@@ -1,0 +1,10 @@
+.chevronContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+svg {
+    width: 5vw;
+    height: 5vw;
+}
