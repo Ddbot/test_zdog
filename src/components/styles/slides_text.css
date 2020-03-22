@@ -11,7 +11,7 @@ div.text {
 
   align-items: center;
 
-  transform: translateX(-10%);
+  /* filter: hue-rotate(180deg); */
 }
 
 /* .text::before {

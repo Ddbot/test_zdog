@@ -9,11 +9,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
+import gsap from 'gsap'
+
 import Header from "./header"
 import "./styles/layout.css"
-import Chevron from './chevron'
-import Footer from "./footer"
-
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -38,9 +37,7 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata.title} />
         <div>
           <main>{children}</main>
-      </div>
-      <Chevron />
-      <Footer />
+        </div>
     </>
   )
 }

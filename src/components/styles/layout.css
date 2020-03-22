@@ -33,7 +33,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 500vh;
+  overflow: hidden;
 }
 article,
 aside,
@@ -640,6 +640,7 @@ pre tt:after {
 
 header + div {
             margin: 0 auto;
+            margin-top: 7.45rem;
             max-width: 960px;
             padding: 0 1.0875rem 1.45rem;
 }
