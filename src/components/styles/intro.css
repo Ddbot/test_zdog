@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,500i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,700i&display=swap');
 
 div.text {
   width: 50vw;
@@ -25,8 +25,13 @@ div.text {
   top: 0;
 } */
 
+.text>p {
+  font-family: Roboto, sans-serif;
+  font-size: 1.67rem;
+  font-weight: regular;
+  line-height: 3rem;
+}
 
-
-.text > p > span.gras {
-color: red;
+.text > p > span {
+font-weight: 700;
 }

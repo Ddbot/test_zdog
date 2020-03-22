@@ -5,22 +5,21 @@ import "../components/styles/intro.css"
 const Intro = () => {
   return (
 		<div className="text">
-			{/* <h2>Bonjour! </h2>
-			<h2>
-				Je suis <span style={{ fontWeight: 500 }}>Andry</span>
-			</h2>
-			<h2>
-				Intégrateur et{" "}
-				<span style={{ fontWeight: 500 }}>développeur</span> de
-			</h2>
-			<h2>
-				<span style={{ fontWeight: 500 }}>Sites Web</span> et d'
-				<span style={{ fontWeight: 500 }}>applications mobiles</span>
-			</h2> */}
 			<p>
-				Bonjour ! Je suis <span style={{ fontWeight: 500 }}>Andry</span>, Intégrateur et{" "}
-				<span style={{ fontWeight: 500 }}>Développeur</span> Développeur de
-				<span style={{ fontWeight: 500 }}>Sites Web</span> et d'<span style={{ fontWeight: 500 }}>applications mobiles</span>
+				Bonjour ! <br />
+				Je suis <span style = {
+				  {
+				    backgroundColor: "#f4ba8e"
+				  }
+				}><b>Andry</b></span> ,
+        <br /> Intégrateur et <span style={{
+          backgroundColor: "#6199b8"
+        }}><b>Développeur</b></span> de <span style={{
+          backgroundColor: "#f4f39a"
+        }}><b>Sites Web</b></span> et d'<span style={{
+          backgroundColor: "#9da99c"
+        }
+        }><b>applications</b></span> mobiles
 			</p>
 		</div>
   );
