@@ -1,17 +1,32 @@
-.text {
-  width: 30vw;
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,500i&display=swap');
+
+div.text {
+  width: 50vw;
   height: 30vw;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
   align-self: center;
 
   display: flex;
   flex-flow: row wrap;
 
   align-items: center;
+
+  transform: translateX(-10%);
 }
 
-.text > h1,
-.text > h2,
-.text > h3 {
+/* .text::before {
+  content: '';
   width: 100%;
+  height: 100%;
+
+  opacity: 0.5;
+
+  position: fixed;
+  top: 0;
+} */
+
+
+
+.text > p > span.gras {
+color: red;
 }

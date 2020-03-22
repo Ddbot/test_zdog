@@ -3,5 +3,5 @@ footer {
   position: fixed;
   bottom: 0;
   margin-bottom: 2rem;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
