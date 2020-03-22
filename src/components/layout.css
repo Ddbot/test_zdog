@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald:200,400&display=swap');
+
+:root {
+  --buff: #f4f39a;
+  --dark-cream: #f4e898;
+  --light-tan: #f4dc95;
+  --pale-peach: #f4d193;
+  --very-light-brown: #f4c590;
+  --peach: #f4ba8e;
+  --pale-salmon: #f3af8b;
+  --light-salmon: #f3a389;
+  --blush: #f39886;
+  --peachy-pink: #f38c84;
+  --blush-pink: #f38181;
+  --cement: #9da99c;
+  --cool-gray: #87a3a7;
+  --bluey-gray: #709db1;
+  --gray-blue: #6199b8;
+  --dusty-blue: #5295bf;
+  /* font-family: "Oswald"; */
+font-size: 20px;
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -209,17 +232,7 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
-img {
-  max-width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-}
+
 h1 {
   margin-left: 0;
   margin-right: 0;
@@ -619,4 +632,10 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+header + div {
+            margin: 0 auto;
+            max-width: 960px;
+            padding: 0 1.0875rem 1.45rem;
 }

@@ -1,0 +1,17 @@
+.text {
+  width: 30vw;
+  height: 30vw;
+  border: 1px solid pink;
+  align-self: center;
+
+  display: flex;
+  flex-flow: row wrap;
+
+  align-items: center;
+}
+
+.text > h1,
+.text > h2,
+.text > h3 {
+  width: 100%;
+}

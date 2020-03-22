@@ -17,8 +17,13 @@ function SEO({ description, lang, meta, title }) {
         site {
           siteMetadata {
             title
-            description
             author
+            en {
+              description
+            }
+            fr {
+              description
+            }
           }
         }
       }
