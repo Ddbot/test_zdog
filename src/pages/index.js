@@ -76,9 +76,6 @@ const IndexPage = () => {
         break;
     }
   }
-  // useEffect(() => {
-  //   renderSwitch(index)
-  // }, [index])
 
   return (
   <>

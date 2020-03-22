@@ -1,6 +1,7 @@
 import React from "react"
 
 const Slide1 = (props) => {
+  
   return (
     <>
 		  <div className="slide text" onMouseMove={props.onMouseMove}>

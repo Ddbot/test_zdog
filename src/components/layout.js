@@ -32,11 +32,18 @@ const Layout = ({ children }) => {
     }
   `)
 
+  function createMarkup() {
+    return {
+      __html: data.site.siteMetadata.en.description
+    };
+  }
+
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
         <div>
-          <main>{children}</main>
+        <main>{children}</main>
+        {/* <div dangerouslySetInnerHTML={createMarkup()} /> */}
         </div>
     </>
   )
