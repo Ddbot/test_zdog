@@ -18,6 +18,7 @@ const IndexPage = () => (
       <Intro />
       {/* <Link to = "/page-2/" > Go to page 2 </Link> */}
     </div>
+    <canvas class="zdog-canvas" width="240" height="240"></canvas>
   </Layout>
 )
 

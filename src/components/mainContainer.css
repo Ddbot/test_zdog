@@ -23,7 +23,9 @@ main>.container>.image {
   border-radius: 50%;
 }
 
-.image img {}
+canvas {
+  border: 2px dashed green;
+}
 
 main>.container>a {
   width: 100%;
