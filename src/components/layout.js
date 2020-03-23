@@ -5,48 +5,32 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql } from "gatsby";
 
-import gsap from 'gsap'
+import gsap from 'gsap';
 
-import Header from "./header"
-import "./styles/layout.css"
+import Header from "./header";
+import "./styles/layout.css";
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-          en{
-            description
-          }
+const Layout = (props) => {
+  let [lang, setLang] = useState('fr');
 
-          fr {
-            description
-          }
-        }
-      }
-    }
-  `)
-
-  function createMarkup() {
-    return {
-      __html: data.site.siteMetadata.en.description
-    };
-  }
+  let toggleLang = (e) => {
+    setLang(e.target.value);
+    localStorage.setItem('lang', lang);
+    console.log(e.target.value, localStorage.getItem('lang'));
+  };
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle="Andry Online" toggleLang={toggleLang} lang={lang} />
         <div>
-        <main>{children}</main>
-        {/* <div dangerouslySetInnerHTML={createMarkup()} /> */}
+          <main>{props.children}</main>
         </div>
     </>
-  )
+  );
 }
 
 Layout.propTypes = {

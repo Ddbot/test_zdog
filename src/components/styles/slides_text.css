@@ -30,6 +30,7 @@ div.text {
   font-size: 1.67rem;
   font-weight: regular;
   line-height: 3rem;
+  user-select: none;
 }
 
 .text > p > span {

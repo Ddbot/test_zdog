@@ -1,23 +1,53 @@
 header {
     position: fixed;
     top: 0;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
     background: rebeccapurple;
 
     width: 100%;
-    height: 6rem;
+    height: 10vh;
 }
 
-header > div {
-        margin: 0 auto;
-            max-width: 960;
-            padding: 1.45rem 1.0875rem;
+
+header+div {
+    margin: 0 auto;
+    margin-top: 10vh;
+    width: 100%;
+    min-width: 960px;
+    max-width: 960px;
+    padding: 0 1.0875rem 1.45rem;
+}
+
+header > div:not(div:first-of-type) {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 1.45rem 1.0875rem;
 }
 
 header > div > h1 {
-margin: 0;  
+    margin: 2.5vw;  
 }
 
 header>div>h1>a {
     color: white;
     text-decoration: none;
+}
+
+header>svg {
+    position: fixed;
+    right: 2.5rem;
+
+    width: 1.8rem;
+    height: 1.2rem;
+
+}
+
+header > .field {
+    position: fixed;
+    right: 5rem;
+
 }
