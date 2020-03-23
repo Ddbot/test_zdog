@@ -7,7 +7,7 @@ module.exports = {
       slide_0: `<p style='margin-right:10%;'>
                   Hello ! <br />
                   I'm <span class="purple"><b>Andry</b></span>,<br />
-                  A <span style='background-color: rebeccapurple;padding:6px;color:white'}}><b>Web site</b></span> and <span class="purple"><b>mobile Apps mobiles</b></span> Integrator and <span class="purple"><b>Designer</b></span>
+                  A <span style='background-color: rebeccapurple;padding:6px;color:white'}}><b>Web site</b></span> and <span class="purple"><b>mobile Apps</b></span> Integrator and <span class="purple"><b>Designer</b></span>
                 </p>`,
       slide_1: `<p style='margin-right:10%;'>
                   I'm using <span class="purple"><b>React</b></span> and <br />

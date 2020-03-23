@@ -68,15 +68,6 @@ main>.container>.image {
     border-radius: 50%;
 }
 
-main>.chevronContainer:first-of-type {
-    position: fixed;
-    left: 50%;
-    top: 12vh;
-}
-
-main>.chevronContainer:first-of-type>svg {
-    transform: rotate(180deg);
-}
 .purple {
     color: white;
     padding: 6px;

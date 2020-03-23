@@ -5,13 +5,23 @@
     left: 50%;
     bottom: 5vh;
 
-    height: 5vw;;
+    height: 3.09vw;;
 
     justify-content: center;
     /* transform: translateY(10vh); */
 }
 
 .chevronContainer > svg {
-    width: 5vw;
-    height: 5vw;
+    width: 3.09vw;
+    height: 3.09vw;
+}
+
+main>.chevronContainer:first-of-type {
+    position: fixed;
+    left: 50%;
+    top: 13.618vh;
+}
+
+main>.chevronContainer:first-of-type>svg {
+    transform: rotate(180deg);
 }
