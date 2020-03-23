@@ -9,7 +9,7 @@ import LangToggle from './langToggle'
 import "./styles/header.css"
 
 const Header = (props) => {
-  // let [lang, setLang] = useState(props.lang);
+  let [lang, setLang] = useState(props.lang);
   return (
     <header>
       <div>

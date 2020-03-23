@@ -4,86 +4,44 @@ module.exports = {
     author: `@dandibot`,
     en: {
       description: `<span>This page is hosting my CV and my blog</span>`,
-      slide_1: `<>
-      		        <div className="slide text" onMouseMove={props.onMouseMove}>
-                    <p>
-				              Hello ! <br />
-                      I'm <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>Andry</b></span>,<br />
-                      A <span style={{backgroundColor: "rebeccapurple",padding: "6px",color: "white"}}><b>Web site</b></span> and <span style={{backgroundColor: "rebeccapurple",padding: "6px",color: "white"}}><b>mobile Apps mobiles</b></span> Integrator and <span style={{backgroundColor: "rebeccapurple",padding: "6px",color: "white"}}><b>Developer</b></span>
-                    </p>
-                  </div>
-                </>`,
-      slide_2: `<>
-                  <div className="slide text" onMouseMove={props.onMouseMove}>
-                    <p>
-                      I'm using <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>React</b></span> and <br />
-                      frameworks such as <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>Gatsby JS</b></span> to create 
-                      <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>fast, modern</b></span> and <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>accessible</b></span>                
-                      Web sites and <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>PWA</b></span><br />
-                    </p>
-                  </div>
-                </>`,
-      slide_3: `<>
-                  <div className="slide slide-3 text" onMouseMove={props.onMouseMove} style={{ marginLeft: "5rem"}}>
-                    <p>
-                      I'm also interested in <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>React Native</b></span> and <br />
-                      <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>Flutter</b></span>. I am passionnate
-                      about technology and music, and always <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b> eager to learn new stuff</b></span>
-                    </p>
-                  </div>
-                  <IPhone />
-                </>`,
-      slide_4: `<>
-		            <div className="slide text" onMouseMove={props.onMouseMove}>
-		              <p>SLIDE 4</p>
-                </div>
-              </>`,
-      slide_5: `<>
-		            <div className="slide text" onMouseMove={props.onMouseMove}>
-		              <p>SLIDE 5</p>
-                </div>
-              </>`,
+      slide_0: `<p style='margin-right:10%;'>
+                  Hello ! <br />
+                  I'm <span class="purple"><b>Andry</b></span>,<br />
+                  A <span style='background-color: rebeccapurple;padding:6px;color:white'}}><b>Web site</b></span> and <span class="purple"><b>mobile Apps mobiles</b></span> Integrator and <span class="purple"><b>Designer</b></span>
+                </p>`,
+      slide_1: `<p style='margin-right:10%;'>
+                  I'm using <span class="purple"><b>React</b></span> and <br />
+                  frameworks such as <span class="purple"><b>Gatsby JS</b></span> to create 
+                  <span class="purple"><b>fast, modern</b></span> and <span class="purple"><b>accessible</b></span>                
+                  Web sites and <span class="purple"><b>PWA</b></span><br />
+                </p>`,
+      slide_2: `<p style='margin-left:10%;'>
+                  I'm also interested in <span class="purple"><b>React Native</b></span> and <br />
+                  <span class="purple"><b>Flutter</b></span>. I am passionnate
+                  about technology and music, and always <span class="purple"><b> eager to learn new stuff</b></span>
+                </p>`,
+      slide_3: `<p style='margin-right:10%;'>SLIDE 4</p>`,
+      slide_4: `<p style='margin-right:10%;'>SLIDE 5</p>`,
     },
     fr: {
       description: `<span>Vous trouverez ici mon CV ainsi que mon blog</span>`,
-      slide_1: `<div>
-		  <div className="slide text" onMouseMove={props.onMouseMove}>
-			  <p>
+      slide_0: `<p style='margin-right:10%;'>
 				  Bonjour ! <br />
-				  Je suis <span style="backgroundColor: "rebeccapurple", padding: "6px", color: "white""><b>Andry</b></span>,<br />
-          Intégrateur et <span style={{backgroundColor: "rebeccapurple",padding: "6px",color: "white"}}><b>Développeur</b></span> de sites<span style={{backgroundColor: "rebeccapurple",padding: "6px",color: "white"}}><b>Web</b></span> et d'<span style={{backgroundColor: "rebeccapurple",padding: "6px",color: "white"}}><b>applications mobiles</b></span>
-			  </p>
-      </div>
-    </div>`,
-      slide_2: `<>
-                <div className="slide text" onMouseMove={props.onMouseMove}>  
-                  <p>
-                    J'utilise <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>React</b></span> et <br />
-                    des frameworks tels que <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>Gatsby JS</b></span> pour créer des sites et des <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>PWA</b></span><br />
-                    <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>modernes, rapides</b></span> et <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>accessibles</b></span>.
-                  </p>
-                </div>
-              </>`,
-      slide_3: `<>
-                  <div className="slide slide-3 text" onMouseMove={props.onMouseMove} style={{ marginLeft: "5rem"}}>
-                    <p>
-                      Je m'intéresse à <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>React Native</b></span> et <br />
-                      <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>Flutter</b></span>,
-                      et en véritable passionné de technologie, <span style={{ backgroundColor: "rebeccapurple", padding: "6px", color: "white" }}><b>je ne cesse d'apprendre</b></span>
-			              </p>
-                  </div>
-                  <IPhone />
-                </>`,
-      slide_4: `<>
-		              <div className="slide text" onMouseMove={props.onMouseMove}>
-		                <p>SLIDE 4</p>
-                  </div>
-                </>`,
-      slide_5: `<>
-                  <div className="slide text" onMouseMove={props.onMouseMove}>
-                    <p>SLIDE 5</p>
-                  </div>
-                </>`,
+				  Je suis <span class="purple"><b>Andry</b></span>,<br />
+          Intégrateur et <span class="purple"><b>Designer</b></span> de sites<span class="purple"><b>Web</b></span> et d'<span class="purple"><b>applications mobiles</b></span>
+			  </p>`,
+      slide_1: `<p style='margin-right:10%;'>
+                    J'utilise <span class="purple"><b>React</b></span> et <br />
+                    des frameworks tels que <span class="purple"><b>Gatsby JS</b></span> pour créer des sites et des <span class="purple"><b>PWA</b></span><br />
+                    <span class="purple"><b>modernes, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
+                  </p>`,
+      slide_2: `<p style='margin-left: 10%;'>
+                      Je m'intéresse à <span class="purple"><b>React Native</b></span> et <br />
+                      <span class="purple"><b>Flutter</b></span>,
+                      et en véritable passionné de technologie, <span class="purple"><b>je ne cesse d'apprendre</b></span>
+			              </p>`,
+      slide_3: `<p style='margin-right:10%;'>SLIDE 4</p>`,
+      slide_4: `<p style='margin-right:10%;'>SLIDE 5 </p>`,
     },
     plugins: [
       `gatsby-plugin-react-helmet`,
@@ -94,8 +52,6 @@ module.exports = {
           path: `${__dirname}/src/images`,
         },
       },
-      `gatsby-transformer-sharp`,
-      `gatsby-plugin-sharp`,
       {
         resolve: `gatsby-plugin-manifest`,
         options: {

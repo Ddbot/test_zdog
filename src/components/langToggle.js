@@ -16,7 +16,7 @@ const LangToggle = (props) => {
         <>
             <div className="field">
                 <div className="control">
-                    <div className="select is-primary">
+                    <div className="select is-primary" onChange={props.toggleLang}>
                         <select onChange={props.toggleLang}>
                             <option>fr</option>
                             <option>en</option>
