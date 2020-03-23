@@ -2,8 +2,10 @@
     display: flex;
     
     position: fixed;
-left: 50%;
-bottom: 10vh;
+    left: 50%;
+    bottom: 5vh;
+
+    height: 5vw;;
 
     justify-content: center;
     /* transform: translateY(10vh); */

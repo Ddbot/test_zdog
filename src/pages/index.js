@@ -11,15 +11,18 @@ import IPhone from "../components/iphone";
 import LogoIllustration from "../components/LogoIllustration";
 import Chevron from "../components/chevron";
 
-import "../components/styles/mainContainer.css";
+import "../components/styles/slide.css";
 import "../components/styles/slides_text.css";
 
 let handleMouseMove = (e) => {
-  const chevron = document.querySelector('.chevronContainer');
+  // const chevron = document.querySelectorAll('.chevronContainer');
 
   if (e.type === 'touchmove' || e.type === 'mousemove') {
-    gsap.to(chevron, { duration: .9, y: -100, repeat: 1 });
-    gsap.to(chevron, { duration: .9, y: 0, repeat: 1 });
+    gsap.to('#chevron_bottom', { duration: .9, y: -100, repeat: 1 });
+    gsap.to('#chevron_bottom', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
+
+    gsap.to('#chevron_top', { duration: .9, y: 100, repeat: 1 });
+    gsap.to('#chevron_top', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
   };
 };
   
@@ -68,30 +71,38 @@ const IndexPage = (props) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (index >= 0 && index < 4) {
-      setIndex(++index);
-      gsap.to('.slide', {
-        opacity: 1,
-        duration: 1
-      });
-    } else {
-      setIndex(0);
-    }
+    // let chevrons = document.getElementsByClassName('chevronContainer');
 
+    if (index >= 0 && index < 4) {
+      switch (e.target.parentNode.id) {
+        case "chevron_bottom":
+          setIndex(++index);
+          break;
+        case "chevron_top":
+          setIndex(--index);
+          break;
+        default:
+          break;
+      }
+    } else {
+        setIndex(0);
+      }
+    
     console.log(index);
   };
 
-  return (
-    <>
+  return (<>
       <Layout toggleLang={toggleLang} lang={lang}>
-          <SEO title="Home" />
+        <SEO title="Home" />
+          {index !== 0 && <Chevron onClick={changeIndex} id="chevron_top" />}
+        
           <div className="container">
-            {index !== 2 && <LogoIllustration />}
+          {index !== 2 && <LogoIllustration />}
           <Slide onMouseMove={handleMouseMove} content={getMarkup(index)} />
             {index === 2 && <IPhone />}
           </div>
         </Layout>
-        <Chevron onClick={changeIndex} />
+        {index !== 4 && <Chevron onClick={changeIndex} id="chevron_bottom"/>}
     </>
   )
 };
