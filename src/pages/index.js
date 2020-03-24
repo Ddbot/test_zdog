@@ -19,11 +19,11 @@ let handleMouseMove = (e) => {
       let bottom = document.getElementById('chevron_bottom');
 
   if (e.type === 'touchmove' || e.type === 'mousemove') {
-    bottom && gsap.to('#chevron_bottom', { duration: .9, y: -100, repeat: 1 });
-    top && gsap.to('#chevron_bottom', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
+    !!bottom && gsap.to('#chevron_bottom', { duration: .9, y: -100, repeat: 1 });
+    !!bottom && gsap.to('#chevron_bottom', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
 
-    gsap.to('#chevron_top', { duration: .9, y: 100, repeat: 1 });
-    gsap.to('#chevron_top', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
+    !!top && gsap.to('#chevron_top', { duration: .9, y: 100, repeat: 1 });
+    !!top && gsap.to('#chevron_top', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
   };
 };
   
