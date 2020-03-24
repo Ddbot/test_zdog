@@ -29,7 +29,19 @@ header > div:not(div:first-of-type) {
 }
 
 header > div > h1 {
-    margin: 2.5vw;  
+        margin: 2.5vw;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        color: inherit;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+            Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
+        line-height: 1.1;
+    
+
 }
 
 header>div>h1>a {

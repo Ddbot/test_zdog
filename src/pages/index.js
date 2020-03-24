@@ -28,7 +28,6 @@ let handleMouseMove = (e) => {
 
 const chevronsAnimation = gsap.timeline({
     defaults: {
-        // duration:.5,
         ease: "elastic",
         paused: true
     }
@@ -115,7 +114,7 @@ const IndexPage = (props) => {
                   index === 0 && gsap.to("#chevron_top", {
                     autoAlpha: 1
                   });
-                  gsap.to(".container", { autoAlpha: 1, duration: .195 });
+                  gsap.to(".container", { autoAlpha: 1, duration: .1 });
                 }
               });
             }
@@ -123,36 +122,40 @@ const IndexPage = (props) => {
           
           break;
         case "chevron_top":
-          gsap.to("#chevron_top", {
-            // duration:.5,
-            y: -50,
-            autoAlpha: 0,
-          });
-          gsap.fromTo("#chevron_top", {
-            onStart: () => {
-              gsap.fromTo("#chevron_bottom", {
+          // on fait d'abord disparaitre le contenu de .container
+          // ne pas hesiter a faire une animation plus complexe plus tard
+          gsap.to(".container", {
+            autoAlpha: 0, duration: .225,
+            onComplete: () => {
+              gsap.to("#chevron_top", {
+                // duration:.5,
+                y: -50,
                 autoAlpha: 0,
-                y: -50
+              });
+              gsap.fromTo("#chevron_top", {
+                onStart: () => {
+                  gsap.fromTo("#chevron_bottom", {
+                    autoAlpha: 0,
+                    y: -50
+                  }, {
+                    autoAlpha: 1,
+                    y: 0,
+                  });
+                },
+                autoAlpha: 0,
+                y: 50
               }, {
                 autoAlpha: 1,
                 y: 0,
+                onComplete: () => {
+                  setIndex(() => {
+                    return index - 1
+                  });
+                  gsap.to(".container", { autoAlpha: 1, duration: .1 });
+                }
               });
-            },
-            autoAlpha: 0,
-            y: 50
-          }, {
-            autoAlpha: 1,
-            y: 0,
-            onComplete: () => {
-              setIndex(() => {
-                return index - 1
-              });
-              // index === 4 && gsap.to("#chevron_bottom", {
-              //   autoAlpha: 0
-              // });
             }
           });
-
           break;
         default:
           break;
@@ -168,6 +171,9 @@ const IndexPage = (props) => {
   };
 
   let toggleLang = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
       setLang(e.target.value);
       localStorage.setItem('lang', lang);
       console.log(e.target.value, localStorage.getItem('lang'));
