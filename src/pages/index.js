@@ -85,7 +85,7 @@ const IndexPage = (props) => {
         case "chevron_bottom":
           // on fait d'abord disparaitre le contenu de .container
           // ne pas hesiter a faire une animation plus complexe plus tard
-          gsap.to(".container", {
+          gsap.to(".slide.text", {
             autoAlpha: 0, duration: .225,
             onComplete: () => {
               gsap.to("#chevron_bottom", {
@@ -114,7 +114,7 @@ const IndexPage = (props) => {
                   index === 0 && gsap.to("#chevron_top", {
                     autoAlpha: 1
                   });
-                  gsap.to(".container", { autoAlpha: 1, duration: .1 });
+                  gsap.to(".slide.text", { autoAlpha: 1, duration: .1 });
                 }
               });
             }
@@ -122,9 +122,9 @@ const IndexPage = (props) => {
           
           break;
         case "chevron_top":
-          // on fait d'abord disparaitre le contenu de .container
+          // on fait d'abord disparaitre le contenu de .slide.text
           // ne pas hesiter a faire une animation plus complexe plus tard
-          gsap.to(".container", {
+          gsap.to(".slide.text", {
             autoAlpha: 0, duration: .225,
             onComplete: () => {
               gsap.to("#chevron_top", {
@@ -151,7 +151,7 @@ const IndexPage = (props) => {
                   setIndex(() => {
                     return index - 1
                   });
-                  gsap.to(".container", { autoAlpha: 1, duration: .1 });
+                  gsap.to(".slide.text", { autoAlpha: 1, duration: .1 });
                 }
               });
             }
