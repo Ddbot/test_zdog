@@ -241,7 +241,7 @@ const IndexPage = (props) => {
               <SEO title="Home" />
               {index !== 0 && <Chevron onClick={changeIndex} id="chevron_top" />}     
               <div className="container">
-                {index !== 2 && <LogoIllustration />}
+        {index !== 2 && <LogoIllustration x={Math.PI / 2} y={-Math.PI / 16}/>}
                 <Slide onMouseMove={handleMouseMove} content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
               </div>
