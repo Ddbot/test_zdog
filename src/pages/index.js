@@ -8,6 +8,9 @@ import SEO from "../components/seo";
 import Slide from "../components/slide";
 import IPhone from "../components/iphone";
 import LogoIllustration from "../components/LogoIllustration";
+
+import { Illustration, Cone, Shape } from 'react-zdog'
+
 import Chevron from "../components/chevron";
 
 import "../components/styles/slide.css";
@@ -34,10 +37,13 @@ const IndexPage = (props) => {
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
+  let [xRot, setXRot] = useState(Math.PI / 2);
+  let [yRot, setYRot] = useState(-Math.PI / 16);
   
   useEffect(() => { 
     index === 0 && gsap.set("#chevron_top", { autoAlpha: 0 });
     index === 4 && gsap.set("#chevron_bottom", { autoAlpha: 0 });
+
   }, [index]);
 
   // ___________ANIMATIONS________________//
@@ -241,7 +247,8 @@ const IndexPage = (props) => {
               <SEO title="Home" />
               {index !== 0 && <Chevron onClick={changeIndex} id="chevron_top" />}     
               <div className="container">
-        {index !== 2 && <LogoIllustration x={Math.PI / 2} y={-Math.PI / 16}/>}
+                {index !== 2 && <LogoIllustration x={xRot} y={yRot}/>}
+    
                 <Slide onMouseMove={handleMouseMove} content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
               </div>
