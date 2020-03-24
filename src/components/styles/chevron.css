@@ -1,20 +1,36 @@
 .chevronContainer {
-    display: flex;
+    /* display: flex; */
+    display: inline-block;
+
+    text-decoration: none;
     
     position: fixed;
+
     left: 50%;
     bottom: 5vh;
 
     height: 3.09vw;;
 
     justify-content: center;
-    /* transform: translateY(10vh); */
+    cursor: pointer;
 
-    /* visibility: hidden; */
+    border: none;
+    background-color: transparent;
+    outline-style: none;
+}
+
+.chevronContainer:hover,
+.chevronContainer:focus {
+    transform: scale(0.85);
+    transition: all .2s linear;
+}
+
+.chevronContainer:focus {
+    outline-offset: -4px;
 }
 
 #chevron_top {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .chevronContainer > svg {

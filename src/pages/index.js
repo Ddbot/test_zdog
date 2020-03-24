@@ -26,16 +26,74 @@ let handleMouseMove = (e) => {
   };
 };
 
-const chevronsAnimation = gsap.timeline({
-    defaults: {
-        ease: "elastic",
-        paused: true
-    }
-});
+const down = 100, up = -1 * down; 
   
 const IndexPage = (props) => {
+  const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'fr';
+
   let [index, setIndex] = useState(0);
+  let [lang, setLang] = useState(defaultLang);
   
+  useEffect(() => { 
+    index === 0 && gsap.set("#chevron_top", { autoAlpha: 0 });
+    index === 4 && gsap.set("#chevron_bottom", { autoAlpha: 0 });
+  }, [index]);
+
+  // ___________ANIMATIONS______________//
+  // Animer l'entree des chevrons
+  let chevronsEntry = () => {
+    index !== 4 && gsap.fromTo("#chevron_bottom", {
+      autoAlpha: 0,
+      y: -50
+    }, {
+      autoAlpha: 1,
+      y: 0,
+      onStart: () => {
+        index !== 0 && gsap.fromTo("#chevron_top", {
+          autoAlpha: 0,
+          y: 50
+        }, {
+          autoAlpha: 1,
+          y: 0,
+        });
+      },
+    });
+  }
+  // Animer la sortie des chevrons
+  let chevronsExit = () => {
+    index !== 4 && gsap.to("#chevron_bottom", {
+      y: 50,
+      autoAlpha: 0,
+      onStart: () => {
+        index !== 0 && gsap.fromTo("#chevron_top", {
+          autoAlpha: 1,
+          y: 0
+        }, {
+          autoAlpha: 0,
+          y: -50,
+        });
+      },
+    });
+  };
+
+  // Animer le fadeout de slide text
+  let fadeOutText = (direction) => {
+    gsap.to('.slide.text', {
+      autoAlpha: 0,
+      y: direction,
+      duration: .225,
+    });
+  };
+
+  // Animer le fade in de slide text
+  let fadeInText = () => {
+    gsap.to('.slide.text', {
+      autoAlpha: 1,
+      y: 0,
+      duration: .225,
+    });
+  };
+
   const data = useStaticQuery(graphql `
     query ContentQuery {
       site {
@@ -61,108 +119,84 @@ const IndexPage = (props) => {
     }
   `);
 
-  const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'fr';
 
-  let [lang, setLang] = useState(defaultLang);
 
-  useEffect(() => {
-    window.addEventListener('load', () => {
-      gsap.fromTo('.chevronContainer', {
-    opacity: 0,
-    },{
-        opacity: 1,
-        duration: 4,
-      });
-    });
-  });
+  // useEffect(() => {
+  //   window.addEventListener('load', () => {
+  //         console.log(document.querySelector('.slide.text'));
+  //     gsap.fromTo('.chevronContainer', {
+  //   opacity: 0,
+  //   },{
+  //       opacity: 1,
+  //       duration: 2,
+  //     });
+  //   });
+  // });
 
   let changeIndex = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
+    let c_bottom = document.querySelector('#chevron_bottom');
+    let c_top = document.querySelector('#chevron_top');
+      
+    // switch (index) {
+    //   case 0:
+    //     gsap.set(c_top, { autoAlpha: 0 });
+    //     break;
+    //   case 1:
+    //   case 2:
+    //   case 3:
+    //     break;
+    //   case 4:
+    //     gsap.set(c_bottom, { autoAlpha: 0 });
+    //     break;
+    //   default:
+    //     break;
+    // }
+
     if (index >= 0 && index <= 4) {
-      switch (e.target.parentNode.id) {
+    let id = e.target.parentNode.id;
+
+      switch (id) {
         case "chevron_bottom":
-          // on fait d'abord disparaitre le contenu de .container
-          // ne pas hesiter a faire une animation plus complexe plus tard
-          gsap.to(".slide.text", {
-            autoAlpha: 0, duration: .225,
-            onComplete: () => {
-              gsap.to("#chevron_bottom", {
-                y: 50,
-                autoAlpha: 0,
-              });
-              gsap.fromTo("#chevron_bottom", {
-                autoAlpha: 0,
-                y: -50
-              }, {
-                autoAlpha: 1,
-                y: 0,
-                onStart: () => {
-                  gsap.fromTo("#chevron_top", {
-                    autoAlpha: 0,
-                    y: 50
-                  }, {
-                    autoAlpha: 1,
-                    y: 0,
-                  });
-                },
-                onComplete: () => {
-                  setIndex(() => {
-                    return index + 1
-                  });
-                  index === 0 && gsap.to("#chevron_top", {
-                    autoAlpha: 1
-                  });
-                  gsap.to(".slide.text", { autoAlpha: 1, duration: .1 });
-                }
-              });
-            }
-          });   
-          
+          // 1. Animer la sortie des chevrons
+          chevronsExit();
+          // 2. Animer le fadeout de slide text
+          fadeOutText(up);          
+          // 3. Changer l'index pour faire changer le contenu de slide text
+          setIndex(() => {
+            return index + 1
+          });
+          // 4. Animer le fade in de slide text
+          fadeInText();
+          // 5. Animer l'entree des chevrons
+          chevronsEntry();
           break;
         case "chevron_top":
-          // on fait d'abord disparaitre le contenu de .slide.text
-          // ne pas hesiter a faire une animation plus complexe plus tard
-          gsap.to(".slide.text", {
-            autoAlpha: 0, duration: .225,
-            onComplete: () => {
-              gsap.to("#chevron_top", {
-                // duration:.5,
-                y: -50,
-                autoAlpha: 0,
-              });
-              gsap.fromTo("#chevron_top", {
-                onStart: () => {
-                  gsap.fromTo("#chevron_bottom", {
-                    autoAlpha: 0,
-                    y: -50
-                  }, {
-                    autoAlpha: 1,
-                    y: 0,
-                  });
-                },
-                autoAlpha: 0,
-                y: 50
-              }, {
-                autoAlpha: 1,
-                y: 0,
-                onComplete: () => {
-                  setIndex(() => {
-                    return index - 1
-                  });
-                  gsap.to(".slide.text", { autoAlpha: 1, duration: .1 });
-                }
-              });
-            }
+          // 1. Animer la sortie des chevrons
+          chevronsExit();
+         
+          // 2. Animer le fadeout de slide text
+          fadeOutText(down);
+          
+          // 3. Changer l'index pour faire changer le contenu de slide text
+          setIndex(() => {
+            return index - 1
           });
+          
+          // 4. Animer le fade in de slide text
+          fadeInText();
+
+          // 5. Animer l'entree des chevrons
+          index !== 4 && chevronsEntry();
           break;
-        default:
-          break;
-      }
-    } else {
+        }
+      } else {
       setIndex(0);
     }
+    
+    index === 0 && gsap.to("#chevron_top", { autoAlpha: 1 });
 
   };
 

@@ -2,14 +2,14 @@ import {
   Link
 } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useState } from "react"
+import React from "react"
 
 import LangToggle from './langToggle'
 
 import "./styles/header.css"
 
 const Header = (props) => {
-  let [lang, setLang] = useState(props.lang);
+  // let [lang, setLang] = useState(props.lang);
   return (
     <header>
       <div>

@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import FranceFlag from './franceFlag';
 import UKFlag from './ukFlag';
 
 const LangToggle = (props) => {
-// mettre lang dans localStorage depuis layout.
-    let [lang, setState] = useState(props.lang);
     const flags = {
         fr: <FranceFlag />,
         en: <UKFlag />
     };
 
-    let flag = document.querySelector('select')
     return (
         <>
-            <div className="field">
+            <div className="field" style={{ fontFamily: "Roboto" }}>
                 <div className="control">
-                    <div className="select is-primary" onChange={props.toggleLang}>
+                    <div className="select is-primary" onBlur={props.toggleLang} role={'checkbox'} aria-checked>
                         <select onChange={props.toggleLang}>
-                            <option>fr</option>
-                            <option>en</option>
+                            <option style={{ fontFamily: "Roboto" }}>fr</option>
+                            <option style={{ fontFamily: "Roboto" }}>en</option>
                         </select>
                     </div>
                 </div>

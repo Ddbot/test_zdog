@@ -47,6 +47,8 @@ header > div > h1 {
 header>div>h1>a {
     color: white;
     text-decoration: none;
+    font-family: Roboto;
+    font-weight: 700;
 }
 
 header>svg {
@@ -61,5 +63,8 @@ header>svg {
 header > .field {
     position: fixed;
     right: 5rem;
+}
 
+header option {
+    font-family: 'Roboto';
 }
