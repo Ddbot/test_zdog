@@ -28,7 +28,7 @@ let handleMouseMove = (e) => {
 
 const chevronsAnimation = gsap.timeline({
     defaults: {
-        duration: .5,
+        // duration:.5,
         ease: "elastic",
         paused: true
     }
@@ -36,26 +36,7 @@ const chevronsAnimation = gsap.timeline({
   
 const IndexPage = (props) => {
   let [index, setIndex] = useState(0);
-
-    let [lang, setLang] = useState(Array.from(navigator.language).slice(0, 2).join('') || 'fr');
-
-    useEffect(() => {
-      window.addEventListener('load', () => {
-        gsap.fromTo('.chevronContainer', {
-      opacity: 0,
-      },{
-          opacity: 1,
-          duration: 4,
-        });
-      });
-    });
   
-    let toggleLang = (e) => {
-      setLang(e.target.value);
-      localStorage.setItem('lang', lang);
-      console.log(e.target.value, localStorage.getItem('lang'));
-    };
-
   const data = useStaticQuery(graphql `
     query ContentQuery {
       site {
@@ -80,60 +61,118 @@ const IndexPage = (props) => {
       }
     }
   `);
-  
-  let getMarkup = (index) => {
-    return data.site.siteMetadata[lang][`slide_${index}`];
-  };
-    
-  let changeIndex = (e) => { 
+
+  const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'fr';
+
+  let [lang, setLang] = useState(defaultLang);
+
+  useEffect(() => {
+    window.addEventListener('load', () => {
+      gsap.fromTo('.chevronContainer', {
+    opacity: 0,
+    },{
+        opacity: 1,
+        duration: 4,
+      });
+    });
+  });
+
+  let changeIndex = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (index >= 0 && index <= 4) {
       switch (e.target.parentNode.id) {
-        case "chevron_bottom":    
-          gsap.to("#chevron_bottom", {
-            duration: .5,
-            y: 50,
-            autoAlpha: 0,
-          });
-          gsap.fromTo("#chevron_bottom", {
-              onStart: () => {
+        case "chevron_bottom":
+          // on fait d'abord disparaitre le contenu de .container
+          // ne pas hesiter a faire une animation plus complexe plus tard
+          gsap.to(".container", {
+            autoAlpha: 0, duration: .225,
+            onComplete: () => {
+              gsap.to("#chevron_bottom", {
+                y: 50,
+                autoAlpha: 0,
+              });
+              gsap.fromTo("#chevron_bottom", {
+                autoAlpha: 0,
+                y: -50
+              }, {
+                autoAlpha: 1,
+                y: 0,
+                onStart: () => {
                   gsap.fromTo("#chevron_top", {
-                      autoAlpha: 0,
-                      y: 50
+                    autoAlpha: 0,
+                    y: 50
                   }, {
-                      autoAlpha: 1,
-                      y: 0,
+                    autoAlpha: 1,
+                    y: 0,
                   });
-              },
-              autoAlpha: 0,
-              y: -50
-          }, {
-              autoAlpha: 1,
-              y: 0,
-              onComplete: () => {
-                setIndex(() => {
-                  return index+1
-                }); 
-                index === 0 && gsap.to("#chevron_top", { autoAlpha: 1 });
-              }
-          });
+                },
+                onComplete: () => {
+                  setIndex(() => {
+                    return index + 1
+                  });
+                  index === 0 && gsap.to("#chevron_top", {
+                    autoAlpha: 1
+                  });
+                  gsap.to(".container", { autoAlpha: 1, duration: .195 });
+                }
+              });
+            }
+          });   
+          
           break;
         case "chevron_top":
-                setIndex(() => {
-                  return index-1
-                });          
+          gsap.to("#chevron_top", {
+            // duration:.5,
+            y: -50,
+            autoAlpha: 0,
+          });
+          gsap.fromTo("#chevron_top", {
+            onStart: () => {
+              gsap.fromTo("#chevron_bottom", {
+                autoAlpha: 0,
+                y: -50
+              }, {
+                autoAlpha: 1,
+                y: 0,
+              });
+            },
+            autoAlpha: 0,
+            y: 50
+          }, {
+            autoAlpha: 1,
+            y: 0,
+            onComplete: () => {
+              setIndex(() => {
+                return index - 1
+              });
+              // index === 4 && gsap.to("#chevron_bottom", {
+              //   autoAlpha: 0
+              // });
+            }
+          });
+
           break;
         default:
           break;
       }
     } else {
-        setIndex(0);
-      }
-    
+      setIndex(0);
+    }
+
   };
 
+  let getMarkup = (index) => {
+    return data.site.siteMetadata[lang][`slide_${index}`];
+  };
+
+  let toggleLang = (e) => {
+      setLang(e.target.value);
+      localStorage.setItem('lang', lang);
+      console.log(e.target.value, localStorage.getItem('lang'));
+  };
+  
   return (<>
             <Layout toggleLang={toggleLang} lang={lang}>
               <SEO title="Home" />
