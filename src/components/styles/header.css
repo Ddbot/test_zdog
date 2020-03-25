@@ -51,26 +51,23 @@ header>div>h1>a {
     font-weight: 700;
 }
 
-/* header>svg {
-    position: fixed;
-    right: 2.5rem;
-} */
-
-header > .field {
-    position: fixed;
-    right: 5rem;
+div.navbar-item>.navbar-dropdown {
+    padding: 0 auto;
+    height: 100%;
 }
 
-header option {
-    font-family: 'Roboto';
-}
-
-.navbar-item {
+div.navbar-item>.navbar-dropdown>a.navbar-item {
     display: flex;
-    justify-content: space-between;
-    min-height: 4rem;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    text-align: left;
+    padding: 0;
+    height: 100%;
 }
-.navbar-item svg {
-    max-height: 1rem;
-    clip-path: circle(50% at 50% 50%);
+a.navbar-item svg {
+    min-height: 50%;
+    max-height: 50%;
+    /* clip-path: circle(50% at 50% 50%); */
+
+    /* align-self: flex-end; */
 }

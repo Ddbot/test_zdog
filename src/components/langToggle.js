@@ -15,7 +15,7 @@ const LangToggle = (props) => {
                 <div className="navbar-end">
                 <div className="navbar-item has-dropdown is-hoverable">
                     <a className="navbar-link">
-                    Switch Language
+                    { props.lang === 'en' ? <div>Languages</div> : <div>Langues</div> }
                     </a>
 
                     <div className="navbar-dropdown">
