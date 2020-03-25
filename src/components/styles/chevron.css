@@ -16,15 +16,15 @@ button.chevronContainer {
 
     border: none;
     border-radius: 50%;
-    background-color: rebeccapurple;
+    /* background-color: rebeccapurple; */
     outline-style: none;
 
     padding: 0;
 
     /* border-radius: 50px; */
-    background: linear-gradient(145deg, #5c2e8a, #6d37a4);
+    /* background: linear-gradient(145deg, #5c2e8a, #6d37a4);
     box-shadow: 20px 20px 60px #572b82,
-    -20px -20px 60px #753bb0;
+    -20px -20px 60px #753bb0; */
 }
 
 .chevronContainer:hover,

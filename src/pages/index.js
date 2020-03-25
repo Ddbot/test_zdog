@@ -19,18 +19,36 @@ import "../components/styles/slides_text.css";
 
 import "font-awesome/css/font-awesome.min.css";
 
-let handleMouseMove = (e) => {
-      let top = document.getElementById('chevron_top');
-      let bottom = document.getElementById('chevron_bottom');
+// import debounce from '../utils/debounce.js';
 
-  if (e.type === 'touchmove' || e.type === 'mousemove') {
-    !!bottom && gsap.to('#chevron_bottom', { duration: .9, y: -100, repeat: 1 });
-    !!bottom && gsap.to('#chevron_bottom', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
-
-    !!top && gsap.to('#chevron_top', { duration: .9, y: 100, repeat: 1 });
-    !!top && gsap.to('#chevron_top', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function () {
+    var context = this,
+      args = arguments;
+    var later = function () {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
   };
-};
+}
+
+let top = document.getElementById('chevron_top');
+let bottom = document.getElementById('chevron_bottom');
+
+let handleMouseMove = (e) => {
+  if (e.type === 'touchmove' || e.type === 'mousemove') {
+    gsap.to('#chevron_bottom', { duration: .9, y: -100, repeat: 1 });
+    gsap.to('#chevron_bottom', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
+
+    gsap.to('#chevron_top', { duration: .9, y: 100, repeat: 1 });
+    gsap.to('#chevron_top', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
+  };
+}
 
 const down = 250, up = -1 * down,
   exit = .195, entry = 0.3;
@@ -40,13 +58,12 @@ const IndexPage = (props) => {
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
-  let [xRot, setXRot] = useState(Math.PI / 2);
+  let [xRot, setXRot] = useState(Math.PI/2);
   let [yRot, setYRot] = useState(-Math.PI / 16);
   
   useEffect(() => { 
-    index === 0 && gsap.to("#chevron_top", { autoAlpha: 0, duration: 1 });
-    index === 4 && gsap.to("#chevron_bottom", { autoAlpha: 0, duration: 1 });
-
+    index === 0 && !!top && gsap.to("#chevron_top", { autoAlpha: 0, duration: 1 });
+    index === 4 && !!top && gsap.to("#chevron_bottom", { autoAlpha: 0, duration: 1 });
   }, [index]);
 
   // ___________ANIMATIONS________________//
@@ -80,6 +97,7 @@ const IndexPage = (props) => {
       y: 0,
     });
   };
+
   // Animer la sortie des chevrons
   let chevronsExit = () => {
     index !== 4 && gsap.to("#chevron_bottom", {
@@ -156,40 +174,53 @@ const IndexPage = (props) => {
   `);
 
   //_______________Functions utiles_______//
-  
   let changeIndex = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    let dummy = document.querySelector('dummy');
+    let dummy = document.querySelector('.dummy');
 
-    let dummyTl = gsap.timeline({
+    const interp_1st = gsap.utils.interpolate(xRot, Math.PI);
+
+    let chevronsTl = gsap.timeline({
       defaults: {
-        duration: exit
+        duration: 0.67,        
       }
     });
 
-    let zdogAnim = gsap.timeline({
+    let dummyTl = gsap.timeline({
       defaults: {
-        paused: true,
+        duration: 1,
+        paused: true
+      }
+    })
+
+    dummyTl.to(dummy, { autoAlpha: 0 });
+
+    let zDogTl = gsap.timeline({
+      defaults: {
         duration: 1,
       }
     });
 
-    zdogAnim.to(dummy, {
-      autoAlpha: 0,
-      onUpdate: () => {
-        const x = Zdog.lerp(xRot, Math.PI, zdogAnim.progress());
-        // let y = Zdog.lerp(yRot, Math.PI, zdogAnim.progress());
-        setXRot(x);
-        console.log('Hello dummy', xRot);
+    // Animer ZDOG
+    zDogTl.to(dummy, {
+      autoAlpha: 0, 
+      onStart: () => {
+        dummyTl.play();
+      },
+      onUpdate: (prevState) => {
+        setXRot((prevState) => {
+          return interp_1st(dummyTl.progress());
+        });
+        console.log('Is: ', dummyTl.progress());
       }
     });
       
     if (index >= 0 && index <= 4) {
       switch (e.target.parentNode.id) {
         case "chevron_bottom":
-          dummyTl.to(dummy, {
+          chevronsTl.to(dummy, {
             autoAlpha: 1,
             onStart: () => {
               // 1. Animer la sortie des chevrons
@@ -213,13 +244,13 @@ const IndexPage = (props) => {
             onComplete: () => {
               // 5. Animer l'entree des chevrons
               chevronsEntry();
-              zdogAnim.delay(1).play();
+              zDogTl.play();
             }
           });      
         break;
         
         case "chevron_top":
-          dummyTl.to('exit', {
+          chevronsTl.to(dummy, {
             autoAlpha: 0,
             onStart: () => {
               // 1. Animer la sortie des chevrons
@@ -243,7 +274,7 @@ const IndexPage = (props) => {
               onComplete: () => {
                 // 5. Animer l'entree des chevrons
                 chevronsEntry();
-              zdogAnim.delay(1).play();
+              zDogTl.play();
               }
             });
           break;
@@ -252,7 +283,7 @@ const IndexPage = (props) => {
         }
       } else {
       setIndex(0);
-      zdogAnim.delay(1).play();
+      zDogTl.play();
     }
   };
 
@@ -275,7 +306,7 @@ const IndexPage = (props) => {
               <SEO title="Home" />
               {index !== 0 && <Chevron onClick={changeIndex} id="chevron_top" />}     
               <div className="container">
-                {index !== 2 && <LogoIllustration x={xRot} y={yRot}/>}
+                {index !== 2 && <LogoIllustration rotation={{ x:xRot, y:yRot}}/>}
     
                 <Slide onMouseMove={handleMouseMove} content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
