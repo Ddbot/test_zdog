@@ -14,11 +14,11 @@ const Header = (props) => {
     // <header>
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="https://bulma.io">
-           <h1><Link to = "/"> {props.siteTitle}</Link></h1>
-        </a>
-
-        <a href="#" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <Link to="/" className="navbar-item">
+           <h1> {props.siteTitle}</h1>
+        </Link>
+        {/* GERER LE MENU BURGER POUR LES SMARTPHONES !! */}
+        <a href="#" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="burger" onClick={() => {console.log('BIRGER !!')}}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>

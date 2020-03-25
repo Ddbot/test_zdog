@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import { Illustration, Cone } from 'react-zdog'
 
-// import './styles/logo.css'
-
 const LogoIllustration = (props) => {
 
     return(<Illustration zoom={1}>

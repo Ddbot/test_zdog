@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import gsap from "gsap";
+import Zdog from 'zdog';
 
 import { useStaticQuery, graphql } from "gatsby";
 
@@ -39,12 +40,12 @@ const IndexPage = (props) => {
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
-  let [xRot, setXRot] = useState(Math.PI / 4);
+  let [xRot, setXRot] = useState(Math.PI / 2);
   let [yRot, setYRot] = useState(-Math.PI / 16);
   
   useEffect(() => { 
-    index === 0 && gsap.set("#chevron_top", { autoAlpha: 0 });
-    index === 4 && gsap.set("#chevron_bottom", { autoAlpha: 0 });
+    index === 0 && gsap.to("#chevron_top", { autoAlpha: 0, duration: 1 });
+    index === 4 && gsap.to("#chevron_bottom", { autoAlpha: 0, duration: 1 });
 
   }, [index]);
 
@@ -121,7 +122,7 @@ const IndexPage = (props) => {
     gsap.fromTo('.slide.text', {
       duration: entry,
       autoAlpha: 0,
-      Y: direction
+      y: direction
     },{
       autoAlpha: 1,
       y: 0,
@@ -160,16 +161,35 @@ const IndexPage = (props) => {
     e.preventDefault();
     e.stopPropagation();
 
+    let dummy = document.querySelector('dummy');
+
     let dummyTl = gsap.timeline({
       defaults: {
         duration: exit
+      }
+    });
+
+    let zdogAnim = gsap.timeline({
+      defaults: {
+        paused: true,
+        duration: 1,
+      }
+    });
+
+    zdogAnim.to(dummy, {
+      autoAlpha: 0,
+      onUpdate: () => {
+        const x = Zdog.lerp(xRot, Math.PI, zdogAnim.progress());
+        // let y = Zdog.lerp(yRot, Math.PI, zdogAnim.progress());
+        setXRot(x);
+        console.log('Hello dummy', xRot);
       }
     });
       
     if (index >= 0 && index <= 4) {
       switch (e.target.parentNode.id) {
         case "chevron_bottom":
-          dummyTl.to('exit', {
+          dummyTl.to(dummy, {
             autoAlpha: 1,
             onStart: () => {
               // 1. Animer la sortie des chevrons
@@ -184,7 +204,7 @@ const IndexPage = (props) => {
               });
             }
           })
-          .to('entry', {
+          .to(dummy, {
             autoAlpha: 1,
             onStart: () => {
               // 4. Animer le fade in de slide text
@@ -193,6 +213,7 @@ const IndexPage = (props) => {
             onComplete: () => {
               // 5. Animer l'entree des chevrons
               chevronsEntry();
+              zdogAnim.delay(1).play();
             }
           });      
         break;
@@ -213,7 +234,7 @@ const IndexPage = (props) => {
               });
             }
           })
-            .to('entry', {
+            .to(dummy, {
               autoAlpha: 1,
               onStart: () => {
                 // 4. Animer le fade in de slide text
@@ -222,6 +243,7 @@ const IndexPage = (props) => {
               onComplete: () => {
                 // 5. Animer l'entree des chevrons
                 chevronsEntry();
+              zdogAnim.delay(1).play();
               }
             });
           break;
@@ -230,6 +252,7 @@ const IndexPage = (props) => {
         }
       } else {
       setIndex(0);
+      zdogAnim.delay(1).play();
     }
   };
 
@@ -258,7 +281,8 @@ const IndexPage = (props) => {
                 {index === 2 && <IPhone />}
               </div>
             </Layout>
-            {index !== 4 && <Chevron onClick={changeIndex} id="chevron_bottom"/>}
+            {index !== 4 && <Chevron onClick={changeIndex} id="chevron_bottom" />}
+            <span className="dummy" style={{ visibility: 'hidden', opacity: 0,width:'0px',height:'0px'}}></span>
           </>);
 };
 
