@@ -11,18 +11,24 @@ const LangToggle = (props) => {
 
     return (
         <>
-            <div className="field" style={{ fontFamily: "Roboto" }}>
-                <div className="control">
-                    <div className="select is-primary" onBlur={props.toggleLang} role={'checkbox'} aria-checked>
-                        <select onChange={props.toggleLang}>
-                            <option style={{ fontFamily: "Roboto" }}>fr</option>
-                            <option style={{ fontFamily: "Roboto" }}>en</option>
-                        </select>
+            <div id="navbarBasicExample" className="navbar-menu">
+                <div className="navbar-end">
+                <div className="navbar-item has-dropdown is-hoverable">
+                    <a className="navbar-link">
+                    Switch Language
+                    </a>
+
+                    <div className="navbar-dropdown">
+                            {props.lang === 'en' && <a className="navbar-item" data-lang={'fr'} onClick={props.toggleLang}>
+                            Francais <FranceFlag />
+                        </a>}
+                        { props.lang === 'fr' && <a className="navbar-item" data-lang={'en'} onClick={props.toggleLang}>
+                            English <UKFlag />
+                        </a>}
                     </div>
                 </div>
+                </div>
             </div>
-            {/* {flags[lang]} */}
-            {flags[props.lang]}
         </>
     );
 };

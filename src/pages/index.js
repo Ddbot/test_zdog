@@ -37,7 +37,7 @@ const IndexPage = (props) => {
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
-  let [xRot, setXRot] = useState(Math.PI / 2);
+  let [xRot, setXRot] = useState(Math.PI / 4);
   let [yRot, setYRot] = useState(-Math.PI / 16);
   
   useEffect(() => { 
@@ -234,12 +234,13 @@ const IndexPage = (props) => {
   };
 
   let toggleLang = (e) => {
-    e.stopPropagation();
+    // e.stopPropagation();
     e.preventDefault();
-    
-      setLang(e.target.value);
-      localStorage.setItem('lang', lang);
-      console.log(e.target.value, localStorage.getItem('lang'));
+
+    const lang = e.target.dataset.lang || e.target.parentNode.parentNode.dataset.lang || e.target.parentNode.parentNode.parentNode.parentNode.dataset.lang;        
+
+    setLang(lang);
+    localStorage.setItem('lang', lang);
   };
   
   return (<>

@@ -11,6 +11,8 @@ import PropTypes from "prop-types";
 import Header from "./header";
 import "./styles/layout.css";
 
+import 'bulma/css/bulma.css'
+
 const Layout = (props) => {
 
   return (

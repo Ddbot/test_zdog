@@ -51,14 +51,10 @@ header>div>h1>a {
     font-weight: 700;
 }
 
-header>svg {
+/* header>svg {
     position: fixed;
     right: 2.5rem;
-
-    width: 1.8rem;
-    height: 1.2rem;
-
-}
+} */
 
 header > .field {
     position: fixed;
@@ -67,4 +63,14 @@ header > .field {
 
 header option {
     font-family: 'Roboto';
+}
+
+.navbar-item {
+    display: flex;
+    justify-content: space-between;
+    min-height: 4rem;
+}
+.navbar-item svg {
+    max-height: 1rem;
+    clip-path: circle(50% at 50% 50%);
 }
