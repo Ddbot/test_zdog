@@ -16,6 +16,8 @@ import Chevron from "../components/chevron";
 import "../components/styles/slide.css";
 import "../components/styles/slides_text.css";
 
+import "font-awesome/css/font-awesome.min.css";
+
 let handleMouseMove = (e) => {
       let top = document.getElementById('chevron_top');
       let bottom = document.getElementById('chevron_bottom');
@@ -211,18 +213,20 @@ const IndexPage = (props) => {
               });
             }
           })
-          .to('entry', {
-            autoAlpha: 1,
-            onStart: () => {
-              // 4. Animer le fade in de slide text
-              fadeInText(up);
-            },
-            onComplete: () => {
-              // 5. Animer l'entree des chevrons
-              chevronsEntry();
-            }
-          });              
-        break;
+            .to('entry', {
+              autoAlpha: 1,
+              onStart: () => {
+                // 4. Animer le fade in de slide text
+                fadeInText(up);
+              },
+              onComplete: () => {
+                // 5. Animer l'entree des chevrons
+                chevronsEntry();
+              }
+            });
+          break;
+          default:
+          break;
         }
       } else {
       setIndex(0);

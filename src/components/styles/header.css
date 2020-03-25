@@ -17,8 +17,14 @@ div.navbar-item>.navbar-dropdown>a.navbar-item {
 a.navbar-item svg {
     min-height: 50%;
     max-height: 50%;
-    /* clip-path: circle(50% at 50% 50%); */
+}
 
-    /* align-self: flex-end; */
+a.navbar-link:not(.is-arrowless):hover {
+    color: rebeccapurple;
+}
+
+a.navbar-link:not(.is-arrowless)::after {
+    content: '';
+    border-color: rebeccapurple;
 }
 

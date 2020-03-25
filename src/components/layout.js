@@ -9,8 +9,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Header from "./header";
-import "./styles/layout.css";
 
+import "./styles/layout.css";
 import 'bulma/css/bulma.css'
 
 const Layout = (props) => {
@@ -18,9 +18,9 @@ const Layout = (props) => {
   return (
     <>
       <Header siteTitle="Andry Online" toggleLang={props.toggleLang} lang={props.lang}/>
-        <div>
+        {/* <div> */}
         <main>{props.children}</main>
-        </div>
+        {/* </div> */}
     </>
   );
 }

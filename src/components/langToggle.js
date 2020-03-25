@@ -4,10 +4,6 @@ import FranceFlag from './franceFlag';
 import UKFlag from './ukFlag';
 
 const LangToggle = (props) => {
-    const flags = {
-        fr: <FranceFlag />,
-        en: <UKFlag />
-    };
 
     return (
         <>
@@ -15,14 +11,14 @@ const LangToggle = (props) => {
                 <div className="navbar-end">
                 <div className="navbar-item has-dropdown is-hoverable">
                     <a className="navbar-link">
-                    { props.lang === 'en' ? <div><i class="fa fa-language" aria-hidden="true"></i> Languages</div> : <div><i class="fa fa-language" aria-hidden="true"></i> Langues</div> }
+                    { props.lang === 'en' ? <div><i className="fa fa-language" aria-hidden="true"></i>&nbsp;&nbsp;Languages</div> : <div><i className="fa fa-language" aria-hidden="true"></i>&nbsp;&nbsp;Langues</div> }
                     </a>
 
                     <div className="navbar-dropdown">
-                            {props.lang === 'en' && <a className="navbar-item" data-lang={'fr'} onClick={props.toggleLang}>
+                            {props.lang === 'en' && <a href={'#'}className="navbar-item" data-lang={'fr'} onClick={props.toggleLang} onKeyPress={props.toggleLang}>
                             Francais <FranceFlag />
                         </a>}
-                        { props.lang === 'fr' && <a className="navbar-item" data-lang={'en'} onClick={props.toggleLang}>
+                        { props.lang === 'fr' && <a href={'#'}className="navbar-item" data-lang={'en'} onClick={props.toggleLang} onKeyPress={props.toggleLang}>
                             English <UKFlag />
                         </a>}
                     </div>
