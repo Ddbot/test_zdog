@@ -7,7 +7,7 @@ button.chevronContainer {
     position: fixed;
 
     left: 50%;
-    bottom: 5vh;
+    /* bottom: 5vh; */
 
     height: 3.09vw;
 
@@ -16,10 +16,10 @@ button.chevronContainer {
 
     border: none;
     border-radius: 50%;
-    /* background-color: rebeccapurple; */
+    background-color: transparent;
     outline-style: none;
 
-    padding: 0;
+    padding: 1rem;
 
     /* border-radius: 50px; */
     /* background: linear-gradient(145deg, #5c2e8a, #6d37a4);
@@ -37,19 +37,18 @@ button.chevronContainer {
     outline-offset: -4px;
 }
 
-#chevron_top {
-    /* visibility: hidden; */
-}
-
 .chevronContainer > svg {
-    width: 3.09vw;
-    height: 3.09vw;
+    width: 3vw;
+    height: 3vw;
+
+    margin: 1vw;
 }
 
 main>.chevronContainer:first-of-type {
     position: fixed;
     left: 50%;
-    top: 13.618vh;
+    top: 6.618vh;
+    /* transform: scale(3); */
 }
 
 main>.chevronContainer:first-of-type>svg {

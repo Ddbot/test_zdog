@@ -18,11 +18,11 @@ const Header = (props) => {
            <h1> {props.siteTitle}</h1>
         </Link>
         {/* GERER LE MENU BURGER POUR LES SMARTPHONES !! */}
-        <a href="#" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="burger" onClick={() => {console.log('BIRGER !!')}}>
+        <button className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="burger" onClick={() => {console.log('BIRGER !! ouvrir un Portal ici pour changer de langue')}}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </button>
       </div>
         <LangToggle toggleLang={props.toggleLang} lang={props.lang}/>
     </nav>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import gsap from "gsap";
-import Zdog from 'zdog';
 
 import { useStaticQuery, graphql } from "gatsby";
 
@@ -8,10 +7,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Slide from "../components/slide";
 import IPhone from "../components/iphone";
-import LogoIllustration from "../components/LogoIllustration";
-
-import { Illustration, Cone, Shape } from 'react-zdog'
-
+import LogoIllustration from "../components/logoIllustration";
 import Chevron from "../components/chevron";
 
 import "../components/styles/slide.css";
@@ -40,21 +36,12 @@ function debounce(func, wait, immediate) {
 let top = document.getElementById('chevron_top');
 let bottom = document.getElementById('chevron_bottom');
 
-let handleMouseMove = (e) => {
-  if (e.type === 'touchmove' || e.type === 'mousemove') {
-    gsap.to('#chevron_bottom', { duration: .9, y: -100, repeat: 1 });
-    gsap.to('#chevron_bottom', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
-
-    gsap.to('#chevron_top', { duration: .9, y: 100, repeat: 1 });
-    gsap.to('#chevron_top', { duration: .9, y: 0, repeat: 1, ease: "elastic.out(1, 0.3)" });
-  };
-}
-
 const down = 250, up = -1 * down,
   exit = .195, entry = 0.3;
   
 const IndexPage = (props) => {
   const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
+  const illuRef = React.createRef();
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
@@ -62,8 +49,16 @@ const IndexPage = (props) => {
   let [yRot, setYRot] = useState(-Math.PI / 16);
   
   useEffect(() => { 
-    index === 0 && !!top && gsap.to("#chevron_top", { autoAlpha: 0, duration: 1 });
-    index === 4 && !!top && gsap.to("#chevron_bottom", { autoAlpha: 0, duration: 1 });
+    index === 0 && !!top && gsap.set("#chevron_top", { autoAlpha: 0 });
+    index === 4 && !!bottom && gsap.set("#chevron_bottom", { autoAlpha: 0 });    
+     
+    gsap.to('#chevron_bottom',
+      { duration: 1.6, y: -40, repeat: -1 })
+      .yoyo(true);
+    
+    gsap.to('#chevron_top',
+      { duration: 1.6, y: 40, repeat: -1 })
+      .yoyo(true);
   }, [index]);
 
   // ___________ANIMATIONS________________//
@@ -91,7 +86,7 @@ const IndexPage = (props) => {
     index === 4 && gsap.fromTo("#chevron_top", {
       duration: entry,
       autoAlpha: 0,
-      y: up,      
+      y: -up,      
     }, {
       autoAlpha: 1,
       y: 0,
@@ -184,7 +179,7 @@ const IndexPage = (props) => {
 
     let chevronsTl = gsap.timeline({
       defaults: {
-        duration: 0.67,        
+        duration: 1,        
       }
     });
 
@@ -200,6 +195,7 @@ const IndexPage = (props) => {
     let zDogTl = gsap.timeline({
       defaults: {
         duration: 1,
+        paused: true
       }
     });
 
@@ -208,12 +204,16 @@ const IndexPage = (props) => {
       autoAlpha: 0, 
       onStart: () => {
         dummyTl.play();
+        console.log('On start, progress is ', dummyTl.progress());
       },
-      onUpdate: (prevState) => {
+      onUpdate: () => {
         setXRot((prevState) => {
           return interp_1st(dummyTl.progress());
         });
         console.log('Is: ', dummyTl.progress());
+      },
+      onComplete: () => {
+        console.log(dummyTl.progress());
       }
     });
       
@@ -306,9 +306,8 @@ const IndexPage = (props) => {
               <SEO title="Home" />
               {index !== 0 && <Chevron onClick={changeIndex} id="chevron_top" />}     
               <div className="container">
-                {index !== 2 && <LogoIllustration rotation={{ x:xRot, y:yRot}}/>}
-    
-                <Slide onMouseMove={handleMouseMove} content={getMarkup(index)} />
+                {index !== 2 && <LogoIllustration ref={illuRef} rotation={{ x:xRot, y:yRot}}/>}
+                <Slide content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
               </div>
             </Layout>
