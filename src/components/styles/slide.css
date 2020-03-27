@@ -74,7 +74,7 @@ main>.container>.image {
 div.container>div>svg {
     width: 25vw;
     height: 25vw;
-    transform: translateY(33%) scale(1.5);
+    transform: translate(20%,50%) scale(1.5);
 }
 
 .purple {
