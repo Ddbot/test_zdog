@@ -1,12 +1,18 @@
 
+div.navbar-item:not(:hover)>.navbar-dropdown {
+    padding: 0 auto;
+    opacity: 0;
+    /* transition: all 1s linear !important; */
+}
 
-div.navbar-item>.navbar-dropdown {     
+div.navbar-item:hover>.navbar-dropdown {     
     padding: 0 auto;
     height: 100%;
+    opacity: 1;
+    /* transition: all 10s linear !important; */
 }
 
 div.navbar-item>.navbar-dropdown>button.navbar-item {        
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
@@ -68,3 +74,12 @@ button.navbar-burger:active {
     transform: scale(0.99);
 } */
 
+.navbar-item:hover>.navbar-link:not(:hover) > .navbar-dropdown {
+    transform: translateY(-200%);
+    transition: all 1s linear;
+}
+
+.navbar-item:hover>.navbar-link:hover>.navbar-dropdown {
+    transform: translateY(0);
+        transition: all 1s linear;
+}
