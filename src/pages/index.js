@@ -15,6 +15,7 @@ import {
   zDogTl,
   chevronsEntry,
   chevronsExit,
+  chevronsBobbing,
   fadeOutText,
   fadeInText,
   interpolateCoords,
@@ -76,19 +77,21 @@ const IndexPage = () => {
   useEffect(() => { 
     index === 0 && !!top && gsap.set("#chevron_top", { autoAlpha: 0, y: 0 });
     index === 4 && !!bottom && gsap.set("#chevron_bottom", { autoAlpha: 0, y: 0 }); 
-        
-    gsap.fromTo('#chevron_bottom',
-      {
-        y: 0
-      },{ duration: .8, y: -20, repeat: -1, ease: "power1.inOut" })
-      .yoyo(true);
-    
-    gsap.fromTo('#chevron_top',
-      {
-        y: 0
-      },{ duration: .8, y: 20, repeat: -1, ease: "power2.inOut" })
-      .yoyo(true);
-  }, [index]);
+
+      chevronsBobbing.fromTo("#chevron_top", {
+          y: -20
+      }, {
+          y: 0,
+      }, 0);
+
+      chevronsBobbing.fromTo("#chevron_bottom", {
+          y: 20
+      }, {
+          y: 0,
+      }, 0);
+
+    chevronsBobbing.play();   
+  });
 
   // Stockage du langage
   useEffect(() => {
@@ -96,11 +99,10 @@ const IndexPage = () => {
   }, [lang]);
   // Stockage de coneRotation dans la forwarded ref
 
-  useEffect(() => { 
+  // useEffect(() => { 
     illuRef.current = coneRotation;
-   });
-
-let dummy = document.querySelector('.dummy');
+    // console.log('Une fois');
+  //  });
 
   //_____________data pour GraphQL________//
   const data = useStaticQuery(graphql `
@@ -132,81 +134,46 @@ let dummy = document.querySelector('.dummy');
   let changeIndex = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    // console.log('Illuref = ', illuRef, 'current: ', illuRef.current);
       
-    if (index >= 0 && index <= 4) {
-      switch (e.target.parentNode.id) {
-        case "chevron_bottom":
-          // chevronsTl.to(dummy, {
-          //   autoAlpha: 0,
-          //   backgroundColor: 'red',
-          //   onStart: () => {
-              // 1. Animer la sortie des chevrons
-              chevronsExit();
-            // },
-            // onComplete: () => {
-              // 2. Animer le fadeout de slide text
-              fadeOutText(down);
-              // 3. Changer l'index pour faire changer le contenu de slide text
-              setIndex((prevIndex, props) => {
-                return prevIndex + 1
-              });
-              // setConeRotation(cone_seq[index]);
-            // }
-          // })
-          // .to(dummy, {
-          //   autoAlpha: 1,
-          //   onStart: () => {
-              // 4. Animer le fade in de slide text
-              fadeInText(down);
-              // 5. Animer l'entree des chevrons
-              chevronsEntry();
-            // },
-            // onComplete: () => {
-            //   console.log("Fini d'animer le chevron du bas", index);
-              setConeRotation(cone_seq[index]);
-              // zDogTl.play();
-            // }
-          // });    
-        break;
-        
-        case "chevron_top":
-          // chevronsTl.to(dummy, {
-          //   autoAlpha: 0,
-          //   onStart: () => {
-              // 1. Animer la sortie des chevrons
-              chevronsExit();
-            // },
-            // onComplete: () => {
-              // 2. Animer le fadeout de slide text
-              fadeOutText(up);
-              // 3. Changer l'index pour faire changer le contenu de slide text
-              setIndex((prevIndex, props) => {
-                return prevIndex - 1
-              });
-              // setConeRotation(cone_seq[index]);
-            // }
-          // })
-            // .to(dummy, {
-            //   autoAlpha: 0,
-              // onStart: () => {
-                // 4. Animer le fade in de slide text
-                fadeInText(up);
-              // },
-              // onComplete: () => {
-                // 5. Animer l'entree des chevrons
-                chevronsEntry();    
-                // setConeRotation(cone_seq[index]);
-            //   }
-            // });
-          // console.log('Animé le chevron du haut', index);
-                setConeRotation(cone_seq[index]);
-          break;
-          default:
-          break;
-        }
-      } else {
-      setIndex(0);      
+    switch (e.target.parentNode.id) {
+      case "chevron_bottom":
+        // 1. Animer la sortie des chevrons
+        chevronsExit();
+        // 2. Animer le fadeout de slide text
+        fadeOutText(down);
+        // 3. Changer l'index pour faire changer le contenu de slide text
+        setIndex((prevIndex, props) => {
+          return prevIndex + 1
+        });
+        // 4. Animer le fade in de slide text
+        fadeInText(down);
+        // 5. Animer l'entree des chevrons
+        chevronsEntry();
+        setConeRotation(cone_seq[index]);
+      break;
+      
+      case "chevron_top":
+        // 1. Animer la sortie des chevrons
+        chevronsExit();
+        // 2. Animer le fadeout de slide text
+        fadeOutText(up);
+        // 3. Changer l'index pour faire changer le contenu de slide text
+        setIndex((prevIndex, props) => {
+          return prevIndex - 1
+        });
+        // 4. Animer le fade in de slide text
+        fadeInText(up);
+        // 5. Animer l'entree des chevrons
+        chevronsEntry();    
+        setConeRotation(cone_seq[index]);
+      break;
+      default:
+      break;
     }
+
+    
   };
 
   let getMarkup = (index) => {
@@ -226,14 +193,14 @@ let dummy = document.querySelector('.dummy');
   return (<>
             <Layout toggleLang={toggleLang} lang={lang}>
               <SEO title="Home" />
-              {index !== 0 && <Chevron onClick={changeIndex} id="chevron_top" />}     
+              {index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
               <div className="container">
-        {index !== 2 && <LogoIllustration ref={illuRef} coneRotation={coneRotation}/>}
+        {index !== 2 && <LogoIllustration ref={illuRef} coneRotation={illuRef}/>}
                 <Slide content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
               </div>
             </Layout>
-            {index !== 4 && <Chevron onClick={changeIndex} id="chevron_bottom" />}
+            {index !== 4 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" />}
             <span className="dummy"></span>
           </>);
 };

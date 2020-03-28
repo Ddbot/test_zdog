@@ -71,6 +71,15 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
       });
   };
 
+  export let chevronsBobbing = gsap.timeline({
+      defaults: {
+          duration: .8, 
+          paused: false,
+          yoyo: true,
+          repeat: -1
+      }
+  });
+  
   // Animer le fadeout de slide text
   export let fadeOutText = (direction) => {
       gsap.to('.slide.text', {
