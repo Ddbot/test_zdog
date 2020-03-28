@@ -74,6 +74,7 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
   export let chevronsBobbing = gsap.timeline({
       defaults: {
           duration: .8, 
+          ease: "power2.inOut",
           paused: false,
           yoyo: true,
           repeat: -1
