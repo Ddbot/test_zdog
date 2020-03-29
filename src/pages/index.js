@@ -101,7 +101,7 @@ const IndexPage = () => {
         fadeOutText(down);
         // 3. Changer l'index pour faire changer le contenu de slide text
         setIndex((prevIndex, props) => {
-          return index + 1
+          return prevIndex + 1
         });
         // 4. Animer le fade in de slide text
         fadeInText(down);
@@ -116,7 +116,7 @@ const IndexPage = () => {
         fadeOutText(up);
         // 3. Changer l'index pour faire changer le contenu de slide text
         setIndex((prevIndex, props) => {
-          return index - 1
+          return prevIndex - 1
         });
         // 4. Animer le fade in de slide text
         fadeInText(up);

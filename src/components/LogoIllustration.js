@@ -54,18 +54,24 @@ let dummyTween = gsap.to(".dummy", {
 });
 
 const LogoIllustration = (props) => {
-    let [index, setIndex] = useState(undefined);
-    let [rotation, setRotation] = useState({       x: Math.PI / 2,        y: -Math.PI / 16  });
+    let [index, setIndex] = useState(0);
+    let [rotation, setRotation] = useState(cone_seq[index]);
     let [tl, setTl] = useState(gsap.timeline({ defaults: { duration: illuTweenDuration, paused: true }}));
         
     let ref = useRef();
     let coneRef = useRef();        
 
     useEffect(() => {
-        props.index !== index && setIndex(prevState => {
-            return { index: props.index, rotation: cone_seq[props.index] }
+        props.index !== index && setIndex(() => {
+            return props.index
         });
     }, [props.index]);
+
+    useEffect(() => {
+        setRotation(() => {
+            return cone_seq[index]
+        });
+    }, [index]);
 
 
     // let animate = () => {
