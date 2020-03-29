@@ -1,15 +1,14 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
-
-import { Illustration, Cone } from 'react-zdog';
+import Zdog from 'zdog';
+import { Illustration, Cone, Cylinder, Box  } from 'react-zdog';
 import gsap from 'gsap';
-
 
 let cone_seq = [{
         x: Math.PI / 2,
         y: -Math.PI / 16
     }, {
-        x: 0,
+        x: 3,
         y: -Math.PI / 16
     },
     // celui-ci napparaitra meme pas
@@ -29,69 +28,71 @@ let cone_seq = [{
     }
 ];
 
-  // if index = 0, pas d'animation
-  // startValue = cone_seq[0]
-  // endValue = cone_seq[0]
-  // progress = 0
-  // gsap.utils.interpolate(startValue, endValue, progress);
-
-  // if index = 1
-  //startValue = cone_seq[index-1]
-  //endValue = index,
-  // progress = ???
-
-// let lerp = (i, prog) => {
-//     let frame = gsap.utils.interpolate(cone_seq[i - 1], cone_seq[i], prog);
-//     gsap.to(coneRef, {
-//         autoAlpha: 0
-//     });
-// }
-
 let illuTweenDuration = 1;
-let dummyTween = gsap.to(".dummy", {
-    backgroundColor: "red",
-    duration: illuTweenDuration
-});
 
 const LogoIllustration = (props) => {
+    function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+    // Animation de slide 0 à slide 1
+    let dummyTween = (prevRot, newRot) => {
+        let tween = gsap.to(".dummy", {
+            autoAlpha: 0,
+            duration: illuTweenDuration,
+            paused: true,
+            onUpdate: () => {
+                setRotation((prev) => {
+                    return {
+                        x: gsap.utils.interpolate(prev.x, newRot.x, tween.progress()),
+                        y: gsap.utils.interpolate(prev.y, newRot.y, tween.progress())
+                    }
+                });
+            },
+            onComplete: () => {
+                let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
+                gsap.to(circle, {
+                    scale: 1,
+                    duration: 1
+                });
+                // console.log('Circ: ', circle);
+            }
+        });
+        tween.play(0);
+    }
+
     let [index, setIndex] = useState(0);
     let [rotation, setRotation] = useState(cone_seq[index]);
-    let [tl, setTl] = useState(gsap.timeline({ defaults: { duration: illuTweenDuration, paused: true }}));
+    
+    let prevRotation = usePrevious(rotation);
         
-    let ref = useRef();
-    let coneRef = useRef();        
+    let coneRef = useRef();     
 
     useEffect(() => {
-        props.index !== index && setIndex(() => {
-            return props.index
-        });
-    }, [props.index]);
+        if (props.index !== index) setIndex((prevIdx) => { return props.index });          
+    }, [props.index,index]);
 
-    useEffect(() => {
-        setRotation(() => {
-            return cone_seq[index]
-        });
+    useEffect(() => {        
+        if (index !== 2 || !index){
+            dummyTween(prevRotation = { x: 0, y: 0 }, cone_seq[index]);                
+        }
     }, [index]);
 
-
-    // let animate = () => {
-    //     // rotate illo each frame
-    //     ref.rotate.y += 0.03;
-    //     ref.updateRenderGraph();
-    //     // animate next frame
-    //     requestAnimationFrame(animate);
-    // }
     return (
-        <Illustration ref={el => el = ref.current} zoom={10}>
+        <Illustration zoom={10}>
             <Cone
-                ref={el => el = coneRef.current}
+                ref={coneRef}
                 diameter={24}
                 length={24}
                 stroke={false}
                 color={'rebeccapurple'}
-                backface={'#C25'}
+                backface={'#C0C44D'}
                 width={24}
                 rotate={rotation}
+                // translate={{ y: 6 }}                
             />
             <div className="dummy"></div>
         </Illustration>

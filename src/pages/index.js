@@ -149,7 +149,7 @@ const IndexPage = () => {
       <SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
               {index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
               <div className="container">
-                {index !== 2 && <LogoIllustration index={index} ref={illuRef} />}
+                {index !== 2 && <LogoIllustration index={index} />}
                 <Slide content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
               </div>

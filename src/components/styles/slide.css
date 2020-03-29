@@ -64,21 +64,33 @@ main>.container {
     font-family: 'Roboto';
 }
 
-main>.container>.image {
+/* main>.container>.image {
     min-width: 20vw;
     min-height: 20vw;
     align-self: center;
     border-radius: 50%;
-}
+} */
 
-div.container>div>svg {
+
+div.container>div:not(.slide.text)>svg {
     width: 25vw;
     height: 25vw;
-    transform: translate(20%,50%) scale(1.5);
+    /* transform: translate(20%,50%) scale(1.5); */
+
 }
 
 .purple {
     color: white;
     padding: 0 6px 0 1.5%;
     background-color: rebeccapurple;
+}
+
+.dummy::before {
+    content: '〰';
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    bottom: 33%;
+    right: 50%;
+    font-size: 2rem;
 }
