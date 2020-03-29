@@ -1,5 +1,5 @@
 // import ReactDOM from 'react-dom'
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Illustration, Cone } from 'react-zdog';
 import gsap from 'gsap';
@@ -50,7 +50,7 @@ let cone_seq = [{
 let illuTweenDuration = 1;
 let dummyTween = gsap.to(".dummy", {
     backgroundColor: "red",
-    duration: this.illuTweenDuration
+    duration: illuTweenDuration
 });
 
 const LogoIllustration = (props) => {
@@ -62,30 +62,30 @@ const LogoIllustration = (props) => {
     let coneRef = useRef();        
 
     useEffect(() => {
-        this.props.index !== this.state.index && this.setState(prevState => {
-            return { ...this.state, index: this.props.index, rotation: cone_seq[this.props.index] }
+        props.index !== index && setIndex(prevState => {
+            return { index: props.index, rotation: cone_seq[props.index] }
         });
-    });
+    }, [props.index]);
 
 
     // let animate = () => {
     //     // rotate illo each frame
-    //     this.ref.rotate.y += 0.03;
-    //     this.ref.updateRenderGraph();
+    //     ref.rotate.y += 0.03;
+    //     ref.updateRenderGraph();
     //     // animate next frame
-    //     requestAnimationFrame(this.animate);
+    //     requestAnimationFrame(animate);
     // }
     return (
-        <Illustration ref={el => el = this.ref.current} zoom={10}>
+        <Illustration ref={el => el = ref.current} zoom={10}>
             <Cone
-                ref={el => el = this.coneRef.current}
+                ref={el => el = coneRef.current}
                 diameter={24}
                 length={24}
                 stroke={false}
                 color={'rebeccapurple'}
                 backface={'#C25'}
                 width={24}
-                rotate={this.state.rotation}
+                rotate={rotation}
             />
             <div className="dummy"></div>
         </Illustration>
