@@ -9,6 +9,8 @@ import IPhone from "../components/iphone";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from "../components/chevron";
 
+import gsap from 'gsap';
+
 import {
   chevronsEntry,
   chevronsExit,
@@ -31,25 +33,28 @@ const IndexPage = () => {
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
+
+  let top = document.getElementById("chevron_top");
+  let bottom = document.getElementById("chevron_bottom");
   
   // Animation des chevrons
   useEffect(() => { 
-    // index === 0 && !!top && gsap.set("#chevron_top", { autoAlpha: 0, y: 0 });
-    // index === 4 && !!bottom && gsap.set("#chevron_bottom", { autoAlpha: 0, y: 0 }); 
+    index === 0 && !!top && gsap.set("#chevron_top", { autoAlpha: 0, y: 0 });
+    index === 4 && !!bottom && gsap.set("#chevron_bottom", { autoAlpha: 0, y: 0 }); 
 
-      !!document.getElementById("#chevron_top") && chevronsBobbing.fromTo("#chevron_top", {
+      chevronsBobbing.fromTo("#chevron_top", {
           y: -20
       }, {
           y: 0,
       }, 0);
 
-      !!document.getElementById("#chevron_bottom") && chevronsBobbing.fromTo("#chevron_bottom", {
+      chevronsBobbing.fromTo("#chevron_bottom", {
           y: 20
       }, {
           y: 0,
       }, 0);
 
-    chevronsBobbing.play();   
+    chevronsBobbing.play(0);   
   });
 
   // Stockage du langage
