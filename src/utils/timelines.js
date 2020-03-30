@@ -5,7 +5,8 @@ export const down = 250,
     exit = .195,
     entry = 0.3,
     index = 0,
-    illuTweenDuration = 1;
+    illuTweenDuration = 1,
+    transitionDelay = .225
 
 export let interpolateCoords = (ar, index = 0, progress = 0) => {
       if (index === 0) return null
@@ -23,7 +24,7 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
           autoAlpha: 1,
           y: 0,
           onStart: () => {
-              index !== 0 && gsap.fromTo("#chevron_top", {
+              index !== 0 && gsap.fromTo(".chevronContainer", {
                   duration: entry,
                   autoAlpha: 0,
                   y: 50
@@ -32,7 +33,7 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
                   y: 0,
               });
           },
-      });
+      }).delay(transitionDelay*2);
 
       index === 4 && gsap.fromTo("#chevron_top", {
           duration: entry,
@@ -51,7 +52,7 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
           autoAlpha: 0,
           duration: exit,
           onStart: () => {
-              index !== 0 && gsap.fromTo("#chevron_top", {
+              index !== 0 && gsap.fromTo(".chevronContainer", {
                   duration: exit,
                   autoAlpha: 1,
                   y: 0
@@ -100,6 +101,6 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
       }, {
           autoAlpha: 1,
               y: 0,
-      });
+      }).delay(transitionDelay);
   };
 
