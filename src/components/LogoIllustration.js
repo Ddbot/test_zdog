@@ -1,6 +1,5 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
-import Zdog from 'zdog';
 import { Illustration, Cone, Cylinder, Box  } from 'react-zdog';
 import gsap from 'gsap';
 
@@ -71,7 +70,9 @@ const LogoIllustration = (props) => {
     
     let prevRotation = usePrevious(rotation);
         
-    let mineRef = useRef();  
+    let pointeRef = useRef(),
+        mineRef = useRef(),
+    cylindreRef = useRef();
     
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });          
@@ -86,9 +87,6 @@ const LogoIllustration = (props) => {
                 scale: 1,
                 width: "100%",
                 height: "100%",
-                scale: 1,
-                    x: 0,
-                    y: 0,
             });
             dummyTween(prevRotation = { x: 0, y: 0 }, cone_seq[index]);                
         } else if (index === 2) {
@@ -110,27 +108,39 @@ const LogoIllustration = (props) => {
     }, [index]);
 
     return (
-        <Illustration zoom={10}>
+        <Illustration zoom={5}>
             <Cone
-                ref={mineRef}
+                ref={pointeRef}
                 diameter={24}
                 length={24}
                 stroke={false}
                 color={'rebeccapurple'}
                 backface={'blue'}
                 width={24}
-                rotate={rotation}
-            >
+                rotate={rotation}>
                 <Cone
+                    ref={mineRef}
                     diameter={24}
                     length={24}
                     stroke={false}
                     backface={"#C25"}
                     scale={.33}
                     color={'beige'}
-                    translate= {{z: 16}}
-                />
+                    translate={{ z: 16 }}>
+                    <Cylinder
+                        ref={cylindreRef}
+                        diameter={24}
+                        length={100}
+                        stroke={ false}
+                        color={'rgb(0, 191, 255)'}
+                        frontFace={'white'}
+                        backface={'black'}
+                        scale={3}
+                        translate={{ z:-198 }}
+                    />
+                    </Cone>
             </Cone>
+
             <div className="dummy"></div>
         </Illustration>
     );
