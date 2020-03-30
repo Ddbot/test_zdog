@@ -1,6 +1,6 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
-import { Illustration, Cone, Cylinder, Box  } from 'react-zdog';
+import { Illustration, Cone, Cylinder, Hemisphere  } from 'react-zdog';
 import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
@@ -39,7 +39,6 @@ const LogoIllustration = (props) => {
         });
         return ref.current;
     }
-    // Animation de slide 0 à slide 1
     let dummyTween = (prevRot, newRot) => {
         let tween = gsap.to(".dummy", {
             autoAlpha: 0,
@@ -56,8 +55,8 @@ const LogoIllustration = (props) => {
             onComplete: () => {
                 let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
                 gsap.to(circle, {
-                    scale: 1,
-                    duration: illuTweenDuration*0.618
+                    // scale: 10,
+                    // duration: illuTweenDuration*0.618
                 });
                 // console.log('Circ: ', circle);
             }
@@ -72,77 +71,137 @@ const LogoIllustration = (props) => {
         
     let pointeRef = useRef(),
         mineRef = useRef(),
-    cylindreRef = useRef();
+        cylindreRef = useRef(),
+        ringRef = useRef(),
+        gumRef = useRef();
     
     useEffect(() => {
-        if (props.index !== index) setIndex((prevIdx) => { return props.index });          
+        if (props.index !== index) setIndex((prevIdx) => { return props.index });  
     }, [props.index,index]);
 
-    useEffect(() => {        
-        if (index !== 2 || !index) {
-            gsap.to('[zoom]', {
-                duration: 1,
-                position: 'relative',     
-                autoAlpha: 1,
-                scale: 1,
-                width: "100%",
-                height: "100%",
-            });
-            dummyTween(prevRotation = { x: 0, y: 0 }, cone_seq[index]);                
-        } else if (index === 2) {
-            
-            gsap.set('[zoom]', {
-                position: 'fixed'
-            });
+    useEffect(() => {  
+        switch (index) {
+            case 0:
+                gsap.set('[zoom]', {
+                    scale: 10
+                });
+                break;
+            case 1:
+                gsap.to('[zoom]>svg', {
+                    duration: 1,
+                    position: 'relative',
+                    autoAlpha: 1,
+                    scale: 1,
+                    // width: "100%",
+                    // height: "100%",
+                });
 
-            gsap.to('[zoom]', {
-                duration: 1,
-                scale: 0.5,
-                x: -450,
-                y: -100,
-                // onComplete: () => {
-                //     gsap.set('[zoom]', { position: 'fixed', autoAlpha: 0.3 });
-                // }
-            });
-        }
+                dummyTween(prevRotation={ x: Math.PI/2, y: -Math.PI/16}, cone_seq[index]);
+                break;
+            case 2:
+                gsap.set('[zoom]', {
+                    position: 'fixed'
+                });
+
+                gsap.to('[zoom]', {
+                    duration: 1,
+                    scale: 0.5,
+                    x: -450,
+                    y: -100,
+                });
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                break;
+        }        
     }, [index]);
 
-    return (
-        <Illustration zoom={5}>
-            <Cone
-                ref={pointeRef}
-                diameter={24}
-                length={24}
-                stroke={false}
-                color={'rebeccapurple'}
-                backface={'blue'}
-                width={24}
-                rotate={rotation}>
+    // RENDER
+    switch (index) {
+        case 0:
+        case 1:
+        case 2:
+            return <Illustration zoom={1}>
+                    <Cone
+                        id={"pointe"}
+                        ref={pointeRef}
+                        diameter={24}
+                        length={24}
+                        stroke={false}
+                        color = {'blue'}
+                        backface={'rebeccapurple'}
+                        width={24}
+                        rotate={rotation} />
+                    <div className="dummy"></div>
+                </Illustration>                      
+            break;
+        case 3:
+        case 4:
+            return <Illustration zoom={1}>
                 <Cone
-                    ref={mineRef}
+                    id={"pointe"}
+                    ref={pointeRef}
                     diameter={24}
                     length={24}
                     stroke={false}
-                    backface={"#C25"}
-                    scale={.33}
-                    color={'beige'}
-                    translate={{ z: 16 }}>
-                    <Cylinder
-                        ref={cylindreRef}
+                    color={'rebeccapurple'}
+                    backface={'blue'}
+                    width={24}
+                    rotate={rotation}>
+                    <Cone
+                        id="mine"
+                        ref={mineRef}
                         diameter={24}
-                        length={100}
-                        stroke={ false}
-                        color={'rgb(0, 191, 255)'}
-                        frontFace={'white'}
-                        backface={'black'}
-                        scale={3}
-                        translate={{ z:-198 }}
-                    />
+                        length={24}
+                        stroke={false}
+                        backface={"pink"}
+                        scale={.33}
+                        color={'beige'}
+                        translate={{ z: 16 }}>
+                        <Cylinder
+                            id={"bois"}
+                            ref={cylindreRef}
+                            diameter={24}
+                            length={100}
+                            stroke={false}
+                            color={'orange'}
+                            frontFace={'white'}
+                            backface={'black'}
+                            scale={3}
+                            translate={{ z: -198 }}>
+                            <Cylinder
+                                id={"ring"}
+                                ref={ringRef}
+                                diameter={24}
+                                length={10}
+                                stroke={false}
+                                color={'red'}
+                                backface={'green'}
+                                color={'salmon'}
+                                translate={{ z: -55 }}>
+                                <Hemisphere
+                                    id={"gum"}
+                                    ref={gumRef}
+                                    diameter={24}
+                                    // fill enabled by default
+                                    // disable stroke for crisp edge
+                                    stroke={false}
+                                    color={'yellow'}
+                                    backface={'gray'}
+                                    rotate={{ x: Math.PI }}
+                                    translate={{ z: -6 }} />
+                            </Cylinder>
+                        </Cylinder>
                     </Cone>
-            </Cone>
-
-            <div className="dummy"></div>
-        </Illustration>
-    );
+                </Cone>
+                <div className="dummy"></div>
+            </Illustration>
+                break;
+        default:
+            break;
+    };
 }
 export default LogoIllustration
