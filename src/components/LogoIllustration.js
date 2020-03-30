@@ -4,6 +4,8 @@ import Zdog from 'zdog';
 import { Illustration, Cone, Cylinder, Box  } from 'react-zdog';
 import gsap from 'gsap';
 
+import { illuTweenDuration } from '../utils/timelines';
+
 let cone_seq = [{
         x: Math.PI / 2,
         y: -Math.PI / 16
@@ -28,7 +30,7 @@ let cone_seq = [{
     }
 ];
 
-let illuTweenDuration = 1;
+// let illuTweenDuration = .5;
 
 const LogoIllustration = (props) => {
     function usePrevious(value) {
@@ -56,12 +58,12 @@ const LogoIllustration = (props) => {
                 let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
                 gsap.to(circle, {
                     scale: 1,
-                    duration: 1
+                    duration: illuTweenDuration*0.618
                 });
                 // console.log('Circ: ', circle);
             }
         });
-        tween.play(0);
+        tween.play(0).delay(.7);
     }
 
     let [index, setIndex] = useState(0);

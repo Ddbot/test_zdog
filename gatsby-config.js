@@ -16,12 +16,11 @@ module.exports = {
                   Web sites and <span class="purple"><b>PWA</b></span><br />
                 </p>`,
       slide_2: `<p style='margin-left:10%;'>
-                  I'm also interested in <span class="purple"><b>React Native</b></span> and <br />
-                  <span class="purple"><b>Flutter</b></span>. I am passionnate
-                  about technology and music, and always <span class="purple"><b> eager to learn new stuff</b></span>
+                  I'm also using <span class="purple"><b>React Native</b></span> and <br />
+                  <span class="purple"><b>Ruby on Rails</b></span>. I am a music and technology fan, who <span class="purple"><b>always strives to learn more</b></span>
                 </p>`,
-      slide_3: `<p style='margin-right:10%;'>SLIDE 4</p>`,
-      slide_4: `<p style='margin-right:10%;'>SLIDE 5</p>`,
+      slide_3: `<p style='margin-left: 10%;'>I am also a <span class="purple"><b>writer / translator</b></span>. I create catchy and <span class="purple"><b>a11y compliant content</b></span> and can even shoulder the <span class="purple"><b>i18n</b></span> of your sites and applications</p>`,
+      slide_4: `<p style='margin-right:10%;'>I'm currently available for work. <span class="purple"><b>Contact me !</p></span></p>`,
     },
     fr: {
       description: `<span>Vous trouverez ici mon CV ainsi que mon blog</span>`,
@@ -36,12 +35,10 @@ module.exports = {
                     <span class="purple"><b>modernes, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
                   </p>`,
       slide_2: `<p style='margin-left: 10%;'>
-                      Je m'intéresse à <span class="purple"><b>React Native</b></span> et <br />
-                      <span class="purple"><b>Flutter</b></span>,
-                      et en véritable passionné de technologie, <span class="purple"><b>je ne cesse d'apprendre</b></span>
+                      J'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>, et en véritable passionné, j'assure une <span class="purple"><b>veille technologique</b></span> permanente
 			              </p>`,
-      slide_3: `<p style='margin-right:10%;'>SLIDE 4</p>`,
-      slide_4: `<p style='margin-right:10%;'>SLIDE 5 </p>`,
+      slide_3: `<p style='margin-left: 10%;'>Je suis aussi <span class="purple"><b>rédacteur</b></span> et <span class="purple"><b>traducteur</b></span>. Je créé du <span class="purple"><b>contenu accrocheur</b></span> et accessible et assure l'<span class="purple"><b>i18n de vos sites</b></span> et applications </p>`,
+      slide_4: `<p style='margin-right:10%;'>Je suis à votre disposition pour plus de renseignements. <span class="purple"><b>Contactez-moi !</p></span></p>`,
     },
     plugins: [
       `gatsby-plugin-react-helmet`,

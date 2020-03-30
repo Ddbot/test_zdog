@@ -4,7 +4,8 @@ export const down = 250,
     up = -1 * down,
     exit = .195,
     entry = 0.3,
-    index = 0;
+    index = 0,
+    illuTweenDuration = 1;
 
 export let interpolateCoords = (ar, index = 0, progress = 0) => {
       if (index === 0) return null
@@ -85,7 +86,7 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
   export let fadeOutText = (direction) => {
       gsap.to('.slide.text', {
           autoAlpha: 0,
-          y: direction,
+          y: direction/2,
           duration: exit,
       });
   };
@@ -95,7 +96,7 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
       gsap.fromTo('.slide.text', {
           duration: entry,
           autoAlpha: 0,
-          y: direction
+          y: direction,
       }, {
           autoAlpha: 1,
               y: 0,

@@ -37,7 +37,7 @@ const IndexPage = () => {
   let top = document.getElementById("chevron_top");
   let bottom = document.getElementById("chevron_bottom");
   
-  // Animation des chevrons
+  // Animation des chevrons PERMANENTE
   useEffect(() => { 
     index === 0 && !!top && gsap.set("#chevron_top", { autoAlpha: 0, y: 0 });
     index === 4 && !!bottom && gsap.set("#chevron_bottom", { autoAlpha: 0, y: 0 }); 
@@ -96,7 +96,7 @@ const IndexPage = () => {
     switch (e.target.parentNode.id) {
       case "chevron_bottom":
         // 1. Animer la sortie des chevrons
-        chevronsExit();
+		chevronsExit();
         // 2. Animer le fadeout de slide text
         fadeOutText(down);
         // 3. Changer l'index pour faire changer le contenu de slide text
@@ -125,9 +125,7 @@ const IndexPage = () => {
       break;
       default:
       break;
-    }
-
-    
+    }    
   };
 
   let getMarkup = (index) => {
@@ -146,11 +144,11 @@ const IndexPage = () => {
   
   return (<>
             <Layout toggleLang={toggleLang} lang={lang}>
-      <SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
+              <SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
               {index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
               <div className="container">
                 {index !== 2 && <LogoIllustration index={index} />}
-                <Slide content={getMarkup(index)} />
+			  	<Slide index={index} content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
               </div>
             </Layout>
