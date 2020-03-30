@@ -71,31 +71,66 @@ const LogoIllustration = (props) => {
     
     let prevRotation = usePrevious(rotation);
         
-    let coneRef = useRef();     
-
+    let mineRef = useRef();  
+    
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });          
     }, [props.index,index]);
 
     useEffect(() => {        
-        if (index !== 2 || !index){
+        if (index !== 2 || !index) {
+            gsap.to('[zoom]', {
+                duration: 1,
+                position: 'relative',     
+                autoAlpha: 1,
+                scale: 1,
+                width: "100%",
+                height: "100%",
+                scale: 1,
+                    x: 0,
+                    y: 0,
+            });
             dummyTween(prevRotation = { x: 0, y: 0 }, cone_seq[index]);                
+        } else if (index === 2) {
+            
+            gsap.set('[zoom]', {
+                position: 'fixed'
+            });
+
+            gsap.to('[zoom]', {
+                duration: 1,
+                scale: 0.5,
+                x: -450,
+                y: -100,
+                // onComplete: () => {
+                //     gsap.set('[zoom]', { position: 'fixed', autoAlpha: 0.3 });
+                // }
+            });
         }
     }, [index]);
 
     return (
         <Illustration zoom={10}>
             <Cone
-                ref={coneRef}
+                ref={mineRef}
                 diameter={24}
                 length={24}
                 stroke={false}
                 color={'rebeccapurple'}
-                backface={'#C0C44D'}
+                backface={'blue'}
                 width={24}
                 rotate={rotation}
-                // translate={{ y: 6 }}                
-            />
+            >
+                <Cone
+                    diameter={24}
+                    length={24}
+                    stroke={false}
+                    backface={"#C25"}
+                    scale={.33}
+                    color={'beige'}
+                    translate= {{z: 16}}
+                />
+            </Cone>
             <div className="dummy"></div>
         </Illustration>
     );
