@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Illustration, Cone, Cylinder, Hemisphere  } from 'react-zdog';
 import gsap from 'gsap';
 
+import './styles/logo.css';
+
 import { illuTweenDuration } from '../utils/timelines';
 
 let cone_seq = [{
@@ -12,24 +14,19 @@ let cone_seq = [{
         x: 3,
         y: -Math.PI / 16
     },
-    // celui-ci napparaitra meme pas
     {
         x: 0,
         y: -Math.PI / 16
     },
-    // celui ci non plus, il sagira dun svg en SIGNATURE
     {
-        x: 0,
-        y: -Math.PI / 4
+        x: 2,
+        y: 2*Math.PI / 16,
     },
-    // celui ci non plus, il sagira dun svg en ENVELOPPE
     {
         x: 0,
         y: -Math.PI / 2
     }
 ];
-
-// let illuTweenDuration = .5;
 
 const LogoIllustration = (props) => {
     function usePrevious(value) {
@@ -39,6 +36,7 @@ const LogoIllustration = (props) => {
         });
         return ref.current;
     }
+
     let dummyTween = (prevRot, newRot) => {
         let tween = gsap.to(".dummy", {
             autoAlpha: 0,
@@ -47,17 +45,17 @@ const LogoIllustration = (props) => {
             onUpdate: () => {
                 setRotation((prev) => {
                     return {
-                        x: gsap.utils.interpolate(prev.x, newRot.x, tween.progress()),
-                        y: gsap.utils.interpolate(prev.y, newRot.y, tween.progress())
+                        x: gsap.utils.interpolate(prevRot.x, newRot.x, tween.progress()),
+                        y: gsap.utils.interpolate(prevRot.y, newRot.y, tween.progress())
                     }
                 });
             },
             onComplete: () => {
-                let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
-                gsap.to(circle, {
-                    // scale: 10,
-                    // duration: illuTweenDuration*0.618
-                });
+                // let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
+                // gsap.to(circle, {
+                //     scale: 10,
+                //     duration: illuTweenDuration*0.618
+                // });
                 // console.log('Circ: ', circle);
             }
         });
@@ -69,7 +67,7 @@ const LogoIllustration = (props) => {
     
     let prevRotation = usePrevious(rotation);
         
-    let pointeRef = useRef(),
+    let illuRef = useRef(), pointeRef = useRef(),
         mineRef = useRef(),
         cylindreRef = useRef(),
         ringRef = useRef(),
@@ -77,46 +75,52 @@ const LogoIllustration = (props) => {
     
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });  
-    }, [props.index,index]);
+    }, [props.index, index]);
+    
 
+    // ANIMATIONS ZDOG !!!
     useEffect(() => {  
+        gsap.set(['[zoom]>svg', '[zoom]'], { overflow: "visible" });
         switch (index) {
             case 0:
+                console.log('PrevRot: ', prevRotation, 'Current index: ', index, 'Current Seq: ', cone_seq[index]);
                 gsap.set('[zoom]', {
                     scale: 10
                 });
                 break;
             case 1:
-                gsap.to('[zoom]>svg', {
-                    duration: 1,
-                    position: 'relative',
-                    autoAlpha: 1,
-                    scale: 1,
-                    // width: "100%",
-                    // height: "100%",
-                });
-
-                dummyTween(prevRotation={ x: Math.PI/2, y: -Math.PI/16}, cone_seq[index]);
+                console.log('PrevRot: ', prevRotation, 'Current index: ', index, 'Current Seq: ', cone_seq[index]);
+                dummyTween(prevRotation, cone_seq[index]);
+                gsap.to('[zoom]>svg>path', {
+                    duration: .225,          
+                    fill: "hsl(48, 100%, 67%)",
+                }).delay(illuTweenDuration + 0.7);
                 break;
-            case 2:
-                gsap.set('[zoom]', {
-                    position: 'fixed'
-                });
-
+            case 2:         
+                console.log('PrevRot: ', prevRotation, 'Current index: ', index, 'Current Seq: ', cone_seq[index]);
+                // dummyTween(prevRotation, cone_seq[index]);
+                // gsap.set('[zoom]', { position: "fixed" });
                 gsap.to('[zoom]', {
-                    duration: 1,
-                    scale: 0.5,
-                    x: -450,
-                    y: -100,
+                    onStart: () => {
+                        gsap.set('[zoom]', { position: "fixed" });
+                    },
+                    scale: 3,
+                    width: "10%", 
+                    height: "10%",
+                    x: -400,
+                    y: -175
                 });
+
                 break;
-            case 3:
+            case 3:  
+                dummyTween(prevRotation, cone_seq[index]);
+                gsap.to()
                 break;
-            case 4:
+            case 4:                                
+                dummyTween(prevRotation, cone_seq[index]);
                 break;
-            default:
-                break;
-        }        
+            default:                                
+        }       
     }, [index]);
 
     // RENDER
@@ -124,15 +128,15 @@ const LogoIllustration = (props) => {
         case 0:
         case 1:
         case 2:
-            return <Illustration zoom={1}>
+            return <Illustration ref={el => el = illuRef} index={index} zoom={1}>
                     <Cone
                         id={"pointe"}
                         ref={pointeRef}
                         diameter={24}
                         length={24}
                         stroke={false}
-                        color = {'blue'}
-                        backface={'rebeccapurple'}
+                        color = {'#0B8CDE'}
+                        backface={'hsl(48, 100%, 67%)'}
                         width={24}
                         rotate={rotation} />
                     <div className="dummy"></div>
@@ -140,14 +144,14 @@ const LogoIllustration = (props) => {
             break;
         case 3:
         case 4:
-            return <Illustration zoom={1}>
+            return <Illustration index={index} zoom={.33}>
                 <Cone
                     id={"pointe"}
                     ref={pointeRef}
                     diameter={24}
                     length={24}
                     stroke={false}
-                    color={'rebeccapurple'}
+                    color={'yellow'}
                     backface={'blue'}
                     width={24}
                     rotate={rotation}>

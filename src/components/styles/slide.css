@@ -76,21 +76,45 @@ div.container>div:not(.slide.text)>svg {
     width: 25vw;
     height: 25vw;
     /* transform: translate(20%,50%) scale(1.5); */
+    z-index: 2;
 
 }
 
 .purple {
     color: white;
     padding: 0 6px 0 1.5%;
-    background-color: rebeccapurple;
+    /* background-color: rebeccapurple; */
+    background-color: var(--bulma-green);
 }
 
 .dummy::before {
     content: '〰';
     position: absolute;
+    color: var(--bulma-orange);
     width: 3rem;
     height: 3rem;
-    bottom: 33%;
-    right: 50%;
+    top: 30vh;
+    left: 38vw;
+    font-size: 5rem;
+    transform: rotate(7deg);
+
+    background-color: var(--bulma-green);
+    border-radius: 50%;
+}
+
+.dummy::after {
+    content: '〰';
+    color: var(--bulma-red);
+    position: absolute;
+
+    width: 3rem;
+    height: 3rem;
+
+    z-index: -1;
+    top: 25vh;
+    left: 34vw;
     font-size: 2rem;
+    transform: rotate(7deg);
+
+    background-size: 400px;
 }

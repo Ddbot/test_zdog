@@ -7,7 +7,7 @@ module.exports = {
       slide_0: `<p style='margin-right:10%;'>
                   Hello ! <br />
                   I'm <span class="purple"><b>Andry</b></span>,<br />
-                  A <span style='background-color: rebeccapurple;padding:6px;color:white'}}><b>Web site</b></span> and <span class="purple"><b>mobile Apps</b></span> Integrator and <span class="purple"><b>Designer</b></span>
+                  A <span style='background-color: hsl(171, 100%, 41%);padding:6px;color:white'}}><b>Web site</b></span> and <span class="purple"><b>mobile Apps</b></span> Integrator and <span class="purple"><b>Designer</b></span>
                 </p>`,
       slide_1: `<p style='margin-right:10%;'>
                   I'm using <span class="purple"><b>React</b></span> and <br />
@@ -35,7 +35,8 @@ module.exports = {
                     <span class="purple"><b>modernes, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
                   </p>`,
       slide_2: `<p style='margin-left: 10%;'>
-                      J'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>, et en véritable passionné, j'assure une <span class="purple"><b>veille technologique</b></span> permanente
+                      J 'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>. En véritable <span class="purple"><b>passionné</b></span>, j'
+                      assure une <span class="purple"><b>veille technologique</b></span> permanente.
 			              </p>`,
       slide_3: `<p style='margin-left: 10%;'>Je suis aussi <span class="purple"><b>rédacteur</b></span> et <span class="purple"><b>traducteur</b></span>. Je créé du <span class="purple"><b>contenu accrocheur</b></span> et accessible et assure l'<span class="purple"><b>i18n de vos sites</b></span> et applications </p>`,
       slide_4: `<p style='margin-right:10%;'>Je suis à votre disposition pour plus de renseignements. <span class="purple"><b>Contactez-moi !</p></span></p>`,

@@ -147,7 +147,7 @@ const IndexPage = () => {
               <SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
               {index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
               <div className="container">
-                <LogoIllustration index={index} />
+			  <LogoIllustration index={index} />
 
 			  <Slide index={index} content={getMarkup(index)} />
                 {index === 2 && <IPhone />}
