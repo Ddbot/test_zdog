@@ -38,7 +38,7 @@ module.exports = {
                       J 'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>. En véritable <span class="purple"><b>passionné</b></span>, j'
                       assure une <span class="purple"><b>veille technologique</b></span> permanente.
 			              </p>`,
-      slide_3: `<p style='margin-left: 10%;'>Je suis aussi <span class="purple"><b>rédacteur</b></span> et <span class="purple"><b>traducteur</b></span>. Je créé du <span class="purple"><b>contenu accrocheur</b></span> et accessible et assure l'<span class="purple"><b>i18n de vos sites</b></span> et applications </p>`,
+      slide_3: `<p style='margin-left: 10%;'>Je suis également <span class="purple"><b>rédacteur et traducteur</b></span>. Je créé du <span class="purple"><b>contenu SEO accrocheur</b></span> et assure une <span class="purple"><b>i18n de qualité</b></span></p>`,
       slide_4: `<p style='margin-right:10%;'>Je suis à votre disposition pour plus de renseignements. <span class="purple"><b>Contactez-moi !</p></span></p>`,
     },
     plugins: [
