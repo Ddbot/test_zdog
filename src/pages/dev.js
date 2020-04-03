@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "gatsby";
+import { Link , useStaticQuery, graphql,} from "gatsby";
 
 import SEO from "../components/seo";
 
@@ -20,13 +20,15 @@ import {
 } from '../utils/timelines';
 
 
-const Dev = props => {
-  console.log('Props: ', props);
+const Dev = ({ location }) => {
+
+	const { state = {} } = location;
+	const { content , lang } = state;
 	return (<>
-			<SEO title={props.lang === "fr" ? "Développeur" : "Dev"} />
+			<SEO title={lang === "fr" ? "Développeur" : "Dev"} />
 			<Container className="container">
-			<Link to='/'>
-				<ChevronTop onClick={props.changeIndex}
+			<Link to='/' state={{ index: 0 }}>
+				<ChevronTop
 					onMouseEnter={() => chevronsBobbing.pause()}
 					onMouseLeave={() => {
 						chevronsBobbing.play();}}/>
@@ -38,7 +40,7 @@ const Dev = props => {
 				<Purple><b>modernes, rapides</b></Purple> et <Purple><b>accessibles</b></Purple>.
 			</p>
 		</Container>
-			<Link to='/design'>
+			<Link to='/design' state={{ index: 2 }}>
 				<ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} />
 			</Link>
 	</>)

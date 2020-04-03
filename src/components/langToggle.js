@@ -6,9 +6,8 @@ import UKFlag from './ukFlag';
 const LangToggle = (props) => {
 
     return (
-        <>
-            <div id="navbarBasicExample" className="navbar-menu">
-                <div className="navbar-end">
+        <div id="navbarBasicExample" className="navbar-menu">
+            <div className="navbar-end">
                 <div className="navbar-item has-dropdown is-hoverable">
                     <button className="navbar-link">
                     { props.lang === 'en' ? <div><i className="fa fa-language" aria-hidden="true"></i>&nbsp;&nbsp;Languages</div> : <div><i className="fa fa-language" aria-hidden="true"></i>&nbsp;&nbsp;Langues</div> }
@@ -23,9 +22,8 @@ const LangToggle = (props) => {
                         </button>}
                     </div>
                 </div>
-                </div>
             </div>
-        </>
+        </div>
     );
 };
 

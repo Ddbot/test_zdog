@@ -24,19 +24,19 @@ const Contact = props => {
   console.log('Props: ', props);
 return (<>
 	<SEO title={"Contact"} />
-		<Container>
-			<Link to='/design'>
-		<ChevronTop
-		onClick={props.changeIndex}
-		onMouseEnter={() => chevronsBobbing.pause()}
-		onMouseLeave={() => {
-			chevronsBobbing.play();
-		}}        
-		/>
-	</Link>
-			<LogoIllustration index={4} />				
-			<p>Je suis à votre disposition pour plus de renseignements. <Purple><b>Contactez-moi !</b></Purple></p>
-		</Container>
+	<Container>
+		<Link to='/i18n' state={{ index: 3 }}>
+	<ChevronTop
+	onClick={props.changeIndex}
+	onMouseEnter={() => chevronsBobbing.pause()}
+	onMouseLeave={() => {
+		chevronsBobbing.play();
+	}}        
+	/>
+</Link>
+		<LogoIllustration index={4} />				
+		<p>Je suis à votre disposition pour plus de renseignements. <Purple><b>Contactez-moi !</b></Purple></p>
+	</Container>
   </>)
 };
 

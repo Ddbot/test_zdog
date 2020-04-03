@@ -26,8 +26,8 @@ const Design = props => {
     return (<>
         <SEO title={"Designer"} />
         <Container className="container">
-            <Link to='/dev'>
-                <ChevronTop onClick={props.changeIndex}
+            <Link to='/dev' state={{ index: 1 }}>
+                <ChevronTop 
                     onMouseEnter={() => chevronsBobbing.pause()}
                     onMouseLeave={() => {
                     chevronsBobbing.play(); }}/>
@@ -38,7 +38,7 @@ const Design = props => {
             </p>        
             <Smartphone />
         </Container>
-        <Link to='/i18n'>
+        <Link to='/i18n' state={{ indx: 3 }}>
             <ChevronBottom 
                 onMouseEnter={() => chevronsBobbing.pause()} 
                 onMouseLeave={() => { chevronsBobbing.play() }}/>

@@ -59,6 +59,7 @@ const IndexPage = () => {
   useEffect(() => {
     localStorage.setItem('lang', lang);
   }, [lang]);
+	
 
   //_____________data pour GraphQL________//
   const data = useStaticQuery(graphql `
@@ -142,16 +143,16 @@ const IndexPage = () => {
   
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-		<Container className="container">
-			<LogoIllustration index={0} />	
-			<p style={{marginRight:'10%'}}>
-				Bonjour ! <br />
-				Je suis <Purple><b>Andry</b></Purple>,<br />
-				Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
-			</p>						  	 
-		</Container>
-		<Link to='/dev'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
-			</>);
+			<Container className="container">
+				<LogoIllustration index={0} />	
+				<p style={{marginRight:'10%'}}>
+					Bonjour ! <br />
+					Je suis <Purple><b>Andry</b></Purple>,<br />
+					Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
+				</p>						  	 
+			</Container>
+		<Link to='/dev' state={{ index: 1 }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
+		</>);
 };
 
 export default IndexPage;
