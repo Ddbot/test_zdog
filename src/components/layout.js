@@ -12,6 +12,7 @@ import styled from 'styled-components';
 
 import Header from "./header";
 
+
 import "./styles/layout.css";
 import 'bulma/css/bulma.css';
 
@@ -28,9 +29,7 @@ const Layout = (props) => {
   return (
     <>
       <Header siteTitle="Andry Online" toggleLang={props.toggleLang} lang={props.lang}/>
-        {/* <div> */}
         <Main>{props.children}</Main>
-        {/* </div> */}
     </>
   );
 }

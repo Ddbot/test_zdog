@@ -4,10 +4,11 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 
 import SEO from "../components/seo";
 import LogoIllustration from "../components/logoIllustration";
-import ChevronBtn from "../components/chevron";
+import {ChevronBottom} from '../components/chevron';
 import styled from 'styled-components';
 
 import Purple from '../components/styled/Purple';
+import Container from '../components/styled/Container';
 
 import gsap from 'gsap';
 
@@ -22,27 +23,6 @@ import {
 } from '../utils/timelines';
 
 import "font-awesome/css/font-awesome.min.css";
-
-const Container = styled.div`
-
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
-	min-width: 960px;
-	height: 60vh;
-
-	margin-top: 13vh;
-
-	font-size: 2rem;
-	font-family: "Roboto";
-	z-index: -1;
-
-	p {
-		
-		width: 70vw;
-	}
-`;
 
 const IndexPage = () => {
   const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
@@ -176,7 +156,7 @@ const IndexPage = () => {
           		Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
 			</p>						  	 
 		</Container>
-		<Link to='/dev'><ChevronBtn onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
+		<Link to='/dev'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
         {/* <span className="dummy"></span> */}
           </>);
 };

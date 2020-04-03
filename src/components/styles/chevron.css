@@ -28,7 +28,7 @@ button.chevronContainer {
 main>.chevronContainer:first-of-type {
     position: fixed;
     left: 50%;
-    top: 6.618vh;
+
     /* transform: scale(3); */
 }
 

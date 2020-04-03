@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "gatsby";
+import styled from 'styled-components';
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-import Chevron from "../components/chevron";
 import LogoIllustration from "../components/logoIllustration";
+import { ChevronBottom,	ChevronTop } from '../components/chevron';
+
 
 
 import {
@@ -17,20 +19,20 @@ import {
   up,
   down,
 } from '../utils/timelines';
+import Container from "../components/styled/Container";
 
 const Dev = props => {
   console.log('Props: ', props);
 return <>
-    <SEO title={props.lang === "fr" ? "Développeur" : "Dev"} />
+	<SEO title={props.lang === "fr" ? "Développeur" : "Dev"} />
+	<Container>
     <Link to='/'>
-      <Chevron
-        onClick={props.changeIndex}
-        onMouseEnter={() => chevronsBobbing.pause()}
-        onMouseLeave={() => {
-          chevronsBobbing.play();
-        }}
-        id="chevron_top"
-      />
+      <ChevronTop
+			onClick={props.changeIndex}
+			onMouseEnter={() => chevronsBobbing.pause()}
+			onMouseLeave={() => {
+				chevronsBobbing.play();
+			}}/>
 	</Link>
 	<LogoIllustration index={1} />	
 {/* en */}
@@ -45,7 +47,8 @@ return <>
 		des frameworks tels que <span className="purple"><b>Gatsby JS</b></span> pour créer des sites et des <span className="purple"><b>PWA</b></span><br />
 		<span className="purple"><b>modernes, rapides</b></span> et <span className="purple"><b>accessibles</b></span>.
 	</p>
-    <Link to='/design'><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} id="chevron_bottom" /></Link>
+	</Container>
+    <Link to='/design'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} style={{ bottom:'10vh' }} /></Link>
   </>
 };
 
