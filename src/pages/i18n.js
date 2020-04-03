@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "gatsby";
 
-import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-import Chevron from "../components/chevron";
+import Container from "../components/styled/Container";
+import { ChevronBottom, ChevronTop } from '../components/chevron';
+
 import LogoIllustration from "../components/logoIllustration";
+
+import Purple from '../components/styled/Purple';
+
 
 
 import {
@@ -21,9 +25,10 @@ import {
 const I18n = props => {
   console.log('Props: ', props);
 return <>
-    <SEO title={"i18n"} />
+  <SEO title={"i18n"} />
+  <Container>
     <Link to='/design'>
-      <Chevron
+      <ChevronTop
         onClick={props.changeIndex}
         onMouseEnter={() => chevronsBobbing.pause()}
         onMouseLeave={() => {
@@ -32,12 +37,13 @@ return <>
         id="chevron_top"
       />
 	</Link>
-	<LogoIllustration index={2} />	
+	<LogoIllustration index={3} />	
     {/* en */}
     {
-        /* <p style='margin-left: 10%;'>I am also a <span className="purple"><b>writer / translator</b></span>. I create catchy and <span className="purple"><b>a11y compliant content</b></span> and can even shoulder the <span className="purple"><b>i18n</b></span> of your sites and applications</p> */ }
-    <p style={{marginLeft: '10%'}}>Je suis également <span className="purple"><b>rédacteur et traducteur</b></span>. Je créé du <span className="purple"><b>contenu SEO accrocheur</b></span> et assure une <span className="purple"><b>i18n de qualité</b></span></p>
-    <Link to='/contact'><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} id="chevron_bottom" /></Link>
+        /* <p style='margin-left: 10%;'>I am also a <Purple><b>writer / translator</b></Purple>. I create catchy and <Purple><b>a11y compliant content</b></Purple> and can even shoulder the <Purple><b>i18n</b></Purple> of your sites and applications</p> */ }
+  <p style={{ marginLeft: '10%' }}>Je suis également <Purple><b>rédacteur et traducteur</b></Purple>. Je créé du <Purple><b>contenu SEO accrocheur</b></Purple> et assure une <Purple><b>i18n de qualité</b></Purple></p>
+  </Container>
+    <Link to='/contact'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
   </>
 };
 

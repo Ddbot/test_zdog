@@ -143,7 +143,7 @@ const IndexPage = () => {
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
 		<Container className="container">
-			<LogoIllustration index={index} />	
+			<LogoIllustration index={0} />	
 			{/* EN */}
 			{/* <p style={{marginRight:'10%'}}>
 				Hello ! <br />
@@ -157,7 +157,6 @@ const IndexPage = () => {
 			</p>						  	 
 		</Container>
 		<Link to='/dev'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
-        {/* <span className="dummy"></span> */}
           </>);
 };
 

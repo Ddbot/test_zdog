@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "gatsby";
 
-import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-import Chevron from "../components/chevron";
-import LogoIllustration from "../components/logoIllustration";
+import Container from "../components/styled/Container";
+import { ChevronBottom, ChevronTop } from '../components/chevron';
+
+import Purple from '../components/styled/Purple';
+
+import Smartphone from "../components/smartphone";
 
 
 import {
@@ -22,8 +25,9 @@ const Design = props => {
   console.log('Props: ', props);
 return <>
     <SEO title={"Designer"} />
+    <Container className="container">
     <Link to='/dev'>
-      <Chevron
+      <ChevronTop
         onClick={props.changeIndex}
         onMouseEnter={() => chevronsBobbing.pause()}
         onMouseLeave={() => {
@@ -32,17 +36,19 @@ return <>
         id="chevron_top"
       />
 	</Link>
-	<LogoIllustration index={2} />	
     {/* en */}
     {/* <p style='margin-left:10%;'>
-        I'm also using <span className="purple"><b>React Native</b></span> and <br />
-        <span className="purple"><b>Ruby on Rails</b></span>. I am a music and technology fan, who <span className="purple"><b>always strives to learn more</b></span>
+        I'm also using <Purple><b>React Native</b></Purple> and <br />
+        <Purple><b>Ruby on Rails</b></Purple>. I am a music and technology fan, who <Purple><b>always strives to learn more</b></Purple>
     </p> */}
     <p style={{marginLeft:'10%'}}>
-        J 'utilise également <span className="purple"><b>React Native</b></span> et <span className="purple"><b>Ruby on Rails</b></span>. En véritable <span className="purple"><b>passionné</b></span>, j'
-        assure une <span className="purple"><b>veille technologique</b></span> permanente.
+        J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
+        assure une <Purple><b>veille technologique</b></Purple> permanente.
     </p>
-    <Link to='/i18n'><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} id="chevron_bottom" /></Link>
+        
+    <Smartphone />
+    </Container>
+    <Link to='/i18n'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} id="chevron_bottom" /></Link>
   </>
 };
 

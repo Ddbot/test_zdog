@@ -13,7 +13,7 @@ const Container = styled.div `
 
 	font-size: 2rem;
 	font-family: "Roboto";
-	z-index: -1;
+	z-index: 1;
 
 	p {
 		

@@ -25,7 +25,7 @@ const Chevron = styled.button`
     background-color: transparent;
     outline-style: none;
 
-    // padding: 1rem;
+    z-index: 10;
 `;
 
 const ChevronBtn = (props) => {
