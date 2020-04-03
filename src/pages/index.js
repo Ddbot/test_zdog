@@ -147,17 +147,17 @@ const IndexPage = () => {
 			{/* EN */}
 			{/* <p style={{marginRight:'10%'}}>
 				Hello ! <br />
-                I 'm <Purple><b>Andry</b></Purple>,<br />
-                A <Purple> <b> Web site </b></Purple> and <Purple> <b> mobile Apps </b></Purple> Integrator and <Purple> <b>Designer</b></Purple>
-        	</p> */}
+				I 'm <Purple><b>Andry</b></Purple>,<br />
+				A <Purple> <b> Web site </b></Purple> and <Purple> <b> mobile Apps </b></Purple> Integrator and <Purple> <b>Designer</b></Purple>
+			</p> */}
 			<p style={{marginRight:'10%'}}>
 				Bonjour ! <br />
 				Je suis <Purple><b>Andry</b></Purple>,<br />
-          		Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
+				Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
 			</p>						  	 
 		</Container>
 		<Link to='/dev'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
-          </>);
+			</>);
 };
 
 export default IndexPage;

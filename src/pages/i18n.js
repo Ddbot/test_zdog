@@ -25,25 +25,20 @@ import {
 const I18n = props => {
   console.log('Props: ', props);
 return <>
-  <SEO title={"i18n"} />
-  <Container>
-    <Link to='/design'>
-      <ChevronTop
-        onClick={props.changeIndex}
-        onMouseEnter={() => chevronsBobbing.pause()}
-        onMouseLeave={() => {
-          chevronsBobbing.play();
-        }}
-        id="chevron_top"
-      />
-	</Link>
-	<LogoIllustration index={3} />	
-    {/* en */}
-    {
-        /* <p style='margin-left: 10%;'>I am also a <Purple><b>writer / translator</b></Purple>. I create catchy and <Purple><b>a11y compliant content</b></Purple> and can even shoulder the <Purple><b>i18n</b></Purple> of your sites and applications</p> */ }
-  <p style={{ marginLeft: '10%' }}>Je suis également <Purple><b>rédacteur et traducteur</b></Purple>. Je créé du <Purple><b>contenu SEO accrocheur</b></Purple> et assure une <Purple><b>i18n de qualité</b></Purple></p>
-  </Container>
-    <Link to='/contact'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
+	<SEO title={"i18n"} />
+	<Container>
+		<Link to='/design'>
+			<ChevronTop onClick={props.changeIndex}
+				onMouseEnter={() => chevronsBobbing.pause()}
+				onMouseLeave={() => {
+				chevronsBobbing.play();}} />
+		</Link>
+		<LogoIllustration index={3} />	
+		{/* en */}
+		{/* <p style='margin-left: 10%;'>I am also a <Purple><b>writer / translator</b></Purple>. I create catchy and <Purple><b>a11y compliant content</b></Purple> and can even shoulder the <Purple><b>i18n</b></Purple> of your sites and applications</p> */ }
+		<p style={{ marginLeft: '10%' }}>Je suis également <Purple><b>rédacteur et traducteur</b></Purple>. Je créé du <Purple><b>contenu SEO accrocheur</b></Purple> et assure une <Purple><b>i18n de qualité</b></Purple></p>
+	</Container>
+	<Link to='/contact'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
   </>
 };
 

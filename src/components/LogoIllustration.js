@@ -4,8 +4,6 @@ import Zdog from 'zdog';
 import { Illustration, Cone, Cylinder, Hemisphere  } from 'react-zdog';
 import gsap from 'gsap';
 
-import './styles/logo.css';
-
 import { illuTweenDuration } from '../utils/timelines';
 
 let { TAU } = Zdog;
@@ -158,7 +156,7 @@ const LogoIllustration = (props) => {
                 }
             });
         case 2:
-            return <Illustration ref={el => el = illuRef} index={index} zoom={1} rotate={{ z: TAU/4 }} style={{ border: "1px solid red"}}>                
+            return <Illustration ref={el => el = illuRef} index={index} zoom={1} rotate={{ z: TAU/4 }}>                
                 <Cone diameter={24}
                     // 1
                     length={24}

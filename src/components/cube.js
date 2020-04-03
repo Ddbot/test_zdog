@@ -32,6 +32,3 @@ const Cube = (props) => {
 };
 
 export default Cube;
-
-// svg = document.querySelector('svg#cube')
-// triangles = document.querySelectorAll('svg#cube>path')

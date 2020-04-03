@@ -22,34 +22,33 @@ import {
 } from '../utils/timelines';
 
 const Design = props => {
-  console.log('Props: ', props);
-return <>
-    <SEO title={"Designer"} />
-    <Container className="container">
-    <Link to='/dev'>
-      <ChevronTop
-        onClick={props.changeIndex}
-        onMouseEnter={() => chevronsBobbing.pause()}
-        onMouseLeave={() => {
-          chevronsBobbing.play();
-        }}
-        id="chevron_top"
-      />
-	</Link>
-    {/* en */}
-    {/* <p style='margin-left:10%;'>
-        I'm also using <Purple><b>React Native</b></Purple> and <br />
-        <Purple><b>Ruby on Rails</b></Purple>. I am a music and technology fan, who <Purple><b>always strives to learn more</b></Purple>
-    </p> */}
-    <p style={{marginLeft:'10%'}}>
-        J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
-        assure une <Purple><b>veille technologique</b></Purple> permanente.
-    </p>
-        
-    <Smartphone />
-    </Container>
-    <Link to='/i18n'><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} id="chevron_bottom" /></Link>
-  </>
+    console.log('Props: ', props);
+    return (<>
+        <SEO title={"Designer"} />
+        <Container className="container">
+            <Link to='/dev'>
+                <ChevronTop onClick={props.changeIndex}
+                    onMouseEnter={() => chevronsBobbing.pause()}
+                    onMouseLeave={() => {
+                    chevronsBobbing.play(); }}/>
+            </Link>
+            {/* en */}
+            {/* <p style='margin-left:10%;'>
+                I'm also using <Purple><b>React Native</b></Purple> and <br />
+                <Purple><b>Ruby on Rails</b></Purple>. I am a music and technology fan, who <Purple><b>always strives to learn more</b></Purple>
+            </p> */}
+            <p style={{marginLeft:'10%'}}>
+                J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
+                assure une <Purple><b>veille technologique</b></Purple> permanente.
+            </p>        
+            <Smartphone />
+        </Container>
+        <Link to='/i18n'>
+            <ChevronBottom 
+                onMouseEnter={() => chevronsBobbing.pause()} 
+                onMouseLeave={() => { chevronsBobbing.play() }}/>
+        </Link>
+  </>)
 };
 
 export default Design;

@@ -1,10 +1,8 @@
-import {
-  Link
-} from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
 
-import LangToggle from './langToggle'
+import LangToggle from './langToggle';
 
 import "./styles/header.css"
 

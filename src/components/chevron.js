@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Chevron from './styled/Chevron';
 
 
 // import './styles/chevron.css';
@@ -7,26 +8,6 @@ import styled from 'styled-components';
 let handleKeyPress = () => {
     console.log('Gérer ca plus tard');
 }
-
-const Chevron = styled.button`
-
-    text-decoration: none;
-    position: fixed;
-    left: 50% ;
-    
-    width: 3vw;
-    height: 3vw;
-
-    justify-content: center;
-    cursor: pointer;
-
-    border: none;
-    border-radius: 50% ;
-    background-color: transparent;
-    outline-style: none;
-
-    z-index: 10;
-`;
 
 const ChevronBtn = (props) => {
     return (<Chevron className="chevronContainer" onClick={props.onClick} onKeyPress={props.onClick} tabIndex={0}>
