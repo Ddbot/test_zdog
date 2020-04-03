@@ -6,8 +6,10 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Slide from "../components/slide";
 import IPhone from "../components/iphone";
+import Smartphone from "../components/smartphone";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from "../components/chevron";
+import Cube from "../components/cube"
 
 import gsap from 'gsap';
 
@@ -144,14 +146,16 @@ const IndexPage = () => {
   
   return (<>
             <Layout toggleLang={toggleLang} lang={lang}>
-              <SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-              {index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
-              <div className="container">
-                <LogoIllustration index={index} />
+				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
+				{index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
+				<div className="container">
+				<LogoIllustration index={index} />
+				{/* <Cube /> */}
 
-			  <Slide index={index} content={getMarkup(index)} />
-                {index === 2 && <IPhone />}
-              </div>
+			  	<Slide index={index} content={getMarkup(index)} />
+                {/* {index === 2 && <IPhone />} */}
+			  	{index === 2 && <Smartphone index={index} />}
+      </div>
             </Layout>
             {index !== 4 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" />}
             <span className="dummy"></span>

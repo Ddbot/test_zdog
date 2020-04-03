@@ -17,6 +17,13 @@
   --bluey-gray: #709db1;
   --gray-blue: #6199b8;
   --dusty-blue: #5295bf;
+  --bulma-green: #9DF5DF;
+  --bulma-blue: hsl(204, 86%, 53%);
+  --bulma-blue2: rgb(33, 128, 160);
+  --bulma-orange: hsl(48, 100%, 67%);
+  --bulma-red: hsl(348, 100%, 61%);
+  --bulma-yellow: #D1CE0A;
+  --bulma-black: #002620;
   /* font-family: "Oswald"; */
   font-size: 20px;
 
@@ -93,7 +100,7 @@ h1 {
 }
 mark {
   background-color: #ff0;
-  color: #000;
+  color: var(--bulma-black);
 }
 small {
   font-size: 80%;
@@ -115,7 +122,7 @@ img {
   border-style: none;
 }
 svg:not(:root) {
-  overflow: hidden;
+  overflow: visible;
 }
 code,
 kbd,
@@ -226,7 +233,8 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
+  /* color: hsla(0, 0%, 0%, 0.8); */
+  color: var(--bulma-black);
   font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -623,5 +631,6 @@ pre tt:after {
 
 .container {
   min-width: 960px;
+  z-index: -1;
   /* filter: hue-rotate(267deg); */
 }

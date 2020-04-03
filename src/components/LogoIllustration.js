@@ -1,35 +1,38 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
+import Zdog from 'zdog';
 import { Illustration, Cone, Cylinder, Hemisphere  } from 'react-zdog';
 import gsap from 'gsap';
 
+import './styles/logo.css';
+
 import { illuTweenDuration } from '../utils/timelines';
 
+let { TAU } = Zdog;
+
+// TAU = PI*2
+
 let cone_seq = [{
-        x: Math.PI / 2,
-        y: -Math.PI / 16
+    //     x: TAU/4,
+    // y: -Math.PI / 4,
+x: TAU/4, y: 0    
     }, {
         x: 3,
         y: -Math.PI / 16
     },
-    // celui-ci napparaitra meme pas
     {
         x: 0,
         y: -Math.PI / 16
     },
-    // celui ci non plus, il sagira dun svg en SIGNATURE
     {
-        x: 0,
-        y: -Math.PI / 4
+        x: 2,
+        y: 2*Math.PI / 16,
     },
-    // celui ci non plus, il sagira dun svg en ENVELOPPE
     {
         x: 0,
         y: -Math.PI / 2
     }
 ];
-
-// let illuTweenDuration = .5;
 
 const LogoIllustration = (props) => {
     function usePrevious(value) {
@@ -39,27 +42,20 @@ const LogoIllustration = (props) => {
         });
         return ref.current;
     }
+
     let dummyTween = (prevRot, newRot) => {
         let tween = gsap.to(".dummy", {
             autoAlpha: 0,
-            duration: illuTweenDuration,
+            duration: illuTweenDuration*4,
             paused: true,
             onUpdate: () => {
-                setRotation((prev) => {
+                setRotation((prev = {x: 0, y: 0}) => {
                     return {
                         x: gsap.utils.interpolate(prev.x, newRot.x, tween.progress()),
                         y: gsap.utils.interpolate(prev.y, newRot.y, tween.progress())
                     }
                 });
             },
-            onComplete: () => {
-                let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
-                gsap.to(circle, {
-                    // scale: 10,
-                    // duration: illuTweenDuration*0.618
-                });
-                // console.log('Circ: ', circle);
-            }
         });
         tween.play(0).delay(.7);
     }
@@ -68,8 +64,9 @@ const LogoIllustration = (props) => {
     let [rotation, setRotation] = useState(cone_seq[index]);
     
     let prevRotation = usePrevious(rotation);
+    let prevIndex = usePrevious(index);
         
-    let pointeRef = useRef(),
+    let illuRef = useRef(), pointeRef = useRef(),
         mineRef = useRef(),
         cylindreRef = useRef(),
         ringRef = useRef(),
@@ -77,77 +74,186 @@ const LogoIllustration = (props) => {
     
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });  
-    }, [props.index,index]);
+    }, [props.index, index]);
+    
 
+    // ANIMATIONS ZDOG !!!
     useEffect(() => {  
+        gsap.set(['[zoom]>svg', '[zoom]'], { overflow: "visible" });
         switch (index) {
-            case 0:
+            case 0:                                
+                prevIndex > index && dummyTween(cone_seq[index+1], cone_seq[index]);
+                
                 gsap.set('[zoom]', {
-                    scale: 10
+                    scale: 4
                 });
                 break;
             case 1:
-                gsap.to('[zoom]>svg', {
+                prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index], cone_seq[index + 1]);
+
+                let theOne = document.querySelectorAll('[zoom]>svg>path:nth-of-type(2)');                
+                let circs = document.querySelectorAll('[zoom]>svg>path:not(:nth-of-type(2))');
+
+                gsap.to(circs, {
+                    fill: "transparent",
+                    stagger: {
+                        amount: .4,
+                        ease: "power2.in"
+                    },
+                    onStart: () => { console.log(circs) },
+                    onComplete: () => {
+                        
+                        gsap.to(theOne, {
+                            transformOrigin: "50% 50%",
+                            scale: 3,
+                            ease: "power4.out",
+                            duration: illuTweenDuration/4
+                        });
+                    },
+                }).delay(illuTweenDuration);
+                break;
+            case 2:                         
+                // prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index - 1], cone_seq[index]);
+
+                gsap.set('.container>[zoom]', { display: "none" });
+                gsap.from('svg#smartphone', {
+                    autoAlpha: 0,
                     duration: 1,
-                    position: 'relative',
-                    autoAlpha: 1,
-                    scale: 1,
-                    // width: "100%",
-                    // height: "100%",
+                    x: 150,
                 });
 
-                dummyTween(prevRotation={ x: Math.PI/2, y: -Math.PI/16}, cone_seq[index]);
+                // gsap.to('[zoom]>svg>path:first-of-type', {
+                //     fill: "transparent",
+                //     duration: .195,
+                //     onStart: () => {
+                //         gsap.set('[zoom]', { position: "fixed" });
+                //     },
+                //     scale: 3,
+                //     width: "10%", 
+                //     height: "10%",                    
+                // });
                 break;
-            case 2:
-                gsap.set('[zoom]', {
-                    position: 'fixed'
-                });
-
-                gsap.to('[zoom]', {
-                    duration: 1,
-                    scale: 0.5,
-                    x: -450,
-                    y: -100,
-                });
+            case 3:  
+                prevIndex > index ? dummyTween(cone_seq[index+1], cone_seq[index]) : dummyTween(cone_seq[index-1], cone_seq[index]);                
                 break;
-            case 3:
+            case 4:                                
+                
+                dummyTween(cone_seq[index-1], cone_seq[index]);
                 break;
-            case 4:
-                break;
-            default:
-                break;
-        }        
+            default:                                
+        }       
     }, [index]);
 
     // RENDER
     switch (index) {
         case 0:
         case 1:
+            gsap.to(['#chevron_bottom', '#chevron_top'], {
+                duration: 2.25,
+                // fill: "hsl(204, 86%, 53%)",
+                onStart: () => {
+                    gsap.to('.purple', {
+                        // backgroundColor: "hsl(204, 86%, 53%)",
+                    });
+                }
+            });
         case 2:
-            return <Illustration zoom={1}>
-                    <Cone
+            return <Illustration ref={el => el = illuRef} index={index} zoom={1} rotate={{ z: TAU/4 }}>                
+                <Cone diameter={24}
+                    // 1
+                    length={24}
+                    stroke={false}
+                    color={'#f38181'}
+                    backface={'hsl(48, 100%, 67%)'}                    
+                    rotate={{ x: -rotation.x, y: -rotation.y}}  
+                />
+
+                <Cone diameter={24}
+                    // 2
+                    length={24}
+                    stroke={false}
+                    color={'#f38c84'}
+                    backface={'green'}                    
+                    rotate={rotation}
+                    translate={{ x: -12, y: 24}}  
+                />    
+                <Cone diameter={24}
+                    // 3
+                    length={24}
+                    stroke={false}
+                    color={'#f3a389'}
+                    backface={'hsl(48, 100%, 67%)'}                    
+                    rotate={{ x: -rotation.x, y: -rotation.y}} 
+                    translate={{x: -24}} 
+                />                    
+              
+                <Cone
+                    // 4
+                        ref={pointeRef}
+                        diameter={24}
+                        length={24}
+                        stroke={false}
+                        color = {'#f4ba8e'}
+                        backface={'hsl(48, 100%, 67%)'}                        
+                    rotate={rotation}
+                    translate={{x: -24}}
+                />
+                    
+                <Cone diameter={24}
+                    // 5
+                    length={24}
+                    stroke={false}
+                    color={'#f4c590'}
+                    backface={'black'}                    
+                    rotate={{ x: -rotation.x, y: -rotation.y}} 
+                    translate={{x: -12, y: -24}} 
+                />
+
+                <Cone
+                    // 6
                         id={"pointe"}
                         ref={pointeRef}
                         diameter={24}
                         length={24}
                         stroke={false}
-                        color = {'blue'}
-                        backface={'rebeccapurple'}
-                        width={24}
-                        rotate={rotation} />
+                        color={'#f4d193'}
+                        backface={'hsl(48, 100%, 67%)'}                        
+                    rotate={rotation}
+                />     
+                
+              <Cone diameter={24}
+                    // 7
+                    length={24}
+                    stroke={false}
+                    color={'#f4dc95'}
+                    backface={'hsl(48, 100%, 67%)'}                    
+                    rotate={{ x: -rotation.x, y: -rotation.y}}
+                    translate={{ x: 12, y: -24}}  
+                />                
+
+                <Cone diameter={24}
+                    // 8
+                    length={24}
+                    stroke={false}
+                    color={'#f4f39a'}
+                    backface={'black'}                    
+                    rotate={rotation}
+                    translate={{ x: 12, y: -24}}  
+                />                   
+                                          
                     <div className="dummy"></div>
                 </Illustration>                      
             break;
         case 3:
         case 4:
-            return <Illustration zoom={1}>
+            return <Illustration index={index} zoom={.33}>
                 <Cone
                     id={"pointe"}
                     ref={pointeRef}
                     diameter={24}
                     length={24}
                     stroke={false}
-                    color={'rebeccapurple'}
+                    color={'yellow'}
                     backface={'blue'}
                     width={24}
                     rotate={rotation}>

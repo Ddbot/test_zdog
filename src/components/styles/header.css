@@ -27,12 +27,12 @@ button.navbar-item svg {
 }
 
 button.navbar-link:not(.is-arrowless):hover {
-    color: rebeccapurple;
+    color: hsl(171, 100%, 41%);
 }
 
 button.navbar-link:not(.is-arrowless)::after {
     content: '';
-    border-color: rebeccapurple;
+    border-color: hsl(171, 100%, 41%);
 }
 
 button.navbar-item,
@@ -82,4 +82,8 @@ button.navbar-burger:active {
 .navbar-item:hover>.navbar-link:hover>.navbar-dropdown {
     transform: translateY(0);
         transition: all 1s linear;
+}
+
+.navbar-item:hover>.navbar-link:hover>.navbar-dropdown:hover {
+    cursor: pointer;
 }
