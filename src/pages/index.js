@@ -146,16 +146,15 @@ const IndexPage = () => {
   
   return (<>
             <Layout toggleLang={toggleLang} lang={lang}>
-              <SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-              {index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
-              <div className="container">
-        <LogoIllustration index={index} />
-        {/* <Cube /> */}
+				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
+				{index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
+				<div className="container">
+				<LogoIllustration index={index} />
+				{/* <Cube /> */}
 
-			  <Slide index={index} content={getMarkup(index)} />
+			  	<Slide index={index} content={getMarkup(index)} />
                 {/* {index === 2 && <IPhone />} */}
-                {index === 2 && <Smartphone />}
-
+			  	{index === 2 && <Smartphone index={index} />}
       </div>
             </Layout>
             {index !== 4 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" />}

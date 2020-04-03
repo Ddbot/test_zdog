@@ -66,6 +66,11 @@ main>.container {
     /* background-size: 250px; */
 }
 
+main>.container>svg#smartphone {
+    /* max-width: 70%; */
+    
+}
+
 /* main>.container>.image {
     min-width: 20vw;
     min-height: 20vw;

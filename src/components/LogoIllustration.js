@@ -56,14 +56,6 @@ const LogoIllustration = (props) => {
                     }
                 });
             },
-            onComplete: () => {
-                let circle = index === 1 ? document.querySelector('[zoom]>svg>path') : 'undefined';
-                gsap.to(circle, {
-                    scale: 10,
-                    duration: illuTweenDuration*0.618
-                });
-                // console.log('Circ: ', circle);
-            }
         });
         tween.play(0).delay(.7);
     }
@@ -121,17 +113,25 @@ const LogoIllustration = (props) => {
                 }).delay(illuTweenDuration);
                 break;
             case 2:                         
-                prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index - 1], cone_seq[index]);
-                gsap.to('[zoom]>svg>path:first-of-type', {
-                    fill: "transparent",
-                    duration: .195,
-                    onStart: () => {
-                        gsap.set('[zoom]', { position: "fixed" });
-                    },
-                    scale: 3,
-                    width: "10%", 
-                    height: "10%",                    
+                // prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index - 1], cone_seq[index]);
+
+                gsap.set('.container>[zoom]', { display: "none" });
+                gsap.from('svg#smartphone', {
+                    autoAlpha: 0,
+                    duration: 1,
+                    x: 150,
                 });
+
+                // gsap.to('[zoom]>svg>path:first-of-type', {
+                //     fill: "transparent",
+                //     duration: .195,
+                //     onStart: () => {
+                //         gsap.set('[zoom]', { position: "fixed" });
+                //     },
+                //     scale: 3,
+                //     width: "10%", 
+                //     height: "10%",                    
+                // });
                 break;
             case 3:  
                 prevIndex > index ? dummyTween(cone_seq[index+1], cone_seq[index]) : dummyTween(cone_seq[index-1], cone_seq[index]);                
@@ -147,10 +147,6 @@ const LogoIllustration = (props) => {
     // RENDER
     switch (index) {
         case 0:
-            gsap.set('.purple', {
-                // fill: "rebeccapurple",
-                // backgroundColor: "rebeccapurple"
-            });
         case 1:
             gsap.to(['#chevron_bottom', '#chevron_top'], {
                 duration: 2.25,

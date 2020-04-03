@@ -5,7 +5,6 @@ import { Illustration, Rect } from 'react-zdog';
 import gsap from 'gsap';
 
 import iphone from "../images/iphone.png"
-import iphone from "../images/iphone.png"
 
 import './styles/iphone.css'
 
