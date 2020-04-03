@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import '../styles/layout.css';
+// import '../styles/layout.css';
 
 const Purple = styled.span`
 	    color: white;
