@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import Chevron from "../components/chevron";
-import Slide from "../components/slide";
+import LogoIllustration from "../components/logoIllustration";
 
 
 import {
@@ -18,11 +18,11 @@ import {
   down,
 } from '../utils/timelines';
 
-const SecondPage = props => {
+const Contact = props => {
   console.log('Props: ', props);
-return <Layout toggleLang={props.toggleLang} lang={props.lang}>
-    <SEO title={props.lang === "fr" ? "Développeur" : "Dev"} />
-    <Link to='/'>
+return <>
+    <SEO title={"Contact"} />
+    <Link to='/design'>
       <Chevron
         onClick={props.changeIndex}
         onMouseEnter={() => chevronsBobbing.pause()}
@@ -31,12 +31,12 @@ return <Layout toggleLang={props.toggleLang} lang={props.lang}>
         }}
         id="chevron_top"
       />
-    </Link>
-    <Slide index={props.index} content={props.content} />
-
-    <p>Welcome to page 2</p>
-    <Link to='/'><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} id="chevron_bottom" /></Link>
-  </Layout>
+	</Link>
+	<LogoIllustration index={2} />	
+    {/* en */}
+    {/* <p style='margin-right:10%;'>I'm currently available for work. <span className="purple"><b>Contact me !</p></span></p> */ }
+    <p style={{marginRight:'10%'}}>Je suis à votre disposition pour plus de renseignements. <span className="purple"><b>Contactez-moi !</b></span></p>
+  </>
 };
 
-export default SecondPage
+export default Contact;

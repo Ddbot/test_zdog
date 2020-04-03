@@ -144,19 +144,24 @@ const IndexPage = () => {
     localStorage.setItem('lang', lang);
   };
   
-  return (<>
-            <Layout toggleLang={toggleLang} lang={lang}>
-				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-				<div className="container">
-				<LogoIllustration index={index} />
-
-			  	<Slide index={index} content={getMarkup(index)} />
-                {/* {index === 2 && <IPhone />} */}
-			  	{index === 2 && <Smartphone index={index} />}
-      </div>
-            </Layout>
-            {index !== 4 && <Link to='/page-2'><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" /></Link>}
-            <span className="dummy"></span>
+	return (<>
+		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
+		<div className="container">
+			<LogoIllustration index={index} />	
+			{/* EN */}
+			{/* <p style='margin-right:10%;'>
+				Hello ! <br />
+                I'm <span className="purple"><b>Andry</b></span>,<br />
+                A <span style='background-color: hsl(171, 100%, 41%);padding:6px;color:white'><b>Web site</b></span> and <span className="purple"><b>mobile Apps</b></span> Integrator and <span className="purple"><b>Designer</b></span>
+        	</p> */}
+			<p style={{marginRight:'10%'}}>
+				Bonjour ! <br />
+				Je suis <span className="purple"><b>Andry</b></span>,<br />
+          		Intégrateur et <span className="purple"><b>Designer</b></span> de sites<span className="purple"><b>Web</b></span> et d'<span className="purple"><b>applications mobiles</b></span>
+			</p>						  	
+		</div>
+		<Link to='/dev' truc={'truc'}><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" /></Link>}
+        <span className="dummy"></span>
           </>);
 };
 
