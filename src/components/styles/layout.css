@@ -628,9 +628,3 @@ pre tt:after {
     font-size: 100%;
   }
 }
-
-.container {
-  min-width: 960px;
-  z-index: -1;
-  /* filter: hue-rotate(267deg); */
-}

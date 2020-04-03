@@ -8,10 +8,20 @@
 import React from "react"; 
 import PropTypes from "prop-types";
 
+import styled from 'styled-components';
+
 import Header from "./header";
 
 import "./styles/layout.css";
-import 'bulma/css/bulma.css'
+import 'bulma/css/bulma.css';
+
+const Main = styled.main`
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100 vw;
+`;
 
 const Layout = (props) => {
 
@@ -19,7 +29,7 @@ const Layout = (props) => {
     <>
       <Header siteTitle="Andry Online" toggleLang={props.toggleLang} lang={props.lang}/>
         {/* <div> */}
-        <main>{props.children}</main>
+        <Main>{props.children}</Main>
         {/* </div> */}
     </>
   );

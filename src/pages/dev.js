@@ -49,4 +49,4 @@ return <>
   </>
 };
 
-export default Dev
+export default Dev;

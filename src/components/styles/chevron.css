@@ -1,25 +1,6 @@
 button.chevronContainer {
     /* display: flex; */
-    display: inline-block;
 
-    text-decoration: none;
-    
-    position: fixed;
-
-    left: 50%;
-    /* bottom: 5vh; */
-
-    height: 3.09vw;
-
-    justify-content: center;
-    cursor: pointer;
-
-    border: none;
-    border-radius: 50%;
-    background-color: transparent;
-    outline-style: none;
-
-    padding: 1rem;
 
     /* border-radius: 50px; */
     /* background: linear-gradient(145deg, #5c2e8a, #6d37a4);

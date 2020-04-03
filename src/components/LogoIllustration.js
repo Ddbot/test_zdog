@@ -158,7 +158,7 @@ const LogoIllustration = (props) => {
                 }
             });
         case 2:
-            return <Illustration ref={el => el = illuRef} index={index} zoom={1} rotate={{ z: TAU/4 }}>                
+            return <Illustration ref={el => el = illuRef} index={index} zoom={1} rotate={{ z: TAU/4 }} style={{ border: "1px solid red"}}>                
                 <Cone diameter={24}
                     // 1
                     length={24}
@@ -310,4 +310,4 @@ const LogoIllustration = (props) => {
             break;
     };
 }
-export default LogoIllustration
+export default LogoIllustration;

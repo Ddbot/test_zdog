@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { useStaticQuery, graphql, Link } from "gatsby";
 
-import Layout from "../components/layout";
 import SEO from "../components/seo";
-import Slide from "../components/slide";
-import IPhone from "../components/iphone";
-import Smartphone from "../components/smartphone";
 import LogoIllustration from "../components/logoIllustration";
-import Chevron from "../components/chevron";
-import Cube from "../components/cube"
+import ChevronBtn from "../components/chevron";
+import styled from 'styled-components';
+
+import Purple from '../components/styled/Purple';
 
 import gsap from 'gsap';
 
@@ -23,10 +21,28 @@ import {
   down,
 } from '../utils/timelines';
 
-import "../components/styles/slide.css";
-import "../components/styles/slides_text.css";
-
 import "font-awesome/css/font-awesome.min.css";
+
+const Container = styled.div`
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	min-width: 960px;
+	height: 60vh;
+
+	margin-top: 13vh;
+
+	font-size: 2rem;
+	font-family: "Roboto";
+	z-index: -1;
+
+	p {
+		
+		width: 70vw;
+	}
+`;
 
 const IndexPage = () => {
   const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
@@ -146,22 +162,22 @@ const IndexPage = () => {
   
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-		<div className="container">
+		<Container className="container">
 			<LogoIllustration index={index} />	
 			{/* EN */}
-			{/* <p style='margin-right:10%;'>
+			{/* <p style={{marginRight:'10%'}}>
 				Hello ! <br />
-                I'm <span className="purple"><b>Andry</b></span>,<br />
-                A <span style='background-color: hsl(171, 100%, 41%);padding:6px;color:white'><b>Web site</b></span> and <span className="purple"><b>mobile Apps</b></span> Integrator and <span className="purple"><b>Designer</b></span>
+                I 'm <Purple><b>Andry</b></Purple>,<br />
+                A <Purple> <b> Web site </b></Purple> and <Purple> <b> mobile Apps </b></Purple> Integrator and <Purple> <b>Designer</b></Purple>
         	</p> */}
 			<p style={{marginRight:'10%'}}>
 				Bonjour ! <br />
-				Je suis <span className="purple"><b>Andry</b></span>,<br />
-          		Intégrateur et <span className="purple"><b>Designer</b></span> de sites<span className="purple"><b>Web</b></span> et d'<span className="purple"><b>applications mobiles</b></span>
-			</p>						  	
-		</div>
-		<Link to='/dev' truc={'truc'}><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" /></Link>}
-        <span className="dummy"></span>
+				Je suis <Purple><b>Andry</b></Purple>,<br />
+          		Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
+			</p>						  	 
+		</Container>
+		<Link to='/dev'><ChevronBtn onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
+        {/* <span className="dummy"></span> */}
           </>);
 };
 
