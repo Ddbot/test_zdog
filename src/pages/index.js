@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -147,17 +147,15 @@ const IndexPage = () => {
   return (<>
             <Layout toggleLang={toggleLang} lang={lang}>
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-				{index !== 0 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_top" />}     
 				<div className="container">
 				<LogoIllustration index={index} />
-				{/* <Cube /> */}
 
 			  	<Slide index={index} content={getMarkup(index)} />
                 {/* {index === 2 && <IPhone />} */}
 			  	{index === 2 && <Smartphone index={index} />}
       </div>
             </Layout>
-            {index !== 4 && <Chevron onClick={changeIndex} onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" />}
+            {index !== 4 && <Link to='/page-2'><Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} id="chevron_bottom" /></Link>}
             <span className="dummy"></span>
           </>);
 };
