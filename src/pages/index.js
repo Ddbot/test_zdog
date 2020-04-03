@@ -144,12 +144,6 @@ const IndexPage = () => {
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
 		<Container className="container">
 			<LogoIllustration index={0} />	
-			{/* EN */}
-			{/* <p style={{marginRight:'10%'}}>
-				Hello ! <br />
-				I 'm <Purple><b>Andry</b></Purple>,<br />
-				A <Purple> <b> Web site </b></Purple> and <Purple> <b> mobile Apps </b></Purple> Integrator and <Purple> <b>Designer</b></Purple>
-			</p> */}
 			<p style={{marginRight:'10%'}}>
 				Bonjour ! <br />
 				Je suis <Purple><b>Andry</b></Purple>,<br />

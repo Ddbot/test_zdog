@@ -32,13 +32,6 @@ const Dev = props => {
 						chevronsBobbing.play();}}/>
 			</Link>
 			<LogoIllustration index={1} />	
-			{/* en */}
-			{/* <p style={{marginRight:'10%'}}>
-				I'm using <Purple><b>React</b></Purple> and <br />
-				frameworks such as <Purple><b>Gatsby JS</b></Purple> to create 
-				<Purple><b>fast, modern</b></Purple> and <Purple><b>accessible</b></Purple>                
-				Web sites and <Purple><b>PWA</b></Purple><br />
-			</p> */}
 			<p style={{marginRight:'10%'}}>
 				J'utilise <Purple><b>React</b></Purple> et <br />
 				des frameworks tels que <Purple><b>Gatsby JS</b></Purple> pour créer des sites et des <Purple><b>PWA</b></Purple><br />

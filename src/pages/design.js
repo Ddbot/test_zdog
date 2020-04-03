@@ -32,11 +32,6 @@ const Design = props => {
                     onMouseLeave={() => {
                     chevronsBobbing.play(); }}/>
             </Link>
-            {/* en */}
-            {/* <p style='margin-left:10%;'>
-                I'm also using <Purple><b>React Native</b></Purple> and <br />
-                <Purple><b>Ruby on Rails</b></Purple>. I am a music and technology fan, who <Purple><b>always strives to learn more</b></Purple>
-            </p> */}
             <p style={{marginLeft:'10%'}}>
                 J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
                 assure une <Purple><b>veille technologique</b></Purple> permanente.

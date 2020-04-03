@@ -34,9 +34,7 @@ return (<>
 		}}        
 		/>
 	</Link>
-			<LogoIllustration index={4} />	
-			{/* en */}
-			{/* <p style='margin-right:10%;'>I'm currently available for work. <<Purple>><b>Contact me !</p></span></p> */ }
+			<LogoIllustration index={4} />				
 			<p>Je suis à votre disposition pour plus de renseignements. <Purple><b>Contactez-moi !</b></Purple></p>
 		</Container>
   </>)
