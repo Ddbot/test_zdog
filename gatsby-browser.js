@@ -8,7 +8,7 @@
 
 import React from "react";
 import Layout from "./src/components/layout";
-import { LangProvider } from "./src/components/contexts/LangContext";
+import { LangProvider, LangConsumer } from "./src/components/contexts/LangContext";
 
 // export const wrapRootElement = ({ element }) => (<LangProvider>{element}</LangProvider>);
 
@@ -22,6 +22,7 @@ import { LangProvider } from "./src/components/contexts/LangContext";
 // }
 
 // Wraps every page in a component
+
 export const wrapPageElement = ({ element, props }) => {
   return <LangProvider><Layout {...props}>{element}</Layout></LangProvider>
 }

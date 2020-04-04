@@ -5,7 +5,6 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import SEO from "../components/seo";
 import LogoIllustration from "../components/logoIllustration";
 import {ChevronBottom} from '../components/chevron';
-import styled from 'styled-components';
 
 import Purple from '../components/styled/Purple';
 import Container from '../components/styled/Container';
@@ -26,8 +25,6 @@ import "font-awesome/css/font-awesome.min.css";
 
 const IndexPage = () => {
   const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
-
-  let illuRef = useRef();
 
   let [index, setIndex] = useState(0);
   let [lang, setLang] = useState(defaultLang);
@@ -142,16 +139,16 @@ const IndexPage = () => {
   };
   
 	return (<>
-		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-			<Container className="container">
-				<LogoIllustration index={0} />	
-				<p style={{marginRight:'10%'}}>
-					Bonjour ! <br />
-					Je suis <Purple><b>Andry</b></Purple>,<br />
-					Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
-				</p>						  	 
-			</Container>
-		<Link to='/dev' state={{ index: 1 }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play()}} /></Link>
+				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
+				<Container className="container">
+					<LogoIllustration index={0} />	
+					<p style={{marginRight:'10%'}}>
+						Bonjour ! <br />
+						Je suis <Purple><b>Andry</b></Purple>,<br />
+						Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
+					</p>						  	 
+				</Container>
+				<Link to='/dev' state={{ index: 1 }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
 		</>);
 };
 

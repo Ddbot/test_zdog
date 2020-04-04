@@ -9,6 +9,7 @@ import { ChevronBottom, ChevronTop } from '../components/chevron';
 import Purple from '../components/styled/Purple';
 
 import Smartphone from "../components/smartphone";
+import LogoIllustration from "../components/logoIllustration"
 
 
 import {
@@ -32,11 +33,11 @@ const Design = props => {
                     onMouseLeave={() => {
                     chevronsBobbing.play(); }}/>
             </Link>
+            <LogoIllustration index={2} />
             <p style={{marginLeft:'10%'}}>
                 J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
                 assure une <Purple><b>veille technologique</b></Purple> permanente.
             </p>        
-            <Smartphone />
         </Container>
         <Link to='/i18n' state={{ indx: 3 }}>
             <ChevronBottom 

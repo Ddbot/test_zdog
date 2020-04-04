@@ -1,10 +1,12 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
 import Zdog from 'zdog';
-import { Illustration, Cone, Cylinder, Hemisphere  } from 'react-zdog';
+import { Illustration, Cone, Cylinder, Hemisphere } from 'react-zdog';
+import Smartphone from './smartphone';
 import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
+import Triangles from './triangles';
 
 let { TAU } = Zdog;
 
@@ -64,11 +66,6 @@ const LogoIllustration = (props) => {
     let prevRotation = usePrevious(rotation);
     let prevIndex = usePrevious(index);
         
-    let illuRef = useRef(), pointeRef = useRef(),
-        mineRef = useRef(),
-        cylindreRef = useRef(),
-        ringRef = useRef(),
-        gumRef = useRef();
     
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });  
@@ -142,170 +139,10 @@ const LogoIllustration = (props) => {
         }       
     }, [index]);
 
-    // RENDER
-    switch (index) {
-        case 0:
-        case 1:
-            gsap.to(['#chevron_bottom', '#chevron_top'], {
-                duration: 2.25,
-                // fill: "hsl(204, 86%, 53%)",
-                onStart: () => {
-                    gsap.to('.purple', {
-                        // backgroundColor: "hsl(204, 86%, 53%)",
-                    });
-                }
-            });
-        case 2:
-            return <Illustration ref={el => el = illuRef} index={index} zoom={1} rotate={{ z: TAU/4 }}>                
-                <Cone diameter={24}
-                    // 1
-                    length={24}
-                    stroke={false}
-                    color={'#f38181'}
-                    backface={'hsl(48, 100%, 67%)'}                    
-                    rotate={{ x: -rotation.x, y: -rotation.y}}  
-                />
-
-                <Cone diameter={24}
-                    // 2
-                    length={24}
-                    stroke={false}
-                    color={'#f38c84'}
-                    backface={'green'}                    
-                    rotate={rotation}
-                    translate={{ x: -12, y: 24}}  
-                />    
-                <Cone diameter={24}
-                    // 3
-                    length={24}
-                    stroke={false}
-                    color={'#f3a389'}
-                    backface={'hsl(48, 100%, 67%)'}                    
-                    rotate={{ x: -rotation.x, y: -rotation.y}} 
-                    translate={{x: -24}} 
-                />                    
-              
-                <Cone
-                    // 4
-                        ref={pointeRef}
-                        diameter={24}
-                        length={24}
-                        stroke={false}
-                        color = {'#f4ba8e'}
-                        backface={'hsl(48, 100%, 67%)'}                        
-                    rotate={rotation}
-                    translate={{x: -24}}
-                />
-                    
-                <Cone diameter={24}
-                    // 5
-                    length={24}
-                    stroke={false}
-                    color={'#f4c590'}
-                    backface={'black'}                    
-                    rotate={{ x: -rotation.x, y: -rotation.y}} 
-                    translate={{x: -12, y: -24}} 
-                />
-
-                <Cone
-                    // 6
-                        id={"pointe"}
-                        ref={pointeRef}
-                        diameter={24}
-                        length={24}
-                        stroke={false}
-                        color={'#f4d193'}
-                        backface={'hsl(48, 100%, 67%)'}                        
-                    rotate={rotation}
-                />     
-                
-              <Cone diameter={24}
-                    // 7
-                    length={24}
-                    stroke={false}
-                    color={'#f4dc95'}
-                    backface={'hsl(48, 100%, 67%)'}                    
-                    rotate={{ x: -rotation.x, y: -rotation.y}}
-                    translate={{ x: 12, y: -24}}  
-                />                
-
-                <Cone diameter={24}
-                    // 8
-                    length={24}
-                    stroke={false}
-                    color={'#f4f39a'}
-                    backface={'black'}                    
-                    rotate={rotation}
-                    translate={{ x: 12, y: -24}}  
-                />                   
-                                          
-                    <div className="dummy"></div>
-                </Illustration>                      
-            break;
-        case 3:
-        case 4:
-            return <Illustration index={index} zoom={.33}>
-                <Cone
-                    id={"pointe"}
-                    ref={pointeRef}
-                    diameter={24}
-                    length={24}
-                    stroke={false}
-                    color={'yellow'}
-                    backface={'blue'}
-                    width={24}
-                    rotate={rotation}>
-                    <Cone
-                        id="mine"
-                        ref={mineRef}
-                        diameter={24}
-                        length={24}
-                        stroke={false}
-                        backface={"pink"}
-                        scale={.33}
-                        color={'beige'}
-                        translate={{ z: 16 }}>
-                        <Cylinder
-                            id={"bois"}
-                            ref={cylindreRef}
-                            diameter={24}
-                            length={100}
-                            stroke={false}
-                            color={'orange'}
-                            frontFace={'white'}
-                            backface={'black'}
-                            scale={3}
-                            translate={{ z: -198 }}>
-                            <Cylinder
-                                id={"ring"}
-                                ref={ringRef}
-                                diameter={24}
-                                length={10}
-                                stroke={false}
-                                color={'red'}
-                                backface={'green'}
-                                color={'salmon'}
-                                translate={{ z: -55 }}>
-                                <Hemisphere
-                                    id={"gum"}
-                                    ref={gumRef}
-                                    diameter={24}
-                                    // fill enabled by default
-                                    // disable stroke for crisp edge
-                                    stroke={false}
-                                    color={'yellow'}
-                                    backface={'gray'}
-                                    rotate={{ x: Math.PI }}
-                                    translate={{ z: -6 }} />
-                            </Cylinder>
-                        </Cylinder>
-                    </Cone>
-                </Cone>
-                <div className="dummy"></div>
-            </Illustration>
-                break;
-        default:
-            break;
-    };
+    if (index===0) { return <Triangles index={index} rotation={rotation}/> }
+    if (index===1) { return <Triangles index={index} rotation={rotation}/> }
+    if (index===2) { return <Smartphone index={index} rotation={rotation}/> }
+    if (index===3) { return <Triangles index={index} rotation={rotation}/> }
+    if (index===4) { return <Triangles index={index} rotation={rotation}/> }
 }
 export default LogoIllustration;
