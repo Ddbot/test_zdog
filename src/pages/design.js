@@ -1,48 +1,56 @@
-import React from "react";
-import { Link } from "gatsby";
+import React, { useContext } from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
+import LangContext from '../components/contexts/LangContext';
 
 import SEO from "../components/seo";
-
 import Container from "../components/styled/Container";
+import LogoIllustration from "../components/logoIllustration"
 import { ChevronBottom, ChevronTop } from '../components/chevron';
 
-import Purple from '../components/styled/Purple';
+import { chevronsBobbing } from '../utils/timelines';
 
-import Smartphone from "../components/smartphone";
-import LogoIllustration from "../components/logoIllustration"
+import Smartphone from '../components/smartphone';
 
+const Design = ({location}) => {
+    //_____________data pour GraphQL________//
+    const data = useStaticQuery(graphql `
+    query DesQuery {
+      site {
+        siteMetadata {
+          title
+          en {
+            slide_2
+          }
 
-import {
-  chevronsEntry,
-  chevronsExit,
-  chevronsBobbing,
-  fadeOutText,
-  fadeInText,
-  up,
-  down,
-} from '../utils/timelines';
-
-const Design = props => {
-    console.log('Props: ', props);
+          fr {
+            slide_2
+          }
+        }
+      }
+    }
+  `);
+    const defaultLang = localStorage.getItem('lang');    
+    const { index } = location.state;
+    let lang = useContext(LangContext);
+    
+    const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
+    
     return (<>
         <SEO title={"Designer"} />
-        <Container className="container">
+        <Container className="container" style={{ display: "flex", flexFlow:"row nowrap", padding: "0 5rem"}}>
             <Link to='/dev' state={{ index: 1 }}>
                 <ChevronTop 
-                    onMouseEnter={() => chevronsBobbing.pause()}
-                    onMouseLeave={() => {
-                    chevronsBobbing.play(); }}/>
+                    onMouseEnter={() => { chevronsBobbing.pause() }}
+                    onMouseLeave={() => { chevronsBobbing.play(); }}/>
             </Link>
-            <LogoIllustration index={2} />
-            <p style={{marginLeft:'10%'}}>
-                J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
-                assure une <Purple><b>veille technologique</b></Purple> permanente.
-            </p>        
+            {/* <LogoIllustration index={2} /> */}
+        <Smartphone style={{ width: '215px', height: '444px' }} index={2}/>
+			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
         </Container>
-        <Link to='/i18n' state={{ indx: 3 }}>
+        <Link to='/i18n' state={{ index: 3 }}>
             <ChevronBottom 
                 onMouseEnter={() => chevronsBobbing.pause()} 
-                onMouseLeave={() => { chevronsBobbing.play() }}/>
+                onMouseLeave={() => chevronsBobbing.play()}/>
         </Link>
   </>)
 };

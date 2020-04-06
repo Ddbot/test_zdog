@@ -1,49 +1,56 @@
-import React from "react";
-import { Link , useStaticQuery, graphql,} from "gatsby";
+import React, { useContext } from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
+import LangContext from '../components/contexts/LangContext';
 
 import SEO from "../components/seo";
-
 import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration";
 import { ChevronBottom, ChevronTop } from '../components/chevron';
 
-import Purple from '../components/styled/Purple';
+import { chevronsBobbing } from '../utils/timelines';
 
-import {
-  chevronsEntry,
-  chevronsExit,
-  chevronsBobbing,
-  fadeOutText,
-  fadeInText,
-  up,
-  down,
-} from '../utils/timelines';
+const Dev = ({location}) => {
+	//_____________data pour GraphQL________//
+	const data = useStaticQuery(graphql `
+    query DevQuery {
+      site {
+        siteMetadata {
+          title
+          en {
+            slide_1
+          }
 
-
-const Dev = ({ location }) => {
-
-	const { state = {} } = location;
-	const { content , lang } = state;
+          fr {
+            slide_1
+          }
+        }
+      }
+    }
+  `);	
+	const defaultLang = localStorage.getItem('lang');	
+	const {index} = location.state;
+	let lang = useContext(LangContext);
+	
+	const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
+		
 	return (<>
-			<SEO title={lang === "fr" ? "Développeur" : "Dev"} />
+			<SEO title={location.state.lang === "fr" ? "Développeur" : "Dev"} />
 			<Container className="container">
-			<Link to='/' state={{ index: 0 }}>
-				<ChevronTop
-					onMouseEnter={() => chevronsBobbing.pause()}
-					onMouseLeave={() => {
-						chevronsBobbing.play();}}/>
-			</Link>
-			<LogoIllustration index={1} />	
-			<p style={{marginRight:'10%'}}>
-				J'utilise <Purple><b>React</b></Purple> et <br />
-				des frameworks tels que <Purple><b>Gatsby JS</b></Purple> pour créer des sites et des <Purple><b>PWA</b></Purple><br />
-				<Purple><b>modernes, rapides</b></Purple> et <Purple><b>accessibles</b></Purple>.
-			</p>
-		</Container>
+				<Link to='/' state={{ index: 0 }}>
+					<ChevronTop
+						onMouseEnter={() => { chevronsBobbing.pause() }}
+						onMouseLeave={() => { chevronsBobbing.play() }}/>
+				</Link>
+				<LogoIllustration index={1} />	
+				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
+			</Container>
 			<Link to='/design' state={{ index: 2 }}>
-				<ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} />
+				<ChevronBottom
+					onMouseEnter={() => chevronsBobbing.pause()}
+					onMouseLeave={() => { chevronsBobbing.play() }} />
 			</Link>
 	</>)
 };
 
 export default Dev;
+

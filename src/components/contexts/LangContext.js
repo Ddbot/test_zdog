@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
+const locale = {
+    lang: 'fr',
+    setLang: () => {}
+}
 
-const LangContext = React.createContext(defaultLang);
+const LangContext = React.createContext(locale);
 
 
 export const LangProvider = LangContext.Provider;

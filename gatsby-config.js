@@ -6,40 +6,40 @@ module.exports = {
       description: `<span>This page is hosting my CV and my blog</span>`,
       slide_0: `<p style={{marginRight:'10%'}}>
 				Hello ! <br />
-				I 'm <Purple><b>Andry</b></Purple>,<br />
-				A <Purple> <b> Web site </b></Purple> and <Purple> <b> mobile Apps </b></Purple> Integrator and <Purple> <b>Designer</b></Purple>
+				I 'm <span class="purple"><b>Andry</b></span>,<br />
+				A <span class="purple"> <b> Web site </b></span> and <span class="purple"> <b> mobile Apps </b></span> Integrator and <span class="purple"> <b>Designer</b></span>
 			</p>`,
       slide_1: `<p style={{marginRight:'10%'}}>
-				I'm using <Purple><b>React</b></Purple> and <br />
-				frameworks such as <Purple><b>Gatsby JS</b></Purple> to create 
-				<Purple><b>fast, modern</b></Purple> and <Purple><b>accessible</b></Purple>                
-				Web sites and <Purple><b>PWA</b></Purple><br />
+				I'm using <span class="purple"><b>React</b></span> and <br />
+				frameworks such as <span class="purple"><b>Gatsby JS</b></span> to create 
+				<span class="purple"><b>fast, modern</b></span> and <span class="purple"><b>accessible</b></span>                
+				Web sites and <span class="purple"><b>PWA</b></span><br />
 			</p>`,
       slide_2: `<p style='margin-left:10%;'>
-                I'm also using <Purple><b>React Native</b></Purple> and <br />
-                <Purple><b>Ruby on Rails</b></Purple>. I am a music and technology fan, who <Purple><b>always strives to learn more</b></Purple>
+                I'm also using <span class="purple"><b>React Native</b></span> and <br />
+                <span class="purple"><b>Ruby on Rails</b></span>. I am a music and technology fan, who <span class="purple"><b>always strives to learn more</b></span>
             </p>`,
-      slide_3: `<p style='margin-left: 10%;'>I am also a <Purple><b>writer / translator</b></Purple>. I create catchy and <Purple><b>a11y compliant content</b></Purple> and can even shoulder the <Purple><b>i18n</b></Purple> of your sites and applications</p>`,
-      slide_4: `<p style='margin-right:10%;'>I'm currently available for work. <<Purple>><b>Contact me !</p></span></p>`,
+      slide_3: `<p style='margin-left: 10%;'>I am also a <span class="purple"><b>writer / translator</b></span>. I create catchy and <span class="purple"><b>a11y compliant content</b></span> and can even shoulder the <span class="purple"><b>i18n</b></span> of your sites and applications</p>`,
+      slide_4: `<p style='margin-right:10%;'>I'm currently available for work. <span class="purple"><b>Contact me !</p></span></p>`,
     },
     fr: {
       description: `<span>Vous trouverez ici mon CV ainsi que mon blog</span>`,
       slide_0: `<p style={{marginRight:'10%'}}>
 				Bonjour ! <br />
-				Je suis <Purple><b>Andry</b></Purple>,<br />
-				Intégrateur et <Purple><b>Designer</b></Purple> de sites<Purple><b>Web</b></Purple> et d'<Purple><b>applications mobiles</b></Purple>
+				Je suis <span class="purple"><b>Andry</b></span>,<br />
+				Intégrateur et <span class="purple"><b>Designer</b></span> de sites<span class="purple"><b>Web</b></span> et d'<span class="purple"><b>applications mobiles</b></span>
 			</p>`,
       slide_1: `<p style={{marginRight:'10%'}}>
-				J'utilise <Purple><b>React</b></Purple> et <br />
-				des frameworks tels que <Purple><b>Gatsby JS</b></Purple> pour créer des sites et des <Purple><b>PWA</b></Purple><br />
-				<Purple><b>modernes, rapides</b></Purple> et <Purple><b>accessibles</b></Purple>.
+				J'utilise <span class="purple"><b>React</b></span> et <br />
+				des frameworks tels que <span class="purple"><b>Gatsby JS</b></span> pour créer des sites et des <span class="purple"><b>PWA</b></span><br />
+				<span class="purple"><b>modernes, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
 			</p>`,
       slide_2: `<p style={{marginLeft:'10%'}}>
-                J'utilise également <Purple><b>React Native</b></Purple> et <Purple><b>Ruby on Rails</b></Purple>. En véritable <Purple><b>passionné</b></Purple>, j'
-                assure une <Purple><b>veille technologique</b></Purple> permanente.
+                J'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>. En véritable <span class="purple"><b>passionné</b></span>, j'
+                assure une <span class="purple"><b>veille technologique</b></span> permanente.
             </p>`,
-      slide_3: `<p style={{ marginLeft: '10%' }}>Je suis également <Purple><b>rédacteur et traducteur</b></Purple>. Je créé du <Purple><b>contenu SEO accrocheur</b></Purple> et assure une <Purple><b>i18n de qualité</b></Purple></p>`,
-      slide_4: `<p>Je suis à votre disposition pour plus de renseignements. <Purple><b>Contactez-moi !</b></Purple></p>`,
+      slide_3: `<p style={{ marginLeft: '10%' }}>Je suis également <span class="purple"><b>rédacteur et traducteur</b></span>. Je créé du <span class="purple"><b>contenu SEO accrocheur</b></span> et assure une <span class="purple"><b>i18n de qualité</b></span></p>`,
+      slide_4: `<p>Je suis à votre disposition pour plus de renseignements. <span class="purple"><b>Contactez-moi !</b></span></p>`,
     },
     plugins: [
       `gatsby-plugin-react-helmet`,

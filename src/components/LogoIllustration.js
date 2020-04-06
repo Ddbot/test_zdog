@@ -1,8 +1,7 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
-import Zdog from 'zdog';
-import { Illustration, Cone, Cylinder, Hemisphere } from 'react-zdog';
 import Smartphone from './smartphone';
+import Zdog from 'zdog';
 import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
@@ -63,7 +62,7 @@ const LogoIllustration = (props) => {
     let [index, setIndex] = useState(0);
     let [rotation, setRotation] = useState(cone_seq[index]);
     
-    let prevRotation = usePrevious(rotation);
+    // let prevRotation = usePrevious(rotation);
     let prevIndex = usePrevious(index);
         
     
@@ -72,49 +71,56 @@ const LogoIllustration = (props) => {
     }, [props.index, index]);
     
 
-    // ANIMATIONS ZDOG !!!
     useEffect(() => {  
         gsap.set(['[zoom]>svg', '[zoom]'], { overflow: "visible" });
+        gsap.set('[zoom]', {
+            scale: 4
+        });        
+        
         switch (index) {
             case 0:                                
-                prevIndex > index && dummyTween(cone_seq[index+1], cone_seq[index]);
-                
-                gsap.set('[zoom]', {
-                    scale: 4
-                });
+                prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
+                // 
                 break;
             case 1:
-                prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index], cone_seq[index + 1]);
+                if (prevIndex > index) {
+                    dummyTween(cone_seq[index + 1], cone_seq[index]); 
+                } else {
+                    dummyTween(cone_seq[index], cone_seq[index + 1])
+                }
 
-                let theOne = document.querySelectorAll('[zoom]>svg>path:nth-of-type(2)');                
-                let circs = document.querySelectorAll('[zoom]>svg>path:not(:nth-of-type(2))');
+                 // let theOne = document.querySelectorAll('[zoom]>svg>path:nth-of-type(2)');                
+                 let circs = document.querySelectorAll('[zoom]>svg>path:not(:nth-of-type(2))');
 
+                 // onComplete: () => {
+
+                 //     gsap.to(theOne, {
+                 //         transformOrigin: "50% 50%",
+                 //         scale: 3,
+                 //         ease: "power4.out",
+                 //         duration: illuTweenDuration/4
+                 //     });
+                 // },
                 gsap.to(circs, {
                     fill: "transparent",
                     stagger: {
                         amount: .4,
                         ease: "power2.in"
                     },
-                    onStart: () => { console.log(circs) },
-                    onComplete: () => {
-                        
-                        gsap.to(theOne, {
-                            transformOrigin: "50% 50%",
-                            scale: 3,
-                            ease: "power4.out",
-                            duration: illuTweenDuration/4
-                        });
-                    },
-                }).delay(illuTweenDuration);
+                }).delay(illuTweenDuration/2);
                 break;
             case 2:                         
                 // prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index - 1], cone_seq[index]);
 
                 gsap.set('.container>[zoom]', { display: "none" });
-                gsap.from('svg#smartphone', {
+                gsap.fromTo('svg#smartphone', {
                     autoAlpha: 0,
                     duration: 1,
-                    x: 150,
+                    scale: 0,
+                    x: -150,
+                }, {
+                    autoAlpha:1,
+                    scale: .4
                 });
 
                 // gsap.to('[zoom]>svg>path:first-of-type', {
@@ -137,7 +143,7 @@ const LogoIllustration = (props) => {
                 break;
             default:                                
         }       
-    }, [index]);
+    }, [prevIndex,index]);
 
     if (index===0) { return <Triangles index={index} rotation={rotation}/> }
     if (index===1) { return <Triangles index={index} rotation={rotation}/> }

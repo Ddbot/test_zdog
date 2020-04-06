@@ -1,13 +1,15 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import LangToggle from './langToggle';
+import LangContext from './contexts/LangContext';
 
-import "./styles/header.css"
+import "./styles/header.css";
+
 
 const Header = (props) => {
-  // let [lang, setLang] = useState(props.lang);
+  // const locale = localStorage.getItem('lang');
   return (
     // <header>
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -22,7 +24,7 @@ const Header = (props) => {
           <span aria-hidden="true"></span>
         </button>
       </div>
-        <LangToggle toggleLang={props.toggleLang} lang={props.lang}/>
+      <LangToggle lang={props.locale === "fr" ? "en" : "fr" } toggleLang={props.toggleLang}/>
     </nav>
   )}
 

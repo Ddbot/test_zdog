@@ -12,7 +12,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f38181'}
-            backface={'hsl(48, 100%, 67%)'}
+            backface = {'#f38c84'}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
         />
 
@@ -21,7 +21,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f38c84'}
-            backface={'green'}
+            backface = {'#f38181'}
             rotate={props.rotation}
             translate={{ x: -12, y: 24 }}
         />
@@ -30,7 +30,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f3a389'}
-            backface={'hsl(48, 100%, 67%)'}
+            backface={'#f3a389'}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
             translate={{ x: -24 }}
         />
@@ -41,7 +41,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f4ba8e'}
-            backface={'hsl(48, 100%, 67%)'}
+            backface={'#f4ba8e'}
             rotate={props.rotation}
             translate={{ x: -24 }}
         />
@@ -51,7 +51,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f4c590'}
-            backface={'black'}
+            backface={'#f4c590'}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
             translate={{ x: -12, y: -24 }}
         />
@@ -63,7 +63,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f4d193'}
-            backface={'hsl(48, 100%, 67%)'}
+            backface={'#f4d193'}
             rotate={props.rotation}
         />
                 
@@ -72,7 +72,7 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f4dc95'}
-            backface={'hsl(48, 100%, 67%)'}
+            backface={'#f4dc95'}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
             translate={{ x: 12, y: -24 }}
         />
@@ -82,12 +82,12 @@ const Triangles = (props) => {
             length={24}
             stroke={false}
             color={'#f4f39a'}
-            backface={'black'}
+            backface={'#f4f39a'}
             rotate={props.rotation}
             translate={{ x: 12, y: -24 }}
         />
                                           
-        <div className="dummy"></div>
+        {/* <div className="dummy"></div> */}
     </Illustration>
 }
 
