@@ -17,7 +17,7 @@ const Container = styled.div `
 
 	p {
 		
-		width: 70vw;
+		width: 50vw;
 	}
 `;
 

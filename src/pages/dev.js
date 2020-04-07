@@ -27,9 +27,9 @@ const Dev = ({location}) => {
       }
     }
   `);	
-	const defaultLang = localStorage.getItem('lang');	
 	const {index} = location.state;
 	let lang = useContext(LangContext);
+	const defaultLang = localStorage.getItem('lang') || lang;
 	
 	const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
 		
@@ -42,13 +42,14 @@ const Dev = ({location}) => {
 						onMouseLeave={() => { chevronsBobbing.play() }}/>
 				</Link>
 				<LogoIllustration index={1} />	
-				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-			</Container>
-			<Link to='/design' state={{ index: 2 }}>
-				<ChevronBottom
-					onMouseEnter={() => chevronsBobbing.pause()}
-					onMouseLeave={() => { chevronsBobbing.play() }} />
-			</Link>
+					<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
+				<Link to='/design' state={{ index: 2 }}>
+					<ChevronBottom
+						onMouseEnter={() => chevronsBobbing.pause()}
+						onMouseLeave={() => { chevronsBobbing.play() }} />
+				</Link>
+		</Container>
+
 	</>)
 };
 

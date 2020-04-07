@@ -6,7 +6,7 @@ const { TAU } = Zdog;
 
 const Triangles = (props) => {
 
-    return <Illustration index={props.index} zoom={1} rotate={{ z: TAU / 4 }}>
+    return <Illustration index={props.index} zoom={.8} rotate={{ z: TAU / 4 }}>
         <Cone diameter={24}
             // 1
             length={24}

@@ -46,12 +46,13 @@ const Design = ({location}) => {
             {/* <LogoIllustration index={2} /> */}
         <Smartphone style={{ width: '215px', height: '444px' }} index={2}/>
 			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
-        </Container>
         <Link to='/i18n' state={{ index: 3 }}>
             <ChevronBottom 
                 onMouseEnter={() => chevronsBobbing.pause()} 
                 onMouseLeave={() => chevronsBobbing.play()}/>
         </Link>
+      </Container>
+
   </>)
 };
 

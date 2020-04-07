@@ -9,6 +9,8 @@ import "./styles/header.css";
 
 
 const Header = (props) => {
+  let current = useContext(LangContext);
+  console.log('Current ctx: ',current);
   // const locale = localStorage.getItem('lang');
   return (
     // <header>
@@ -24,7 +26,7 @@ const Header = (props) => {
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <LangToggle lang={props.locale === "fr" ? "en" : "fr" } toggleLang={props.toggleLang}/>
+      <LangToggle lang={current} toggleLang={props.toggleLang}/>
     </nav>
   )}
 

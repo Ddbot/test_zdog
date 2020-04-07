@@ -42,8 +42,8 @@ return (<>
 		</Link>
 		<LogoIllustration index={3} />			
 			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
-	</Container>
 	<Link to='/contact' state={{ index: 4 }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
+	</Container>
   </>)
 };
 

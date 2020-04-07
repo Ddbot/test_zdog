@@ -15,7 +15,7 @@ import { chevronsBobbing } from '../utils/timelines';
 import "font-awesome/css/font-awesome.min.css";
 
 const IndexPage = (props) => {
-  const defaultLang = localStorage.getItem('lang');
+  const defaultLang = localStorage.getItem('lang') || 'fr';
 
   let index = 0;
   let lang = useContext(LangContext);
@@ -46,7 +46,7 @@ const IndexPage = (props) => {
     <Container className="container">
         <LogoIllustration index={index} />
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-      { index !== 4 && <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>}
+      <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
 				</Container>
 		</>);
 };
