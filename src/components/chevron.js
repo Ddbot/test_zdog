@@ -18,7 +18,8 @@ const ChevronBtn = (props) => {
 };
 
 export const ChevronBottom = styled(ChevronBtn)`
-  transform: translateY(350px);
+  transform: translateY(300px);
+  // margin-bottom: 40vh;
 `;
 
 export const ChevronTop = styled(ChevronBtn)`  

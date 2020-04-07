@@ -47,11 +47,11 @@ const IndexPage = (props) => {
 
 	return (<>
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-    {/* <Container className="container">
-        <LogoIllustration index={index} /> */}
+    <Container className="container">
+        <LogoIllustration index={index} />
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-      {/* <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link> */}
-				{/* </Container> */}
+      <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
+				</Container>
 		</>);
 };
 
