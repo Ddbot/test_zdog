@@ -36,9 +36,12 @@ const Layout = (props) => {
 	let [lang, setLang] = useState(defaultLang);
 		
 	const toggleLang = (e) => {
-		console.log("Target du toggle: ",e.target.dataset.lang);
-			setLang(() => { return e.target.dataset.lang }) ;
-			localStorage.setItem('lang', e.target.dataset.lang);
+		e.stopPropagation();
+		e.preventDefault();
+		const {lang} = e.target.dataset
+		console.log("Target du toggle: ", lang);
+			setLang(() => { return lang }) ;
+			localStorage.setItem('lang', lang);
 		}
 	return (<>
 		<LangContext.Provider value={lang} >

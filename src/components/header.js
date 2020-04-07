@@ -1,6 +1,6 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import LangToggle from './langToggle';
 import LangContext from './contexts/LangContext';
@@ -10,8 +10,12 @@ import "./styles/header.css";
 
 const Header = (props) => {
   let current = useContext(LangContext);
-  console.log('Current ctx: ',current);
-  // const locale = localStorage.getItem('lang');
+  console.log('Current ctx: ', current);
+
+  useEffect(() => {
+      localStorage.setItem('lang', current);
+  });
+  
   return (
     // <header>
     <nav className="navbar" role="navigation" aria-label="main navigation">

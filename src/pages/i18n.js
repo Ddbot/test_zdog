@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import LangContext from '../components/contexts/LangContext';
 
@@ -8,7 +8,12 @@ import LogoIllustration from "../components/logoIllustration";
 import { ChevronBottom, ChevronTop } from '../components/chevron';
 import { chevronsBobbing } from '../utils/timelines';
 
-const I18n = ({location}) => {
+const I18n = ({ location }) => {
+  let current = useContext(LangContext);
+
+  useEffect(() => {
+    localStorage.setItem('lang', current);
+  });
 
     const data = useStaticQuery(graphql `
     query i18nQuery {
@@ -26,10 +31,9 @@ const I18n = ({location}) => {
       }
     }
   `);
-	const { index } = location.state;
+	  const { index } = location.state;
     const defaultLang = localStorage.getItem('lang');
     const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
-	let lang = useContext(LangContext);
 
 return (<>
 	<SEO title={"i18n"} />

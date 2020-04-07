@@ -27,8 +27,11 @@ const Dev = ({location}) => {
       }
     }
   `);	
-	const {index} = location.state;
+	
+	const { index } = location.state;
+	
 	let lang = useContext(LangContext);
+	
 	const defaultLang = localStorage.getItem('lang') || lang;
 	
 	const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
