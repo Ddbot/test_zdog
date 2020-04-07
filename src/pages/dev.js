@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import LangContext from '../components/contexts/LangContext';
 
@@ -31,6 +31,10 @@ const Dev = ({location}) => {
 	const { index } = location.state;
 	
 	let lang = useContext(LangContext);
+
+	useEffect(() => { 
+		localStorage.setItem('lang', lang);
+	});
 	
 	const defaultLang = localStorage.getItem('lang') || lang;
 	

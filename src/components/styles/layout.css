@@ -635,4 +635,6 @@ pre tt:after {
       
       .textContent {
         background-color: pink;
+        /* min-width: 30vw;
+        min-height: 30vh; */
       }

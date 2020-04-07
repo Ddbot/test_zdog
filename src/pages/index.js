@@ -15,12 +15,16 @@ import { chevronsBobbing } from '../utils/timelines';
 import "font-awesome/css/font-awesome.min.css";
 
 const IndexPage = (props) => {
-  const defaultLang = localStorage.getItem('lang') || 'fr';
 
   let index = 0;
   let lang = useContext(LangContext);
 
-  console.log('Lang in context in ndex is: ', lang);
+  useEffect(() => {
+    localStorage.setItem('lang', lang);
+   });
+  const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
+
+  console.log('Lang in context in ndex is: ', lang, defaultLang);
 	
   //_____________data pour GraphQL________//
   const data = useStaticQuery(graphql `
@@ -43,11 +47,11 @@ const IndexPage = (props) => {
 
 	return (<>
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
-    <Container className="container">
-        <LogoIllustration index={index} />
+    {/* <Container className="container">
+        <LogoIllustration index={index} /> */}
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-      <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
-				</Container>
+      {/* <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link> */}
+				{/* </Container> */}
 		</>);
 };
 
