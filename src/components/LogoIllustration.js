@@ -6,6 +6,7 @@ import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
 import Triangles from './triangles';
+import Me from "./zdog/Andry";
 
 let { TAU } = Zdog;
 
@@ -74,13 +75,11 @@ const LogoIllustration = (props) => {
     useEffect(() => {  
         gsap.set(['[zoom]>svg', '[zoom]'], { overflow: "visible" });
         gsap.set('[zoom]', {
-            scale: 4
-        });        
+        });
         
         switch (index) {
             case 0:                                
                 prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
-                // 
                 break;
             case 1:
                 if (prevIndex > index) {
@@ -89,18 +88,8 @@ const LogoIllustration = (props) => {
                     dummyTween(cone_seq[index], cone_seq[index + 1])
                 }
 
-                 // let theOne = document.querySelectorAll('[zoom]>svg>path:nth-of-type(2)');                
-                 let circs = document.querySelectorAll('[zoom]>svg>path:not(:nth-of-type(2))');
-
-                 // onComplete: () => {
-
-                 //     gsap.to(theOne, {
-                 //         transformOrigin: "50% 50%",
-                 //         scale: 3,
-                 //         ease: "power4.out",
-                 //         duration: illuTweenDuration/4
-                 //     });
-                 // },
+                let circs = document.querySelectorAll('[zoom]>svg>path:not(:nth-of-type(2))');
+    
                 gsap.to(circs, {
                     fill: "transparent",
                     stagger: {
@@ -145,7 +134,10 @@ const LogoIllustration = (props) => {
         }       
     }, [prevIndex,index]);
 
-    if (index===0) { return <Triangles index={index} rotation={rotation}/> }
+    if (index === 0) {
+        return <Me index={index} rotation={rotation}/>        
+        // <Triangles index={index} rotation={rotation} />
+    }
     if (index===1) { return <Triangles index={index} rotation={rotation}/> }
     if (index===2) { return <Smartphone index={index} rotation={rotation}/> }
     if (index===3) { return <Triangles index={index} rotation={rotation}/> }

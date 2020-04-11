@@ -26,10 +26,8 @@ const Dev = ({location}) => {
         }
       }
     }
-  `);	
-	
-	const { index } = location.state;
-	
+  `);		
+	const { index } = location.state;	
 	let lang = useContext(LangContext);
 
 	useEffect(() => { 

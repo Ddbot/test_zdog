@@ -14,10 +14,10 @@ const LangToggle = (props) => {
                     </button>
                     <div className="navbar-dropdown">
                             {props.lang === 'en' && <button href={'#'}className="navbar-item" data-lang={'fr'} onClick={props.toggleLang} onKeyPress={props.toggleLang}>
-                            Francais <FranceFlag />
+                            Francais <FranceFlag data-lang={'fr'}/>
                         </button>}
                         { props.lang === 'fr' && <button href={'#'}className="navbar-item" data-lang={'en'} onClick={props.toggleLang} onKeyPress={props.toggleLang}>
-                            English <UKFlag />
+                            English <UKFlag data-lang={'en'}/>
                         </button>}
                     </div>
                 </div>

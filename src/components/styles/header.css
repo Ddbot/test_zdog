@@ -1,8 +1,15 @@
+nav.navbar {
+    /* background-color: transparent; */
+}
+div.navbar-item {
+    background-color: transparent;
+}
 
 div.navbar-item:not(:hover)>.navbar-dropdown {
     padding: 0 auto;
     opacity: 0;
     /* transition: all 1s linear !important; */
+    background-color: transparent;
 }
 
 div.navbar-item:hover>.navbar-dropdown {     

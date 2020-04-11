@@ -26,9 +26,11 @@
   --bulma-black: #002620;
   /* font-family: "Oswald"; */
   font-size: 20px;
+}
 
-
-
+#gatsby-focus-wrapper>div:nth-child(1) {
+  height: 100vh;
+  background-blend-mode: darken;
 }
 
 html {
@@ -36,12 +38,14 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   height: 100vh;
+  /* background-color: transparent; */
 }
 article,
 aside,
@@ -124,6 +128,7 @@ img {
 svg:not(:root) {
   overflow: visible;
 }
+
 code,
 kbd,
 pre,
@@ -633,8 +638,30 @@ pre tt:after {
 	    padding: 0 6px 0 1.5%;
       background-color: var(--bulma-blue2);}
       
-      .textContent {
-        background-color: pink;
+      .textContent>p {
         /* min-width: 30vw;
         min-height: 30vh; */
+      }
+
+      .textContent>p::before {
+          content: '';
+          position: fixed;
+          top: 20vh;
+          left: -12vw;
+          width: 100%;
+          height: 100%;
+          transform: scale(0.5) rotateX(40deg);
+          mix-blend-mode: lighten;
+          clip-path: url(#bgPath);
+          z-index: 1;
+          /* background-color: #DFDBE5; */
+          /* background: rgb(2, 0, 36); */
+          /* background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%); */
+          /* background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E"),linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%); */
+          transition: clip-path 2s;
+}
+
+      .textContent>p::before:hover {
+        clip-path: url(#bgPath2);
+        transition: clip-path 2s;
       }
