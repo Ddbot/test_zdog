@@ -12,7 +12,7 @@ var hipX = (8 / quarterTurn) / 2;
 const leftKnee = { x: -hipX - 10, y: -2, z: 15 };
 
 const illoRotation = {
-    // x: -TAU / 4,
+    // x: TAU / 4,
     // y: TAU/4,
     // z: TAU/4
 }
@@ -23,7 +23,7 @@ const Bras = React.forwardRef((props, ref) => (
         translate={props.translate}
         rotate={ props.rotate }
         color={props.color}
-        stroke={4} />));
+        stroke={4}>{props.children}</Shape>));
 
 const Me = React.forwardRef((props, ref) => {
 
@@ -151,14 +151,15 @@ const Me = React.forwardRef((props, ref) => {
         let rightForeArm = useRef(null);
         let leftForeArm = useRef(null);
 
-        return <Shape ref={torsoRef} translate={{ y: 25.3, z: 0 }}
+        return <Shape ref={torsoRef} translate={{
+            y: 25.3, z: 0
+        }}
             // rotate={{ z: TAU/4 }}
             path={[{ y: -torsoX }, { y: torsoX * 3 }]}
             color={'rgba(0,0,0,0.5)'}
             stroke={12.5}>
             {/* BRAS R */}
             <Bras ref={rightArm} color={'blue'}
-
                 translate={{
                     x: -torsoX - 3,
                     y: -7
@@ -167,27 +168,29 @@ const Me = React.forwardRef((props, ref) => {
                     // x: -TAU / 4,
                     // y: 0,
                     z: TAU / 16
-                }}
-            />
-            {/* AVANT BRAS R */}
-            <Bras ref={rightForeArm} color={'yellow'}
-                translate={{
-                    x: -torsoX - 6,
-                    y: 1.7,
-                    z: 0
-                }}
-                rotate={{
-                    x: 1,
-                    y: -5,
-                    z: -1
-                }} />
-            {/* MAIN R */}
-            <Shape stroke={5} color={'pink'}
-                translate={{
-                    x: -torsoX - 4,
-                    y: -1.5,
-                    z: 8
-                }} />
+                }}>
+                {/* AVANT BRAS R */}
+                <Bras ref={rightForeArm} color={'yellow'}
+                    translate={{
+                        // x: -torsoX - 6,
+                        y: 7,
+                        z: 0
+                    }}
+                    rotate={{
+                        x: 1,
+                        y: -5,
+                        z: -1
+                    }}
+                >
+                    {/* MAIN R */}
+                    <Shape stroke={5} color={'pink'}
+                        translate={{
+                            // x: -torsoX - 4,
+                            y: 8,
+                            z: 0
+                    }} />
+                </Bras>
+            </Bras>
             
             {/* BRAS L */}
             <Bras ref={leftArm} color={'red'}
@@ -294,7 +297,7 @@ const Me = React.forwardRef((props, ref) => {
         <Cylinder diameter={8}
             length={torsoX*3-1}
             translate={{ y: 40 }}
-            rotate={{ x: -TAU / 4, y: -TAU / 4 }}
+            rotate={{ x: -TAU / 8, y: -TAU / 4 }}
             color={'rgba(0,0,0,0.5)'}>
             {/* JAMBES */}
             <Cylinder diameter={4}
