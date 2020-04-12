@@ -63,13 +63,13 @@ const data = useStaticQuery(graphql `
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
     <Container className="container">
       <LogoIllustration index={index} style={{ zIndex: 2 }} rot={rotation}/>
-      <div className="rotationSliders" style={{ height: '50px', width:'50px'}}>
+      <div className="rotationSliders" style={{ height: '50px', width:'50px', zIndex: 10}}>
         <input type="range" id="x" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
-        <label for="x">X</label>
+        <label for="x">x</label>
         <input type="range" id="y" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
-        <label for="x">Y</label>
+        <label for="x">y</label>
         <input type="range" id="z" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
-        <label for="x">Z</label>
+        <label for="x">z</label>
       </div>  
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
       <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
