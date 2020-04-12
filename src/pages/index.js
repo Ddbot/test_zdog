@@ -6,7 +6,8 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 
 import SEO from "../components/seo";
 import LogoIllustration from "../components/logoIllustration";
-import {ChevronBottom} from '../components/chevron';
+import { ChevronBottom } from '../components/chevron';
+import RotationSliders from '../components/rotationSliders';
 
 import Container from '../components/styled/Container';
 
@@ -63,14 +64,7 @@ const data = useStaticQuery(graphql `
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
     <Container className="container">
       <LogoIllustration index={index} style={{ zIndex: 2 }} rot={rotation}/>
-      <div className="rotationSliders" style={{ height: '50px', width:'50px', zIndex: 10}}>
-        <input type="range" id="x" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
-        <label for="x">x</label>
-        <input type="range" id="y" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
-        <label for="x">y</label>
-        <input type="range" id="z" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
-        <label for="x">z</label>
-      </div>  
+      <RotationSliders handleRotation={handleRotation}/>
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
       <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
       {/* <svg width="681" height="573" viewBox="0 0 681 573" fill="none" xmlns="http://www.w3.org/2000/svg">

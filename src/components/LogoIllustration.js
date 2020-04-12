@@ -1,12 +1,14 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from "react-dom";
+
 import Smartphone from './smartphone';
 import Zdog from 'zdog';
 import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
 import Triangles from './triangles';
-import Me from "./zdog/Andry";
+import Me from "./zdog/me";
 
 let { TAU } = Zdog;
 
@@ -136,16 +138,21 @@ const LogoIllustration = (props) => {
         }       
     }, [prevIndex, index]);
     
-        // Rotation de Me
-        useEffect(() => {
-            if (props.rot !== rot) setRot((prevRot) => {
-                return props.rot
-            });
+    // Rotation de Me
+    useEffect(() => {
+        if (props.rot !== rot) setRot((prevRot) => {
+            return props.rot
+        });
 
-        }, [props.rot, rot]);
+    }, [props.rot, rot]);
+
+    const handleClick = (e) => {
+        e.persist();
+        console.log('ID : ', e.target, ' Parent node: ', e.target.parentNode);
+    }
 
     if (index === 0) {
-        return <Me index={index} rotation={rot}/>        
+        return <Me index={index} rotation={rot} handleClick={handleClick}/>        
         // <Triangles index={index} rotation={rotation} />
     }
     if (index===1) { return <Triangles index={index} rotation={rotation}/> }

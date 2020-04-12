@@ -155,9 +155,11 @@ const Me = React.forwardRef((props, ref) => {
             y: 25.3, z: 0
         }}
             // rotate={{ z: TAU/4 }}
-            path={[{ y: -torsoX }, { y: torsoX * 3 }]}
+            path={[{ y: -torsoX }, { y: torsoX * 3-1 }]}
             color={'rgba(0,0,0,0.5)'}
-            stroke={12.5}>
+            stroke={12.4}
+            onClick={() => console.log('U clicked on the TORSO')}
+        >
             {/* BRAS R */}
             <Bras ref={rightArm} color={'blue'}
                 translate={{
@@ -294,28 +296,38 @@ const Me = React.forwardRef((props, ref) => {
     
     const Legs = (props) => (
         // HANCHES
-        <Cylinder diameter={8} length={torsoX*3-1} translate={{ y: 40 }} rotate={{ x: -TAU / 8, y: -TAU / 4 }} color={'rgba(0,0,0,0.5)'}>
+        <Cylinder diameter={6} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'rgba(0,0,0,0.5)'}>
             {/* JAMBES */}
             {/* RIGHT THIGH */}
-            <Cylinder diameter={4}
-                translate={{ x: -8.5, y: 0, z: -4 }} rotate={{ y: TAU / 4 }} length={12} color={'red'}>
-                {/* TIBIA R */}
-                <Cylinder diameter={4} translate={{ x: 0, y: 0, z: 12 }} rotate={{ y: 0 }} length={12} color={'green'}>
-                    {/* CHAUSSURE R */}
-                    <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'black'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -2.5, y: 1, z: .5 }} />
-                </Cylinder>
+            <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: -6 }} rotate={{ y: TAU / 4 + 0.4 }} length={12} color={'red'}>
+                {/* KNEE R */}
+                <Shape stroke={5} color={'yellow'} translate={{ z: 8 }}>
+                    {/* TIBIA R */}
+                    <Cylinder diameter={4} translate={{ x: 0, y: 7.5, z: 0 }} rotate={{ x: -TAU/4, y: 0 }} length={12} color={'green'}>
+                        {/* CHAUSSURE R */}
+                        <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'black'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -3, y: 1, z: .5 }}>
+                            <Ellipse diameter={4} quarters={2} color={'yellow'} translate={{ x: 1.1, y:2, z: 0}} rotate={{ x: TAU/4}}/>
+                            <Ellipse diameter={3} quarters={2} color={'yellow'} translate={{ x: 1.1, y:5, z: 0}} rotate={{ x: TAU/4}}/>
+                        </Shape>
+                    </Cylinder>
+                </Shape>
             </Cylinder>
             {/* LEFT THIGH */}
-            <Cylinder diameter={4} translate={{x: -8.5, y: 0, z: 4}} rotate={{ y: TAU/4}} length={12}>
-                {/* TIBIA */}
-                <Cylinder diameter={4} translate={{ x: 0, y: 0, z: 12 }} rotate={{ y: 0 }} length={12} color={'green'}>
-                    {/* CHAUSSURE L */}
-                    <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'blue'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -2.5, y: 2, z: .5 }} />
-                </Cylinder>
+            <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: 6 }} rotate={{ y: TAU / 4 - 0.4 }} length={12}>
+                {/* KNEE L */}
+                <Shape stroke={5} color={'red'} translate={{ z: 8 }}>
+                    {/* TIBIA L */}
+                    <Cylinder diameter={4} translate={{ x: 0, y: 7.5, z: 0 }} rotate={{ x: -TAU/4, y: 0 }} length={12} color={'green'}>
+                        {/* CHAUSSURE L */}
+                        <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'blue'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -3, y: 2, z: .5 }}>
+                            <Ellipse diameter={4} quarters={2} color={'yellow'} translate={{ x: 1.1, y:2, z: 0}} rotate={{ x: TAU/4}}/>
+                            <Ellipse diameter={3} quarters={2} color={'yellow'} translate={{ x: 1.1, y:5, z: 0}} rotate={{ x: TAU/4}}/>
+                        </Shape>
+                    </Cylinder>
+                </Shape>
             </Cylinder>     
         </Cylinder>);
-
-    return <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation}>
+    return <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation} onClick={props.handleClick}>
         <Head />
         <Torso />
         <Legs />
