@@ -300,10 +300,13 @@ const Me = React.forwardRef((props, ref) => {
             rotate={{ x: -TAU / 8, y: -TAU / 4 }}
             color={'rgba(0,0,0,0.5)'}>
             {/* JAMBES */}
+            {/* RIGHT LEG */}
             <Cylinder diameter={4}
-                translate={{x: -14.5, y: 0, z: -4}}
-                rotate={{ y: TAU/4}}
-                length={24} />
+                translate={{ x: -14.5, y: 0, z: -4 }}
+                rotate={{ y: TAU / 4 }}
+                length={24}
+                color={'red'} />
+            {/* LEFT LEG */}
             <Cylinder diameter={4}
                 translate={{x: -14.5, y: 0, z: 4}}
                 rotate={{ y: TAU/4}}
