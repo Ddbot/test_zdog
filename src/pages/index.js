@@ -32,9 +32,15 @@ const data = useStaticQuery(graphql `
       }
     }
   `);
-let lang = useContext(LangContext);
+  let lang = useContext(LangContext);
+  let [rotation, setRotation] = useState({
+    x: 0,
+    y: 0,
+    z: 0
+  });
 
-let index = 0;
+  let index = 0;
+  // LANG
   useEffect(() => {
     localStorage.setItem('lang', lang);
   });
@@ -45,10 +51,26 @@ let index = 0;
 	
   const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
 
+  const handleRotation = (e) => {
+    e.persist();
+    setRotation((prev) => {
+      return {...rotation, [e.target.id]: Number(e.target.value) }
+    });
+    console.log('Now rotation is ',rotation);
+  }
+
 	return (<>
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
     <Container className="container">
-			<LogoIllustration index={index} style={{ zIndex: 2}}/>
+      <LogoIllustration index={index} style={{ zIndex: 2 }} rot={rotation}/>
+      <div className="rotationSliders" style={{ height: '50px', width:'50px'}}>
+        <input type="range" id="x" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
+        <label for="x">X</label>
+        <input type="range" id="y" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
+        <label for="x">Y</label>
+        <input type="range" id="z" name="x" min="0" max="6.28" step="0.01" onChange={handleRotation}/>
+        <label for="x">Z</label>
+      </div>  
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
       <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
       {/* <svg width="681" height="573" viewBox="0 0 681 573" fill="none" xmlns="http://www.w3.org/2000/svg">

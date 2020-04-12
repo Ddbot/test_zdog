@@ -62,11 +62,13 @@ const LogoIllustration = (props) => {
 
     let [index, setIndex] = useState(0);
     let [rotation, setRotation] = useState(cone_seq[index]);
+    let [rot, setRot] = useState({ x: 0, y: 0, z: 0});
     
-    // let prevRotation = usePrevious(rotation);
+    let prevRotation = usePrevious(props.rot);
     let prevIndex = usePrevious(index);
         
-    
+
+    //  Index
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });  
     }, [props.index, index]);
@@ -132,10 +134,18 @@ const LogoIllustration = (props) => {
                 break;
             default:                                
         }       
-    }, [prevIndex,index]);
+    }, [prevIndex, index]);
+    
+        // Rotation de Me
+        useEffect(() => {
+            if (props.rot !== rot) setRot((prevRot) => {
+                return props.rot
+            });
+
+        }, [props.rot, rot]);
 
     if (index === 0) {
-        return <Me index={index} rotation={rotation}/>        
+        return <Me index={index} rotation={rot}/>        
         // <Triangles index={index} rotation={rotation} />
     }
     if (index===1) { return <Triangles index={index} rotation={rotation}/> }

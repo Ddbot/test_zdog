@@ -334,7 +334,7 @@ const Me = React.forwardRef((props, ref) => {
         </Cylinder>
     );
 
-    return <Illustration zoom={8} translate={{ y: -30 }} rotate={illoRotation}>
+    return <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation}>
         <Head />
         <Torso />
         <Legs />
