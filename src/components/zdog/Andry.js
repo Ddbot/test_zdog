@@ -294,48 +294,26 @@ const Me = React.forwardRef((props, ref) => {
     
     const Legs = (props) => (
         // HANCHES
-        <Cylinder diameter={8}
-            length={torsoX*3-1}
-            translate={{ y: 40 }}
-            rotate={{ x: -TAU / 8, y: -TAU / 4 }}
-            color={'rgba(0,0,0,0.5)'}>
+        <Cylinder diameter={8} length={torsoX*3-1} translate={{ y: 40 }} rotate={{ x: -TAU / 8, y: -TAU / 4 }} color={'rgba(0,0,0,0.5)'}>
             {/* JAMBES */}
-            {/* RIGHT LEG */}
+            {/* RIGHT THIGH */}
             <Cylinder diameter={4}
-                translate={{ x: -14.5, y: 0, z: -4 }}
-                rotate={{ y: TAU / 4 }}
-                length={24}
-                color={'red'} />
-            {/* LEFT LEG */}
-            <Cylinder diameter={4}
-                translate={{x: -14.5, y: 0, z: 4}}
-                rotate={{ y: TAU/4}}
-                length={24} />     
-                {/* CHAUSSURE R */}
-            <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'red'} translate={{
-                x: -29,
-                // y: -2,
-                z: -4
-            }}
-                rotate={{
-                    x: -2.5,
-                    y: -2,
-                    // z: 0
-                }}
-            />
-                {/* CHAUSSURE L */}
-                <Shape path={[{ y: 0 }, { y: 4}]} stroke={5} color={'blue'} translate={{ 
-                x: -29,
-                // y: -4,
-                z: 4
-            }} rotate={{
-                x: -10,
-                y: 4,
-                z: 0
-            }} />
-
-        </Cylinder>
-    );
+                translate={{ x: -8.5, y: 0, z: -4 }} rotate={{ y: TAU / 4 }} length={12} color={'red'}>
+                {/* TIBIA R */}
+                <Cylinder diameter={4} translate={{ x: 0, y: 0, z: 12 }} rotate={{ y: 0 }} length={12} color={'green'}>
+                    {/* CHAUSSURE R */}
+                    <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'black'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -2.5, y: 1, z: .5 }} />
+                </Cylinder>
+            </Cylinder>
+            {/* LEFT THIGH */}
+            <Cylinder diameter={4} translate={{x: -8.5, y: 0, z: 4}} rotate={{ y: TAU/4}} length={12}>
+                {/* TIBIA */}
+                <Cylinder diameter={4} translate={{ x: 0, y: 0, z: 12 }} rotate={{ y: 0 }} length={12} color={'green'}>
+                    {/* CHAUSSURE L */}
+                    <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'blue'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -2.5, y: 2, z: .5 }} />
+                </Cylinder>
+            </Cylinder>     
+        </Cylinder>);
 
     return <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation}>
         <Head />
