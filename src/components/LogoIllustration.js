@@ -148,7 +148,7 @@ const LogoIllustration = (props) => {
 
     const handleClick = (e) => {
         e.persist();
-        console.log('ID : ', e.target, ' Parent node: ', e.target.parentNode);
+        console.log('ID : ', e.target.id, ' Parent node: ', e.target.parentNode);
     }
 
     if (index === 0) {

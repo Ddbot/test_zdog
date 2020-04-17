@@ -77,6 +77,7 @@ const data = useStaticQuery(graphql `
           </clipPath>
         </defs>
       </svg> */}
+      <span id="dummy"></span>
 		</Container>
 		</>);
 };
