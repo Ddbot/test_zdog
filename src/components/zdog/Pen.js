@@ -1,6 +1,6 @@
 import React from 'react';
 import Zdog from 'zdog';
-import { Anchor, Cone, Cylinder, Hemisphere } from 'react-zdog';
+import { Anchor, Cone, Cylinder, Hemisphere, Shape } from 'react-zdog';
 
 
 let { TAU } = Zdog;
@@ -9,7 +9,7 @@ let Pointe = (props) => {
     diameter={.72}
     length={.72}
     stroke={false}
-    color={"beige"}
+    color={"#f4dc95"}
     backface={"#C25"} 
     />
 }
@@ -41,19 +41,22 @@ let Anneau = (props) => {
         diameter={.7}
         length={.45}
             stroke={false}        
-        color={'orange'}
-            backface={'red'}
+        color={'whitesmoke'}
+            backface={'whitesmoke'}
         translate={{ z: -4.5 }}
     
     />
 }
 
+
+
+
 let Gomme = (props) => {
     return <Hemisphere
     diameter={.7}
     stroke={ false}
-    color={ 'blue'}
-    backface={ 'orange'}
+    color={ 'black'}
+    backface={'white'}
     rotate={{
         x: Math.PI
     }}
@@ -64,12 +67,15 @@ let Gomme = (props) => {
 />}
 
 const Pen = (props) => {
-    return <Anchor rotate={{ x: TAU/4}}>
+    return <Anchor
+        scale={1}
+        translate={{ x: 15, y: 25.5, z: 16 }}
+        rotate={{ x: TAU / 4, y: -TAU/16}}>
         <Pointe />
         <Mine />
-        <Bois/>
-            <Anneau/>
-                <Gomme />
+        <Bois />
+        <Anneau />
+        <Gomme />
     </Anchor>
 }
 

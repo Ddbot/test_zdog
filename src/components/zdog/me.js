@@ -362,7 +362,7 @@ const Me = (props) => {
         return <Box
         translate={{
             y: 44.6,
-            z: 12
+            z: 14
         }}
             width={ 40}
             height={27}
@@ -459,7 +459,7 @@ const Me = (props) => {
             translate={{
             // x: 15,
             y: 24,
-            z: 20
+            z: 18
             }}
             rotate={{
                 x: -0.1
