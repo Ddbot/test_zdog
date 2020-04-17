@@ -494,7 +494,39 @@ const Me = (props) => {
                 rotate={{
                     x: TAU / 4 - 3
                 }}/>
-        </Group>}
+        </Group>
+    }
+    
+    const Smartphone = () => {
+    return <Group
+        translate={{
+        x: -15,
+        y: 25,
+        z: 18
+        }}
+        rotate={{
+            x: -0.1,
+            y: TAU/12
+        }}>      
+        <Box
+            stroke={0.01}
+            width={3}
+            height={5.5}
+            depth={.125}
+            color={'black'}
+            backface={'hsl(201, 38%, 25%)'}
+            leftFace={'hsl(201, 38%, 25%)'}
+            rightFace={'hsl(201, 38%, 25%)'}
+            topFace={'hsl(201, 38%, 25%)'}
+            bottomFace={'hsl(201, 38%, 25%)'}
+            translate={{
+                y: 32 / 6,
+                z: -32 / 6
+            }}
+            rotate={{
+                x: TAU / 4 - 3
+            }}/>
+    </Group>}
 
     return <>
         <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation|| { x: 5.67, y: 5.67, z: 6.28 }} onClick={props.handleClick}>
@@ -503,6 +535,7 @@ const Me = (props) => {
             <Torso color={'#995c00'}/>
             <Legs />
             <Table />
+            <Smartphone />
             {/* <Pen /> */}
             <Pot />
                 <Pen />
