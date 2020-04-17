@@ -215,6 +215,26 @@ const Me = (props) => {
                     y: -6
             }}
             />
+            {/* LOGO TSHIRT */}
+            <Shape
+                // triangle
+                path={[ 
+                    { x:   0, y: -1.6 },
+                    { x:  1.6, y:  1.6 },
+                    { x: -1.6, y:  1.6 },
+                ]}
+                stroke={.5}
+                color={'#636'}
+                translate={{ y: -4, z: 4 }} />
+                <Shape
+                    path={[
+                        { x: -1.6, y: 2.58 },
+                        { x: 1.6, y: 2.58 }
+                    ]}
+                    // closed by default
+                    stroke={.5}
+                    color={'#636'}
+                    translate={{ y: -4, z: 4 }} />
             {/* BRAS R */}
             <Bras ref={rightArm} color={'black'}
                 translate={{
@@ -295,7 +315,7 @@ const Me = (props) => {
 
     const Legs = (props) => {
         // HANCHES
-        return <Cylinder diameter={6} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'darkslategray'}>
+        return <Cylinder diameter={6} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'hsl(180, 25%, 20%)'}>
             {/* JAMBES */}
             {/* RIGHT THIGH */}
             <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: -6 }} rotate={{ y: TAU / 4 + 0.4 }} length={12} color={'darkslategray'}>
@@ -472,7 +492,7 @@ const Me = (props) => {
         </Group>}
 
     return <>
-        <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation} onClick={props.handleClick}>
+        <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation|| { x: 5.67, y: 5.67, z: 6.28 }} onClick={props.handleClick}>
             <Computer />
             <Head />
             < Torso color = {
