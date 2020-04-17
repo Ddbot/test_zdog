@@ -2,6 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import Zdog from 'zdog';
 import { Anchor, Cone, Cylinder, Ellipse, Box, Illustration, Rect, Shape, Group, Hemisphere } from 'react-zdog';
 
+import Pen from './Pen';
+import Pot from './Pot';
+
 import gsap from 'gsap';
 
 const { TAU } = Zdog;
@@ -203,7 +206,7 @@ const Me = (props) => {
             path={[{ y: -torsoX }, { y: torsoX * 3-1 }]}
             color={'black'}
             
-            stroke={12  }
+            stroke={12}
             onClick={() => console.log('U clicked on the TORSO')}>
             {/* EPAULES */}
             <Shape
@@ -224,7 +227,7 @@ const Me = (props) => {
                     { x: -1.6, y:  1.6 },
                 ]}
                 stroke={.5}
-                color={'#636'}
+                color={'#f38181'}
                 translate={{ y: -4, z: 4 }} />
                 <Shape
                     path={[
@@ -233,7 +236,7 @@ const Me = (props) => {
                     ]}
                     // closed by default
                     stroke={.5}
-                    color={'#636'}
+                    color={'#f4f39a'}
                     translate={{ y: -4, z: 4 }} />
             {/* BRAS R */}
             <Bras ref={rightArm} color={'black'}
@@ -299,15 +302,18 @@ const Me = (props) => {
                         x: -2,
                         y: 0,
                         z: 5
-                    }}
-                >
+                    }}>
                     {/* MAIN L */}
-                    <Shape stroke={5}
+                    <Shape stroke={4.7}
                         color = {
-                            props.color
+                           props.color
                         }
-                        // translate={{ x: torsoX + 6, y: 3, z: 8 }}
-                    />
+                        translate={{
+                            // x: torsoX + 6,
+                            x: -1,
+                            y: -2,
+                            z: 1
+                        }}/>
                 </Bras>
             </Bras>
         </Shape>
@@ -371,7 +377,6 @@ const Me = (props) => {
             bottomFace={ false}
         />
     }
-    
 
     let Chair = () => {
         let DossierTop = () => {
@@ -495,12 +500,13 @@ const Me = (props) => {
         <Illustration zoom={8} translate={{ y: -30 }} rotate={props.rotation|| { x: 5.67, y: 5.67, z: 6.28 }} onClick={props.handleClick}>
             <Computer />
             <Head />
-            < Torso color = {
-                '#995c00'
-            }
-            />
+            <Torso color={'#995c00'}/>
             <Legs />
             <Table />
+            {/* <Pen /> */}
+            <Pot />
+                <Pen />
+            {/* </Pot> */}
             <Chair />   
             <button id="torsoAnim" onClick={rightForeArmMove}>Torso</button>
         </Illustration>
