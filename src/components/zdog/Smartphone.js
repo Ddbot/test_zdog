@@ -5,7 +5,8 @@ import {
     Box,
     Group,
     Shape,
-    Ellipse
+    Ellipse,
+    Rect
 } from 'react-zdog';
 
 const {
@@ -47,41 +48,43 @@ const Smartphone = () => {
                 stroke={0.04}
                 translate={{ x: .7, y: -2 }}
                 fill={true}
-                color={'#9da99c'}
-            />
+                color={'#9da99c'}/>
+            <Shape
+                path={[{
+                    x: 0
+                }, {
+                    x: 1
+                    }]}
+                color={'#87a3a7'}
+                stroke={.2}
+                translate={{ x: -1, y: -2}}/>
+            <Shape
+                path={[{ x: 0 }, { x: 2 }]}
+                color={'#87a3a7'}
+                stroke={.2}
+                translate={{ x: -1, y: -1.2}}/>
+            <Shape
+                path={[{ x: 0 }, { x: 2 }]}
+                color={'#87a3a7'}
+                stroke={.2}
+                translate={{ x: -1, y: -.4 }} />
+            <Rect
+                width={2}
+                height={1.8}
+                color={'#87a3a7'}
+                fill={true}
+                stroke={.2}
+                translate={{ y: 1.4 }}>
+                {/* triangle */}
                 <Shape
-                    path={[{
-                        x: 0
-                    }, {
-                        x: 1
-                        }]}
-                    color={'#87a3a7'}
+                    path={[{ x:0, y:-.4 }, { x:.4, y:.4 }, { x:-.4, y:.4 }]}
+                    fill={true}
+                    // closed by default
                     stroke={.2}
-                    translate={{ x: -1, y: -2}}
-                />
-                <Shape
-                    path={[{
-                        x: 0
-                    }, {
-                        x: 2
-                        }]}
-                    color={'#87a3a7'}
-                    stroke={.2}
-                    translate={{ x: -1, y: -1.2}}
-            />
-                            <Shape
-                    path={[{
-                        x: 0
-                    }, {
-                        x: 2
-                        }]}
-                    color={'#87a3a7'}
-                    stroke={.2}
-                    translate={{ x: -1, y: -.4}}
-                />
-            </Box>
-
-        </Group>
+                    color={'#636'}/>
+            </Rect>
+        </Box>
+    </Group>
 }
     
 export default Smartphone;
