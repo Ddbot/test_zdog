@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Zdog from 'zdog';
 
 import LangContext from '../components/contexts/LangContext';
 
@@ -14,6 +15,21 @@ import Container from '../components/styled/Container';
 import { chevronsBobbing } from '../utils/timelines';
 
 import "font-awesome/css/font-awesome.min.css";
+
+const { TAU } = Zdog;
+
+const animation_sequence = [{
+    x: 5.72,
+    y: 6.19,
+    z: 0
+  },
+  {
+    x: TAU,
+    y: TAU / 2,
+    z: 0
+  },
+  'ZOOMER SUR LECRAN AVEC VIEWBOX ???'
+];
 
 const IndexPage = (props) => {
 //_____________data pour GraphQL________//
@@ -63,7 +79,12 @@ const data = useStaticQuery(graphql `
 	return (<>
 				<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
     <Container className="container">
-      <LogoIllustration index={index} style={{ zIndex: 2 }} rot={rotation}/>
+      <LogoIllustration
+        index={index}
+        style={{ zIndex: 2 }}
+        rot={rotation}
+        // rot={animation_sequence[index]}
+      />
       <RotationSliders handleRotation={handleRotation}/>
       <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
       <Link to='/dev' state={{ index: index + 1, }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>

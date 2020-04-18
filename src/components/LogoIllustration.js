@@ -8,7 +8,8 @@ import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
 import Triangles from './triangles';
-import Me from "./zdog/me";
+import Me from "./zdog/Me";
+import Illu_1 from './zdog/Illu_1';
 
 let { TAU } = Zdog;
 
@@ -83,7 +84,7 @@ const LogoIllustration = (props) => {
         
         switch (index) {
             case 0:                                
-                prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
+                // prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
                 break;
             case 1:
                 if (prevIndex > index) {
@@ -151,13 +152,10 @@ const LogoIllustration = (props) => {
         console.log('ID : ', e.target.id, ' Parent node: ', e.target.parentNode);
     }
 
-    if (index === 0) {
-        return <Me index={index} rotation={rot} handleClick={handleClick}/>        
-        // <Triangles index={index} rotation={rotation} />
-    }
-    if (index===1) { return <Triangles index={index} rotation={rotation}/> }
-    if (index===2) { return <Smartphone index={index} rotation={rotation}/> }
-    if (index===3) { return <Triangles index={index} rotation={rotation}/> }
-    if (index===4) { return <Triangles index={index} rotation={rotation}/> }
+    if (index === 0) { return <Me rotation={rot} handleClick={handleClick}/> }
+    if (index===1) { return <Triangles rotation={rotation}/> }
+    if (index===2) { return <Smartphone rotation={rotation}/> }
+    if (index===3) { return <Triangles rotation={rotation}/> }
+    if (index===4) { return <Triangles rotation={rotation}/> }
 }
 export default LogoIllustration;

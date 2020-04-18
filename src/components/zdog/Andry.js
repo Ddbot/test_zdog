@@ -2,17 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import Zdog from 'zdog';
 import { Anchor, Cone, Cylinder, Ellipse, Box, Illustration, Rect, Shape, Group, Hemisphere, useZdog } from 'react-zdog';
 
-
-import Andry from './Andry';
-import Chair from './Chair';
-import Computer from './Computer';
-import Pen from './Pen';
-import Pot from './Pot';
-import Smartphone from './Smartphone';
-import Table from './Table';
-
-import gsap from 'gsap';
-
 const { TAU } = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
 
@@ -20,8 +9,9 @@ var torsoX = 3 / quarterTurn;
 var shoulderX = torsoX + 1.5;
 var shinEnd = { y: 22 };
 var hipX = (8 / quarterTurn) / 2;
+const leftKnee = { x: -hipX - 10, y: -2, z: 15 };
 
-const Me = (props) => {    
+const Andry = (props) => {    
     let headRef = useRef(null);
     let torsoRef = useRef(null);
     let rightArm = useRef(null);
@@ -32,26 +22,30 @@ const Me = (props) => {
     const Head = (props) => {
         {/* COU */ }
         return <Cylinder ref={headRef}
-            // path={[{ y: 8 }, { y: 14 }]}
             diameter={4}
             length={6}
             stroke={false}
-            // color={'#804d00'}
-            color={'#995c00'}
+            color = {
+                '#804d00'
+            }
             rotate={{ x: -TAU / 4 }}
             translate={{ y: 12.5 }}>
             {/* menton */}
             <Shape
                 translate={{ y: 0, z: -2 }}
                 stroke={7.5}
-                color={'#995c00'}
+                color = {
+                    '#995c00'
+                }
                 rotate={{ x: TAU / 4 }}>
                 {/* front */}
                 <Ellipse
                     diameter={2}
                     translate={{ y: -4 }}
                     stroke={4}
-                    color = {'#995c00'}>
+                    color = {
+                        '#995c00'
+                    }>
                         {/* CHEVEUX GROS */}
                         <Shape
                             path={[{ y: -1 }, { y: -7 }]}
@@ -102,7 +96,9 @@ const Me = (props) => {
                         translate={{ x: 3.5, y: 1, z: -1 }}
                         rotate={{ y: -TAU / 8 }}
                         stroke={1}
-                        color = {'#995c00'}
+                        color = {
+                            '#995c00'
+                        }
                         fill={true}>
                         {/* CHEVEUX AUTOUR OREILLE L*/}
                         <Ellipse quarters={2}
@@ -119,7 +115,9 @@ const Me = (props) => {
                         translate={{ x: -3.5, y: 1, z: -1 }}
                         rotate={{ y: TAU / 8 }}
                         stroke={1}
-                        color={'#995c00'}
+                        color = {
+                            '#995c00'
+                        }
                         fill={true}>
                         {/* CHEVEUX AUTOUR OREILLE R */}
                         <Ellipse quarters={2}
@@ -170,7 +168,8 @@ const Me = (props) => {
 				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
 				color={"black"}
 				stroke={12}
-				onClick={() => console.log("U clicked on the TORSO")}>
+				onClick={() => console.log("U clicked on the TORSO")}
+			>
 				{/* EPAULES */}
 				<Shape
 					path={[{ x: 0 }, { x: 10 }]}
@@ -179,7 +178,8 @@ const Me = (props) => {
 					translate={{
 						x: -5,
 						y: -6
-					}}/>
+					}}
+				/>
 				{/* LOGO TSHIRT */}
 				<Shape
 					// triangle
@@ -283,7 +283,7 @@ const Me = (props) => {
 							<Shape
 								stroke={4.7}
 								color={props.color}
-                                translate={{
+								translate={{
 									x: -.5,
 									y: -3.5,
 									z: .5
@@ -334,32 +334,13 @@ const Me = (props) => {
             </Cylinder>
         </Cylinder>
     };
-
-    useEffect(() => {
-        console.log(TAU)
-    })
     
-    return (
-			<Illustration
-				zoom={8}
-				translate={{ y: -30 }}
-				rotate = { props.rotation }
-				onClick={props.handleClick}>
-				<Table />
-				<Head />
-            <Torso
-                color={"#995c00"}
-            />
-				<Legs />
-				<Chair />
-				<Computer />
-            <Smartphone />
-				<Group>
-					<Pot />
-					<Pen />
-                </Group>            
-			</Illustration>
+    return (<Group>
+        <Head />
+        <Torso color={"#995c00"} />
+        <Legs />	
+    </Group>            
 	);
 };
 
-export default Me;
+export default Andry;
