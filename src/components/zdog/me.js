@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Zdog from 'zdog';
-import { Anchor, Cone, Cylinder, Ellipse, Box, Illustration, Rect, Shape, Group, Hemisphere, useZdog } from 'react-zdog';
+import { Cylinder, Ellipse, Box, Illustration, Shape, Group } from 'react-zdog';
 
+import styled from 'styled-components';
 
-import Andry from './Andry';
 import Chair from './Chair';
 import Computer from './Computer';
 import Pen from './Pen';
@@ -11,7 +11,10 @@ import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
 
-import gsap from 'gsap';
+const Illo = styled(Illustration)`
+    shape-outside: circle(50%);    
+`;
+
 
 const { TAU } = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
@@ -168,13 +171,13 @@ const Me = (props) => {
 					}
 				}
 				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
-				color={"black"}
+				color={"#DED381"}
 				stroke={12}
 				onClick={() => console.log("U clicked on the TORSO")}>
 				{/* EPAULES */}
 				<Shape
 					path={[{ x: 0 }, { x: 10 }]}
-					color={"black"}
+					color={"#FAE491"}
 					stroke={8}
 					translate={{
 						x: -5,
@@ -189,8 +192,8 @@ const Me = (props) => {
 						{ x: -1.6, y: 1.6 }
 					]}
 					stroke={0.5}
-					color={"#f38181"}
-					translate={{ y: -4, z: 4 }}
+					color={"hsla(359, 85%, 74%, .5)"}
+					translate={{ y: -7, z: 4 }}
 				/>
 				<Shape
 					path={[
@@ -199,14 +202,14 @@ const Me = (props) => {
 					]}
 					// closed by default
 					stroke={0.5}
-					color={"#f4f39a"}
-					translate={{ y: -4, z: 4 }}
+					color={"hsla(203, 77%, 83%, 0.5)"}
+					translate={{ y: -7, z: 4 }}
 				/>
 				{/* BRAS R */}
 				<Group>
 					<Bras
 						ref={rightArm}
-						color={"black"}
+						color={"#F5F39A"}
 						translate={{
 							x: -torsoX - 3,
 							y: -7
@@ -251,7 +254,7 @@ const Me = (props) => {
 				<Group>
 					<Bras
 						ref={leftArm}
-						color={"black"}
+						color={"#F5F39A"}
 						translate={{
 							x: torsoX + 3,
 							y: -7,
@@ -340,10 +343,11 @@ const Me = (props) => {
     })
     
     return (
-			<Illustration
+        <Illo
+            className="illustration"
 				zoom={8}
 				translate={{ y: -30 }}
-				rotate = { props.rotation }
+				rotate={props.rotation }
 				onClick={props.handleClick}>
 				<Table />
 				<Head />
@@ -358,7 +362,7 @@ const Me = (props) => {
 					<Pot />
 					<Pen />
                 </Group>            
-			</Illustration>
+			</Illo>
 	);
 };
 

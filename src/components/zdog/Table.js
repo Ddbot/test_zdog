@@ -3,7 +3,7 @@ import Zdog from 'zdog';
 import { Box } from 'react-zdog';
 
 const Table = (props) => {
-        return <Box
+    return <Box            
         translate={{
             y: 44.6,
             z: 14

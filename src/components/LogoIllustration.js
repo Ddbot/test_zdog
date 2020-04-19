@@ -70,7 +70,6 @@ const LogoIllustration = (props) => {
     let prevRotation = usePrevious(props.rot);
     let prevIndex = usePrevious(index);
         
-
     //  Index
     useEffect(() => {
         if (props.index !== index) setIndex((prevIdx) => { return props.index });  
@@ -84,7 +83,7 @@ const LogoIllustration = (props) => {
         
         switch (index) {
             case 0:                                
-                // prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
+                prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
                 break;
             case 1:
                 if (prevIndex > index) {
@@ -144,7 +143,6 @@ const LogoIllustration = (props) => {
         if (props.rot !== rot) setRot((prevRot) => {
             return props.rot
         });
-
     }, [props.rot, rot]);
 
     const handleClick = (e) => {
@@ -152,10 +150,10 @@ const LogoIllustration = (props) => {
         console.log('ID : ', e.target.id, ' Parent node: ', e.target.parentNode);
     }
 
-    if (index === 0) { return <Me rotation={rot} handleClick={handleClick}/> }
-    if (index===1) { return <Triangles rotation={rotation}/> }
-    if (index===2) { return <Smartphone rotation={rotation}/> }
-    if (index===3) { return <Triangles rotation={rotation}/> }
-    if (index===4) { return <Triangles rotation={rotation}/> }
+    if (index===0) { return <Me index={index} rotation={rot} handleClick={handleClick}/> }
+    if (index===1) { return <Triangles index={index} rotation={rotation}/> }
+    if (index===2) { return <Smartphone index={index} rotation={rotation}/> }
+    if (index===3) { return <Triangles index={index} rotation={rotation}/> }
+    if (index===4) { return <Triangles index={index} rotation={rotation}/> }
 }
 export default LogoIllustration;

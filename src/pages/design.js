@@ -37,14 +37,14 @@ const Design = ({location}) => {
     
     return (<>
         <SEO title={"Designer"} />
-        <Container className="container" style={{ display: "flex", flexFlow:"row nowrap", padding: "0 5rem"}}>
+        <Container className="container">
             <Link to='/dev' state={{ index: 1 }}>
                 <ChevronTop 
                     onMouseEnter={() => { chevronsBobbing.pause() }}
                     onMouseLeave={() => { chevronsBobbing.play(); }}/>
             </Link>
             {/* <LogoIllustration index={2} /> */}
-        <Smartphone style={{ width: '215px', height: '444px' }} index={2}/>
+      <LogoIllustration index={2} />	
 			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
         <Link to='/i18n' state={{ index: 3 }}>
             <ChevronBottom 

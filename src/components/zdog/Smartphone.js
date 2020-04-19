@@ -15,6 +15,7 @@ const {
 
 const Smartphone = () => {
     return <Group
+        className="illustration"
         translate={{
         x: -15,
         y: 25,

@@ -13,7 +13,7 @@ let Chair = () => {
         diameter={20}
         quarters={2}
         stroke={3}
-        color = {'#00264d'}
+        color = {'#332424'}
         rotate={{
             x: 3 / TAU / 4,
             z: -TAU / 4,
@@ -32,7 +32,7 @@ let Chair = () => {
         width={20}
         height={18}
         stroke={3}
-        color = {'#00264d'}
+        color = {'#332424'}
             translate={{
                 // x: 10,
                 y: 39,
@@ -47,7 +47,7 @@ let Chair = () => {
             width={10}
             height={20}
             stroke={8}
-            color={'#00264d'}
+            color={'#332424'}
             rotate={{
                 x: TAU / 4,
                 z: -TAU / 4,

@@ -47,7 +47,7 @@ const Dev = ({location}) => {
 						onMouseLeave={() => { chevronsBobbing.play() }}/>
 				</Link>
 				<LogoIllustration index={1} />	
-					<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
+				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
 				<Link to='/design' state={{ index: 2 }}>
 					<ChevronBottom
 						onMouseEnter={() => chevronsBobbing.pause()}
