@@ -5,7 +5,8 @@ import LangContext from '../components/contexts/LangContext';
 import SEO from "../components/seo";
 import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration"
-import { ChevronBottom, ChevronTop } from '../components/chevron';
+import Chevron from '../components/styled/Chevron';
+
 
 import { chevronsBobbing } from '../utils/timelines';
 
@@ -38,19 +39,14 @@ const Design = ({location}) => {
     return (<>
         <SEO title={"Designer"} />
         <Container className="container">
-            <Link to='/dev' state={{ index: 1 }}>
-                <ChevronTop 
-                    onMouseEnter={() => { chevronsBobbing.pause() }}
-                    onMouseLeave={() => { chevronsBobbing.play(); }}/>
+            <Link to='/dev' state={{ index: 1 }} style={{ position: "fixed", left: "25%", top: "10%", rotate:"180deg"}}>
+					    <Chevron onMouseEnter={() => { chevronsBobbing.pause() }} onMouseLeave={() => { chevronsBobbing.play() }} />
+            </Link>        
+            <LogoIllustration index={2} />	
+            <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
+            <Link to='/i18n' state={{ index: 3 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
+              <Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => chevronsBobbing.play()}/>
             </Link>
-            {/* <LogoIllustration index={2} /> */}
-      <LogoIllustration index={2} />	
-			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
-        <Link to='/i18n' state={{ index: 3 }}>
-            <ChevronBottom 
-                onMouseEnter={() => chevronsBobbing.pause()} 
-                onMouseLeave={() => chevronsBobbing.play()}/>
-        </Link>
       </Container>
 
   </>)

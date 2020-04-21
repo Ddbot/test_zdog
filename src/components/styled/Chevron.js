@@ -1,29 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Chevron = styled.button `
-    text-decoration: none;
-    position: fixed;
-    left: 50% ;
-    
-    width: 3vw;
-    height: 3vw;
+const Chevron = styled.button`    
+    width: 4vw;
+    height: 4vw;
 
     justify-content: center;
     cursor: pointer;
 
-    border: none;
+    border: .5vw solid transparent;
     border-radius: 50% ;
-    background-color: transparent;
+    background-color: #6199b8;
     outline-style: none;
 
     z-index: 10;
+
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+
+    rotate: 90deg;
     
     svg {
-        width: 3 vw;
-        height: 3 vw;
-
-        margin: 1 vw;
+        width: 4vw;
+        height: 4vw;
+        display: none;
+        margin: 1vw;
     }
 `;
 

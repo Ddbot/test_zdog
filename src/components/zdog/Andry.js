@@ -168,7 +168,9 @@ const Andry = (props) => {
 				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
 				color={"black"}
 				stroke={12}
-				onClick={() => console.log("U clicked on the TORSO")}
+                onClick={() =>
+                    // console.log("U clicked on the TORSO")
+                }
 			>
 				{/* EPAULES */}
 				<Shape

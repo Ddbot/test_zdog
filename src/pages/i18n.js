@@ -5,7 +5,7 @@ import LangContext from '../components/contexts/LangContext';
 import SEO from "../components/seo";
 import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration";
-import { ChevronBottom, ChevronTop } from '../components/chevron';
+import Chevron from '../components/styled/Chevron';
 import { chevronsBobbing } from '../utils/timelines';
 
 const I18n = ({ location }) => {
@@ -40,15 +40,17 @@ const I18n = ({ location }) => {
   return (<>
 	<SEO title={"i18n"} />
 	<Container>
-		<Link to='/design' state={{ index: 2 }}>
-			<ChevronTop onClick={location.changeIndex}
+		<Link to='/design' state={{ index: 2 }} style={{ position: "fixed", left: "25%", top: "10%", rotate:"180deg"}}>
+			<Chevron onClick={location.changeIndex}
 				onMouseEnter={() => chevronsBobbing.pause()}
 				onMouseLeave={() => {
 				chevronsBobbing.play()}} />
 		</Link>
 		<LogoIllustration index={3} />			
 			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
-	<Link to='/contact' state={{ index: 4 }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
+      <Link to='/contact' state={{ index: 4 }} style={{ position: "fixed", left: "25%", bottom: "4%" }}>
+              <Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => chevronsBobbing.play()}/>
+            </Link>
 	</Container>
   </>)
 };

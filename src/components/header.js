@@ -10,7 +10,7 @@ import "./styles/header.css";
 
 const Header = (props) => {
   let current = useContext(LangContext);
-  console.log('Current ctx: ', current);
+  // console.log('Current ctx: ', current);
 
   useEffect(() => {
       localStorage.setItem('lang', current);
@@ -24,7 +24,9 @@ const Header = (props) => {
            <h1> {props.siteTitle}</h1>
         </Link>
         {/* GERER LE MENU BURGER POUR LES SMARTPHONES !! */}
-        <button className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="burger" onClick={() => {console.log('BIRGER !! ouvrir un Portal ici pour changer de langue')}}>
+        <button className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="burger" onClick={() => {
+          // console.log('BIRGER !! ouvrir un Portal ici pour changer de langue')
+        }}>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>

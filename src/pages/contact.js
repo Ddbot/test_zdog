@@ -34,9 +34,8 @@ const Contact = ({location}) => {
 return (<>
 	<SEO title={"Contact"} />
 	<Container>
-		<Link to='/i18n' state={{ index: index }}>
+		<Link to='/i18n' state={{ index: 3 }} style={{ position: "fixed", left: "25%", top: "10%", rotate:"180deg"}}>
 			<ChevronTop
-			onClick={location.state.changeIndex}
 			onMouseEnter={() => chevronsBobbing.pause()}
 			onMouseLeave={() => {
 				chevronsBobbing.play();

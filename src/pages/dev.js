@@ -5,11 +5,11 @@ import LangContext from '../components/contexts/LangContext';
 import SEO from "../components/seo";
 import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration";
-import { ChevronBottom, ChevronTop } from '../components/chevron';
+import Chevron from '../components/styled/Chevron';
 
 import { chevronsBobbing } from '../utils/timelines';
 
-const Dev = ({location}) => {
+const Dev = ({location},props) => {
 	//_____________data pour GraphQL________//
 	const data = useStaticQuery(graphql `
     query DevQuery {
@@ -37,23 +37,23 @@ const Dev = ({location}) => {
 	const defaultLang = localStorage.getItem('lang') || lang;
 	
 	const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
+
+	let handleClick = (e) => {
+		// ANIMER LA TRANSIITION
+	};	
 		
 	return (<>
 			<SEO title={location.state.lang === "fr" ? "Développeur" : "Dev"} />
 			<Container className="container">
-				<Link to='/' state={{ index: 0 }}>
-					<ChevronTop
-						onMouseEnter={() => { chevronsBobbing.pause() }}
-						onMouseLeave={() => { chevronsBobbing.play() }}/>
+				<Link to='/' state={{ index: 0 }} style={{ position: "fixed", left: "25%", top:"10%"}}>
+					<Chevron onMouseEnter={() => { chevronsBobbing.pause() }} onMouseLeave={() => { chevronsBobbing.play() }} style={{ rotate: "270deg", top: "14%"}}/>
 				</Link>
 				<LogoIllustration index={1} />	
 				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-				<Link to='/design' state={{ index: 2 }}>
-					<ChevronBottom
-						onMouseEnter={() => chevronsBobbing.pause()}
-						onMouseLeave={() => { chevronsBobbing.play() }} />
+				<Link to='/design' state={{ index: 2 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
+					<Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} />
 				</Link>
-		</Container>
+			</Container>
 
 	</>)
 };

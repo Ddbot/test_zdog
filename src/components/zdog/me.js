@@ -11,9 +11,7 @@ import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
 
-const Illo = styled(Illustration)`
-    shape-outside: circle(50%);    
-`;
+const Illo = styled(Illustration)``;
 
 
 const { TAU } = Zdog;
@@ -173,7 +171,7 @@ const Me = (props) => {
 				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
 				color={"#DED381"}
 				stroke={12}
-				onClick={() => console.log("U clicked on the TORSO")}>
+                onClick={() =>                    console.log("U clicked on the TORSO")}            >
 				{/* EPAULES */}
 				<Shape
 					path={[{ x: 0 }, { x: 10 }]}
@@ -339,7 +337,7 @@ const Me = (props) => {
     };
 
     useEffect(() => {
-        console.log(TAU)
+        // console.log(TAU)
     })
     
     return (
@@ -349,18 +347,16 @@ const Me = (props) => {
 				translate={{ y: -30 }}
 				rotate={props.rotation }
 				onClick={props.handleClick}>
-				<Table />
-				<Head />
-            <Torso
-                color={"#995c00"}
-            />
-				<Legs />
-				<Chair />
-				<Computer />
-            <Smartphone />
+				<Table className="table" />
+				<Head className="head" />
+                <Torso className="torso" color={"#995c00"} />
+				<Legs className="legs" />
+				<Chair className="chair" />
+				<Computer className="computer" />
+            <Smartphone className="smartphone" />
 				<Group>
-					<Pot />
-					<Pen />
+					<Pot className="pot" />
+					<Pen className="pen" />
                 </Group>            
 			</Illo>
 	);

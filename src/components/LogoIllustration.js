@@ -37,7 +37,7 @@ x: TAU/4, y: 0
     }
 ];
 
-const LogoIllustration = (props) => {
+const LogoIllustration = React.forwardRef((props,ref) => {
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -49,10 +49,10 @@ const LogoIllustration = (props) => {
     let dummyTween = (prevRot, newRot) => {
         let tween = gsap.to(".dummy", {
             autoAlpha: 0,
-            duration: illuTweenDuration*4,
+            duration: illuTweenDuration,
             paused: true,
             onUpdate: () => {
-                setRotation((prev = {x: 0, y: 0}) => {
+                setRotation((prev) => {
                     return {
                         x: gsap.utils.interpolate(prev.x, newRot.x, tween.progress()),
                         y: gsap.utils.interpolate(prev.y, newRot.y, tween.progress())
@@ -82,8 +82,7 @@ const LogoIllustration = (props) => {
         });
         
         switch (index) {
-            case 0:                                
-                prevIndex > index && dummyTween(cone_seq[index + 1], cone_seq[index]);       
+            case 0:                                     
                 break;
             case 1:
                 if (prevIndex > index) {
@@ -115,23 +114,10 @@ const LogoIllustration = (props) => {
                     autoAlpha:1,
                     scale: .4
                 });
-
-                // gsap.to('[zoom]>svg>path:first-of-type', {
-                //     fill: "transparent",
-                //     duration: .195,
-                //     onStart: () => {
-                //         gsap.set('[zoom]', { position: "fixed" });
-                //     },
-                //     scale: 3,
-                //     width: "10%", 
-                //     height: "10%",                    
-                // });
-                break;
             case 3:  
                 prevIndex > index ? dummyTween(cone_seq[index+1], cone_seq[index]) : dummyTween(cone_seq[index-1], cone_seq[index]);                
                 break;
-            case 4:                                
-                
+            case 4:                                                
                 dummyTween(cone_seq[index-1], cone_seq[index]);
                 break;
             default:                                
@@ -155,5 +141,6 @@ const LogoIllustration = (props) => {
     if (index===2) { return <Smartphone index={index} rotation={rotation}/> }
     if (index===3) { return <Triangles index={index} rotation={rotation}/> }
     if (index===4) { return <Triangles index={index} rotation={rotation}/> }
-}
+})
+
 export default LogoIllustration;

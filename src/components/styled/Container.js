@@ -7,17 +7,24 @@ const Container = styled.div `
 	justify-content: center;
 	align-items: center;
 	min-width: 960px;
-	height: 60vh;
-
-	margin-top: 13vh;
 
 	font-size: 2rem;
 	font-family: "Roboto";
 	z-index: 1;
 
-	p {
-		
+	.illustration {		
+		width: 50vw;	
+		max-height: 30vw;			
+	}
+
+	.textContent {
 		width: 50vw;
+		max-height: 30vw;	
+			
+
+		p {
+			width: 50vw;
+		}
 	}
 `;
 
