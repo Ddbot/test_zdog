@@ -80,9 +80,17 @@ const data = useStaticQuery(graphql `
 		}
 	});
 
+	let animChevron = () => {
+		gsap.from(chevronBottom.current, {
+			x: -10,
+			duration: .7,
+			repeat: -1,
+			yoyo: true
+		});
+	}
 	// Chevorns animation
 	useEffect(() => {
-		gsap.from(chevronBottom.current, {x: -10, duration: .7, repeat: -1, yoyo: true});
+		animChevron();
 	});
   
   const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
