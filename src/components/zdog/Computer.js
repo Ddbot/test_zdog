@@ -23,6 +23,7 @@ const Computer = () => {
             stroke={1}
             color={'rgba(1,1,1,.8)'}  // default face colo}
             backface={'lightgray'}
+            // backface={false}
             leftFace={'lightgray'}
             rightFace={'lightgray'}
             topFace={'lightgray'}
@@ -34,6 +35,7 @@ const Computer = () => {
             height={ 32/3}
             color={ 'rgb(211, 211, 212)'}
             backface={ 'lightgray'}
+            // backface={false}
             leftFace={ 'lightgray'}
             rightFace={ 'lightgray'}
             topFace={ 'lightgray'}

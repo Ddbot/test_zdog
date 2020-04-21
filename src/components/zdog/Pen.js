@@ -10,7 +10,8 @@ let Pointe = (props) => {
     length={.72}
     stroke={false}
     color={"#f4dc95"}
-    backface={"#C25"} 
+    // backface={"#C25"} 
+    backface={false}
     />
 }
 
@@ -20,7 +21,8 @@ let Mine = (props) => {
         length={.24}
         stroke={false}
         color={"black"}
-        backface={"black"}
+        // backface={"black"}
+        backface={false}
         translate={{ z: .48}}  
         />
 }
@@ -31,7 +33,8 @@ let Bois = (props) => {
     length={4.5}
     stroke={false}
     color={'blue'}
-    backface={'#E62'}
+    // backface={'#E62'}
+    backface={false}
     translate={{ z: -2.25 }}
     />
 }
@@ -42,7 +45,8 @@ let Anneau = (props) => {
         length={.45}
             stroke={false}        
         color={'whitesmoke'}
-            backface={'whitesmoke'}
+            // backface={'whitesmoke'}
+            backface={false}
         translate={{ z: -4.5 }}
     
     />
@@ -56,7 +60,8 @@ let Gomme = (props) => {
     diameter={.7}
     stroke={ false}
     color={ 'black'}
-    backface={'white'}
+    // backface={'white'}
+    backface={false}
     rotate={{
         x: Math.PI
     }}

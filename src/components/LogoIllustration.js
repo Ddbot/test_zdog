@@ -9,7 +9,6 @@ import gsap from 'gsap';
 import { illuTweenDuration } from '../utils/timelines';
 import Triangles from './triangles';
 import Me from "./zdog/Me";
-import Illu_1 from './zdog/Illu_1';
 
 let { TAU } = Zdog;
 
@@ -133,14 +132,16 @@ const LogoIllustration = React.forwardRef((props,ref) => {
 
     const handleClick = (e) => {
         e.persist();
-        console.log('ID : ', e.target.id, ' Parent node: ', e.target.parentNode);
+        console.log('ID : ', e.target, ' Parent node: ', e.target.parentNode);
     }
 
-    if (index===0) { return <Me index={index} rotation={rot} handleClick={handleClick}/> }
-    if (index===1) { return <Triangles index={index} rotation={rotation}/> }
-    if (index===2) { return <Smartphone index={index} rotation={rotation}/> }
-    if (index===3) { return <Triangles index={index} rotation={rotation}/> }
-    if (index===4) { return <Triangles index={index} rotation={rotation}/> }
+    if (index === 0) {
+        return <Me ref={ref} index={index} rotation={rot} handleClick={handleClick} />
+    }
+    if (index===1) { return <Triangles ref={ref} index={index} rotation={rotation}/> }
+    if (index===2) { return <Smartphone ref={ref} index={index} rotation={rotation}/> }
+    if (index===3) { return <Triangles ref={ref} index={index} rotation={rotation}/> }
+    if (index===4) { return <Triangles ref={ref} index={index} rotation={rotation}/> }
 })
 
 export default LogoIllustration;

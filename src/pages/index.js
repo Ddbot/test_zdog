@@ -41,6 +41,9 @@ const animation_sequence = [{
 
 
 const IndexPage = (props) => {
+
+	let illoRef = useRef(null);
+	let chevronBottom = useRef(null)
 //_____________data pour GraphQL________//
 const data = useStaticQuery(graphql `
     query ContentQuery {
@@ -76,6 +79,11 @@ const data = useStaticQuery(graphql `
 			purples[i].style.backgroundColor = colors[i];
 		}
 	});
+
+	// Chevorns animation
+	useEffect(() => {
+		gsap.from(chevronBottom.current, {x: -10, duration: .7, repeat: -1, yoyo: true});
+	});
   
   const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
 	
@@ -92,6 +100,8 @@ const data = useStaticQuery(graphql `
 
 	let handleClick = (e) => {
 		// ANIMER LA TRANSIITION
+
+		console.log(chevronBottom.current);
 
 		let anim = () => {
 			const { x, y, z } = animation_sequence[index];
@@ -123,19 +133,25 @@ const data = useStaticQuery(graphql `
 		})
 	};
 
+	gsap.to(chevronBottom.current, {
+		duration: 0.5,
+		x: -5,
+		repeat: -1,
+		paused: false
+	});
+
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
 		<Container className="container">
 			<LogoIllustration
+				ref={illoRef}
 				index={index}
 				style={{ zIndex: 2 }}
 				rot={rotation}
-				// rot={animation_sequence[index]}
-			/>
+				/>
 			{/* <RotationSliders handleRotation={handleRotation}/> */}
 			<TextContainer className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-				<Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} onClick={() => handleClick()} style={{ position: "fixed", left: "25%", bottom: "4%"}}/>
-		
+			<Chevron ref={chevronBottom} onClick={() => handleClick()} style={{ position: "fixed", left: "25%", bottom: "4%"}}/>		
 		</Container>
 	</>);
 };

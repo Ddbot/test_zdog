@@ -10,9 +10,7 @@ import Pen from './Pen';
 import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
-
-const Illo = styled(Illustration)``;
-
+import gsap from 'gsap';
 
 const { TAU } = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
@@ -22,13 +20,15 @@ var shoulderX = torsoX + 1.5;
 var shinEnd = { y: 22 };
 var hipX = (8 / quarterTurn) / 2;
 
-const Me = (props) => {    
+const Me = React.forwardRef((props, ref) => {    
+    let illuRef = useRef(null);
     let headRef = useRef(null);
     let torsoRef = useRef(null);
     let rightArm = useRef(null);
     let leftArm = useRef(null);
     let rightForeArm = useRef(null);
     let leftForeArm = useRef(null);
+    let legsRef = useRef(null);
 
     const Head = (props) => {
         {/* COU */ }
@@ -146,8 +146,9 @@ const Me = (props) => {
         </Cylinder>
     };    
         
-    const Bras = React.forwardRef((props, ref) => {
-        return <Shape ref={ref}
+    const Bras = React.forwardRef((props,ref) => {
+        return <Shape
+            ref={ref}
             path={[{ y: 0 }, { y: 7 }]}
             translate={props.translate}
             rotate={props.rotate}
@@ -171,7 +172,7 @@ const Me = (props) => {
 				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
 				color={"#DED381"}
 				stroke={12}
-                onClick={() =>                    console.log("U clicked on the TORSO")}            >
+                onClick={() => {}}>
 				{/* EPAULES */}
 				<Shape
 					path={[{ x: 0 }, { x: 10 }]}
@@ -204,9 +205,8 @@ const Me = (props) => {
 					translate={{ y: -7, z: 4 }}
 				/>
 				{/* BRAS R */}
-				<Group>
+				<Group ref={rightArm}>
 					<Bras
-						ref={rightArm}
 						color={"#F5F39A"}
 						translate={{
 							x: -torsoX - 3,
@@ -249,9 +249,8 @@ const Me = (props) => {
 					</Bras>
 				</Group>
 				{/* BRAS L */}
-				<Group>
+				<Group ref={leftArm}>
 					<Bras
-						ref={leftArm}
 						color={"#F5F39A"}
 						translate={{
 							x: torsoX + 3,
@@ -299,7 +298,7 @@ const Me = (props) => {
 
     const Legs = (props) => {
         // HANCHES
-        return <Cylinder diameter={6} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'hsl(180, 25%, 20%)'}>
+        return <Cylinder diameter={6} ref={legsRef} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'hsl(180, 25%, 20%)'}>
             {/* JAMBES */}
             {/* RIGHT THIGH */}
             <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: -6 }} rotate={{ y: TAU / 4 + 0.4 }} length={12} color={'darkslategray'}>
@@ -335,13 +334,10 @@ const Me = (props) => {
             </Cylinder>
         </Cylinder>
     };
-
-    useEffect(() => {
-        // console.log(TAU)
-    })
     
     return (
-        <Illo
+        <Illustration
+            ref={ref}
             className="illustration"
 				zoom={8}
 				translate={{ y: -30 }}
@@ -358,8 +354,8 @@ const Me = (props) => {
 					<Pot className="pot" />
 					<Pen className="pen" />
                 </Group>            
-			</Illo>
+            </Illustration>
 	);
-};
+});
 
 export default Me;

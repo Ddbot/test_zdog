@@ -10,7 +10,8 @@ const Pot = (props) => {
     length={3}
     stroke={false}
     color={'rgba(157, 169, 156, 0.9)'}
-    backface={'gray'}
+    // backface={'gray'}
+        backface={false}
     translate={{ x: 14, y: 28.5, z: 16 }}
         rotate={{ x: TAU/4 }}
     />

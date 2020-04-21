@@ -65,7 +65,8 @@ let Chair = () => {
             // length={12}
             stroke={false}
             color={'#b3cccc'}
-            backface={'#e6f2ff'}
+            // backface={'#e6f2ff'}
+            backface={false}
             translate={{
                 y: 59
             }}

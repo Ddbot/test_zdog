@@ -31,7 +31,8 @@ const Smartphone = () => {
             height={5.5}
             depth={.125}
             color={'black'}
-            backface={'hsl(201, 38%, 25%)'}
+            // backface={'hsl(201, 38%, 25%)'}
+            backface={false}
             leftFace={'hsl(201, 38%, 25%)'}
             rightFace={'hsl(201, 38%, 25%)'}
             topFace={'hsl(201, 38%, 25%)'}
