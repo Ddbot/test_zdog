@@ -7,7 +7,7 @@ import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from '../components/styled/Chevron';
 
-import { chevronsBobbing } from '../utils/timelines';
+import { animChevron } from '../utils/timelines';
 
 const Dev = ({location},props) => {
 	//_____________data pour GraphQL________//
@@ -32,6 +32,11 @@ const Dev = ({location},props) => {
 
 	useEffect(() => { 
 		localStorage.setItem('lang', lang);
+		let design = document.querySelector('a[href="/design"]');
+		let home = document.querySelectorAll('a[href="/"]')[1];
+
+		animChevron(design, 'y', -15);
+		animChevron(home, 'y', 15);
 	});
 	
 	const defaultLang = localStorage.getItem('lang') || lang;
@@ -46,12 +51,12 @@ const Dev = ({location},props) => {
 			<SEO title={location.state.lang === "fr" ? "Développeur" : "Dev"} />
 			<Container className="container">
 				<Link to='/' state={{ index: 0 }} style={{ position: "fixed", left: "25%", top:"10%"}}>
-					<Chevron onMouseEnter={() => { chevronsBobbing.pause() }} onMouseLeave={() => { chevronsBobbing.play() }} style={{ rotate: "270deg", top: "14%"}}/>
+					<Chevron style={{ rotate: "270deg", top: "14%"}}/>
 				</Link>
 				<LogoIllustration index={1} />	
 				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
 				<Link to='/design' state={{ index: 2 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
-					<Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} />
+					<Chevron />
 				</Link>
 			</Container>
 

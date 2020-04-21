@@ -82,6 +82,16 @@ export let interpolateCoords = (ar, index = 0, progress = 0) => {
           repeat: -1
       }
   });
+
+  	export let animChevron = (el, dir, dist, paused=false) => {
+  	    gsap.from(el, {
+  	        [dir]: dist,
+  	        duration: .7,
+  	        repeat: -1,
+                yoyo: true,
+              paused: paused
+  	    });
+  	}
   
   // Animer le fadeout de slide text
   export let fadeOutText = (direction) => {

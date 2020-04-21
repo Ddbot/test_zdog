@@ -15,7 +15,7 @@ import RotationSliders from '../components/rotationSliders';
 
 import Container from '../components/styled/Container';
 
-import { chevronsBobbing } from '../utils/timelines';
+import { animChevron } from '../utils/timelines';
 
 import "font-awesome/css/font-awesome.min.css";
 import gsap from "gsap";
@@ -80,17 +80,10 @@ const data = useStaticQuery(graphql `
 		}
 	});
 
-	let animChevron = () => {
-		gsap.from(chevronBottom.current, {
-			x: -10,
-			duration: .7,
-			repeat: -1,
-			yoyo: true
-		});
-	}
+
 	// Chevorns animation
 	useEffect(() => {
-		animChevron();
+		animChevron(chevronBottom.current, 'x', -15);
 	});
   
   const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
@@ -141,12 +134,12 @@ const data = useStaticQuery(graphql `
 		})
 	};
 
-	gsap.to(chevronBottom.current, {
-		duration: 0.5,
-		x: -5,
-		repeat: -1,
-		paused: false
-	});
+	// gsap.to(chevronBottom.current, {
+	// 	duration: 0.5,
+	// 	x: -5,
+	// 	repeat: -1,
+	// 	paused: false
+	// });
 
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
@@ -159,7 +152,12 @@ const data = useStaticQuery(graphql `
 				/>
 			{/* <RotationSliders handleRotation={handleRotation}/> */}
 			<TextContainer className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-			<Chevron ref={chevronBottom} onClick={() => handleClick()} style={{ position: "fixed", left: "25%", bottom: "4%"}}/>		
+			<Chevron ref={chevronBottom}
+				onMouseEnter={() => {
+					animChevron(chevronBottom.current, 'x', -15, true);
+				}}
+				onClick={() => handleClick()}
+				style={{ position: "fixed", left: "25%", bottom: "4%" }} />		
 		</Container>
 	</>);
 };

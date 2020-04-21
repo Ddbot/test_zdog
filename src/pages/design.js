@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import LangContext from '../components/contexts/LangContext';
 
@@ -7,8 +7,7 @@ import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration"
 import Chevron from '../components/styled/Chevron';
 
-
-import { chevronsBobbing } from '../utils/timelines';
+import { animChevron } from '../utils/timelines';
 
 import Smartphone from '../components/smartphone';
 
@@ -32,7 +31,15 @@ const Design = ({location}) => {
   `);
     const defaultLang = localStorage.getItem('lang');    
     const { index } = location.state;
-    let lang = useContext(LangContext);
+    // let lang = useContext(LangContext);
+  
+  useEffect(() => {
+    		let dev = document.querySelector('a[href="/dev"]');
+    let i18n = document.querySelector('a[href="/i18n"]');
+    
+    		animChevron(dev, 'y', 15);
+    		animChevron(i18n, 'y', 15);
+  });
     
     const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
     
@@ -40,12 +47,12 @@ const Design = ({location}) => {
         <SEO title={"Designer"} />
         <Container className="container">
             <Link to='/dev' state={{ index: 1 }} style={{ position: "fixed", left: "25%", top: "10%", rotate:"180deg"}}>
-					    <Chevron onMouseEnter={() => { chevronsBobbing.pause() }} onMouseLeave={() => { chevronsBobbing.play() }} />
+					    <Chevron />
             </Link>        
             <LogoIllustration index={2} />	
             <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
             <Link to='/i18n' state={{ index: 3 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
-              <Chevron onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => chevronsBobbing.play()}/>
+              <Chevron />
             </Link>
       </Container>
 
