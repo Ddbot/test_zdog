@@ -20,6 +20,8 @@ import { animChevron } from '../utils/timelines';
 import "font-awesome/css/font-awesome.min.css";
 import gsap from "gsap";
 
+// import '../components/zdog/vanilla_me';
+
 const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 `;
@@ -40,7 +42,10 @@ const animation_sequence = [{
 ];
 
 
+
+
 const IndexPage = (props) => {
+	
 
 	let illoRef = useRef(null);
 	let chevronBottom = useRef(null)
@@ -133,13 +138,6 @@ const data = useStaticQuery(graphql `
 			}
 		})
 	};
-
-	// gsap.to(chevronBottom.current, {
-	// 	duration: 0.5,
-	// 	x: -5,
-	// 	repeat: -1,
-	// 	paused: false
-	// });
 
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />

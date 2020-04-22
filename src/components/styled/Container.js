@@ -14,7 +14,8 @@ const Container = styled.div `
 
 	.illustration {		
 		width: 50vw;	
-		max-height: 30vw;			
+		z-index: -1;
+		// max-height: 30vw;			
 	}
 
 	.textContent {

@@ -12,7 +12,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f38181'}
-            backface = {'#f38c84'}
+            backface = {false}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
         />
 
@@ -21,7 +21,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f38c84'}
-            backface = {'#f38181'}
+            backface = {false}
             rotate={props.rotation}
             translate={{ x: -12, y: 24 }}
         />
@@ -30,7 +30,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f3a389'}
-            backface={'#f3a389'}
+            backface={false}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
             translate={{ x: -24 }}
         />
@@ -41,7 +41,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f4ba8e'}
-            backface={'#f4ba8e'}
+            backface={false}
             rotate={props.rotation}
             translate={{ x: -24 }}
         />
@@ -51,7 +51,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f4c590'}
-            backface={'#f4c590'}
+            backface={false}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
             translate={{ x: -12, y: -24 }}
         />
@@ -63,7 +63,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f4d193'}
-            backface={'#f4d193'}
+            backface={false}
             rotate={props.rotation}
         />
                 
@@ -72,7 +72,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f4dc95'}
-            backface={'#f4dc95'}
+            backface={false}
             rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
             translate={{ x: 12, y: -24 }}
         />
@@ -82,7 +82,7 @@ const ConePattern = (props) => {
             length={24}
             stroke={false}
             color={'#f4f39a'}
-            backface={'#f4f39a'}
+            backface={false}
             rotate={props.rotation}
             translate={{ x: 12, y: -24 }}
         />

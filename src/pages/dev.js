@@ -51,7 +51,7 @@ const Dev = ({location},props) => {
 			<SEO title={location.state.lang === "fr" ? "Développeur" : "Dev"} />
 			<Container className="container">
 				<Link to='/' state={{ index: 0 }} style={{ position: "fixed", left: "25%", top:"10%"}}>
-					<Chevron style={{ rotate: "270deg", top: "14%"}}/>
+					<Chevron style={{ rotate: "270deg", top: "14%", zIndex: 10}}/>
 				</Link>
 				<LogoIllustration index={1} />	
 				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />

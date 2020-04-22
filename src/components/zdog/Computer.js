@@ -27,7 +27,9 @@ const Computer = () => {
             leftFace={'lightgray'}
             rightFace={'lightgray'}
             topFace={'lightgray'}
-            bottomFace={'lightgray'}>
+            // bottomFace={'lightgray'}
+            bottomFace={false}
+        >
         </Box>
         {/* Keyboard */}          
         <Box
@@ -39,7 +41,8 @@ const Computer = () => {
             leftFace={ 'lightgray'}
             rightFace={ 'lightgray'}
             topFace={ 'lightgray'}
-            bottomFace={ 'lightgray'}
+            // bottomFace={ 'lightgray'}
+            bottomFace={false}
             translate={{
                 y: 32 / 6,
                 z: -32 / 6

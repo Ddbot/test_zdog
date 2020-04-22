@@ -31,8 +31,7 @@ module.exports = {
 			</p>`,
       slide_1: `<p>
 				J'utilise <span class="purple"><b>React</b></span> et <br />
-				des frameworks tels que <span class="purple"><b>Gatsby JS</b></span> pour créer des sites et des <span class="purple"><b>PWA</b></span><br />
-				<span class="purple"><b>modernes, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
+				des frameworks tels que <span class="purple"><b>Gatsby&nbsp;JS</b></span> pour créer des sites et des <span class="purple"><b>PWA&nbsp;modernes<b></span>, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
 			</p>`,
       slide_2: `<p style={{marginLeft:'10%'}}>
                 J'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>. En véritable <span class="purple"><b>passionné</b></span>, j'

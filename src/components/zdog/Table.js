@@ -1,6 +1,7 @@
 import React from 'react';
 import Zdog from 'zdog';
 import { Box } from 'react-zdog';
+import Computer from './Computer';
 
 const Table = (props) => {
     return <Box            
@@ -19,7 +20,9 @@ const Table = (props) => {
             rearFace={ false}
             topFace={'#4d3319'}
             bottomFace={ false}
-        />
+    >
+        {/* <Computer /> */}
+        </Box>
 }
     
 export default Table;

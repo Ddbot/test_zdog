@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Zdog from 'zdog';
-import { Cylinder, Ellipse, Box, Illustration, Shape, Group } from 'react-zdog';
+import { Cylinder, Ellipse, Box, Illustration, Canvas, Shape, Group } from 'react-zdog';
 
 import styled from 'styled-components';
 

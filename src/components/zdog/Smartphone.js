@@ -36,7 +36,8 @@ const Smartphone = () => {
             leftFace={'hsl(201, 38%, 25%)'}
             rightFace={'hsl(201, 38%, 25%)'}
             topFace={'hsl(201, 38%, 25%)'}
-            bottomFace={'hsl(201, 38%, 25%)'}
+            // bottomFace={'hsl(201, 38%, 25%)'}
+            bottomFace={false}
             translate={{
                 y: 32 / 6,
                 z: -32 / 6
