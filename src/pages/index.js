@@ -22,6 +22,7 @@ import gsap from "gsap";
 
 // import '../components/zdog/vanilla_me';
 
+
 const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 `;
@@ -41,9 +42,11 @@ const animation_sequence = [{
   'ZOOMER SUR LECRAN AVEC VIEWBOX ???'
 ];
 
-const IndexPage = (props) => {
-	
+const IndexPage = ({ location }, props) => {
 
+	let prevIndex = location.state.index;
+
+	
 	let illoRef = useRef(null);
 	let chevronBottom = useRef(null)
 //_____________data pour GraphQL________//
@@ -66,12 +69,13 @@ const data = useStaticQuery(graphql `
 	let lang = useContext(LangContext);
 	let index = 0;
 	let [animation, setAnimation] = useState(false);
- 	let [rotation, setRotation] = useState(animation_sequence[index]);
+	let [rotation, setRotation] = useState(animation_sequence[prevIndex]);
 	
-  // LANG		
-  useEffect(() => {
-    localStorage.setItem('lang', lang);
-  });
+	
+	// LANG		
+	useEffect(() => {
+		localStorage.setItem('lang', lang);
+	});
 	
 	// Background colors in Purple Class
 	useEffect(() => {
@@ -88,6 +92,13 @@ const data = useStaticQuery(graphql `
 	useEffect(() => {
 		animChevron(chevronBottom.current, 'x', -15);
 	});
+
+
+	// Which direction for the Animation
+	useEffect(() => {
+		// console.log('Received from Index nmber: ', prevIndex);
+		
+	 });
   
   const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
 	

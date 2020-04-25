@@ -691,43 +691,55 @@ const seq = [{
   z: 0
 }];
 
+const Me = (props) => {
 
-let rotateScene = () => {
-  		let anim = () => {
-  		  const {
-  		    x,
-  		    y,
-  		    z
-  		  } = seq[0];
+let animateScene = () => {
+  let anim = () => {
+    // const {
+    //   x,
+    //   y,
+    //   z
+    // } = seq[0];
 
-  		  // setRotation((prevRotation) => {
-  		    // return ({
-  		      scene.rotate.x = gsap.utils.interpolate(x, seq[1].x, animateIllo.progress());
-  		      scene.rotate.y = gsap.utils.interpolate(y, seq[1].y, animateIllo.progress());
-  		      scene.rotate.z = gsap.utils.interpolate(z, seq[1].z, animateIllo.progress());
-  		    // });
-  		  // });
-  		}
+    let start, end;
 
-  		let animateIllo = gsap.to('html', {
-  		  visibility: 'visible',
-  		  duration: 1,
-  		  onStart: () => {
-  		    gsap.ticker.add(anim);
-  		  },
-  		  onComplete: () => {
-  		    gsap.ticker.remove(anim);
+    if (props.index === 0) {
+      start = 0;
+      end = 1;
+    }
+    if (props.index === 1) {
+      start = 1;
+      end = 0;
+    }
 
-  		    navigate("/dev", {
-  		      state: {
-  		        index: 1
-  		      }
-  		    });
-  		  }
-      })
-  console.log('From RotateScene Func in Vanilla_Me, we activated the animation !!');
+    // setRotation((prevRotation) => {
+    // return ({
+    scene.rotate.x = gsap.utils.interpolate(seq[start].x, seq[end].x, animateIllo.progress());
+    scene.rotate.y = gsap.utils.interpolate(seq[start].y, seq[end].y, animateIllo.progress());
+    scene.rotate.z = gsap.utils.interpolate(seq[start].z, seq[end].z, animateIllo.progress());
+    // });
+    // });
+  }
+
+  let animateIllo = gsap.to('html', {
+    visibility: 'visible',
+    duration: 2.5,
+    ease: "power4.in",
+    onStart: () => {
+      gsap.ticker.add(anim);
+    },
+    onComplete: () => {
+      gsap.ticker.remove(anim);
+
+      navigate("/dev", {
+        state: {
+          index: 1
+        }
+      });
+    }
+  })
 }
-    
+
 // ----- animate ----- //
 
 let animate = () => {
@@ -753,8 +765,6 @@ let render = () => {
   ctx.restore();
 }
 
-// animate();
-
 // ----- drag ----- //
 
 let dragStartRX, dragStartRY;
@@ -774,8 +784,6 @@ new Zdog.Dragger({
   }
 });
 
-const Me = (props) => {
-
 // ----- setup ----- //
 
 // get canvas element and its context
@@ -793,12 +801,14 @@ useEffect(() => {
   scene.rotate = seq[0];
 
   animate();
+  console.log('From animateScene Func in Vanilla_Me, we activated the animation !!', props.index);
+
 }, [props.rotation]);
   
   
   // Animate Scene ?
   useEffect(() => { 
-    !!props.animate && rotateScene()
+    !!props.animate && animateScene();
   });
   return (
     <canvas className="zdog-canvas" width={480} height={480}></canvas>

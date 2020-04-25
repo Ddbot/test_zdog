@@ -5,6 +5,7 @@ import { Cone } from 'react-zdog';
 const { TAU } = Zdog;
 
 const ConePattern = (props) => {
+    console.log('Dans Triangles lindex est: ', props.index);
 
     return <>
         <Cone diameter={24}
@@ -86,8 +87,6 @@ const ConePattern = (props) => {
             rotate={props.rotation}
             translate={{ x: 12, y: -24 }}
         />
-                                          
-        {/* <div className="dummy"></div> */}
     </>
 }
 

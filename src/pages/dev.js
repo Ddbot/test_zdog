@@ -27,7 +27,7 @@ const Dev = ({location},props) => {
       }
     }
   `);		
-	const { index } = location.state;	
+	const { index, prevIndex } = location.state;	
 	let lang = useContext(LangContext);
 
 	useEffect(() => { 
@@ -50,10 +50,10 @@ const Dev = ({location},props) => {
 	return (<>
 			<SEO title={location.state.lang === "fr" ? "Développeur" : "Dev"} />
 			<Container className="container">
-				<Link to='/' state={{ index: 0 }} style={{ position: "fixed", left: "25%", top:"10%"}}>
+				<Link to='/' state={{ index: 1 }} style={{ position: "fixed", left: "25%", top:"10%"}}>
 					<Chevron style={{ rotate: "270deg", top: "14%", zIndex: 10}}/>
 				</Link>
-				<LogoIllustration index={1} />	
+			<LogoIllustration index={1} prevIndex={prevIndex}/>	
 				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
 				<Link to='/design' state={{ index: 2 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
 					<Chevron />
