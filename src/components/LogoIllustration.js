@@ -46,6 +46,8 @@ const LogoIllustration = React.forwardRef((props,ref) => {
         return ref.current;
     }
 
+
+
     let dummyTween = (prevRot, newRot) => {
         let tween = gsap.to("body", {
             autoAlpha: 1,
@@ -63,11 +65,11 @@ const LogoIllustration = React.forwardRef((props,ref) => {
         tween.play(0).delay(.7);
     }
 
+    let [animateIllo, setAnimateIllo] = useState();
     let [index, setIndex] = useState(0);
     let [rotation, setRotation] = useState(cone_seq[index]);
     let [rot, setRot] = useState({ x: 0, y: 0, z: 0});
     
-    let prevRotation = usePrevious(props.rot);
     let prevIndex = usePrevious(index);
         
     //  Index
@@ -125,19 +127,19 @@ const LogoIllustration = React.forwardRef((props,ref) => {
     }, [prevIndex, index]);
     
     // Rotation de Me
-    useEffect(() => {
-        if (props.rot !== rot) setRot((prevRot) => {
-            return props.rot
-        });
-    }, [props.rot, rot]);
+    // useEffect(() => {
+    //     if (props.rot !== rot) setRot((prevRot) => {
+    //         return props.rot
+    //     });
+    // }, [props.rot, rot]);
 
-    const handleClick = (e) => {
-        e.persist();
-        console.log('ID : ', e.target, ' Parent node: ', e.target.parentNode);
-    }
+    useEffect(() => { 
+        !!props.animation && setAnimateIllo(prev => true);
+    });
+
 
     if (index === 0) {
-        return <Me ref={ref} index={index} rotation={props.rotation} handleClick={handleClick} />
+        return <Me ref={ref} index={index} rotation={props.rotation} animate={animateIllo}/>
     }
     if (index===1) { return <Triangles ref={ref} index={index} rotation={rotation}/> }
     if (index===2) { return <Smartphone ref={ref} index={index} rotation={rotation}/> }

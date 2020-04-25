@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Zdog from 'zdog';
+import {   navigate } from "gatsby";
+
+import gsap from 'gsap';
 
 let faux = require('./faux-code.svg');
 
@@ -677,6 +680,53 @@ let Gomme = new Zdog.Hemisphere({
     rotate: { x: Math.PI },
     translate: { z: -4.75 }
 });
+
+const seq = [{
+  x: 5.72,
+  y: 6.19,
+  z: 0
+}, {
+  x: TAU,
+  y: TAU / 2,
+  z: 0
+}];
+
+
+let rotateScene = () => {
+  		let anim = () => {
+  		  const {
+  		    x,
+  		    y,
+  		    z
+  		  } = seq[0];
+
+  		  // setRotation((prevRotation) => {
+  		    // return ({
+  		      scene.rotate.x = gsap.utils.interpolate(x, seq[1].x, animateIllo.progress());
+  		      scene.rotate.y = gsap.utils.interpolate(y, seq[1].y, animateIllo.progress());
+  		      scene.rotate.z = gsap.utils.interpolate(z, seq[1].z, animateIllo.progress());
+  		    // });
+  		  // });
+  		}
+
+  		let animateIllo = gsap.to('html', {
+  		  visibility: 'visible',
+  		  duration: 1,
+  		  onStart: () => {
+  		    gsap.ticker.add(anim);
+  		  },
+  		  onComplete: () => {
+  		    gsap.ticker.remove(anim);
+
+  		    navigate("/dev", {
+  		      state: {
+  		        index: 1
+  		      }
+  		    });
+  		  }
+      })
+  console.log('From RotateScene Func in Vanilla_Me, we activated the animation !!');
+}
     
 // ----- animate ----- //
 
@@ -740,10 +790,16 @@ useEffect(() => {
   zoom = 7;
   isSpinning = false;
 
-  scene.rotate = props.rotation;
+  scene.rotate = seq[0];
 
   animate();
 }, [props.rotation]);
+  
+  
+  // Animate Scene ?
+  useEffect(() => { 
+    !!props.animate && rotateScene()
+  });
   return (
     <canvas className="zdog-canvas" width={480} height={480}></canvas>
   );

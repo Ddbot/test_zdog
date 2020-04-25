@@ -41,9 +41,6 @@ const animation_sequence = [{
   'ZOOMER SUR LECRAN AVEC VIEWBOX ???'
 ];
 
-
-
-
 const IndexPage = (props) => {
 	
 
@@ -68,6 +65,7 @@ const data = useStaticQuery(graphql `
   `);
 	let lang = useContext(LangContext);
 	let index = 0;
+	let [animation, setAnimation] = useState(false);
  	let [rotation, setRotation] = useState(animation_sequence[index]);
 	
   // LANG		
@@ -106,34 +104,8 @@ const data = useStaticQuery(graphql `
 
 	let handleClick = (e) => {
 		// ANIMER LA TRANSIITION
-
-		let anim = () => {
-			const { x, y, z } = animation_sequence[index];
-
-			setRotation((prevRotation) => {
-				return ({
-					x: gsap.utils.interpolate(x, animation_sequence[index + 1].x, animateIllo.progress()),
-					y: gsap.utils.interpolate(y, animation_sequence[index + 1].y, animateIllo.progress()),
-					z: gsap.utils.interpolate(z, animation_sequence[index + 1].z, animateIllo.progress()),
-				});
-			});		
-		}
-	
-		let animateIllo = gsap.to('html', {
-			visibility: 'visible',
-			duration: 2,
-			onStart: () => {
-				gsap.ticker.add(anim);
-			},
-			onComplete: () => {
-				gsap.ticker.remove(anim);
-
-				navigate("/dev", {
-					state: {
-						index: index + 1
-					}
-				});
-			}
+		setAnimation(prev => {
+			if (prev === false) return true;
 		})
 	};
 
@@ -145,6 +117,7 @@ const data = useStaticQuery(graphql `
 				index={index}
 				style={{ zIndex: 2 }}
 				rotation={rotation}
+				animation={animation}
 			/>
 			{/* <RotationSliders handleRotation={handleRotation}/> */}
 			<TextContainer className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
