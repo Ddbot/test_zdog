@@ -107,8 +107,6 @@ const data = useStaticQuery(graphql `
 	let handleClick = (e) => {
 		// ANIMER LA TRANSIITION
 
-		console.log(chevronBottom.current);
-
 		let anim = () => {
 			const { x, y, z } = animation_sequence[index];
 
@@ -146,15 +144,15 @@ const data = useStaticQuery(graphql `
 				ref={illoRef}
 				index={index}
 				style={{ zIndex: 2 }}
-				rot={rotation}
-				/>
+				rotation={rotation}
+			/>
 			{/* <RotationSliders handleRotation={handleRotation}/> */}
 			<TextContainer className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
 			<Chevron ref={chevronBottom}
 				onMouseEnter={() => {
 					animChevron(chevronBottom.current, 'x', -15, true);
 				}}
-				onClick={() => handleClick()}
+				onClick={handleClick}
 				style={{ position: "fixed", left: "25%", bottom: "4%" }} />		
 		</Container>
 	</>);

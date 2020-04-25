@@ -5,12 +5,16 @@ const Container = styled.div `
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
+	// align-items: center;
+
 	min-width: 960px;
 
 	font-size: 2rem;
 	font-family: "Roboto";
 	z-index: 1;
+
+	margin-top: 40vh;
 
 	.illustration {		
 		width: 50vw;	

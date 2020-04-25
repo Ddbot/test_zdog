@@ -1,0 +1,181 @@
+<svg class="faux-code" xmlns="http://www.w3.org/2000/svg" width="690" height="190">
+  <path fill="#fff" d="M0 0h690v190H0z"/>
+  <g class="code block" stroke-linecap="square" stroke-width="5">
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 50h15"/>
+      <path d="M67.5 50h25"/>
+      <path d="M102.5 50h10"/>
+      <path d="M122.5 50h25"/>
+      <path d="M157.5 50h30"/>
+      <path d="M197.5 50h10"/>
+      <path d="M217.5 50h0"/>
+      <path d="M227.5 50h10"/>
+      <path d="M247.5 50h5"/>
+      <path d="M262.5 50h30"/>
+      <path d="M302.5 50h5"/>
+      <path d="M317.5 50h10"/>
+      <path d="M337.5 50h30"/>
+      <path d="M377.5 50h20"/>
+      <path d="M407.5 50h15"/>
+      <path d="M432.5 50h20"/>
+      <path d="M462.5 50h5"/>
+      <path d="M477.5 50h15"/>
+      <path d="M502.5 50h30"/>
+      <path d="M542.5 50h0"/>
+      <path d="M552.5 50h20"/>
+      <path d="M582.5 50h50"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 60h35"/>
+      <path d="M87.5 60h25"/>
+      <path d="M122.5 60h15"/>
+      <path d="M147.5 60h20"/>
+      <path d="M177.5 60h45"/>
+      <path d="M232.5 60h5"/>
+      <path d="M247.5 60h15"/>
+      <path d="M272.5 60h30"/>
+      <path d="M312.5 60h20"/>
+      <path d="M342.5 60h0"/>
+      <path d="M352.5 60h20"/>
+      <path d="M382.5 60h20"/>
+      <path d="M412.5 60h15"/>
+      <path d="M437.5 60h0"/>
+      <path d="M447.5 60h30"/>
+      <path d="M487.5 60h20"/>
+      <path d="M517.5 60h30"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 80h35"/>
+      <path d="M87.5 80h35"/>
+      <path d="M132.5 80h40"/>
+      <path d="M182.5 80h5"/>
+      <path d="M197.5 80h30"/>
+      <path d="M237.5 80h15"/>
+      <path d="M262.5 80h10"/>
+      <path d="M282.5 80h15"/>
+      <path d="M307.5 80h5"/>
+      <path d="M322.5 80h15"/>
+      <path d="M347.5 80h35"/>
+      <path d="M392.5 80h15"/>
+      <path d="M417.5 80h30"/>
+      <path d="M457.5 80h40"/>
+      <path d="M507.5 80h35"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 90h10"/>
+      <path d="M62.5 90h20"/>
+      <path d="M92.5 90h10"/>
+      <path d="M112.5 90h15"/>
+      <path d="M137.5 90h10"/>
+      <path d="M157.5 90h15"/>
+      <path d="M182.5 90h40"/>
+      <path d="M232.5 90h15"/>
+      <path d="M257.5 90h0"/>
+      <path d="M267.5 90h20"/>
+      <path d="M297.5 90h15"/>
+      <path d="M322.5 90h10"/>
+      <path d="M342.5 90h10"/>
+      <path d="M362.5 90h20"/>
+      <path d="M392.5 90h30"/>
+      <path d="M432.5 90h10"/>
+      <path d="M452.5 90h15"/>
+      <path d="M477.5 90h25"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 100h25"/>
+      <path d="M77.5 100h10"/>
+      <path d="M97.5 100h0"/>
+      <path d="M107.5 100h25"/>
+      <path d="M142.5 100h5"/>
+      <path d="M157.5 100h10"/>
+      <path d="M177.5 100h15"/>
+      <path d="M202.5 100h0"/>
+      <path d="M212.5 100h10"/>
+      <path d="M232.5 100h20"/>
+      <path d="M262.5 100h10"/>
+      <path d="M282.5 100h0"/>
+      <path d="M292.5 100h20"/>
+      <path d="M322.5 100h10"/>
+      <path d="M342.5 100h15"/>
+      <path d="M367.5 100h40"/>
+      <path d="M417.5 100h20"/>
+      <path d="M447.5 100h20"/>
+      <path d="M477.5 100h15"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 120h25"/>
+      <path d="M77.5 120h15"/>
+      <path d="M102.5 120h20"/>
+      <path d="M132.5 120h0"/>
+      <path d="M142.5 120h15"/>
+      <path d="M167.5 120h15"/>
+      <path d="M192.5 120h15"/>
+      <path d="M217.5 120h5"/>
+      <path d="M232.5 120h5"/>
+      <path d="M247.5 120h40"/>
+      <path d="M297.5 120h10"/>
+      <path d="M317.5 120h20"/>
+      <path d="M347.5 120h30"/>
+      <path d="M387.5 120h10"/>
+      <path d="M407.5 120h15"/>
+      <path d="M432.5 120h15"/>
+      <path d="M457.5 120h10"/>
+      <path d="M477.5 120h20"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 130h30"/>
+      <path d="M82.5 130h20"/>
+      <path d="M112.5 130h5"/>
+      <path d="M127.5 130h20"/>
+      <path d="M157.5 130h35"/>
+      <path d="M202.5 130h0"/>
+      <path d="M212.5 130h10"/>
+      <path d="M232.5 130h10"/>
+      <path d="M252.5 130h25"/>
+      <path d="M287.5 130h15"/>
+      <path d="M312.5 130h10"/>
+      <path d="M332.5 130h10"/>
+      <path d="M352.5 130h5"/>
+      <path d="M367.5 130h20"/>
+      <path d="M397.5 130h0"/>
+      <path d="M407.5 130h25"/>
+      <path d="M442.5 130h30"/>
+    </g>
+    <g class="code line" stroke="#24292e">
+      <path d="M47.5 140h15"/>
+      <path d="M67.5 140h0"/>
+      <path d="M77.5 140h15"/>
+      <path d="M102.5 140h5"/>
+      <path d="M117.5 140h25"/>
+      <path d="M152.5 140h10"/>
+      <path d="M172.5 140h10"/>
+      <path d="M192.5 140h25"/>
+      <path d="M227.5 140h30"/>
+      <path d="M267.5 140h10"/>
+      <path d="M287.5 140h35"/>
+      <path d="M332.5 140h15"/>
+      <path d="M357.5 140h10"/>
+      <path d="M377.5 140h15"/>
+      <path d="M402.5 140h35"/>
+      <path d="M447.5 140h15"/>
+      <path d="M472.5 140h10"/>
+      <path d="M492.5 140h5"/>
+      <path d="M507.5 140h5"/>
+      <path d="M522.5 140h15"/>
+      <path d="M547.5 140h0"/>
+      <path d="M557.5 140h35"/>
+    </g>
+  </g>
+  <g class="line numbers" stroke="#444d56" stroke-linecap="square" stroke-width="5">
+    <path d="M32.5 50h0"/>
+    <path d="M32.5 60h0"/>
+    <path d="M32.5 70h0"/>
+    <path d="M32.5 80h0"/>
+    <path d="M32.5 90h0"/>
+    <path d="M32.5 100h0"/>
+    <path d="M32.5 110h0"/>
+    <path d="M32.5 120h0"/>
+    <path d="M32.5 130h0"/>
+    <path d="M32.5 140h-5"/>
+  </g>
+</svg>

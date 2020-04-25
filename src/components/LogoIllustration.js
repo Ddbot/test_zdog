@@ -8,7 +8,8 @@ import gsap from 'gsap';
 
 import { illuTweenDuration } from '../utils/timelines';
 import Triangles from './triangles';
-import Me from "./zdog/Me";
+// import Me from "./zdog/Me";
+import Me from './zdog/vanilla_me';
 
 let { TAU } = Zdog;
 
@@ -46,8 +47,8 @@ const LogoIllustration = React.forwardRef((props,ref) => {
     }
 
     let dummyTween = (prevRot, newRot) => {
-        let tween = gsap.to(".dummy", {
-            autoAlpha: 0,
+        let tween = gsap.to("body", {
+            autoAlpha: 1,
             duration: illuTweenDuration,
             paused: true,
             onUpdate: () => {
@@ -136,7 +137,7 @@ const LogoIllustration = React.forwardRef((props,ref) => {
     }
 
     if (index === 0) {
-        return <Me ref={ref} index={index} rotation={rot} handleClick={handleClick} />
+        return <Me ref={ref} index={index} rotation={props.rotation} handleClick={handleClick} />
     }
     if (index===1) { return <Triangles ref={ref} index={index} rotation={rotation}/> }
     if (index===2) { return <Smartphone ref={ref} index={index} rotation={rotation}/> }

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Zdog from 'zdog';
-import { Cylinder, Ellipse, Box, Illustration, Canvas, Shape, Group } from 'react-zdog';
+import { Cylinder, Ellipse, Box, Illustration, Canvas, Shape, Group, useZdog, useRender } from 'react-zdog';
 
 import styled from 'styled-components';
 
@@ -21,7 +21,6 @@ var shinEnd = { y: 22 };
 var hipX = (8 / quarterTurn) / 2;
 
 const Me = React.forwardRef((props, ref) => {    
-    let illuRef = useRef(null);
     let headRef = useRef(null);
     let torsoRef = useRef(null);
     let rightArm = useRef(null);
@@ -335,6 +334,14 @@ const Me = React.forwardRef((props, ref) => {
         </Cylinder>
     };
     
+    const handleClick = () => {
+        console.log(ref.current, ref);
+    }
+
+    useEffect(() => { 
+        console.log(ref.current, ref);
+    });
+
     return (
         <Illustration
             ref={ref}
@@ -342,19 +349,19 @@ const Me = React.forwardRef((props, ref) => {
 				zoom={8}
 				translate={{ y: -30 }}
 				rotate={props.rotation }
-				onClick={props.handleClick}>
+				onClick={handleClick}>
 				<Table className="table" />
 				<Head className="head" />
                 <Torso className="torso" color={"#995c00"} />
 				<Legs className="legs" />
 				<Chair className="chair" />
 				<Computer className="computer" />
-            <Smartphone className="smartphone" />
+                <Smartphone className="smartphone" />
 				<Group>
 					<Pot className="pot" />
 					<Pen className="pen" />
                 </Group>            
-            </Illustration>
+        </Illustration>
 	);
 });
 

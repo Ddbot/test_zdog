@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Zdog from 'zdog';
 
+let faux = require('./faux-code.svg');
 
 const { TAU } = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
@@ -10,26 +11,16 @@ var shoulderX = torsoX + 1.5;
 var shinEnd = { y: 22 };
 var hipX = 8 / quarterTurn / 2;
 
-// ----- setup ----- //
-
-    // get canvas element and its context
-    let canvas = document.querySelector(".zdog-canvas");
-    let ctx = canvas.getContext("2d");
-    // get canvas size
-    let canvasWidth = canvas.width;
-    let canvasHeight = canvas.height;
-    // illustration variables
-    const zoom = 5;
-    let isSpinning = false;
+let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
     // create an scene Anchor to hold all items
     let scene = new Zdog.Anchor();
 
-    scene.rotate = {
-        x: 5.72,
-        y: 6.19,
-        z: 0
-    };
+    // scene.rotate = {
+    //     x: 5.72,
+    //     y: 6.19,
+    //     z: 0
+    // };
 
 // ----- model ----- //
 
@@ -237,9 +228,6 @@ const Logo_tshirt2 = new Zdog.Shape({
     z: 4
   }
 });
-{
-  /* BRAS R */
-}
 
 const Bras_Groupe_R = new Zdog.Group({
   addTo: Torse
@@ -292,9 +280,7 @@ const Main_R = new Zdog.Shape({
     z: 0
   }
 });
-{
-  /* BRAS L */
-}
+
 const Bras_Groupe_L = new Zdog.Group({
   addTo: Torse
 });
@@ -359,9 +345,7 @@ const Genou_R = new Zdog.Shape({
   color: "hsl(180, 25%, 28%)",
   translate: { z: 8 }
 });
-{
-  /* TIBIA R */
-}
+
 const Tibia_R = new Zdog.Cylinder({
   addTo: Genou_R,
   diameter: 4,
@@ -418,13 +402,14 @@ const Lacet_CHaussure_L_1 = new Zdog.Shape({
   stroke: 0.5,
   color: "beige"
 });
+
 const Lacet_CHaussure_L_2 = Lacet_CHaussure_L_1.copy({
   translate: { x: 1.3, y: 3.25, z: -2 }
 });
+
 const Lacet_CHaussure_L_3 = Lacet_CHaussure_L_1.copy({
   translate: { x: 1.3, y: 4.5, z: -2 }
 });
-
 
 let Chair = new Zdog.Group({
     addTo: scene
@@ -446,7 +431,6 @@ let DossierTop = new Zdog.Ellipse({
     },
     fill: true
 });
-
 
 let DossierMiddle = new Zdog.Rect({
     addTo: Chair,
@@ -486,13 +470,12 @@ let StoolStand = new Zdog.Hemisphere({
     rotate: { x: TAU / 4 }            
 });
 
-
 const Computer = new Zdog.Group({
     addTo: scene,
         translate:{        y: 24,        z: 18        },
         rotate:{            x: -0.1    }
 })
-{/* Bezel */ }
+
 const Screen = new Zdog.Box({
     addTo: Computer,
     width: 16,
@@ -506,21 +489,24 @@ const Screen = new Zdog.Box({
     topFace: 'lightgray',
     bottomFace: false
 });
-   const Keyboard = new Zdog.Box({
-       addTo: Computer,
-            width: 16,
-            height: 32/3,
-            color: 'rgb(211, 211, 212)',
-            backface: 'lightgray',
-            // backface:false,
-            leftFace: 'lightgray',
-            rightFace: 'lightgray',
-            topFace: 'lightgray',
-            // bottomFace: 'lightgray',
-            bottomFace:false,
-            translate:{               y: 32 / 6,                z: -32 / 6            },
-       rotate: { x: TAU / 4 - 3 }
-   });
+
+// Screen.addChild(faux);
+
+const Keyboard = new Zdog.Box({
+    addTo: Computer,
+        width: 16,
+        height: 32/3,
+        color: 'rgb(211, 211, 212)',
+        backface: 'lightgray',
+        // backface:false,
+        leftFace: 'lightgray',
+        rightFace: 'lightgray',
+        topFace: 'lightgray',
+        // bottomFace: 'lightgray',
+        bottomFace:false,
+        translate:{               y: 32 / 6,                z: -32 / 6            },
+    rotate: { x: TAU / 4 - 3 }
+});
 
 const Table = new Zdog.Box({            
     addTo: scene,
@@ -539,7 +525,7 @@ const Table = new Zdog.Box({
             rearFace: false,
             topFace:'#4d3319',
             bottomFace: false,
-    });
+});
 
 const Smartphone = new Zdog.Group({
   addTo: scene,
@@ -691,24 +677,23 @@ let Gomme = new Zdog.Hemisphere({
     rotate: { x: Math.PI },
     translate: { z: -4.75 }
 });
-
-
+    
 // ----- animate ----- //
 
-function animate() {
+let animate = () => {
   // make changes to model, like rotating scene
-  scene.rotate.y += isSpinning ? 0.03 : 0;
+  // scene.rotate.y += isSpinning ? 0.03 : 0;
   scene.updateGraph();
   render();
   requestAnimationFrame(animate);
 }
 
-function render() {
+let render = () => {
   // clear canvas
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx.save();
   // center canvas & zoom
-  ctx.translate(canvasWidth / 2, canvasHeight / 2);
+  ctx.translate(canvasWidth / 2, 0);
   ctx.scale(zoom, zoom);
   // set lineJoin and lineCap to round
   ctx.lineJoin = "round";
@@ -718,7 +703,7 @@ function render() {
   ctx.restore();
 }
 
-animate();
+// animate();
 
 // ----- drag ----- //
 
@@ -739,3 +724,29 @@ new Zdog.Dragger({
   }
 });
 
+const Me = (props) => {
+
+// ----- setup ----- //
+
+// get canvas element and its context
+useEffect(() => {
+  canvas = document.querySelector(".zdog-canvas");
+
+  ctx = canvas.getContext("2d");
+  // get canvas size
+  canvasWidth = canvas.width;
+  canvasHeight = canvas.height;
+  // illustration variables
+  zoom = 7;
+  isSpinning = false;
+
+  scene.rotate = props.rotation;
+
+  animate();
+}, [props.rotation]);
+  return (
+    <canvas className="zdog-canvas" width={480} height={480}></canvas>
+  );
+}
+
+export default Me;
