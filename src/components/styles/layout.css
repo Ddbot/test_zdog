@@ -119,12 +119,5 @@ svg:last-of-type {
   display: none;
 }
 .zdog-canvas {
-  /* width: 100%; */
-  /* height: 100%; */
-  /* border: 1px solid red;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center; */
-
-  /* padding-bottom: 150px; */
+overflow: visible;
 }

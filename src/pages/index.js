@@ -44,8 +44,7 @@ const animation_sequence = [{
 
 const IndexPage = ({ location }, props) => {
 
-	let prevIndex = location.state.index;
-
+	let prevIndex = 0;
 	
 	let illoRef = useRef(null);
 	let chevronBottom = useRef(null)

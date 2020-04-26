@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Zdog from 'zdog';
-import {   navigate } from "gatsby";
+
+import Canvas from '../styled/Canvas';
+
+import { navigate } from "gatsby";
 
 import gsap from 'gsap';
 
@@ -38,7 +41,7 @@ const Cou = new Zdog.Cylinder({
   translate: { y: 12.5 }
 });
 
-let Menton = new Zdog.Shape({
+const Menton = new Zdog.Shape({
   addTo: Cou,
   translate: { y: 0, z: -2 },
   stroke: 7.5,
@@ -46,7 +49,7 @@ let Menton = new Zdog.Shape({
   rotate: { x: TAU / 4 }
 });
 
-let Front = new Zdog.Ellipse({
+const Front = new Zdog.Ellipse({
   addTo: Menton,
   diameter: 2,
   translate: { y: -4 },
@@ -54,7 +57,7 @@ let Front = new Zdog.Ellipse({
   color: "#995c00"
 });
 
-let Cheveux_gros = new Zdog.Shape({
+const Cheveux_gros = new Zdog.Shape({
   addTo: Front,
   path: [{ y: -1 }, { y: -7 }],
   translate: { x: -2, y: -3.5, z: -3 },
@@ -63,7 +66,7 @@ let Cheveux_gros = new Zdog.Shape({
   color: "#616161"
 });
 
-let Cheveux_medium = new Zdog.Shape({
+const Cheveux_medium = new Zdog.Shape({
   addTo: Front,
   path: [{ y: 0 }, { y: -6 }],
   translate: { x: 2, y: -3, z: -2 },
@@ -72,7 +75,7 @@ let Cheveux_medium = new Zdog.Shape({
   color: "lightgray"
 });
 
-let Cheveux_petit = new Zdog.Shape({
+const Cheveux_petit = new Zdog.Shape({
   addTo: Front,
   path: [{ y: 0 }, { y: -6 }],
   translate: { x: -0.25, y: -3, z: -1 },
@@ -81,7 +84,7 @@ let Cheveux_petit = new Zdog.Shape({
   color: "gray"
 });
 
-let Cheveux_derriere = new Zdog.Ellipse({
+const Cheveux_derriere = new Zdog.Ellipse({
   addTo: Front,
   diameter: 3,
   translate: { y: -0.3, z: -3 },
@@ -89,7 +92,7 @@ let Cheveux_derriere = new Zdog.Ellipse({
   color: "#4e4e4e"
 });
 
-let Yeux_L = new Zdog.Ellipse({
+const Yeux_L = new Zdog.Ellipse({
   addTo: Front,
   quarters: 2,
   scale: 1.5,
@@ -101,11 +104,11 @@ let Yeux_L = new Zdog.Ellipse({
   fill: false
 });
 
-let Yeux_R = Yeux_L.copy({
+const Yeux_R = Yeux_L.copy({
   translate: { x: 1.5, y: 0.5, z: 2 }
 });
 
-let Oreille_L = new Zdog.Ellipse({
+const Oreille_L = new Zdog.Ellipse({
   addTo: Front,
   diameter: 1.5,
   translate: { x: 3.5, y: 1, z: -1 },
@@ -115,7 +118,7 @@ let Oreille_L = new Zdog.Ellipse({
   fill: true
 });
 
-let Cheveux_oreille_L = new Zdog.Ellipse({
+const Cheveux_oreille_L = new Zdog.Ellipse({
   addTo: Oreille_L,
   quarters: 2,
   scale: 3,
@@ -127,19 +130,19 @@ let Cheveux_oreille_L = new Zdog.Ellipse({
   fill: false
 });
 
-let Oreille_R = Oreille_L.copy({
+const Oreille_R = Oreille_L.copy({
   addTo: Front,
   translate: { x: -3.5, y: 1, z: -1 },
   rotate: { y: TAU / 8 }
 });
 
-let Cheveux_oreille_R = Cheveux_oreille_L.copy({
+const Cheveux_oreille_R = Cheveux_oreille_L.copy({
   addTo: Oreille_R,
   translate: { x: 0.5, y: -0.4, z: -2 },
   rotate: { y: 0.8, z: -TAU / 4 }
 });
 
-let Sourire = new Zdog.Ellipse({
+const Sourire = new Zdog.Ellipse({
   addTo: Menton,
   quarters: 2,
   translate: { y: -1, z: 3.5 },
@@ -324,7 +327,234 @@ const Main_L = Main_R.copy({
   }
 });
 
-const Jambes = new Zdog.Cylinder({
+const Computer = new Zdog.Group({
+    addTo: scene,
+        translate:{        y: 24,        z: 18        },
+        rotate:{            x: -0.1    }
+})
+
+const Screen = new Zdog.Box({
+    addTo: Computer,
+    width: 16,
+    height: 32 / 3,
+    depth: 1,
+    stroke: 1,
+    color: 'rgba(1,1,1,.8)',
+    backface: 'lightgray',
+    leftFace: 'lightgray',
+    rightFace: 'lightgray',
+    topFace: 'lightgray',
+    bottomFace: false
+});
+
+const Keyboard = new Zdog.Box({
+    addTo: Computer,
+        width: 16,
+        height: 32/3,
+        color: 'rgb(211, 211, 212)',
+        backface: 'lightgray',
+        // backface:false,
+        leftFace: 'lightgray',
+        rightFace: 'lightgray',
+        topFace: 'lightgray',
+        // bottomFace: 'lightgray',
+        bottomFace:false,
+        translate:{ y: 32/6, z: -32/6 },
+    rotate: { x: TAU / 4 - 3 }
+});
+
+const Pen = new Zdog.Anchor({
+  addTo: scene,
+  scale: 1,
+  translate: {
+    x: 15,
+    y: 25.5,
+    z: 16
+  },
+  rotate: {
+    x: TAU / 4,
+    y: -TAU / 16
+  },
+});
+
+const Pot = new Zdog.Cylinder({
+  addTo: scene,
+  diameter: 3,
+  length: 3,
+  stroke: false,
+  color: 'rgba(157, 169, 156, 0.9)',
+  // backface={'gray'}
+  backface: false,
+  translate: {
+    x: 13.5,
+    y: 28.5,
+    z: 16
+  },
+  rotate: {
+    x: TAU / 4
+  }
+});
+
+let Pointe = new Zdog.Cone({
+  addTo: Pen,
+  diameter: .72,
+  length: .72,
+  stroke: false,
+  color: "#f4dc95",
+  // backface: "#C25"},
+  backface: false,
+})
+
+let Mine = new Zdog.Cone({
+  addTo: Pen,
+  diameter: .2,
+  length: .2,
+  stroke: false,
+  color: "black",
+  backface: false,
+  translate: {
+    z: .48
+  }
+});
+
+
+let Bois = new Zdog.Cylinder({
+  addTo: Pen,
+  diameter: .7,
+  length: 4.5,
+  stroke: false,
+  color: 'blue',
+  backface: false,
+  translate: {
+    z: -2.25
+  }
+});
+
+let Anneau = new Zdog.Cylinder({
+  addTo: Pen,
+  diameter: .7,
+  length: .45,
+  stroke: false,
+  color: 'whitesmoke',
+  // backface: 'whitesmoke',
+  backface: false,
+  translate: {
+    z: -4.5
+  }
+});
+
+let Gomme = new Zdog.Hemisphere({
+  addTo: Pen,
+  diameter: .7,
+  stroke: false,
+  color: 'black',
+  backface: false,
+  rotate: {
+    x: Math.PI
+  },
+  translate: {
+    z: -4.75
+  }
+});
+
+const Table = new Zdog.Box({            
+    addTo: scene,
+        translate:{
+            y: 44.6,
+            z: 14
+        },
+            width: 40,
+            height:27,
+            depth: 15,
+            stroke:2,
+            color:'transparent',
+            // remove left & right faces
+            leftFace:'#86592d',
+            rightFace:'#734d26',
+            rearFace: false,
+            topFace:'#4d3319',
+            bottomFace: false,
+});
+
+
+
+const Smartphone = new Zdog.Group({
+  addTo: scene,
+    translate: {
+        x: -15,
+        y: 25,
+        z: 18
+    },
+    rotate: {
+        x: 0,
+        y: TAU / 12
+    }
+});
+
+const SmartphoneScreen = new Zdog.Box({
+    addTo: Smartphone,
+            stroke: 0.01,
+            width: 3,
+            height: 5.5,
+            depth: .125,
+            color: 'black',
+            // backface: 'hsl(201, 38%, 25%)',
+            backface: false,
+            leftFace: 'hsl(201, 38%, 25%)',
+            rightFace: 'hsl(201, 38%, 25%)',
+            topFace: 'hsl(201, 38%, 25%)',
+            // bottomFace: 'hsl(201, 38%, 25%)',
+            bottomFace: false,
+            translate:{
+                y: 32 / 6,
+                z: -32 / 6
+            },
+            rotate: {
+        x: TAU / 4 - 3
+    }
+});
+
+const Avatar = new Zdog.Ellipse({
+    addTo: SmartphoneScreen,
+    diameter: 0.8,
+    // height:0.1,
+    stroke: 0.04,
+    translate: { x: .7, y: -2 },
+    fill: true,
+    color: '#9da99c'
+});
+
+const Line = new Zdog.Shape({
+    addTo: SmartphoneScreen,
+    path: [{ x: 0 }, { x: 1 }],
+    color: '#87a3a7',
+    stroke: .2,
+    translate: { x: -1, y: -2 }
+});
+
+const Line2 = Line.copy({ path: [{ x: 0 }, { x: 2 }], translate: { x: -1, y: -1.2 } });
+
+const Line3 = Line2.copy({ translate: { x: -1, y: -.4 } });
+
+const Box = new Zdog.Rect({
+            addTo: SmartphoneScreen,
+                width: 2,
+                height: 1.8,
+                color: '#87a3a7',
+                fill: true,
+                stroke: .2,
+    translate: { y: 1.4 }
+});
+
+const Triangle = new Zdog.Shape({
+    addTo: Box,
+    path: [{ x: 0, y: -.4 }, { x: .4, y: .4 }, { x: -.4, y: .4 }],
+    fill: true,
+    stroke: .2,
+    color: '#636'
+});
+
+const Hanches = new Zdog.Cylinder({
   addTo: scene,
   diameter: 6,
   length: torsoX * 3 - 1,
@@ -334,7 +564,7 @@ const Jambes = new Zdog.Cylinder({
 });
 
 const Cuisse_R = new Zdog.Cylinder({
-  addTo: Jambes,
+  addTo: Hanches,
   diameter: 4,
   translate: { x: -8.5, y: 0, z: -6 },
   rotate: { y: TAU / 4 + 0.4 },
@@ -414,11 +644,11 @@ const Lacet_CHaussure_L_3 = Lacet_CHaussure_L_1.copy({
   translate: { x: 1.3, y: 4.5, z: -2 }
 });
 
-let Chair = new Zdog.Group({
+const Chair = new Zdog.Group({
     addTo: scene
 });
 
-let DossierTop = new Zdog.Ellipse({
+const DossierTop = new Zdog.Ellipse({
     addTo: Chair,
     diameter: 20,
     quarters: 2,
@@ -435,7 +665,7 @@ let DossierTop = new Zdog.Ellipse({
     fill: true
 });
 
-let DossierMiddle = new Zdog.Rect({
+const DossierMiddle = new Zdog.Rect({
     addTo: Chair,
     width: 20,
     height: 18,
@@ -448,7 +678,7 @@ let DossierMiddle = new Zdog.Rect({
     fill: true
 });
 
-let Pouf = new Zdog.Ellipse({
+const Pouf = new Zdog.Ellipse({
     addTo: Chair,
     width: 10,
     height: 20,
@@ -463,7 +693,7 @@ let Pouf = new Zdog.Ellipse({
     }
 });
         
-let StoolStand = new Zdog.Hemisphere({
+const StoolStand = new Zdog.Hemisphere({
     addTo: Chair,
     diameter: 20,
     stroke: false,
@@ -473,214 +703,7 @@ let StoolStand = new Zdog.Hemisphere({
     rotate: { x: TAU / 4 }            
 });
 
-const Computer = new Zdog.Group({
-    addTo: scene,
-        translate:{        y: 24,        z: 18        },
-        rotate:{            x: -0.1    }
-})
-
-const Screen = new Zdog.Box({
-    addTo: Computer,
-    width: 16,
-    height: 32 / 3,
-    depth: 1,
-    stroke: 1,
-    color: 'rgba(1,1,1,.8)',
-    backface: 'lightgray',
-    leftFace: 'lightgray',
-    rightFace: 'lightgray',
-    topFace: 'lightgray',
-    bottomFace: false
-});
-
-// Screen.addChild(faux);
-
-const Keyboard = new Zdog.Box({
-    addTo: Computer,
-        width: 16,
-        height: 32/3,
-        color: 'rgb(211, 211, 212)',
-        backface: 'lightgray',
-        // backface:false,
-        leftFace: 'lightgray',
-        rightFace: 'lightgray',
-        topFace: 'lightgray',
-        // bottomFace: 'lightgray',
-        bottomFace:false,
-        translate:{               y: 32 / 6,                z: -32 / 6            },
-    rotate: { x: TAU / 4 - 3 }
-});
-
-const Table = new Zdog.Box({            
-    addTo: scene,
-        translate:{
-            y: 44.6,
-            z: 14
-        },
-            width: 40,
-            height:27,
-            depth: 15,
-            stroke:2,
-            color:'transparent',
-            // remove left & right faces
-            leftFace:'#86592d',
-            rightFace:'#734d26',
-            rearFace: false,
-            topFace:'#4d3319',
-            bottomFace: false,
-});
-
-const Smartphone = new Zdog.Group({
-  addTo: scene,
-    translate: {
-        x: -15,
-        y: 25,
-        z: 18
-    },
-    rotate: {
-        x: 0,
-        y: TAU / 12
-    }
-});
-
-const SmartphoneScreen = new Zdog.Box({
-    addTo: Smartphone,
-            stroke: 0.01,
-            width: 3,
-            height: 5.5,
-            depth: .125,
-            color: 'black',
-            // backface: 'hsl(201, 38%, 25%)',
-            backface: false,
-            leftFace: 'hsl(201, 38%, 25%)',
-            rightFace: 'hsl(201, 38%, 25%)',
-            topFace: 'hsl(201, 38%, 25%)',
-            // bottomFace: 'hsl(201, 38%, 25%)',
-            bottomFace: false,
-            translate:{
-                y: 32 / 6,
-                z: -32 / 6
-            },
-            rotate: {
-        x: TAU / 4 - 3
-    }
-});
-
-const Avatar = new Zdog.Ellipse({
-    addTo: SmartphoneScreen,
-    diameter: 0.8,
-    // height:0.1,
-    stroke: 0.04,
-    translate: { x: .7, y: -2 },
-    fill: true,
-    color: '#9da99c'
-});
-
-const Line = new Zdog.Shape({
-    addTo: SmartphoneScreen,
-    path: [{ x: 0 }, { x: 1 }],
-    color: '#87a3a7',
-    stroke: .2,
-    translate: { x: -1, y: -2 }
-});
-
-const Line2 = Line.copy({ path: [{ x: 0 }, { x: 2 }], translate: { x: -1, y: -1.2 } });
-
-const Line3 = Line2.copy({ translate: { x: -1, y: -.4 } });
-
-const Box = new Zdog.Rect({
-            addTo: SmartphoneScreen,
-                width: 2,
-                height: 1.8,
-                color: '#87a3a7',
-                fill: true,
-                stroke: .2,
-    translate: { y: 1.4 }
-});
-
-const Triangle = new Zdog.Shape({
-    addTo: Box,
-    path: [{ x: 0, y: -.4 }, { x: .4, y: .4 }, { x: -.4, y: .4 }],
-    fill: true,
-    stroke: .2,
-    color: '#636'
-});
-
-const Pen = new Zdog.Anchor({
-    addTo: scene,
-        scale: 1,
-        translate: { x: 15, y: 25.5, z: 16 },
-        rotate: { x: TAU / 4, y: -TAU/16},
-});
-
-const Pot = new Zdog.Cylinder({
-    addTo: scene,
-    diameter: 3,
-    length: 3,
-    stroke: false,
-    color: 'rgba(157, 169, 156, 0.9)',
-    // backface={'gray'}
-    backface: false,
-    translate: {
-        x: 13.5,
-        y: 28.5,
-        z: 16
-    },
-    rotate: { x: TAU / 4 }
-});
-
-let Pointe = new Zdog.Cone({
-    addTo: Pen,
-    diameter: .72,
-    length: .72,
-    stroke: false,
-    color: "#f4dc95",
-    // backface: "#C25"},
-    backface: false,
-})
-
-let Mine = new Zdog.Cone({
-    addTo: Pen,
-    diameter: .2,
-    length: .2,
-    stroke: false,
-    color: "black",
-    backface: false,
-    translate: { z: .48 }
-});
-
-
-let Bois = new Zdog.Cylinder({
-    addTo: Pen,
-    diameter: .7,
-    length: 4.5,
-    stroke: false,
-    color: 'blue',
-    backface: false,
-    translate: { z: -2.25 }
-});
-
-let Anneau = new Zdog.Cylinder({
-    addTo: Pen,
-        diameter: .7,
-        length: .45,
-            stroke: false,
-        color: 'whitesmoke',
-            // backface: 'whitesmoke',
-            backface: false,
-    translate: { z: -4.5 }
-    });
-
-let Gomme = new Zdog.Hemisphere({
-    addTo: Pen,
-    diameter: .7,
-    stroke: false,
-    color: 'black',
-    backface: false,
-    rotate: { x: Math.PI },
-    translate: { z: -4.75 }
-});
-
+let liste = [Cou, Menton, Front, Cheveux_gros, Cheveux_medium, Cheveux_petit, Cheveux_derriere, Yeux_L, Yeux_R, Oreille_L, Cheveux_oreille_L, Oreille_R, Cheveux_oreille_R, Sourire, Torse, Epaules, Logo_tshirt1, Logo_tshirt2, Bras_Groupe_R, Bras_R, Avant_Bras_R, Main_R, Bras_Groupe_L, Bras_L, Avant_Bras_L, Main_L, Hanches, Cuisse_R, Genou_R, Tibia_R, Chaussure_R, Lacet_CHaussure_R_1, Lacet_CHaussure_R_2, Lacet_CHaussure_R_3, Cuisse_L, Genou_L, Tibia_L, Chaussure_L, Lacet_CHaussure_L_1, Lacet_CHaussure_L_2, Lacet_CHaussure_L_3, Chair, DossierTop, DossierMiddle, Pouf, StoolStand, Table, Smartphone, SmartphoneScreen, Avatar, Line, Line2, Line3, Box, Triangle, Pen, Pot, Pointe, Mine, Bois, Anneau, Gomme];
 const seq = [{
   x: 5.72,
   y: 6.19,
@@ -692,41 +715,47 @@ const seq = [{
 }];
 
 const Me = (props) => {
-
-let animateScene = () => {
+  
+  let animateScene = () => {
+  
   let anim = () => {
-    // const {
-    //   x,
-    //   y,
-    //   z
-    // } = seq[0];
-
     let start, end;
 
     if (props.index === 0) {
       start = 0;
       end = 1;
     }
-    if (props.index === 1) {
+    if (props.prevIndex === 1) {
       start = 1;
       end = 0;
     }
 
-    // setRotation((prevRotation) => {
-    // return ({
     scene.rotate.x = gsap.utils.interpolate(seq[start].x, seq[end].x, animateIllo.progress());
     scene.rotate.y = gsap.utils.interpolate(seq[start].y, seq[end].y, animateIllo.progress());
     scene.rotate.z = gsap.utils.interpolate(seq[start].z, seq[end].z, animateIllo.progress());
-    // });
-    // });
+    scene.scale = gsap.utils.interpolate(1, 8, animateIllo.progress());
+    scene.translate.y -= 1.018;
+    // canvasWidth += 2;
+    // canvasHeight += 2;
   }
 
   let animateIllo = gsap.to('html', {
     visibility: 'visible',
     duration: 2.5,
-    ease: "power4.in",
-    onStart: () => {
+    onStart: () => {      
       gsap.ticker.add(anim);
+      // Make all Zdog shapes disappear ...
+      gsap.to('body', {
+        autoAlpha: 1,
+        duration: 1,
+        onUpdate: () => {
+          const candidates = liste.splice(0, 1);
+          candidates.forEach(candidate => candidate.remove());
+        },
+      });
+
+      // Except the SCREEN, with lines appearing typing
+      // Screen.addChild(faux);
     },
     onComplete: () => {
       gsap.ticker.remove(anim);
@@ -801,17 +830,18 @@ useEffect(() => {
   scene.rotate = seq[0];
 
   animate();
-  console.log('From animateScene Func in Vanilla_Me, we activated the animation !!', props.index);
 
 }, [props.rotation]);
   
-  
+useEffect(() => {
+  // if (!!props.animation && prevIndex === 0) setAnimateIllo(() => true);
+});
   // Animate Scene ?
   useEffect(() => { 
     !!props.animate && animateScene();
   });
   return (
-    <canvas className="zdog-canvas" width={480} height={480}></canvas>
+    <Canvas className="zdog-canvas" width={480} height={480}></Canvas>
   );
 }
 

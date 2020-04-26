@@ -78,11 +78,7 @@ const LogoIllustration = React.forwardRef((props,ref) => {
     }, [props.index, index]);
     
 
-    useEffect(() => {  
-        gsap.set(['[zoom]>svg', '[zoom]'], { overflow: "visible" });
-        gsap.set('[zoom]', {
-        });
-        
+    useEffect(() => {          
         switch (index) {
             case 0:                                     
                 break;
