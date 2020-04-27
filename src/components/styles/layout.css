@@ -118,6 +118,21 @@ body {
 svg:last-of-type {
   display: none;
 }
+
 .zdog-canvas {
 overflow: visible;
+border: .1rem solid rgba(33, 128, 160, 0.7);
+border-radius: 50%;
+transform: translateY(-20px);
+}
+
+.zdog-canvas:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  border: 20px solid red;
 }

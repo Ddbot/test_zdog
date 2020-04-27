@@ -14,6 +14,7 @@ import Chevron from '../components/styled/Chevron';
 import RotationSliders from '../components/rotationSliders';
 
 import Container from '../components/styled/Container';
+import ConePatterm from '../components/zdog/ConePattern';
 
 import { animChevron } from '../utils/timelines';
 
@@ -91,13 +92,6 @@ const data = useStaticQuery(graphql `
 	useEffect(() => {
 		animChevron(chevronBottom.current, 'x', -15);
 	});
-
-
-	// Which direction for the Animation
-	useEffect(() => {
-		// console.log('Received from Index nmber: ', prevIndex);
-		
-	 });
   
   const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
 	

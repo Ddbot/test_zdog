@@ -68,9 +68,8 @@ const LogoIllustration = React.forwardRef((props,ref) => {
     let [animateIllo, setAnimateIllo] = useState();
     let [index, setIndex] = useState(0);
     let [rotation, setRotation] = useState(cone_seq[index]);
-    let [rot, setRot] = useState({ x: 0, y: 0, z: 0});
     
-    let prevIndex = usePrevious(index);
+    let {prevIndex} = props;
         
     //  Index
     useEffect(() => {
@@ -102,7 +101,7 @@ const LogoIllustration = React.forwardRef((props,ref) => {
             case 2:                         
                 // prevIndex > index ? dummyTween(cone_seq[index + 1], cone_seq[index]) : dummyTween(cone_seq[index - 1], cone_seq[index]);
 
-                gsap.set('.container>[zoom]', { display: "none" });
+                // gsap.set('.container>[zoom]', { display: "none" });
                 gsap.fromTo('svg#smartphone', {
                     autoAlpha: 0,
                     duration: 1,
@@ -130,12 +129,16 @@ const LogoIllustration = React.forwardRef((props,ref) => {
     // }, [props.rot, rot]);
 
     useEffect(() => { 
-        !!props.animation && setAnimateIllo(prev => true);
+        if (!!props.animation) {
+            setAnimateIllo(prev => true);
+        };
     });
+
+    console.log('Index: ', index, ' Prev index: ', prevIndex);
 
 
     if (index === 0) {
-        return <Me ref={ref} index={index} rotation={props.rotation} animate={animateIllo}/>
+        return <Me ref={ref} index={index} prevIndex={prevIndex} rotation={props.rotation} animate={animateIllo}/>
     }
     if (index===1) { return <Triangles ref={ref} index={index} rotation={rotation}/> }
     if (index===2) { return <Smartphone ref={ref} index={index} rotation={rotation}/> }

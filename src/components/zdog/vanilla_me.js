@@ -5,7 +5,7 @@ import Canvas from '../styled/Canvas';
 
 import { navigate } from "gatsby";
 
-import gsap from 'gsap';
+import gsap, { splitColor } from 'gsap';
 
 let faux = require('./faux-code.svg');
 
@@ -21,12 +21,6 @@ let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
     // create an scene Anchor to hold all items
     let scene = new Zdog.Anchor();
-
-    // scene.rotate = {
-    //     x: 5.72,
-    //     y: 6.19,
-    //     z: 0
-    // };
 
 // ----- model ----- //
 
@@ -329,9 +323,19 @@ const Main_L = Main_R.copy({
 
 const Computer = new Zdog.Group({
     addTo: scene,
-        translate:{        y: 24,        z: 18        },
-        rotate:{            x: -0.1    }
+    translate:{ y: 24, z: 18 },
+    rotate:{ x: -0.1 }
 })
+
+const slogan = "Hello !!"
+
+const LineScreen = new Zdog.Shape({	
+	// addTo: Computer,
+	color: 'green',
+	path: [{ x: -2 }, { x: 2 }],
+	closed: false,
+	stroke: .8
+});
 
 const Screen = new Zdog.Box({
     addTo: Computer,
@@ -339,7 +343,7 @@ const Screen = new Zdog.Box({
     height: 32 / 3,
     depth: 1,
     stroke: 1,
-    color: 'rgba(1,1,1,.8)',
+    color: 'rgba(255,255,255,1)',
     backface: 'lightgray',
     leftFace: 'lightgray',
     rightFace: 'lightgray',
@@ -417,7 +421,6 @@ let Mine = new Zdog.Cone({
   }
 });
 
-
 let Bois = new Zdog.Cylinder({
   addTo: Pen,
   diameter: .7,
@@ -475,8 +478,6 @@ const Table = new Zdog.Box({
             topFace:'#4d3319',
             bottomFace: false,
 });
-
-
 
 const Smartphone = new Zdog.Group({
   addTo: scene,
@@ -693,156 +694,265 @@ const Pouf = new Zdog.Ellipse({
     }
 });
         
-const StoolStand = new Zdog.Hemisphere({
-    addTo: Chair,
-    diameter: 20,
-    stroke: false,
-    color: '#b3cccc',
-    backface: false,
-    translate: { y: 59 },
-    rotate: { x: TAU / 4 }            
+// const StoolStand = new Zdog.Hemisphere({
+//     addTo: Pouf,
+//     diameter: 19,
+//     stroke: false,
+//     color: '#b3cccc',
+//     backface: false,
+// 	translate: {
+// 		x: 0,
+// 		z: -14
+// 	},        
+// });
+
+const Stand1 = new Zdog.Ellipse({
+	addTo: Pouf,
+	quarters: 2,
+	// scale: 1.5,
+	diameter: 18,
+	translate: {
+		// x: -1.5,
+		// y: 15,
+		z: -14
+	},	
+	rotate: {
+		x: TAU/4,
+		y: 0,
+		z: TAU/4
+	},
+	closed: false,
+	color: '#b3cccc',
+	stroke: 2,
+	// fill: false
 });
 
-let liste = [Cou, Menton, Front, Cheveux_gros, Cheveux_medium, Cheveux_petit, Cheveux_derriere, Yeux_L, Yeux_R, Oreille_L, Cheveux_oreille_L, Oreille_R, Cheveux_oreille_R, Sourire, Torse, Epaules, Logo_tshirt1, Logo_tshirt2, Bras_Groupe_R, Bras_R, Avant_Bras_R, Main_R, Bras_Groupe_L, Bras_L, Avant_Bras_L, Main_L, Hanches, Cuisse_R, Genou_R, Tibia_R, Chaussure_R, Lacet_CHaussure_R_1, Lacet_CHaussure_R_2, Lacet_CHaussure_R_3, Cuisse_L, Genou_L, Tibia_L, Chaussure_L, Lacet_CHaussure_L_1, Lacet_CHaussure_L_2, Lacet_CHaussure_L_3, Chair, DossierTop, DossierMiddle, Pouf, StoolStand, Table, Smartphone, SmartphoneScreen, Avatar, Line, Line2, Line3, Box, Triangle, Pen, Pot, Pointe, Mine, Bois, Anneau, Gomme];
+const Stand2 = new Zdog.Ellipse({
+	addTo: Pouf,
+	quarters: 2,
+	// scale: 1.5,
+	diameter: 18,
+	translate: {
+		// x: -1.5,
+		// y: 15,
+		z: -14
+	},
+	rotate: {
+		// x: TAU/2,
+		y: TAU/4,
+		// z: TAU/2
+	},
+	closed: false,
+	color: '#b3cccc',
+	stroke: 2,
+	// fill: false
+});
+
+let liste = [Cou, Menton, Front, Cheveux_gros, Cheveux_medium, Cheveux_petit, Cheveux_derriere, Yeux_L, Yeux_R, Oreille_L, Cheveux_oreille_L, Oreille_R, Cheveux_oreille_R, Sourire, Torse, Epaules, Logo_tshirt1, Logo_tshirt2, Bras_Groupe_R, Bras_R, Avant_Bras_R, Main_R, Bras_Groupe_L, Bras_L, Avant_Bras_L, Main_L, Hanches, Cuisse_R, Genou_R, Tibia_R, Chaussure_R, Lacet_CHaussure_R_1, Lacet_CHaussure_R_2, Lacet_CHaussure_R_3, Cuisse_L, Genou_L, Tibia_L, Chaussure_L, Lacet_CHaussure_L_1, Lacet_CHaussure_L_2, Lacet_CHaussure_L_3, Chair, DossierTop, DossierMiddle, Pouf, Stand1, Stand2,];
 const seq = [{
-  x: 5.72,
-  y: 6.19,
+  x: 5.485,
+  y: 6.138,
   z: 0
 }, {
   x: TAU,
   y: TAU / 2,
   z: 0
-}];
+  }];
+
 
 const Me = (props) => {
+	let me_tl = gsap.timeline({
+		paused: true,
+		onComplete: () => {
+			navigate("/dev", {
+				state: {
+					index: 1
+				}
+			});
+		}
+	});
   
-  let animateScene = () => {
-  
-  let anim = () => {
-    let start, end;
+	let animateScene = () => {
+		let alpha = 1;
+		let colors = [];
+		liste.forEach((el) => colors.push(el.color));
 
-    if (props.index === 0) {
-      start = 0;
-      end = 1;
-    }
-    if (props.prevIndex === 1) {
-      start = 1;
-      end = 0;
-    }
 
-    scene.rotate.x = gsap.utils.interpolate(seq[start].x, seq[end].x, animateIllo.progress());
-    scene.rotate.y = gsap.utils.interpolate(seq[start].y, seq[end].y, animateIllo.progress());
-    scene.rotate.z = gsap.utils.interpolate(seq[start].z, seq[end].z, animateIllo.progress());
-    scene.scale = gsap.utils.interpolate(1, 8, animateIllo.progress());
-    scene.translate.y -= 1.018;
-    // canvasWidth += 2;
-    // canvasHeight += 2;
-  }
+		// Funcs for the TICKER 
+		let rotateScene = () => {
+			let start, end;
+			
+			const tween = Zdog.easeInOut(rotateIllo.progress(), 3);
 
-  let animateIllo = gsap.to('html', {
-    visibility: 'visible',
-    duration: 2.5,
-    onStart: () => {      
-      gsap.ticker.add(anim);
-      // Make all Zdog shapes disappear ...
-      gsap.to('body', {
-        autoAlpha: 1,
-        duration: 1,
-        onUpdate: () => {
-          const candidates = liste.splice(0, 1);
-          candidates.forEach(candidate => candidate.remove());
-        },
-      });
+			if (props.index === 0 && !props.prevIndex) {
+			start = 0;
+			end = 1;
+			}
+			if (props.index === 0 && props.prevIndex === 1) {
+			start = 1;
+			end = 0;
+			}
 
-      // Except the SCREEN, with lines appearing typing
-      // Screen.addChild(faux);
-    },
-    onComplete: () => {
-      gsap.ticker.remove(anim);
+			console.log('Rotate illo: ',tween);
 
-      navigate("/dev", {
-        state: {
-          index: 1
-        }
-      });
-    }
-  })
-}
+			scene.rotate = {
+				x: Zdog.lerp(seq[start].x, seq[end].x, tween*rotateIllo.progress()),
+				y: Zdog.lerp(seq[start].y, seq[end].y, tween*rotateIllo.progress()),
+				// z: Zdog.lerp(seq[start].z, seq[end].z, rotateIllo.progress())
+			};
+		}
 
-// ----- animate ----- //
+		let zoomOnScreen = () => {
+			const tween = Zdog.easeInOut(zoomIllo.progress()%1.2, 4);
+			// zoom vers l'ecran
+			alpha = Zdog.lerp(1, 0, zoomIllo.progress());			
+			scene.scale = Zdog.lerp(1, 7.4, zoomIllo.progress()/2);
+			scene.translate.y -= 1.2;
+			
+			liste.map((el, i) => {				
+				let rgba = gsap.utils.splitColor(colors[i]);
+				rgba[3] = alpha;
+				el.color = "rgba(`${rgba.join(',')}`)";
+				el.scale -= .1;
+			});
 
-let animate = () => {
-  // make changes to model, like rotating scene
-  // scene.rotate.y += isSpinning ? 0.03 : 0;
-  scene.updateGraph();
-  render();
-  requestAnimationFrame(animate);
-}
+			if (zoomIllo.progress() >= 0.5) {
+				liste.forEach((el) => {					
+					el.visible = false
+				});
+			}
+		}
 
-let render = () => {
-  // clear canvas
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  ctx.save();
-  // center canvas & zoom
-  ctx.translate(canvasWidth / 2, 0);
-  ctx.scale(zoom, zoom);
-  // set lineJoin and lineCap to round
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
-  // render scene graph
-  scene.renderGraphCanvas(ctx);
-  ctx.restore();
-}
+		// Funcs for the TIMELINE
+		let rotateIllo = gsap.to('html', {
+			opacity: 1,
+			duration: 1,
+			ease: "power2.out",
+			onStart: () => {
+				gsap.ticker.add(rotateScene);				
+			},
+			onComplete: () => {
+				gsap.ticker.remove(rotateScene);
+			}
+		});
 
-// ----- drag ----- //
+		let zoomIllo = gsap.to('.zdog-canvas', {
+			borderRadius: "0%",	
+			borderColor: "transparent",
+			duration: 1,
+			onStart: () => {
+				gsap.ticker.add(zoomOnScreen);
+				gsap.to([Table, Pot, Pen], {
+					opacity: 0,
+					duration: 1,
+					leftFace: 'transparent',
+					rightFace: 'transparent',
+					topFace: 'transparent',
+					color: 'transparent',
+					onStart: () => {
 
-let dragStartRX, dragStartRY;
-let minSize = Math.min(canvasWidth, canvasHeight);
+					}
+				});
 
-// add drag-rotatation with Dragger
-new Zdog.Dragger({
-  startElement: canvas,
-  onDragStart: function () {
-    isSpinning = false;
-    dragStartRX = scene.rotate.x;
-    dragStartRY = scene.rotate.y;
-  },
-  onDragMove: function (pointer, moveX, moveY) {
-    scene.rotate.x = dragStartRX - (moveY / minSize) * TAU;
-    scene.rotate.y = dragStartRY - (moveX / minSize) * TAU;
-  }
-});
+			},
+			onComplete: () => {
+				gsap.ticker.remove(zoomOnScreen);
+				gsap.set([Table, Pot, Pen, Computer], { visible: false });
+			},
+		});
 
-// ----- setup ----- //
+		let typeText = gsap.to('html', {
+			duration: 3,
+			// TYPE TEXT LIKE TYPE WRITER
+			onStart: () => {
+				// let animateCodeOnScreen = ...
+				Screen.addChild(LineScreen);
+				Screen.updateGraph();
+			}
+		});
 
-// get canvas element and its context
-useEffect(() => {
-  canvas = document.querySelector(".zdog-canvas");
+		me_tl.add(rotateIllo);
+		me_tl.add(zoomIllo);
+		me_tl.add(typeText);
 
-  ctx = canvas.getContext("2d");
-  // get canvas size
-  canvasWidth = canvas.width;
-  canvasHeight = canvas.height;
-  // illustration variables
-  zoom = 7;
-  isSpinning = false;
+		me_tl.play();
+	}
 
-  scene.rotate = seq[0];
+	// ----- animate ----- //
+	let animate = () => {
+	// make changes to model, like rotating scene
+	// scene.rotate.y += isSpinning ? 0.03 : 0;
+	scene.updateGraph();
+	render();
+	requestAnimationFrame(animate);
+	}
 
-  animate();
+	let render = () => {
+	// clear canvas
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+	ctx.save();
+	// center canvas & zoom
+	ctx.translate(canvasWidth / 2, 0);
+	ctx.scale(zoom, zoom);
+	// set lineJoin and lineCap to round
+	ctx.lineJoin = "round";
+	ctx.lineCap = "round";
+	// render scene graph
+	scene.renderGraphCanvas(ctx);
+	ctx.restore();
+	}
 
-}, [props.rotation]);
-  
-useEffect(() => {
-  // if (!!props.animation && prevIndex === 0) setAnimateIllo(() => true);
-});
-  // Animate Scene ?
-  useEffect(() => { 
-    !!props.animate && animateScene();
-  });
-  return (
-    <Canvas className="zdog-canvas" width={480} height={480}></Canvas>
-  );
+	// ----- setup ----- //
+	// get canvas element and its context
+	useEffect(() => {
+		canvas = document.querySelector(".zdog-canvas");
+
+		ctx = canvas.getContext("2d");
+		// get canvas size
+		canvasWidth = canvas.width;
+		canvasHeight = canvas.height;
+		// illustration variables
+		zoom = 7;
+		isSpinning = false;
+
+		// ----- drag ----- //
+		let dragStartRX, dragStartRY;
+		let minSize = Math.min(canvasWidth, canvasHeight);
+
+		// add drag-rotatation with Dragger
+		new Zdog.Dragger({
+		startElement: canvas,
+		onDragStart: function () {
+			isSpinning = false;
+			dragStartRX = scene.rotate.x;
+			dragStartRY = scene.rotate.y;
+		},
+		// CLAMP pour limiter le mouvement
+		onDragMove: function (pointer, moveX, moveY) {
+			// scene.rotate.x = gsap.utils.clamp(5.62, 6.33, dragStartRX - (moveY / minSize) * TAU);
+			// scene.rotate.y = gsap.utils.clamp(5.96, 6.64, dragStartRY - (moveX / minSize) * TAU);
+			scene.rotate.x = dragStartRX - (moveY / minSize) * TAU;
+			scene.rotate.y = dragStartRY - (moveX / minSize) * TAU;
+
+			console.log('onDragMove: { x: ', scene.rotate.x, '; y: ', scene.rotate.y, ' }');
+		}
+		});  
+
+		scene.rotate = seq[0];
+
+		animate();
+
+	}, [props.rotation]);
+	
+	// Animate Scene ?
+	scene.translate.y = 3;
+	useEffect(() => { 
+		!!props.animate && animateScene();
+	});
+		
+	return (
+		<Canvas className="zdog-canvas" width={480} height={480}></Canvas>
+	);
 }
 
 export default Me;
