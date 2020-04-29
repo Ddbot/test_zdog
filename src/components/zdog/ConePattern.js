@@ -1,11 +1,11 @@
 import React from 'react';
 import Zdog from 'zdog';
-import { Cone } from 'react-zdog';
+import { Anchor, Cone } from 'react-zdog';
 
 const { TAU } = Zdog;
 
 const ConePattern = (props) => {
-    return <>
+    return <Anchor>
         <Cone diameter={24}
             // 1
             length={24}
@@ -85,7 +85,7 @@ const ConePattern = (props) => {
             rotate={props.rotation}
             translate={{ x: 12, y: -24 }}
         />
-    </>
+    </Anchor>
 }
 
 export default ConePattern;

@@ -329,13 +329,6 @@ const Computer = new Zdog.Group({
 
 const slogan = "Hello !!"
 
-const LineScreen = new Zdog.Shape({	
-	// addTo: Computer,
-	color: 'green',
-	path: [{ x: -2 }, { x: 2 }],
-	closed: false,
-	stroke: .8
-});
 
 const Screen = new Zdog.Box({
     addTo: Computer,
@@ -349,6 +342,135 @@ const Screen = new Zdog.Box({
     rightFace: 'lightgray',
     topFace: 'lightgray',
     bottomFace: false
+});
+
+
+let rotCones = {
+  x: 3,
+  y: -Math.PI / 16
+}
+
+new Zdog.Cone({
+  // 1
+  addTo: Screen,
+  diameter: 4,
+  length: 4,
+  stroke: false,
+  color: '#f38181',
+  backface: false,
+  rotate: {
+    x: -rotCones.x,
+    y: -rotCones.y,
+    z: -TAU / 4
+  }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  diameter: 4,
+  // 2
+  length: 4,
+  stroke: false,
+  color: '#f38c84',
+  backface: false,
+    rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 },
+  translate: {
+    x: -2,
+    y: 4
+  }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  diameter: 4,
+  // 3
+  length: 4,
+  stroke: false,
+  color: '#f3a389',
+  backface: false,
+  rotate: { x: -rotCones.x, y: -rotCones.y, z: -TAU/4 },
+  translate: {
+    x: -4
+  }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  // 4
+  diameter: 4,
+  length: 4,
+  stroke: false,
+  color: '#f4ba8e',
+  backface: false,
+    rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 },
+  translate: {
+    x: -4
+  }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  diameter: 4,
+  // 5
+  length: 4,
+  stroke: false,
+  color: '#f4c590',
+  backface: false,
+  rotate: {
+    x: -rotCones.x,
+    y: -rotCones.y,
+    z: -TAU / 4
+  },
+  translate: {
+    x: -2,
+    y: -4,
+  }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  // 6
+  id: "pointe",
+  diameter: 4,
+  length: 4,
+  stroke: false,
+  color: '#f4d193',
+  backface: false,
+  rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  diameter: 4,
+  // 7
+  length: 4,
+  stroke: false,
+  color: '#f4dc95',
+  backface: false,
+  rotate: {
+    x: -rotCones.x,
+    y: -rotCones.y,
+    z: -TAU/4
+  },
+  translate: {
+    x: 2,
+    y: -4
+  }
+});
+
+new Zdog.Cone({
+  addTo: Screen,
+  diameter: 4,
+  // 8
+  length: 4,
+  stroke: false,
+  color: '#f4f39a',
+  backface: false,
+  rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 },
+  translate: {
+    x: 2,
+    y: -4
+  }
 });
 
 const Keyboard = new Zdog.Box({
@@ -704,7 +826,7 @@ const Pouf = new Zdog.Ellipse({
 // 		x: 0,
 // 		z: -14
 // 	},        
-// });
+// });  
 
 const Stand1 = new Zdog.Ellipse({
 	addTo: Pouf,
@@ -782,18 +904,18 @@ const Me = (props) => {
 		let rotateScene = () => {
 			let start, end;
 			
-			const tween = Zdog.easeInOut(rotateIllo.progress(), 3);
+			const tween = Zdog.easeInOut(rotateIllo.progress()%2, 3);
 
 			if (props.index === 0 && !props.prevIndex) {
 			start = 0;
 			end = 1;
-			}
+      }
+      
 			if (props.index === 0 && props.prevIndex === 1) {
 			start = 1;
 			end = 0;
 			}
 
-			console.log('Rotate illo: ',tween);
 
 			scene.rotate = {
 				x: Zdog.lerp(seq[start].x, seq[end].x, tween*rotateIllo.progress()),
@@ -806,8 +928,8 @@ const Me = (props) => {
 			const tween = Zdog.easeInOut(zoomIllo.progress()%1.2, 4);
 			// zoom vers l'ecran
 			alpha = Zdog.lerp(1, 0, zoomIllo.progress());			
-			scene.scale = Zdog.lerp(1, 7.4, zoomIllo.progress()/2);
-			scene.translate.y -= 1.2;
+			scene.scale = Zdog.lerp(1, 7, zoomIllo.progress()/2);
+			scene.translate.y -= 1.5;
 			
 			liste.map((el, i) => {				
 				let rgba = gsap.utils.splitColor(colors[i]);
@@ -821,12 +943,12 @@ const Me = (props) => {
 					el.visible = false
 				});
 			}
-		}
-
+    }
+    
 		// Funcs for the TIMELINE
 		let rotateIllo = gsap.to('html', {
 			opacity: 1,
-			duration: 1,
+			duration: 1.4,
 			ease: "power2.out",
 			onStart: () => {
 				gsap.ticker.add(rotateScene);				
@@ -834,26 +956,27 @@ const Me = (props) => {
 			onComplete: () => {
 				gsap.ticker.remove(rotateScene);
 			}
-		});
+    });
+    
+    let erasePerson = gsap.to(liste, {
+      scale: 0,
+      autoAlpha: 0,
+      color: "transparent",
+      duration: .3,
+      onComplete: () => {
+        gsap.set(liste, { visible: false });
+      }
+    });
 
 		let zoomIllo = gsap.to('.zdog-canvas', {
-			borderRadius: "0%",	
+			borderRadius: "0px",	
 			borderColor: "transparent",
-			duration: 1,
+			duration: .8,
 			onStart: () => {
 				gsap.ticker.add(zoomOnScreen);
-				gsap.to([Table, Pot, Pen], {
-					opacity: 0,
-					duration: 1,
-					leftFace: 'transparent',
-					rightFace: 'transparent',
-					topFace: 'transparent',
-					color: 'transparent',
-					onStart: () => {
-
-					}
-				});
-
+        gsap.to([Table, Pot, Pen], {
+          visible: false
+        })
 			},
 			onComplete: () => {
 				gsap.ticker.remove(zoomOnScreen);
@@ -864,16 +987,18 @@ const Me = (props) => {
 		let typeText = gsap.to('html', {
 			duration: 3,
 			// TYPE TEXT LIKE TYPE WRITER
-			onStart: () => {
+			// onStart: () => {
 				// let animateCodeOnScreen = ...
-				Screen.addChild(LineScreen);
-				Screen.updateGraph();
-			}
+				// Screen.addChild(Pattern);
+				// Screen.updateGraph();
+			// }
 		});
 
-		me_tl.add(rotateIllo);
-		me_tl.add(zoomIllo);
-		me_tl.add(typeText);
+    me_tl.add(rotateIllo);
+    me_tl.add(erasePerson);
+    me_tl.add(zoomIllo);
+    
+		// me_tl.add(typeText);
 
 		me_tl.play();
 	}
@@ -892,7 +1017,7 @@ const Me = (props) => {
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 	ctx.save();
 	// center canvas & zoom
-	ctx.translate(canvasWidth / 2, 0);
+	ctx.translate(canvasWidth/2, 0);
 	ctx.scale(zoom, zoom);
 	// set lineJoin and lineCap to round
 	ctx.lineJoin = "round";

@@ -122,7 +122,7 @@ svg:last-of-type {
 .zdog-canvas {
 overflow: visible;
 border: .1rem solid rgba(33, 128, 160, 0.7);
-border-radius: 50%;
+border-radius: 5%;
 transform: translateY(-20px);
 }
 
@@ -135,4 +135,18 @@ transform: translateY(-20px);
   top: 2rem;
   left: 2rem;
   border: 20px solid red;
+}
+
+.illustration {
+  width: 480px;
+  height: 480px;
+}
+
+.illustration > svg {
+  min-width: 480px;
+  min-height: 480px;
+  max-width: 480px;
+  max-height: 480px;
+  border: 2px dotted green;
+  
 }

@@ -14,7 +14,7 @@ import Chevron from '../components/styled/Chevron';
 import RotationSliders from '../components/rotationSliders';
 
 import Container from '../components/styled/Container';
-import ConePatterm from '../components/zdog/ConePattern';
+import ConePattern from '../components/zdog/ConePattern';
 
 import { animChevron } from '../utils/timelines';
 
