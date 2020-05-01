@@ -82,11 +82,11 @@ const LogoIllustration = React.forwardRef((props,ref) => {
             case 0:                                     
                 break;
             case 1:
-                if (prevIndex > index) {
-                    dummyTween(cone_seq[index + 1], cone_seq[index]); 
-                } else {
-                    dummyTween(cone_seq[index], cone_seq[index + 1])
-                }
+                // if (prevIndex > index) {
+                //     dummyTween(cone_seq[index + 1], cone_seq[index]); 
+                // } else {
+                //     dummyTween(cone_seq[index], cone_seq[index + 1])
+                // }
 
                 let circs = document.querySelectorAll('[zoom]>svg>path:not(:nth-of-type(2))');
     

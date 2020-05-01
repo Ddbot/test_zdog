@@ -7,6 +7,9 @@ import { navigate } from "gatsby";
 
 import gsap, { splitColor } from 'gsap';
 
+import ConePattern from './ConeTest';
+import CodeLines from './CodeLines';
+
 let faux = require('./faux-code.svg');
 
 const { TAU } = Zdog;
@@ -327,151 +330,86 @@ const Computer = new Zdog.Group({
     rotate:{ x: -0.1 }
 })
 
-const slogan = "Hello !!"
-
-
 const Screen = new Zdog.Box({
     addTo: Computer,
-    width: 16,
-    height: 32 / 3,
+    width: 32/3,
+    height: 16,
     depth: 1,
     stroke: 1,
-    color: 'rgba(255,255,255,1)',
-    backface: 'lightgray',
-    leftFace: 'lightgray',
-    rightFace: 'lightgray',
-    topFace: 'lightgray',
-    bottomFace: false
+    color: 'darkgrey',
+    backface: 'white',
+    leftFace: 'darkgrey',
+    rightFace: 'darkgrey',
+    topFace: 'darkgrey',
+    bottomFace: 'darkgrey'
 });
 
+CodeLines.zoom = .4;
 
-let rotCones = {
-  x: 3,
-  y: -Math.PI / 16
-}
-
-new Zdog.Cone({
-  // 1
-  addTo: Screen,
-  diameter: 4,
-  length: 4,
-  stroke: false,
-  color: '#f38181',
-  backface: false,
-  rotate: {
-    x: -rotCones.x,
-    y: -rotCones.y,
-    z: -TAU / 4
-  }
+ 
+let bezel = new Zdog.Rect({
+  width: 32/3,
+  height: 16,
+  stroke: 1.5,
+  color: 'lightgray',
 });
 
-new Zdog.Cone({
-  addTo: Screen,
-  diameter: 4,
-  // 2
-  length: 4,
-  stroke: false,
-  color: '#f38c84',
-  backface: false,
-    rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 },
-  translate: {
-    x: -2,
-    y: 4
-  }
-});
-
-new Zdog.Cone({
-  addTo: Screen,
-  diameter: 4,
-  // 3
-  length: 4,
-  stroke: false,
-  color: '#f3a389',
-  backface: false,
-  rotate: { x: -rotCones.x, y: -rotCones.y, z: -TAU/4 },
-  translate: {
-    x: -4
-  }
-});
-
-new Zdog.Cone({
-  addTo: Screen,
-  // 4
-  diameter: 4,
-  length: 4,
-  stroke: false,
-  color: '#f4ba8e',
-  backface: false,
-    rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 },
-  translate: {
-    x: -4
-  }
-});
-
-new Zdog.Cone({
-  addTo: Screen,
-  diameter: 4,
-  // 5
-  length: 4,
-  stroke: false,
-  color: '#f4c590',
-  backface: false,
-  rotate: {
-    x: -rotCones.x,
-    y: -rotCones.y,
-    z: -TAU / 4
-  },
-  translate: {
-    x: -2,
-    y: -4,
-  }
-});
-
-new Zdog.Cone({
-  addTo: Screen,
-  // 6
-  id: "pointe",
-  diameter: 4,
-  length: 4,
-  stroke: false,
-  color: '#f4d193',
-  backface: false,
-  rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 }
-});
-
-new Zdog.Cone({
-  addTo: Screen,
-  diameter: 4,
-  // 7
-  length: 4,
-  stroke: false,
-  color: '#f4dc95',
-  backface: false,
-  rotate: {
-    x: -rotCones.x,
-    y: -rotCones.y,
-    z: -TAU/4
-  },
-  translate: {
-    x: 2,
-    y: -4
-  }
-});
-
-new Zdog.Cone({
-  addTo: Screen,
-  diameter: 4,
-  // 8
-  length: 4,
-  stroke: false,
+let t1  = new Zdog.Shape({
+  path: [ // triangle
+    { x:   -1, y: 1 },
+    { x:  0, y:  3 },
+    { x: 1, y:  1 },
+  ],
+  translate: { x: -2, y: 1 },
+  // closed by default
+  stroke: .1,
   color: '#f4f39a',
-  backface: false,
-  rotate: { x: rotCones.x, y: rotCones.y, z: -TAU/4 },
-  translate: {
-    x: 2,
-    y: -4
-  }
+  fill: true
 });
+
+let t2 = t1.copy({
+  path: [{x: -1, y: 1 }, { x: 1, y: 1}, { x: 0, y: -1}]
+});
+
+let t3 = t1.copy({
+  path: [{ x: 1, y: 1 }, { x: 0, y: -1 }, { x: 2, y: -1 }],
+  color: '#f4d193'
+});
+let t4 = t1.copy({
+  path: [{ x: 0, y: -1 }, { x: 2, y: -1 }, { x: 1, y: -3 }],
+  color: '#f38181'
+});
+
+let t5 = t1.copy({
+  path: [{ x: 1, y: 1 }, { x: 2, y: -1 }, { x: 3, y: 1 }],
+  color: '#f4c590'
+});
+
+let t6 = t5.copy({
+  path: [{x: 4, y: -1 }, { x: 2, y: -1}, { x: 3, y: 1}]
+});
+
+let t7 = t1.copy({
+  path: [{ x: 1, y: -3 }, { x: 2, y: -1 }, { x: 3, y: -3 }],
+  color: '#f3a389'
+});
+
+let t8 = t7.copy({
+  path: [{x: 4, y: -1 }, { x: 2, y: -1}, { x: 3, y: -3}]
+});
+
+
+Screen.addChild(CodeLines);
+// Screen.addChild(ConePattern); 
+// Screen.addChild(ss);
+[bezel, t1, t2, t3, t4, t5, t6, t7,t8].forEach(t => Screen.addChild(t));
+// Screen.addChild(t1);
+CodeLines.rotate.z = -TAU / 4;
+CodeLines.scale = (.1, 4)
+Screen.rotate = { y: TAU/2, z: TAU/4 }
+
+
+
 
 const Keyboard = new Zdog.Box({
     addTo: Computer,
