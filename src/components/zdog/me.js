@@ -352,11 +352,11 @@ const Me = React.forwardRef((props, ref) => {
 				onClick={handleClick}>
 				<Table className="table" />
 				<Head className="head" />
-                <Torso className="torso" color={"#995c00"} />
+        <Torso className="torso" color={"#995c00"} />
 				<Legs className="legs" />
 				<Chair className="chair" />
 				<Computer className="computer" />
-                <Smartphone className="smartphone" />
+        <Smartphone className="smartphone" />
 				<Group>
 					<Pot className="pot" />
 					<Pen className="pen" />

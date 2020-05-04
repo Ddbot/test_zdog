@@ -64,20 +64,36 @@ body {
 
 }
 
+.zdog-canvas,
+.illustration {
+  flex: 1;
+      width: 50%;
+}
+
 .textContent {
   /* height: 80vh;
   width: 80vh; */
   /* margin-left: 25%; */
-  display: flex;
+  /* display: flex; */
+  flex: 1;
   justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start;
-  line-height: 0em;
+  /* line-height: 0em; */
+  border: 1px solid green;
+}
+
+.zdog-canvas,
+.illustration > svg {
+    border: 1px solid green;
+    /* width: 480px;
+    height: 480px; */
+
 }
 
 .textContent>p {
   font-size: 2.5rem;
-  transform: translateY(-1.2rem);
+  /* transform: translateY(-1.2rem); */
 
   /* padding: 0 2.5rem 2rem 3.5rem; */
   line-height: 1.8;
@@ -85,68 +101,4 @@ body {
   
 }
 
-.textContent>p::before {
-  content: '';
-  position: fixed;
-  top: 20vh;
-  /* left: -12vw; */
-  width: 100%;
-  height: 100%;
-  transform: scale(0.4) rotateX(65deg) rotateZ(-15deg) translate(-27%,50%);
-  mix-blend-mode: lighten;
-  background-blend-mode: lighten;
-  /* clip-path: url(#bgPath); */
-  /* z-index: 1; */
-  /* background-image: url("data:image/svg+xml,%3Csvg width='12' height='16' viewBox='0 0 12 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 .99C4 .445 4.444 0 5 0c.552 0 1 .45 1 .99v4.02C6 5.555 5.556 6 5 6c-.552 0-1-.45-1-.99V.99zm6 8c0-.546.444-.99 1-.99.552 0 1 .45 1 .99v4.02c0 .546-.444.99-1 .99-.552 0-1-.45-1-.99V8.99z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E"), linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%); */
-  
-  /* transition: clip-path 2s; */
-}
 
-.container>div:first-of-type {
-  margin-left: 4rem;
-}
-
-.container>svg {
-  overflow: visible;
-}
-
-.container>svg:last-of-type {
-  width: 0;
-  height: 0;
-}
-
-svg:last-of-type {
-  display: none;
-}
-
-.zdog-canvas {
-overflow: visible;
-border: .1rem solid rgba(33, 128, 160, 0.7);
-border-radius: 5%;
-transform: translateY(-20px);
-}
-
-.zdog-canvas:before {
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  position: fixed;
-  top: 2rem;
-  left: 2rem;
-  border: 20px solid red;
-}
-
-.illustration {
-  width: 480px;
-  height: 480px;
-}
-
-.illustration > svg {
-  min-width: 480px;
-  min-height: 480px;
-  max-width: 480px;
-  max-height: 480px;
-  border: 2px dotted green;
-  
-}

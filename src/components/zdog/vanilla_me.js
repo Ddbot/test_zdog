@@ -399,10 +399,10 @@ let t8 = t7.copy({
 });
 
 
-Screen.addChild(CodeLines);
+// Screen.addChild(CodeLines);
 // Screen.addChild(ConePattern); 
 // Screen.addChild(ss);
-[bezel, t1, t2, t3, t4, t5, t6, t7,t8].forEach(t => Screen.addChild(t));
+// [bezel, t1, t2, t3, t4, t5, t6, t7,t8].forEach(t => Screen.addChild(t));
 // Screen.addChild(t1);
 CodeLines.rotate.z = -TAU / 4;
 CodeLines.scale = (.1, 4)
@@ -1011,10 +1011,10 @@ const Me = (props) => {
 	scene.translate.y = 3;
 	useEffect(() => { 
 		!!props.animate && animateScene();
-	});
-		
+  });
+  		
 	return (
-		<Canvas className="zdog-canvas" width={480} height={480}></Canvas>
+    <Canvas className="zdog-canvas" width={480} height={480}></Canvas>
 	);
 }
 

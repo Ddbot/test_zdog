@@ -7,6 +7,7 @@ import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from '../components/styled/Chevron';
 
+
 import { animChevron } from '../utils/timelines';
 
 const Dev = ({location},props) => {
@@ -53,9 +54,9 @@ const Dev = ({location},props) => {
 				<Link to='/' state={{ prevIndex: 1, animate: true }} style={{ position: "fixed", left: "25%", top:"10%"}}>
 					<Chevron style={{ rotate: "270deg", top: "14%", zIndex: 10}}/>
 				</Link>
-			<LogoIllustration index={1} prevIndex={props.prevIndex}/>	
-				<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-				<Link to='/design' state={{ index: 2 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
+			<LogoIllustration index={1} prevIndex={props.prevIndex}/>				
+			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
+				<Link to='/design' state={{ prevIndex: 1 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
 					<Chevron />
 				</Link>
 			</Container>

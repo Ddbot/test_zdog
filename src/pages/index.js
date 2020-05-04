@@ -119,12 +119,12 @@ const data = useStaticQuery(graphql `
 			<LogoIllustration
 				ref={illoRef}
 				index={index}
-				style={{ zIndex: 2 }}
+				style={{ zIndex: 2, flex: 1 }}
 				rotation={rotation}
 				animation={animation}
 			/>
 			{/* <RotationSliders handleRotation={handleRotation}/> */}
-			<TextContainer className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
+			<TextContainer className="textContent" style={{ flex: 1 }} dangerouslySetInnerHTML={{ __html: content }} />
 			<Chevron ref={chevronBottom}
 				onMouseEnter={() => {
 					animChevron(chevronBottom.current, 'x', -15, true);
