@@ -37,34 +37,32 @@ const initial_position = {
 
 
 const IndexPage = (props) => {
+	let illo = useRef();
+
     function usePrevious(value) {
     	const ref = useRef();
     	useEffect(() => {
     		ref.current = value;
     	});
     	return ref.current;
-    }
-	
-	// let illoRef = useRef(null);
+	}
+		
 	let chevronBottom = useRef(null);
 	let chevronTop = useRef(null);
 	
 	let lang = useContext(LangContext);
 	let [index, setIndex] = useState(0);
 	let [slide, setSlide] = useState(null);
-	let [animation, setAnimation] = useState(false);
-	// let [rotation, setRotation] = useState(initial_position);
 	let [translate, setTranslate] = useState({ x: 0, y: 3, z: 0 });
 	const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
 
-	let prevIndex = usePrevious(index);
 
 	// LANG		
 	useEffect(() => {
 		localStorage.setItem('lang', lang);
 	});
 
-	// Sync Slide to index
+	// Sync Slide (text content) to index
 	useEffect(() => { 
 		setSlide(prev => {
 			let res;
@@ -95,7 +93,8 @@ const IndexPage = (props) => {
 		animChevron(chevronTop.current, 'x', -15);
 		animChevron(chevronBottom.current, 'x', -15);
 	}, [index]);
-  	
+
+
 	let handleClick = (e) => {
 		switch (e.target) {
 			case chevronTop.current:
@@ -107,7 +106,6 @@ const IndexPage = (props) => {
 			default:
 				break;
 		}
-		setAnimation(prev => true);
 	};
 
 	return (<>
@@ -115,8 +113,8 @@ const IndexPage = (props) => {
 		<Container className="container">
 			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "44%", zIndex: 10, position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration
+				ref={illo}
 				index={index}
-				prevIndex={prevIndex}
 				style={{ zIndex: 2, flex: 1 }}
 				translate={translate}
 				rotate={initial_position}

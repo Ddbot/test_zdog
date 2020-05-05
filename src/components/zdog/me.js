@@ -1034,6 +1034,7 @@ let next_coords = [{
 
 const Me = (props) => {
     const { index } = props;
+    
     let [animation, setAnimation] = useState(props.animation);
     let me_tl = gsap.timeline({
         paused: true,
@@ -1211,7 +1212,7 @@ const Me = (props) => {
     let illuTweenDuration = 1;
 
     let dummyTween = (prevRot, newRot) => {
-        let ease= gsap.to("body", {
+        let tween= gsap.to("body", {
             autoAlpha: 1,
             duration: illuTweenDuration,
             paused: true,
@@ -1219,23 +1220,23 @@ const Me = (props) => {
                 setAnimation((prev) => {
                     return [{
                         // translate
-                        x: gsap.utils.interpolate(prev[0].x, newRot[0].x, dummyTween.progress()),
-                        y: gsap.utils.interpolate(prev[0].y, newRot[0].y, dummyTween.progress()),
-                        z: gsap.utils.interpolate(prev[0].z, newRot[0].z, dummyTween.progress())
+                        x: gsap.utils.interpolate(prev[0].x, newRot[0].x, tween.progress()),
+                        y: gsap.utils.interpolate(prev[0].y, newRot[0].y, tween.progress()),
+                        z: gsap.utils.interpolate(prev[0].z, newRot[0].z, tween.progress())
                     }, {
-                        x: gsap.utils.interpolate(prev[1].x, newRot[1].x, dummyTween.progress()),
-                        y: gsap.utils.interpolate(prev[1].y, newRot[1].y, dummyTween.progress()),
-                        z: gsap.utils.interpolate(prev[1].z, newRot[1].z, dummyTween.progress())
+                        x: gsap.utils.interpolate(prev[1].x, newRot[1].x, tween.progress()),
+                        y: gsap.utils.interpolate(prev[1].y, newRot[1].y, tween.progress()),
+                        z: gsap.utils.interpolate(prev[1].z, newRot[1].z, tween.progress())
                         }, {
-                        x: gsap.utils.interpolate(prev[2].x, newRot[2].x, dummyTween.progress()),
-                        y: gsap.utils.interpolate(prev[2].y, newRot[2].y, dummyTween.progress()),
-                        z: gsap.utils.interpolate(prev[2].z, newRot[2].z, dummyTween.progress())
+                        x: gsap.utils.interpolate(prev[2].x, newRot[2].x, tween.progress()),
+                        y: gsap.utils.interpolate(prev[2].y, newRot[2].y, tween.progress()),
+                        z: gsap.utils.interpolate(prev[2].z, newRot[2].z, tween.progress())
 
                     }]
                 });
             },
         });
-        dummyTween.play(0).delay(.7);
+        tween.play(0).delay(.7);
     }
 
     useEffect(() => {          
@@ -1250,32 +1251,21 @@ const Me = (props) => {
                   }                                                
                 break;
             case 2:                         
-                dummyTween(next_coords[index - 1], next_coords[index]);      
-                gsap.fromTo('svg#smartphone', {
-                    autoAlpha: 0,
-                    duration: 1,
-                    scale: 0,
-                    x: -150,
-                }, {
-                    autoAlpha:1,
-                    scale: .4
-                });
+                // dummyTween(next_coords[index - 1], next_coords[index]);      
+
             case 3:  
-                dummyTween(next_coords[index-1], next_coords[index]);                
+                // dummyTween(next_coords[index-1], next_coords[index]);                
                 break;
             case 4:                                                
-                dummyTween(next_coords[index-1], next_coords[index]);
+                // dummyTween(next_coords[index-1], next_coords[index]);
                 break;
             default:
                 break;    
         }       
     }, [index]);    
-
-    useEffect(() => {
-        // scene.rotate = props.rotate
-        scene.translate = props.translate
-        // scene.scale = !!props.translate ? props.translate.z : 1
-    }, [props.rotation, props.translate]);
+    useEffect(() => { 
+        console.log('ID: ', props.index);
+    }, [index]);
 
     return <Canvas className="zdog-canvas" width={480} height={480}></Canvas>;
 }
