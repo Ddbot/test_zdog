@@ -28,7 +28,7 @@ const Dev = ({location},props) => {
       }
     }
   `);		
-	const { index } = location.state;	
+	const { index, prevIndex } = location.state;	
 	let lang = useContext(LangContext);
 
 	useEffect(() => { 
@@ -38,6 +38,10 @@ const Dev = ({location},props) => {
 
 		animChevron(design, 'y', -15);
 		animChevron(home, 'y', 15);
+	});
+
+	useEffect(() => { 
+		console.log('Prev: ', prevIndex, ' Current idx: ', index);
 	});
 	
 	const defaultLang = localStorage.getItem('lang') || lang;
@@ -56,7 +60,7 @@ const Dev = ({location},props) => {
 				</Link>
 			<LogoIllustration index={1} prevIndex={props.prevIndex}/>				
 			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />
-				<Link to='/design' state={{ prevIndex: 1 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
+				<Link to='/design' state={{ prevIndex: 1,index: 2 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
 					<Chevron />
 				</Link>
 			</Container>

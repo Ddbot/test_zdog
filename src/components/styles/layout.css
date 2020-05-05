@@ -46,6 +46,9 @@ body {
   overflow: hidden;
 }
 
+nav.navbar {
+}
+
 .container {
   display: flex;
   flex-flow: row nowrap;
@@ -59,15 +62,27 @@ body {
 .purple {
   color: white;
   padding: 0 3px;
-  background-color: var(--bulma-blue2);
-    font-family: "Roboto";
-
+  background-color: #f4dc95;
+  font-family: "Roboto";
 }
+
+.purple:nth-of-type(2){
+    background-color: #f3af8b;
+}
+.purple:nth-of-type(3) {
+    background-color: #f38181;
+}
+.purple:nth-of-type(4) {
+    background-color: #6199b8;
+}
+
+
 
 .zdog-canvas,
 .illustration {
   flex: 1;
-      width: 50%;
+  width: 50%;
+scale: .8;
 }
 
 .textContent {
@@ -80,15 +95,22 @@ body {
   align-content: flex-start;
   align-items: flex-start;
   /* line-height: 0em; */
-  border: 1px solid green;
+  /* border: 1px solid green; */
+
+  height: 100%;
 }
 
 .zdog-canvas,
-.illustration > svg {
-    border: 1px solid green;
-    /* width: 480px;
-    height: 480px; */
+.illustration,
+.textContent {
+      transform: translateY(-7%);
 
+}
+
+.illustration>svg {
+  transform: translate(2vh,-14vh);
+  overflow: visible;
+  /* scale: 0.7; */
 }
 
 .textContent>p {
@@ -98,7 +120,14 @@ body {
   /* padding: 0 2.5rem 2rem 3.5rem; */
   line-height: 1.8;
   /* float: left; */
-  
 }
 
+
+.rotationSliders {
+  position: fixed;
+  top: 8vh;
+      height: 10px;
+      /* width: 100px; */
+      z-index: 10;
+}
 

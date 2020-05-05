@@ -30,7 +30,7 @@ const Design = ({location}) => {
     }
   `);
     const defaultLang = localStorage.getItem('lang');    
-    const { index } = location.state;
+    const { prevIndex, index } = location.state;
     // let lang = useContext(LangContext);
   
   useEffect(() => {
@@ -40,6 +40,10 @@ const Design = ({location}) => {
     		animChevron(dev, 'y', 15);
     		animChevron(i18n, 'y', 15);
   });
+
+	useEffect(() => {
+	  console.log('Prev: ', prevIndex, ' Current idx: ', index);
+	});
     
     const content = data.site.siteMetadata[defaultLang][`slide_${index}`];
     
@@ -49,7 +53,7 @@ const Design = ({location}) => {
             <Link to='/dev' state={{ index: 1 }} style={{ position: "fixed", left: "25%", top: "10%", rotate:"180deg"}}>
 					    <Chevron />
             </Link>        
-            <LogoIllustration index={2} />	
+        <LogoIllustration index={2} rotation={{  }}/>	
             <div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
             <Link to='/i18n' state={{ index: 3 }} style={{ position: "fixed", left: "25%", bottom: "4%"}}>
               <Chevron />

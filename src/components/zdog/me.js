@@ -1,368 +1,1283 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, {
+    useEffect,
+    useState
+} from 'react';
 import Zdog from 'zdog';
-import { Cylinder, Ellipse, Box, Illustration, Canvas, Shape, Group, useZdog, useRender } from 'react-zdog';
 
-import styled from 'styled-components';
+import Canvas from '../styled/Canvas';
 
-import Chair from './Chair';
-import Computer from './Computer';
-import Pen from './Pen';
-import Pot from './Pot';
+import {
+    navigate, useStaticQuery
+} from "gatsby";
+
+import gsap, {
+    splitColor
+} from 'gsap';
+
+import ConePattern from './ConeTest';
+import CodeLines from './CodeLines';
 import Smartphone from './Smartphone';
-import Table from './Table';
-import gsap from 'gsap';
+import Triangles from '../Triangles';
 
-const { TAU } = Zdog;
+
+let faux = require('./faux-code.svg');
+
+const {
+    TAU
+} = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
 
 var torsoX = 3 / quarterTurn;
 var shoulderX = torsoX + 1.5;
-var shinEnd = { y: 22 };
-var hipX = (8 / quarterTurn) / 2;
+var shinEnd = {
+    y: 22
+};
+var hipX = 8 / quarterTurn / 2;
 
-const Me = React.forwardRef((props, ref) => {    
-    let headRef = useRef(null);
-    let torsoRef = useRef(null);
-    let rightArm = useRef(null);
-    let leftArm = useRef(null);
-    let rightForeArm = useRef(null);
-    let leftForeArm = useRef(null);
-    let legsRef = useRef(null);
+let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
-    const Head = (props) => {
-        {/* COU */ }
-        return <Cylinder ref={headRef}
-            // path={[{ y: 8 }, { y: 14 }]}
-            diameter={4}
-            length={6}
-            stroke={false}
-            // color={'#804d00'}
-            color={'#995c00'}
-            rotate={{ x: -TAU / 4 }}
-            translate={{ y: 12.5 }}>
-            {/* menton */}
-            <Shape
-                translate={{ y: 0, z: -2 }}
-                stroke={7.5}
-                color={'#995c00'}
-                rotate={{ x: TAU / 4 }}>
-                {/* front */}
-                <Ellipse
-                    diameter={2}
-                    translate={{ y: -4 }}
-                    stroke={4}
-                    color = {'#995c00'}>
-                        {/* CHEVEUX GROS */}
-                        <Shape
-                            path={[{ y: -1 }, { y: -7 }]}
-                            translate={{ x: -2, y: -3.5, z: -3 }}
-                            rotate={{ x: -TAU / 4 }}
-                            stroke={2.5}
-                            color={'#616161'} />
-                        {/* CHEVEUX MEDIUM */}
-                        <Shape
-                            path={[{ y: 0 }, { y: -6 }]}
-                            translate={{ x: 2, y: -3, z: -2 }}
-                            rotate={{ x: -TAU * 75 / 360 }}
-                            stroke={2}
-                            color={"lightgray"} />
-                        {/* CHEVEUX PETITS */}
-                        <Shape path={[{ y: 0 }, { y: -6 }]}
-                            translate={{ x: -.25, y: -3, z: -1 }}
-                            rotate={{ x: -TAU * 80 / 360 }}
-                            stroke={2.5}
-                            color={"gray"} />
-                        {/* CHEVEUX DERRIERE */}
-                        <Ellipse diameter={3}
-                            translate={{ y: -.3, z: -3 }}
-                            stroke={4}
-                                color={'#4e4e4e'} />
-                    {/* YEUX */}
-                    <Ellipse
-                        quarters={2}
-                        scale={1.5}
-                        translate={{ x: -1.5, y: 0.5, z: 2 }}
-                        rotate={{ z: -TAU / 4 }}
-                        closed={false}
-                        color={'#330000'}
-                        stroke={0.38}
-                        fill={false} />
-                    <Ellipse
-                        quarters={2}
-                        scale={1.5}
-                        translate={{ x: 1.5, y: 0.5, z: 2 }}
-                        rotate={{ z: -TAU / 4 }}
-                        closed={false}
-                        color={'#330000'}
-                        stroke={0.38}
-                        fill={false} />
-                    {/* OREILLES */}
-                    <Ellipse
-                        diameter={1.5}
-                        translate={{ x: 3.5, y: 1, z: -1 }}
-                        rotate={{ y: -TAU / 8 }}
-                        stroke={1}
-                        color = {'#995c00'}
-                        fill={true}>
-                        {/* CHEVEUX AUTOUR OREILLE L*/}
-                        <Ellipse quarters={2}
-                            scale={3}
-                            translate={{ x: -.5, y: -.4, z: -2 }}
-                            rotate={{ y: -.8, z: -TAU / 4 }}
-                            closed={false}
-                            color={'#4e4e4e'}
-                            stroke={1.5}
-                            fill={false} />
-                    </Ellipse>
-                    <Ellipse
-                        diameter={1.5}
-                        translate={{ x: -3.5, y: 1, z: -1 }}
-                        rotate={{ y: TAU / 8 }}
-                        stroke={1}
-                        color={'#995c00'}
-                        fill={true}>
-                        {/* CHEVEUX AUTOUR OREILLE R */}
-                        <Ellipse quarters={2}
-                            scale={3}
-                            translate={{ x: .5, y: -.4, z: -2 }}
-                            rotate={{ y: .8, z: -TAU / 4 }}
-                            closed={false}
-                            color={'#4e4e4e'}
-                            stroke={1.5}
-                            fill={false} />
-                    </Ellipse>
-                </Ellipse>
-                {/* SOURIRE */}
-                <Ellipse quarters={2}
-                    translate={{ y: -1, z: 3.5 }}
-                    rotate={{ z: TAU / 4 }}
-                    scale={3}
-                    fill={true}
-                    stroke={0.5}
-                    color={'white'}
-                    closed={true} />
-            </Shape>
-        </Cylinder>
-    };    
-        
-    const Bras = React.forwardRef((props,ref) => {
-        return <Shape
-            ref={ref}
-            path={[{ y: 0 }, { y: 7 }]}
-            translate={props.translate}
-            rotate={props.rotate}
-            color={props.color}
-            stroke={4}>{props.children}</Shape>
+// create an scene Anchor to hold all items
+let scene = new Zdog.Anchor();
+scene.scale = .8;
+
+// ----- model ----- //
+
+// add shapes to scene
+const Cou = new Zdog.Cylinder({
+    addTo: scene,
+    diameter: 4,
+    length: 6,
+    stroke: false,
+    color: "#995c00",
+    rotate: {
+        x: -TAU / 4
+    },
+    translate: {
+        y: 12.5
+    }
+});
+
+const Menton = new Zdog.Shape({
+    addTo: Cou,
+    translate: {
+        y: 0,
+        z: -2
+    },
+    stroke: 6,
+    color: "#995c00",
+    rotate: {
+        x: TAU / 4
+    }
+});
+
+const Front = new Zdog.Ellipse({
+    addTo: Menton,
+    diameter: 2,
+    translate: {
+        y: -4
+    },
+    stroke: 3.2,
+    color: "#995c00"
+});
+
+const Cheveux_gros = new Zdog.Shape({
+    addTo: Front,
+    path: [{
+        y: -1
+    }, {
+        y: -7
+    }],
+    translate: {
+        x: -2,
+        y: -3.5,
+        z: -3
+    },
+    rotate: {
+        x: -TAU / 4
+    },
+    stroke: 2,
+    color: "#616161"
+});
+
+const Cheveux_medium = new Zdog.Shape({
+    addTo: Front,
+    path: [{
+        y: 0
+    }, {
+        y: -6
+    }],
+    translate: {
+        x: 2,
+        y: -3,
+        z: -2
+    },
+    rotate: {
+        x: (-TAU * 75) / 360
+    },
+    stroke: 1.6,
+    color: "lightgray"
+});
+
+const Cheveux_petit = new Zdog.Shape({
+    addTo: Front,
+    path: [{
+        y: 0
+    }, {
+        y: -6
+    }],
+    translate: {
+        x: -0.25,
+        y: -3,
+        z: -1
+    },
+    rotate: {
+        x: (-TAU * 80) / 360
+    },
+    stroke: 2,
+    color: "gray"
+});
+
+const Cheveux_derriere = new Zdog.Ellipse({
+    addTo: Front,
+    diameter: 3,
+    translate: {
+        y: -0.3,
+        z: -3
+    },
+    stroke: 4,
+    color: "#4e4e4e"
+});
+
+const Yeux_L = new Zdog.Ellipse({
+    addTo: Front,
+    quarters: 2,
+    scale: 1.5,
+    translate: {
+        x: -1.5,
+        y: 0.5,
+        z: 2
+    },
+    rotate: {
+        z: -TAU / 4
+    },
+    closed: false,
+    color: "#330000",
+    stroke: 0.38,
+    fill: false
+});
+
+const Yeux_R = Yeux_L.copy({
+    translate: {
+        x: 1.5,
+        y: 0.5,
+        z: 2
+    }
+});
+
+const Oreille_L = new Zdog.Ellipse({
+    addTo: Front,
+    diameter: 1.5,
+    translate: {
+        x: 3.5,
+        y: 1,
+        z: -1
+    },
+    rotate: {
+        y: -TAU / 8
+    },
+    stroke: 1,
+    color: "#995c00",
+    fill: true
+});
+
+const Cheveux_oreille_L = new Zdog.Ellipse({
+    addTo: Oreille_L,
+    quarters: 2,
+    scale: 3,
+    translate: {
+        x: -0.5,
+        y: -0.4,
+        z: -2
+    },
+    rotate: {
+        y: -0.8,
+        z: -TAU / 4
+    },
+    closed: false,
+    color: "#4e4e4e",
+    stroke: 1.5,
+    fill: false
+});
+
+const Oreille_R = Oreille_L.copy({
+    addTo: Front,
+    translate: {
+        x: -3.5,
+        y: 1,
+        z: -1
+    },
+    rotate: {
+        y: TAU / 8
+    }
+});
+
+const Cheveux_oreille_R = Cheveux_oreille_L.copy({
+    addTo: Oreille_R,
+    translate: {
+        x: 0.5,
+        y: -0.4,
+        z: -2
+    },
+    rotate: {
+        y: 0.8,
+        z: -TAU / 4
+    }
+});
+
+const Sourire = new Zdog.Ellipse({
+    addTo: Menton,
+    quarters: 2,
+    translate: {
+        y: -1,
+        z: 3.5
+    },
+    rotate: {
+        z: TAU / 4
+    },
+    scale: 3,
+    fill: true,
+    stroke: 0.5,
+    color: "white",
+    closed: true
+});
+
+const Torse = new Zdog.Shape({
+    addTo: scene,
+    translate: {
+        y: 25.3,
+        z: 0
+    },
+    path: [{
+            y: -torsoX
+        },
+        {
+            y: torsoX * 3 - 1
+        }
+    ],
+    color: "#DED381",
+    stroke: 9.6
+});
+
+const Epaules = new Zdog.Shape({
+    addTo: Torse,
+    path: [{
+            x: 0
+        },
+        {
+            x: 10
+        }
+    ],
+    color: "#FAE491",
+    stroke: 6,
+    translate: {
+        x: -5,
+        y: -6
+    }
+});
+
+const Logo_tshirt1 = new Zdog.Shape({
+    addTo: Torse,
+    path: [{
+            x: 0,
+            y: -1.6
+        },
+        {
+            x: 1.6,
+            y: 1.6
+        },
+        {
+            x: -1.6,
+            y: 1.6
+        }
+    ],
+    stroke: 0.5,
+    color: "hsla(359, 85%, 74%, .5)",
+    translate: {
+        y: -7,
+        z: 4
+    }
+});
+
+const Logo_tshirt2 = new Zdog.Shape({
+    addTo: Torse,
+    path: [{
+            x: -1.6,
+            y: 2.58
+        },
+        {
+            x: 1.6,
+            y: 2.58
+        }
+    ],
+    // closed by default
+    stroke: 0.5,
+    color: "hsla(203, 77%, 83%, 0.5)",
+    translate: {
+        y: -7,
+        z: 4
+    }
+});
+
+const Bras_Groupe_R = new Zdog.Group({
+    addTo: Torse
+});
+
+const Bras_R = new Zdog.Shape({
+    addTo: Bras_Groupe_R,
+    path: [{
+            y: 0
+        },
+        {
+            y: 7
+        }
+    ],
+    translate: {
+        x: -torsoX - 3,
+        y: -7
+    },
+    rotate: {
+        x: 0.5,
+        y: -0.5,
+        z: TAU / 16
+    },
+    color: "#F5F39A",
+    stroke: 3.2
+});
+
+const Avant_Bras_R = Bras_R.copy({
+    addTo: Bras_R,
+    color: "#995c00",
+    translate: {
+        y: 7,
+        z: 0
+    },
+    // mouvement du bras vers le haut avec X entre 0.5 et 1
+    rotate: {
+        x: 0.5,
+        y: -5,
+        z: -0.5
+    }
+});
+
+const Main_R = new Zdog.Shape({
+    addTo: Avant_Bras_R,
+    stroke: 4,
+    color: "#995c00",
+    translate: {
+        y: 8,
+        z: 0
+    }
+});
+
+const Bras_Groupe_L = new Zdog.Group({
+    addTo: Torse
+});
+
+const Bras_L = Bras_R.copy({
+    translate: {
+        x: torsoX + 3,
+        y: -7
+    },
+    rotate: {
+        x: 0.7,
+        y: -1,
+        z: -TAU / 16
+    }
+});
+
+const Avant_Bras_L = Avant_Bras_R.copy({
+    addTo: Bras_L,
+    translate: {
+        x: -torsoX - 4,
+        y: 8,
+        z: 2
+    },
+    rotate: {
+        x: -2,
+        y: 0,
+        z: 5
+    }
+});
+
+const Main_L = Main_R.copy({
+    addTo: Avant_Bras_L,
+    stroke: 3.76,
+    translate: {
+        x: -0.5,
+        y: -3,
+        z: 0.5
+    }
+});
+
+const Computer = new Zdog.Group({
+    addTo: scene,
+    translate: {
+        y: 24,
+        z: 18
+    },
+    rotate: {
+        x: -0.1
+    }
+})
+
+const Screen = new Zdog.Box({
+    addTo: Computer,
+    width: 32 / 3,
+    height: 16,
+    depth: 1,
+    stroke: 1,
+    color: 'lightgray',
+    backface: 'white',
+    leftFace: 'lightgray',
+    rightFace: 'lightgray',
+    topFace: 'lightgray',
+    bottomFace: 'lightgray'
+});
+
+CodeLines.zoom = .4;
+
+
+let bezel = new Zdog.Rect({
+    width: 32 / 3,
+    height: 16,
+    stroke: 1.5,
+    color: 'lightgray',
+});
+
+let t1 = new Zdog.Shape({
+    path: [ // triangle
+        {
+            x: -1,
+            y: 1
+        },
+        {
+            x: 0,
+            y: 3
+        },
+        {
+            x: 1,
+            y: 1
+        },
+    ],
+    translate: {
+        x: -2,
+        y: 1
+    },
+    backface: false,
+    // closed by default
+    stroke: .1,
+    color: '#f4f39a',
+    fill: true
+});
+
+let t2 = t1.copy({
+    path: [{
+        x: -1,
+        y: 1
+    }, {
+        x: 1,
+        y: 1
+    }, {
+        x: 0,
+        y: -1
+    }]
+});
+
+let t3 = t1.copy({
+    path: [{
+        x: 1,
+        y: 1
+    }, {
+        x: 0,
+        y: -1
+    }, {
+        x: 2,
+        y: -1
+    }],
+    color: '#f4d193'
+});
+let t4 = t1.copy({
+    path: [{
+        x: 0,
+        y: -1
+    }, {
+        x: 2,
+        y: -1
+    }, {
+        x: 1,
+        y: -3
+    }],
+    color: '#f38181'
+});
+
+let t5 = t1.copy({
+    path: [{
+        x: 1,
+        y: 1
+    }, {
+        x: 2,
+        y: -1
+    }, {
+        x: 3,
+        y: 1
+    }],
+    color: '#f4c590'
+});
+
+let t6 = t5.copy({
+    path: [{
+        x: 4,
+        y: -1
+    }, {
+        x: 2,
+        y: -1
+    }, {
+        x: 3,
+        y: 1
+    }]
+});
+
+let t7 = t1.copy({
+    path: [{
+        x: 1,
+        y: -3
+    }, {
+        x: 2,
+        y: -1
+    }, {
+        x: 3,
+        y: -3
+    }],
+    color: '#f3a389'
+});
+
+let t8 = t7.copy({
+    path: [{
+        x: 4,
+        y: -1
+    }, {
+        x: 2,
+        y: -1
+    }, {
+        x: 3,
+        y: -3
+    }]
+});
+
+
+// Screen.addChild(CodeLines);
+// Screen.addChild(ConePattern); 
+// Screen.addChild(ss);
+// [bezel, t1, t2, t3, t4, t5, t6, t7,t8].forEach(t => Screen.addChild(t));
+Screen.addChild(bezel);
+// Screen.addChild(Triangles);
+
+// Screen.addChild(t1);
+CodeLines.rotate.z = -TAU / 4;
+CodeLines.scale = (.1, 4)
+Screen.rotate = {
+    y: TAU / 2,
+    z: TAU / 4
+}
+
+const Keyboard = new Zdog.Box({
+    addTo: Computer,
+    width: 16,
+    height: 32 / 3,
+    color: 'rgb(211, 211, 212)',
+    backface: 'lightgray',
+    // backface:false,
+    leftFace: 'lightgray',
+    rightFace: 'lightgray',
+    topFace: 'lightgray',
+    // bottomFace: 'lightgray',
+    bottomFace: false,
+    translate: {
+        y: 32 / 6,
+        z: -32 / 6
+    },
+    rotate: {
+        x: TAU / 4 - 3
+    }
+});
+
+const Pen = new Zdog.Anchor({
+    addTo: scene,
+    scale: 1,
+    translate: {
+        x: 15,
+        y: 25.5,
+        z: 16
+    },
+    rotate: {
+        x: TAU / 4,
+        y: -TAU / 16
+    },
+});
+
+const Pot = new Zdog.Cylinder({
+    addTo: scene,
+    diameter: 3,
+    length: 3,
+    stroke: false,
+    color: 'rgba(157, 169, 156, 0.9)',
+    // backface={'gray'}
+    backface: false,
+    translate: {
+        x: 13.5,
+        y: 28.5,
+        z: 16
+    },
+    rotate: {
+        x: TAU / 4
+    }
+});
+
+let Pointe = new Zdog.Cone({
+    addTo: Pen,
+    diameter: .72,
+    length: .72,
+    stroke: false,
+    color: "#f4dc95",
+    // backface: "#C25"},
+    backface: false,
+})
+
+let Mine = new Zdog.Cone({
+    addTo: Pen,
+    diameter: .2,
+    length: .2,
+    stroke: false,
+    color: "black",
+    backface: false,
+    translate: {
+        z: .48
+    }
+});
+
+let Bois = new Zdog.Cylinder({
+    addTo: Pen,
+    diameter: .7,
+    length: 4.5,
+    stroke: false,
+    color: 'blue',
+    backface: false,
+    translate: {
+        z: -2.25
+    }
+});
+
+let Anneau = new Zdog.Cylinder({
+    addTo: Pen,
+    diameter: .7,
+    length: .45,
+    stroke: false,
+    color: 'whitesmoke',
+    // backface: 'whitesmoke',
+    backface: false,
+    translate: {
+        z: -4.5
+    }
+});
+
+let Gomme = new Zdog.Hemisphere({
+    addTo: Pen,
+    diameter: .7,
+    stroke: false,
+    color: 'black',
+    backface: false,
+    rotate: {
+        x: Math.PI
+    },
+    translate: {
+        z: -4.75
+    }
+});
+
+const Table = new Zdog.Box({
+    addTo: scene,
+    translate: {
+        y: 44.6,
+        z: 14
+    },
+    width: 40,
+    height: 27,
+    depth: 15,
+    stroke: 2,
+    color: 'transparent',
+    // remove left & right faces
+    leftFace: '#86592d',
+    rightFace: '#734d26',
+    rearFace: false,
+    topFace: '#4d3319',
+    bottomFace: false,
+});
+
+const Hanches = new Zdog.Cylinder({
+    addTo: scene,
+    diameter: 6,
+    length: torsoX * 3 - 1,
+    translate: {
+        y: 40
+    },
+    rotate: {
+        x: -TAU,
+        y: -TAU / 4
+    },
+    color: "hsl(180, 25%, 20%)"
+});
+
+const Cuisse_R = new Zdog.Cylinder({
+    addTo: Hanches,
+    diameter: 4.8,
+    translate: {
+        x: -8.5,
+        y: 0,
+        z: -6
+    },
+    rotate: {
+        y: TAU / 4 + 0.4
+    },
+    length: 12,
+    color: "darkslategray"
+});
+
+const Genou_R = new Zdog.Shape({
+    addTo: Cuisse_R,
+    stroke: 5,
+    color: "hsl(180, 25%, 28%)",
+    translate: {
+        z: 8
+    }
+});
+
+const Tibia_R = new Zdog.Cylinder({
+    addTo: Genou_R,
+    diameter: 4.8,
+    translate: {
+        x: 0,
+        y: 7.5,
+        z: 0
+    },
+    rotate: {
+        x: -TAU / 4,
+        y: 0
+    },
+    length: 12,
+    color: "hsl(180, 25%, 30%)"
+});
+const Chaussure_R = new Zdog.Shape({
+    addTo: Tibia_R,
+    path: [{
+        y: 0
+    }, {
+        y: 4.8
+    }],
+    stroke: 4,
+    color: "#cc7a00",
+    translate: {
+        x: 0,
+        y: 0,
+        z: 8
+    },
+    rotate: {
+        x: -3,
+        y: 1,
+        z: 0.5
+    }
+});
+
+const Lacet_CHaussure_R_1 = new Zdog.Shape({
+    addTo: Chaussure_R,
+    path: [{
+        x: 0
+    }, {
+        x: 2.5
+    }],
+    translate: {
+        x: 1.3,
+        y: 2,
+        z: 2
+    },
+    rotate: {
+        x: 3,
+        y: 1,
+        z: -0.1
+    },
+    stroke: 0.5,
+    color: "beige"
+});
+const Lacet_CHaussure_R_2 = Lacet_CHaussure_R_1.copy({
+    translate: {
+        x: 1.3,
+        y: 3.25,
+        z: 2
+    }
+});
+const Lacet_CHaussure_R_3 = Lacet_CHaussure_R_1.copy({
+    translate: {
+        x: 1.3,
+        y: 4.5,
+        z: 2
+    }
+});
+
+const Cuisse_L = Cuisse_R.copy({
+    translate: {
+        x: -8.5,
+        y: 0,
+        z: 6
+    },
+    rotate: {
+        y: TAU / 4 - 0.4
+    }
+});
+const Genou_L = Genou_R.copy({
+    addTo: Cuisse_L
+});
+const Tibia_L = Tibia_R.copy({
+    addTo: Genou_L
+});
+
+const Chaussure_L = new Zdog.Shape({
+    addTo: Tibia_L,
+    path: [{
+        y: 0
+    }, {
+        y: 4.8
+    }],
+    stroke: 4,
+    color: "#cc7a00",
+    translate: {
+        x: 0,
+        y: 0,
+        z: 8
+    },
+    rotate: {
+        x: -3,
+        y: 2,
+        z: 0.5
+    }
+});
+
+const Lacet_CHaussure_L_1 = new Zdog.Shape({
+    addTo: Chaussure_L,
+    path: [{
+        x: 0
+    }, {
+        x: 2.5
+    }],
+    translate: {
+        x: 1.3,
+        y: 2,
+        z: -2
+    },
+    rotate: {
+        y: 1.2
+    },
+    stroke: 0.5,
+    color: "beige"
+});
+
+const Lacet_CHaussure_L_2 = Lacet_CHaussure_L_1.copy({
+    translate: {
+        x: 1.3,
+        y: 3.25,
+        z: -2
+    }
+});
+
+const Lacet_CHaussure_L_3 = Lacet_CHaussure_L_1.copy({
+    translate: {
+        x: 1.3,
+        y: 4.5,
+        z: -2
+    }
+});
+
+const Chair = new Zdog.Group({
+    addTo: scene
+});
+
+const DossierTop = new Zdog.Ellipse({
+    addTo: Chair,
+    diameter: 20,
+    quarters: 2,
+    stroke: 3,
+    color: '#332424',
+    rotate: {
+        x: 3 / TAU / 4,
+        z: -TAU / 4,
+    },
+    translate: {
+        y: 30,
+        z: -10
+    },
+    fill: true
+});
+
+const DossierMiddle = new Zdog.Rect({
+    addTo: Chair,
+    width: 20,
+    height: 18,
+    stroke: 3,
+    color: '#332424',
+    translate: {
+        y: 39,
+        z: -10
+    },
+    fill: true
+});
+
+const Pouf = new Zdog.Ellipse({
+    addTo: Chair,
+    width: 10,
+    height: 20,
+    stroke: 8,
+    color: '#332424',
+    rotate: {
+        x: TAU / 4,
+        z: -TAU / 4,
+    },
+    translate: {
+        y: 45,
+    }
+});
+
+const Stand1 = new Zdog.Ellipse({
+    addTo: Pouf,
+    quarters: 2,
+    // scale: 1.5,
+    diameter: 18,
+    translate: {
+        // x: -1.5,
+        // y: 15,
+        z: -14
+    },
+    rotate: {
+        x: TAU / 4,
+        y: 0,
+        z: TAU / 4
+    },
+    closed: false,
+    color: '#b3cccc',
+    stroke: 2,
+    // fill: false
+});
+
+const Stand2 = new Zdog.Ellipse({
+    addTo: Pouf,
+    quarters: 2,
+    // scale: 1.5,
+    diameter: 18,
+    translate: {
+        // x: -1.5,
+        // y: 15,
+        z: -14
+    },
+    rotate: {
+        // x: TAU/2,
+        y: TAU / 4,
+        // z: TAU/2
+    },
+    closed: false,
+    color: '#b3cccc',
+    stroke: 2,
+    // fill: false
+});
+
+let liste = [Cou, Menton, Front, Cheveux_gros, Cheveux_medium, Cheveux_petit, Cheveux_derriere, Yeux_L, Yeux_R, Oreille_L, Cheveux_oreille_L, Oreille_R, Cheveux_oreille_R, Sourire, Torse, Epaules, Logo_tshirt1, Logo_tshirt2, Bras_Groupe_R, Bras_R, Avant_Bras_R, Main_R, Bras_Groupe_L, Bras_L, Avant_Bras_L, Main_L, Hanches, Cuisse_R, Genou_R, Tibia_R, Chaussure_R, Lacet_CHaussure_R_1, Lacet_CHaussure_R_2, Lacet_CHaussure_R_3, Cuisse_L, Genou_L, Tibia_L, Chaussure_L, Lacet_CHaussure_L_1, Lacet_CHaussure_L_2, Lacet_CHaussure_L_3, Chair, DossierTop, DossierMiddle, Pouf, Stand1, Stand2, ];
+
+scene.addChild(Smartphone);
+
+const seq = [{
+    x: 5.485,
+    y: 6.138,
+    z: 0
+}, {
+    x: TAU,
+    y: TAU / 2,
+    z: 0
+    }];
+
+let next_coords = [{
+        x: TAU / 4,
+        y: 0,
+        z: 0    
+    }, {
+        x: 3,
+        y: -Math.PI / 16
+    },
+    {
+        x: 0,
+        y: -Math.PI / 16
+    },
+    {
+        x: 2,
+        y: 2*Math.PI / 16,
+    },
+    {
+        x: 0,
+        y: -Math.PI / 2
+    }
+];
+
+const Me = (props) => {
+    const { index } = props;
+    let [animation, setAnimation] = useState(props.animation);
+    let me_tl = gsap.timeline({
+        paused: true,
     });
-            
-    const Torso = (props) => {
-        return (
-			<Shape
-				ref={torsoRef}
-				translate={{
-					y: 25.3,
-					z: 0
-				}}
-				rotate={
-					{
-						// z: TAU / 4
-					}
-				}
-				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
-				color={"#DED381"}
-				stroke={12}
-                onClick={() => {}}>
-				{/* EPAULES */}
-				<Shape
-					path={[{ x: 0 }, { x: 10 }]}
-					color={"#FAE491"}
-					stroke={8}
-					translate={{
-						x: -5,
-						y: -6
-					}}/>
-				{/* LOGO TSHIRT */}
-				<Shape
-					// triangle
-					path={[
-						{ x: 0, y: -1.6 },
-						{ x: 1.6, y: 1.6 },
-						{ x: -1.6, y: 1.6 }
-					]}
-					stroke={0.5}
-					color={"hsla(359, 85%, 74%, .5)"}
-					translate={{ y: -7, z: 4 }}
-				/>
-				<Shape
-					path={[
-						{ x: -1.6, y: 2.58 },
-						{ x: 1.6, y: 2.58 }
-					]}
-					// closed by default
-					stroke={0.5}
-					color={"hsla(203, 77%, 83%, 0.5)"}
-					translate={{ y: -7, z: 4 }}
-				/>
-				{/* BRAS R */}
-				<Group ref={rightArm}>
-					<Bras
-						color={"#F5F39A"}
-						translate={{
-							x: -torsoX - 3,
-							y: -7
-							// z: 4
-						}}
-						rotate={{
-							x: 0.5,
-							y: -0.5,
-							z: TAU / 16
-						}}
-					>
-						{/* AVANT BRAS R */}
-						<Bras
-							ref={rightForeArm}
-							color={props.color}
-							translate={{
-								// x: -torsoX - 6,
-								y: 7,
-								z: 0
-							}}
-							rotate={{
-								// mouvement du bras vers le haut avec X entre 0.5 et 1
-								x: 0.5,
-								y: -5,
-								z: -0.5
-							}}
-						>
-							{/* MAIN R */}
-							<Shape
-								stroke={5}
-								color={props.color}
-								translate={{
-									// x: -torsoX - 4,
-									y: 8,
-									z: 0
-								}}
-							/>
-						</Bras>
-					</Bras>
-				</Group>
-				{/* BRAS L */}
-				<Group ref={leftArm}>
-					<Bras
-						color={"#F5F39A"}
-						translate={{
-							x: torsoX + 3,
-							y: -7,
-							z: 0
-						}}
-						rotate={{
-							// mouvement du bras vers le haut avec X
-							x: 0.7,
-							y: -1,
-							z: -TAU / 16
-						}}
-					>
-						{/* AVANT BRAS L */}
-						<Bras
-							ref={leftForeArm}
-							color={props.color}
-							translate={{
-								x: -torsoX - 4,
-								y: 8,
-								z: 2
-							}}
-							rotate={{
-								x: -2,
-								y: 0,
-								z: 5
-							}}
-						>
-							{/* MAIN L */}
-							<Shape
-								stroke={4.7}
-								color={props.color}
-                                translate={{
-									x: -.5,
-									y: -3.5,
-									z: .5
-								}}
-							/>
-						</Bras>
-					</Bras>
-				</Group>
-			</Shape>
-		);
-    };    
 
-    const Legs = (props) => {
-        // HANCHES
-        return <Cylinder diameter={6} ref={legsRef} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'hsl(180, 25%, 20%)'}>
-            {/* JAMBES */}
-            {/* RIGHT THIGH */}
-            <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: -6 }} rotate={{ y: TAU / 4 + 0.4 }} length={12} color={'darkslategray'}>
-                {/* KNEE R */}
-                <Shape stroke={5} color={'hsl(180, 25%, 28%)'} translate={{ z: 8 }}>
-                    {/* TIBIA R */}
-                    <Cylinder diameter={4} translate={{ x: 0, y: 7.5, z: 0 }} rotate={{ x: -TAU / 4, y: 0 }} length={12} color={'hsl(180, 25%, 30%)'}>
-                        {/* CHAUSSURE R */}
-                        <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'#cc7a00'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -3, y: 1, z: .5 }}>
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 2, z: 2 }} rotate={{ x: 3, y: 1, z: -0.1 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 3.25, z: 2 }} rotate={{ x: 3, y: 1, z: -0.1 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 4.5, z: 2 }} rotate={{ x: 3, y: 1, z: -0.1 }} stroke={.5} color={'beige'} />
-                        </Shape>
-                    </Cylinder>
-                </Shape>
-            </Cylinder>
-            {/* LEFT THIGH */}
-            <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: 6 }} rotate={{ y: TAU / 4 - 0.4 }} length={12} color={'darkslategray'}>
-                {/* KNEE L */}
-                <Shape stroke={5} color={'hsl(180, 25%, 28%)'} translate={{ z: 8 }}>
-                    {/* TIBIA L */}
-                    <Cylinder diameter={4} translate={{ x: 0, y: 7.5, z: 0 }} rotate={{ x: -TAU / 4, y: 0 }} length={12} color={'hsl(180, 25%, 30%)'}>
-                        {/* CHAUSSURE L */}
-                        <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'#cc7a00'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -3, y: 2, z: .5 }}>
-                            {/* <Ellipse diameter={4} quarters={2} color={'yellow'} translate={{ x: 1.1, y:2, z: 0}} rotate={{ x: TAU/4, y: 0, z: -0.5}}/>
-                                <Ellipse diameter={3} quarters={2} color={'yellow'} translate={{ x: 1.1, y:5, z: 0}} rotate={{ x: TAU/4, y: 0, z: -0.5}}/> */}
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 2, z: -2 }} rotate={{ y: 1.2 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 3.25, z: -2 }} rotate={{ y: 1.2 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 4.5, z: -2 }} rotate={{ y: 1.2 }} stroke={.5} color={'beige'} />
-                        </Shape>
-                    </Cylinder>
-                </Shape>
-            </Cylinder>
-        </Cylinder>
-    };
-    
-    const handleClick = () => {
-        console.log(ref.current, ref);
+    scene.scale = .8;
+
+    let animateScene = () => {
+        let alpha = 1;
+        let colors = [];
+        liste.forEach((el) => colors.push(el.color));
+
+
+        // Funcs for the TICKER 
+        let rotateScene = () => {
+            let start = 0, end = 1;
+
+            const ease= Zdog.easeInOut(rotateIllo.progress() % 2, 3);
+
+            scene.rotate = {
+                x: Zdog.lerp(seq[start].x, seq[end].x, ease* rotateIllo.progress()),
+                y: Zdog.lerp(seq[start].y, seq[end].y, ease* rotateIllo.progress()),
+                // z: Zdog.lerp(seq[start].z, seq[end].z, rotateIllo.progress())
+            };
+        }
+
+        let zoomOnScreen = () => {
+            const ease= Zdog.easeInOut(zoomIllo.progress() % 1.2, 4);
+            // zoom vers l'ecran
+            alpha = Zdog.lerp(1, 0, zoomIllo.progress());
+            scene.scale = Zdog.lerp(1, 7, zoomIllo.progress() / 2);
+            scene.translate.y -= 1.5;
+
+            liste.map((el, i) => {
+                let rgba = gsap.utils.splitColor(colors[i]);
+                rgba[3] = alpha;
+                el.color = "rgba(`${rgba.join(',')}`)";
+                el.scale -= .1;
+            });
+
+            if (zoomIllo.progress() >= 0.5) {
+                liste.forEach((el) => {
+                    el.visible = false
+                });
+            }
+        }
+
+        // Funcs for the TIMELINE
+        let rotateIllo = gsap.to('html', {
+            opacity: 1,
+            duration: 1.4,
+            ease: "power2.out",
+            onStart: () => {
+                gsap.ticker.add(rotateScene);
+            },
+            onComplete: () => {
+                gsap.ticker.remove(rotateScene);
+            }
+        });
+
+        let erasePerson = gsap.to(liste, {
+            scale: 0,
+            autoAlpha: 0,
+            color: "transparent",
+            duration: .3,
+            onComplete: () => {
+                gsap.set(liste, {
+                    visible: false
+                });
+            }
+        });
+
+        let zoomIllo = gsap.to('.zdog-canvas', {
+            borderRadius: "0px",
+            borderColor: "transparent",
+            duration: .8,
+            onStart: () => {
+                gsap.ticker.add(zoomOnScreen);
+                gsap.to([Table, Pot, Pen], {
+                    visible: false
+                })
+            },
+            onComplete: () => {
+                gsap.ticker.remove(zoomOnScreen);
+                gsap.set([Table, Pot, Pen, Computer], {
+                    visible: false
+                });
+            },
+        });
+
+        me_tl.add(rotateIllo);
+        me_tl.add(erasePerson);
+        me_tl.add(zoomIllo);
+
+        me_tl.play();
     }
 
-    useEffect(() => { 
-        console.log(ref.current, ref);
-    });
+    // ----- animate ----- //
+    let animate = () => {
+        // make changes to model, like rotating scene
+        // scene.rotate.y += isSpinning ? 0.03 : 0;
+        scene.updateGraph();
+        render();
+        requestAnimationFrame(animate);
+    }
 
-    return (
-        <Illustration
-            ref={ref}
-            className="illustration"
-				zoom={8}
-				translate={{ y: -30 }}
-				rotate={props.rotation }
-				onClick={handleClick}>
-				<Table className="table" />
-				<Head className="head" />
-        <Torso className="torso" color={"#995c00"} />
-				<Legs className="legs" />
-				<Chair className="chair" />
-				<Computer className="computer" />
-        <Smartphone className="smartphone" />
-				<Group>
-					<Pot className="pot" />
-					<Pen className="pen" />
-                </Group>            
-        </Illustration>
-	);
-});
+    let render = () => {
+        // clear canvas
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.save();
+        // center canvas & zoom
+        ctx.translate(canvasWidth / 2, 0);
+        ctx.scale(zoom, zoom);
+        // set lineJoin and lineCap to round
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        // render scene graph
+        scene.renderGraphCanvas(ctx);
+        ctx.restore();
+    }
+
+    // ----- setup ----- //
+    // get canvas element and its context
+    useEffect(() => {
+        canvas = document.querySelector(".zdog-canvas");
+        console.log(props.animation);
+
+        ctx = canvas.getContext("2d");
+        // get canvas size
+        canvasWidth = canvas.width;
+        canvasHeight = canvas.height;
+        // illustration variables
+        zoom = 7;
+        isSpinning = false;
+
+        // ----- drag ----- //
+        let dragStartRX, dragStartRY;
+        let minSize = Math.min(canvasWidth, canvasHeight);
+
+        // add drag-rotatation with Dragger
+        new Zdog.Dragger({
+            startElement: canvas,
+            onDragStart: function () {
+                isSpinning = false;
+                dragStartRX = scene.rotate.x;
+                dragStartRY = scene.rotate.y;
+            },
+            // CLAMP pour limiter le mouvement
+            onDragMove: function (pointer, moveX, moveY) {
+                // scene.rotate.x = gsap.utils.clamp(5.62, 6.33, dragStartRX - (moveY / minSize) * TAU);
+                // scene.rotate.y = gsap.utils.clamp(5.96, 6.64, dragStartRY - (moveX / minSize) * TAU);
+                scene.rotate.x = dragStartRX - (moveY / minSize) * TAU;
+                scene.rotate.y = dragStartRY - (moveX / minSize) * TAU;
+
+                console.log('onDragMove: { x: ', scene.rotate.x, '; y: ', scene.rotate.y, ' }');
+            }
+        });
+
+        scene.rotate = seq[0];
+
+        animate();
+
+    }, [props.rotation]);
+
+    // Animate Scene ?
+    // scene.translate.y = 3;
+
+    // Set animation or NOT
+    // useEffect(() => {
+    //     setAnimation(prevAnimation => { 
+    //         prevAnimation !== props.animation 
+    //     });
+    // });
+
+    let illuTweenDuration = 1;
+
+    let dummyTween = (prevRot, newRot) => {
+        let ease= gsap.to("body", {
+            autoAlpha: 1,
+            duration: illuTweenDuration,
+            paused: true,
+            onUpdate: () => {
+                setAnimation((prev) => {
+                    return [{
+                        // translate
+                        x: gsap.utils.interpolate(prev[0].x, newRot[0].x, dummyTween.progress()),
+                        y: gsap.utils.interpolate(prev[0].y, newRot[0].y, dummyTween.progress()),
+                        z: gsap.utils.interpolate(prev[0].z, newRot[0].z, dummyTween.progress())
+                    }, {
+                        x: gsap.utils.interpolate(prev[1].x, newRot[1].x, dummyTween.progress()),
+                        y: gsap.utils.interpolate(prev[1].y, newRot[1].y, dummyTween.progress()),
+                        z: gsap.utils.interpolate(prev[1].z, newRot[1].z, dummyTween.progress())
+                        }, {
+                        x: gsap.utils.interpolate(prev[2].x, newRot[2].x, dummyTween.progress()),
+                        y: gsap.utils.interpolate(prev[2].y, newRot[2].y, dummyTween.progress()),
+                        z: gsap.utils.interpolate(prev[2].z, newRot[2].z, dummyTween.progress())
+
+                    }]
+                });
+            },
+        });
+        dummyTween.play(0).delay(.7);
+    }
+
+    useEffect(() => {          
+        switch (index) {
+            case 0:           
+                break;
+            case 1:
+                  let next_pos = {                      
+                  	x: TAU,
+                  	y: TAU / 2,
+                  	z: 0
+                  }                                                
+                break;
+            case 2:                         
+                dummyTween(next_coords[index - 1], next_coords[index]);      
+                gsap.fromTo('svg#smartphone', {
+                    autoAlpha: 0,
+                    duration: 1,
+                    scale: 0,
+                    x: -150,
+                }, {
+                    autoAlpha:1,
+                    scale: .4
+                });
+            case 3:  
+                dummyTween(next_coords[index-1], next_coords[index]);                
+                break;
+            case 4:                                                
+                dummyTween(next_coords[index-1], next_coords[index]);
+                break;
+            default:
+                break;    
+        }       
+    }, [index]);    
+
+    useEffect(() => {
+        // scene.rotate = props.rotate
+        scene.translate = props.translate
+        // scene.scale = !!props.translate ? props.translate.z : 1
+    }, [props.rotation, props.translate]);
+
+    return <Canvas className="zdog-canvas" width={480} height={480}></Canvas>;
+}
 
 export default Me;

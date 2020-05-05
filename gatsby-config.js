@@ -20,7 +20,7 @@ module.exports = {
                 <span class="purple"><b>Ruby on Rails</b></span>. I am a music and technology fan, who <span class="purple"><b>always strives to learn more</b></span>
             </p>`,
       slide_3: `<p style='margin-left: 10%;'>I am also a <span class="purple"><b>writer / translator</b></span>. I create catchy and <span class="purple"><b>a11y compliant content</b></span> and can even shoulder the <span class="purple"><b>i18n</b></span> of your sites and applications</p>`,
-      slide_4: `<p style='margin-right:10%;'>I'm currently available for work. <span class="purple"><b>Contact me !</p></span></p>`,
+      slide_4: `<p style='margin-right:10%;'>I'm currently available for work. <span class="purple"><b>Contact me !</b></span></p>`,
     },
     fr: {
       description: `<span>Vous trouverez ici mon CV ainsi que mon blog</span>`,
