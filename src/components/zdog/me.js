@@ -1,44 +1,31 @@
-import React, {
-    useEffect,
-    useState
-} from 'react';
+import React, {    useEffect,    useState} from 'react';
 import Zdog from 'zdog';
 
 import Canvas from '../styled/Canvas';
 
-import {
-    navigate, useStaticQuery
-} from "gatsby";
+import {    navigate, useStaticQuery} from "gatsby";
 
-import gsap, {
-    splitColor
-} from 'gsap';
+import gsap, {    splitColor} from 'gsap';
 
 import ConePattern from './ConeTest';
 import CodeLines from './CodeLines';
 import Smartphone from './Smartphone';
+import Table from './Table';
 import Triangles from '../Triangles';
 
 
 let faux = require('./faux-code.svg');
 
-const {
-    TAU
-} = Zdog;
+const {    TAU} = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
 
 var torsoX = 3 / quarterTurn;
-var shoulderX = torsoX + 1.5;
-var shinEnd = {
-    y: 22
-};
-var hipX = 8 / quarterTurn / 2;
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
 // create an scene Anchor to hold all items
 let scene = new Zdog.Anchor();
-scene.scale = .8;
+// scene.scale = .8;
 
 // ----- model ----- //
 
@@ -53,7 +40,7 @@ const Cou = new Zdog.Cylinder({
         x: -TAU / 4
     },
     translate: {
-        y: 12.5
+        y: 13.5
     }
 });
 
@@ -580,11 +567,7 @@ let t8 = t7.copy({
 // Screen.addChild(ss);
 // [bezel, t1, t2, t3, t4, t5, t6, t7,t8].forEach(t => Screen.addChild(t));
 Screen.addChild(bezel);
-// Screen.addChild(Triangles);
 
-// Screen.addChild(t1);
-CodeLines.rotate.z = -TAU / 4;
-CodeLines.scale = (.1, 4)
 Screen.rotate = {
     y: TAU / 2,
     z: TAU / 4
@@ -702,25 +685,6 @@ let Gomme = new Zdog.Hemisphere({
     translate: {
         z: -4.75
     }
-});
-
-const Table = new Zdog.Box({
-    addTo: scene,
-    translate: {
-        y: 44.6,
-        z: 14
-    },
-    width: 40,
-    height: 27,
-    depth: 15,
-    stroke: 2,
-    color: 'transparent',
-    // remove left & right faces
-    leftFace: '#86592d',
-    rightFace: '#734d26',
-    rearFace: false,
-    topFace: '#4d3319',
-    bottomFace: false,
 });
 
 const Hanches = new Zdog.Cylinder({
@@ -997,7 +961,7 @@ const Stand2 = new Zdog.Ellipse({
 });
 
 let liste = [Cou, Menton, Front, Cheveux_gros, Cheveux_medium, Cheveux_petit, Cheveux_derriere, Yeux_L, Yeux_R, Oreille_L, Cheveux_oreille_L, Oreille_R, Cheveux_oreille_R, Sourire, Torse, Epaules, Logo_tshirt1, Logo_tshirt2, Bras_Groupe_R, Bras_R, Avant_Bras_R, Main_R, Bras_Groupe_L, Bras_L, Avant_Bras_L, Main_L, Hanches, Cuisse_R, Genou_R, Tibia_R, Chaussure_R, Lacet_CHaussure_R_1, Lacet_CHaussure_R_2, Lacet_CHaussure_R_3, Cuisse_L, Genou_L, Tibia_L, Chaussure_L, Lacet_CHaussure_L_1, Lacet_CHaussure_L_2, Lacet_CHaussure_L_3, Chair, DossierTop, DossierMiddle, Pouf, Stand1, Stand2, ];
-
+scene.addChild(Table);
 scene.addChild(Smartphone);
 
 const seq = [{
@@ -1034,13 +998,13 @@ let next_coords = [{
 
 const Me = (props) => {
     const { index } = props;
+
+    let from, to;
     
     let [animation, setAnimation] = useState(props.animation);
     let me_tl = gsap.timeline({
         paused: true,
     });
-
-    scene.scale = .8;
 
     let animateScene = () => {
         let alpha = 1;
@@ -1199,49 +1163,31 @@ const Me = (props) => {
 
     }, [props.rotation]);
 
-    // Animate Scene ?
-    // scene.translate.y = 3;
-
-    // Set animation or NOT
-    // useEffect(() => {
-    //     setAnimation(prevAnimation => { 
-    //         prevAnimation !== props.animation 
-    //     });
-    // });
-
-    let illuTweenDuration = 1;
-
-    let dummyTween = (prevRot, newRot) => {
-        let tween= gsap.to("body", {
-            autoAlpha: 1,
-            duration: illuTweenDuration,
-            paused: true,
-            onUpdate: () => {
-                setAnimation((prev) => {
-                    return [{
-                        // translate
-                        x: gsap.utils.interpolate(prev[0].x, newRot[0].x, tween.progress()),
-                        y: gsap.utils.interpolate(prev[0].y, newRot[0].y, tween.progress()),
-                        z: gsap.utils.interpolate(prev[0].z, newRot[0].z, tween.progress())
-                    }, {
-                        x: gsap.utils.interpolate(prev[1].x, newRot[1].x, tween.progress()),
-                        y: gsap.utils.interpolate(prev[1].y, newRot[1].y, tween.progress()),
-                        z: gsap.utils.interpolate(prev[1].z, newRot[1].z, tween.progress())
-                        }, {
-                        x: gsap.utils.interpolate(prev[2].x, newRot[2].x, tween.progress()),
-                        y: gsap.utils.interpolate(prev[2].y, newRot[2].y, tween.progress()),
-                        z: gsap.utils.interpolate(prev[2].z, newRot[2].z, tween.progress())
-
-                    }]
-                });
-            },
-        });
-        tween.play(0).delay(.7);
-    }
-
     useEffect(() => {          
         switch (index) {
-            case 0:           
+            case 0:     
+                const r = { x: TAU, y: TAU / 2, z: 0 };
+
+                const tween = gsap.to(scene, {
+                    autoAlpha: 1,
+                    duration: 1.4,
+                    onUpdate: () => {
+                        setAnimation(prevAnimation => {
+                            console.log('Prev anim: ', prevAnimation)
+                            return [
+                                prevAnimation[0],
+                                {
+                                    x: Zdog.lerp(prevAnimation[1].x, r.x, tween.progress()),
+                                    y: Zdog.lerp(prevAnimation[1].y, r.y, tween.progress()),
+                                    z: Zdog.lerp(prevAnimation[1].z, r.z, tween.progress()),
+                                },
+                                prevAnimation[2]
+                            ]
+                        })
+                        console.log(animation, tween.progress())
+                    }
+                });
+                tween.play()
                 break;
             case 1:
                   let next_pos = {                      
@@ -1251,21 +1197,27 @@ const Me = (props) => {
                   }                                                
                 break;
             case 2:                         
-                // dummyTween(next_coords[index - 1], next_coords[index]);      
+                from = next_coords[index - 1]; to=next_coords[index];     
 
             case 3:  
-                // dummyTween(next_coords[index-1], next_coords[index]);                
+                from = next_coords[index - 1]; to=next_coords[index];               
                 break;
             case 4:                                                
-                // dummyTween(next_coords[index-1], next_coords[index]);
+                from = next_coords[index - 1]; to= next_coords[index]
                 break;
             default:
                 break;    
         }       
     }, [index]);    
-    useEffect(() => { 
-        console.log('ID: ', props.index);
-    }, [index]);
+
+    // tanslate, rotate and scale SCENE
+    // useEffect(() => { 
+    //     scene.translate = props.animation[0];
+    //     scene.rotate = props.animation[1];
+    //     scene.scale = props.animation[2];
+
+    //     console.log(props.animation, 'Animation props');
+    // }, [props.animation]);
 
     return <Canvas className="zdog-canvas" width={480} height={480}></Canvas>;
 }

@@ -10,8 +10,13 @@ import { illuTweenDuration } from '../utils/timelines';
 import Me from "./zdog/Me";
 
 let { TAU } = Zdog;
+let start, end;
 
 const LogoIllustration = React.forwardRef((props, ref) => {
+    let [translate, setTranslate] = useState(props.translate);
+    let [rotate, setRotate] = useState(props.rotate);
+    let [scale, setScale] = useState(props.scale);
+
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -23,14 +28,13 @@ const LogoIllustration = React.forwardRef((props, ref) => {
     let { index } = props;            
     
     let prevIndex = usePrevious(index);
-    
 
     // Changement d'index ?
     useEffect(() => {
         console.log('Cur:', index, ' Prev:', prevIndex);
     }, [index]);
     
-    return <Me ref={ref} index={index} animation={[props.translate, props.rotate, props.scale]} />
+    return <Me ref={ref} index={index} animation={[translate, rotate, scale]} />
 
 })
 

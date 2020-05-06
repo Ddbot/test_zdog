@@ -29,31 +29,26 @@ const TextContainer = styled.div`
 const { TAU } = Zdog;
 
 const initial_position = {
-    x: 5.72,
-    y: 6.19,
-    z: 0.13
+    x: 5.631,
+    y: 6.022,
 };
   
 
 
 const IndexPage = (props) => {
 	let illo = useRef();
-
-    function usePrevious(value) {
-    	const ref = useRef();
-    	useEffect(() => {
-    		ref.current = value;
-    	});
-    	return ref.current;
-	}
 		
 	let chevronBottom = useRef(null);
 	let chevronTop = useRef(null);
 	
 	let lang = useContext(LangContext);
+
 	let [index, setIndex] = useState(0);
 	let [slide, setSlide] = useState(null);
-	let [translate, setTranslate] = useState({ x: 0, y: 3, z: 0 });
+	let [translate, setTranslate] = useState({ x: 0, y: 0, z: 0 });
+	let [rotate, setRotate] = useState(initial_position);
+	let [scale, setScale] = useState(.8);
+
 	const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
 
 
@@ -108,6 +103,25 @@ const IndexPage = (props) => {
 		}
 	};
 
+	let handleRotation = (e) => {
+		e.persist();
+		setRotate(prev => { 
+			return { ...prev, [e.target.name]: Number(e.target.value) }
+		});
+		console.log(rotate);
+	}
+
+	let handleTranslation = (e) => {
+		e.persist();
+		if (e.target.name === "z") {
+			setScale(prev => Number(e.target.value));
+		}
+		setTranslate(prev => {
+			return { ...prev, [e.target.name ]: Number(e.target.value) }
+		});
+		console.log(translate, scale);
+	}
+
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
 		<Container className="container">
@@ -117,10 +131,10 @@ const IndexPage = (props) => {
 				index={index}
 				style={{ zIndex: 2, flex: 1 }}
 				translate={translate}
-				rotate={initial_position}
-				scale={1}
+				rotate={rotate}
+				scale={scale}
 			/>
-			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
+			<RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} />
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
 			{index !== 4 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
 	</>);

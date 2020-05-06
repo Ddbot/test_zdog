@@ -46,9 +46,6 @@ body {
   overflow: hidden;
 }
 
-nav.navbar {
-}
-
 .container {
   display: flex;
   flex-flow: row nowrap;
@@ -81,8 +78,8 @@ nav.navbar {
 .zdog-canvas,
 .illustration {
   flex: 1;
-  width: 50%;
-scale: .8;
+  /* width: 50%; */
+/* scale: .8; */
 }
 
 .textContent {
@@ -103,7 +100,7 @@ scale: .8;
 .zdog-canvas,
 .illustration,
 .textContent {
-      transform: translateY(-7%);
+      /* transform: translateY(-7%); */
 
 }
 
@@ -125,7 +122,8 @@ scale: .8;
 
 .rotationSliders {
   position: fixed;
-  top: 8vh;
+  bottom: 5vh;
+  right: 0;
       height: 10px;
       /* width: 100px; */
       z-index: 10;
