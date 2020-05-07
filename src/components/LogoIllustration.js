@@ -1,15 +1,9 @@
 // import ReactDOM from 'react-dom'
 import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from "react-dom";
-
-import Smartphone from './smartphone';
-import Zdog from 'zdog';
 import gsap from 'gsap';
 
-import { illuTweenDuration } from '../utils/timelines';
 import Me from "./zdog/Me";
 
-let { TAU } = Zdog;
 let start, end;
 
 const LogoIllustration = React.forwardRef((props, ref) => {
@@ -31,10 +25,27 @@ const LogoIllustration = React.forwardRef((props, ref) => {
 
     // Changement d'index ?
     useEffect(() => {
-        console.log('Cur:', index, ' Prev:', prevIndex);
+        // prevIndex === undefined && console.log('First load... No previous index');
+        switch (index) {
+            case 0:
+                prevIndex !== undefined && console.log('You come back from Index no: ', prevIndex);
+                setRotate({
+                    x: 0, y: 0, z: 2
+                });
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+        }
     }, [index]);
     
-    return <Me ref={ref} index={index} animation={[translate, rotate, scale]} />
+    return <Me ref={ref} index={index} animation={[props.translate, props.rotate, props.scale]} />
 
 })
 

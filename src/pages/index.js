@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import Zdog from 'zdog';
+import Splitting from "splitting";
 
 import LangContext from '../components/contexts/LangContext';
 
@@ -21,6 +22,7 @@ import Slide4 from '../components/slide4';
 
 
 import "font-awesome/css/font-awesome.min.css";
+import gsap from "gsap";
 
 const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
@@ -63,7 +65,7 @@ const IndexPage = (props) => {
 			let res;
 			 switch (index) {
 				case 0:
-					res = <Slide0 lang={lang} />
+					 res = <Slide0 lang={lang} />
 					break;
 				case 1:
 					res = <Slide1 lang={lang} />
@@ -81,7 +83,8 @@ const IndexPage = (props) => {
 					break;
 			 }
 			return res;
-		})}, [index]);
+		})
+	}, [index]);
 	
 	// Chevrons animation
 	useEffect(() => {
@@ -89,14 +92,77 @@ const IndexPage = (props) => {
 		animChevron(chevronBottom.current, 'x', -15);
 	}, [index]);
 
-
-	let handleClick = (e) => {
+	let handleClick = (e) => {		
 		switch (e.target) {
 			case chevronTop.current:
-				setIndex((prev) => { return prev - 1 });
+				// 1. faire disparaitre le texte avec splitting
+				const p = document.querySelector('.textContent>p');
+
+				const res = Splitting({
+					target: p,
+					by: "words"
+				});
+
+				gsap.to(res[0].words, {
+					opacity: 0,
+					backgroundColor: "transparent",
+					y: 100,
+					stagger: {						
+						amount: .195,
+						from: "start"
+					},
+					onStart: () => {
+						gsap.to('.purple', {
+							backgroundColor: "transparent",
+							color: "#4a4a4a",
+							y: 100,
+							duration: .195
+						});						
+					},
+					onComplete: () => {
+						// 2. setIndex
+						setIndex((prev) => {
+							return prev - 1
+						});
+					}
+				});
+
 				break;
+			
 			case chevronBottom.current:
-				setIndex((prev) => { return prev + 1 });
+				// 1. faire disparaitre le texte avec splitting
+				const pp = document.querySelector('.textContent>p');
+
+				const ress = Splitting({
+					target: pp,
+					by: "words"
+				});
+
+				gsap.to(ress[0].words, {
+					opacity: 0,
+					backgroundColor: "transparent",	
+					// duration: .195,
+					// x: 250,
+					y: -100,
+					// scale: gsap.utils.distribute({
+					// 	base: 1,
+					// 	amount: .195,
+					// 	from: "center"
+					// }),
+					stagger: {						
+						from: "start",
+						amount: .195
+					},
+					onStart: () => {
+						gsap.to('.purple', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a" , y: -100 });
+					},
+					onComplete: () => {
+						// 2. setIndex
+						setIndex((prev) => {
+							return prev + 1
+						});
+					}
+				});
 				break;
 			default:
 				break;
@@ -108,7 +174,7 @@ const IndexPage = (props) => {
 		setRotate(prev => { 
 			return { ...prev, [e.target.name]: Number(e.target.value) }
 		});
-		console.log(rotate);
+		// console.log(rotate);
 	}
 
 	let handleTranslation = (e) => {
@@ -119,13 +185,13 @@ const IndexPage = (props) => {
 		setTranslate(prev => {
 			return { ...prev, [e.target.name ]: Number(e.target.value) }
 		});
-		console.log(translate, scale);
+		// console.log(translate, scale);
 	}
 
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
 		<Container className="container">
-			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "44%", zIndex: 10, position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
+			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "14%", zIndex: 10, position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration
 				ref={illo}
 				index={index}

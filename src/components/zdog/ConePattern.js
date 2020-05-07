@@ -1,91 +1,144 @@
-import React from 'react';
 import Zdog from 'zdog';
-import { Anchor, Cone } from 'react-zdog';
 
-const { TAU } = Zdog;
+const {
+    TAU
+} = Zdog;
 
-const ConePattern = (props) => {
-    return <Anchor>
-        <Cone diameter={24}
-            // 1
-            length={24}
-            stroke={false}
-            color={'#f38181'}
-            backface = {false}
-            rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
-        />
+let ConePattern = new Zdog.Anchor({
+    scale: .5
+});
 
-        <Cone diameter={24}
-            // 2
-            length={24}
-            stroke={false}
-            color={'#f38c84'}
-            backface = {false}
-            rotate={props.rotation}
-            translate={{ x: -12, y: 24 }}
-        />
-        <Cone diameter={24}
-            // 3
-            length={24}
-            stroke={false}
-            color={'#f3a389'}
-            backface={false}
-            rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
-            translate={{ x: -24 }}
-        />
-              
-        <Cone
-            // 4
-            diameter={24}
-            length={24}
-            stroke={false}
-            color={'#f4ba8e'}
-            backface={false}
-            rotate={props.rotation}
-            translate={{ x: -24 }}
-        />
-                    
-        <Cone diameter={24}
-            // 5
-            length={24}
-            stroke={false}
-            color={'#f4c590'}
-            backface={false}
-            rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
-            translate={{ x: -12, y: -24 }}
-        />
+const r = {
+    x: TAU/2,
+    // y: -Math.PI / 16
+    y: 0
+};
 
-        <Cone
-            // 6
-            id={"pointe"}
-            diameter={24}
-            length={24}
-            stroke={false}
-            color={'#f4d193'}
-            backface={false}
-            rotate={props.rotation}
-        />
-                
-        <Cone diameter={24}
-            // 7
-            length={24}
-            stroke={false}
-            color={'#f4dc95'}
-            backface={false}
-            rotate={{ x: -props.rotation.x, y: -props.rotation.y }}
-            translate={{ x: 12, y: -24 }}
-        />
+new Zdog.Cone({
+    // 1
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f38181',
+    backface: false,
+    rotate: {
+        x: -r.x,
+        y: -r.y,
+        z: 0
+    }
+});
 
-        <Cone diameter={24}
-            // 8
-            length={24}
-            stroke={false}
-            color={'#f4f39a'}
-            backface={false}
-            rotate={props.rotation}
-            translate={{ x: 12, y: -24 }}
-        />
-    </Anchor>
-}
+new Zdog.Cone({
+    // 2
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f38c84',
+    backface: false,
+    rotate: r,
+    translate: {
+        x: -2,
+        y: 4
+    }
+});
+
+new Zdog.Cone({
+    // 3
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f3a389',
+    backface: false,
+    rotate: {
+        x: -r.x,
+        y: -r.y,
+        z: 0
+    },
+    translate: {
+        x: -4
+    }
+});
+
+new Zdog.Cone({
+    // 4
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f4ba8e',
+    backface: false,
+    rotate: r,
+    translate: {
+        x: -4
+    }
+});
+
+new Zdog.Cone({
+    // 5
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f4c590',
+    backface: false,
+    rotate: {
+        x: -r.x,
+        y: -r.y,
+        z: 0
+    },
+    translate: {
+        x: -2,
+        y: -4
+    }
+});
+
+new Zdog.Cone({
+    // 6
+    addTo: ConePattern,
+    id: "pointe",
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f4d193',
+    backface: false,
+    rotate: r
+});
+
+new Zdog.Cone({
+    // 7
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f4dc95',
+    backface: false,
+    rotate: {
+        x: -r.x,
+        y: -r.y,
+        z: 0
+    },
+    translate: {
+        x: 2,
+        y: -4
+    }
+});
+
+new Zdog.Cone({
+    // 8
+    addTo: ConePattern,
+    diameter: 4,
+    length: 4,
+    stroke: false,
+    color: '#f4f39a',
+    backface: false,
+    rotate: r,
+    translate: {
+        x: 2,
+        y: -4
+    }
+});
 
 export default ConePattern;

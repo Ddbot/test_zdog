@@ -1,348 +1,587 @@
-import React, { useRef, useEffect, useState } from 'react';
 import Zdog from 'zdog';
-import { Anchor, Cone, Cylinder, Ellipse, Box, Illustration, Rect, Shape, Group, Hemisphere, useZdog } from 'react-zdog';
 
 const { TAU } = Zdog;
 var quarterTurn = Math.sin(TAU / 8);
 
 var torsoX = 3 / quarterTurn;
-var shoulderX = torsoX + 1.5;
-var shinEnd = { y: 22 };
-var hipX = (8 / quarterTurn) / 2;
-const leftKnee = { x: -hipX - 10, y: -2, z: 15 };
 
-const Andry = (props) => {    
-    let headRef = useRef(null);
-    let torsoRef = useRef(null);
-    let rightArm = useRef(null);
-    let leftArm = useRef(null);
-    let rightForeArm = useRef(null);
-    let leftForeArm = useRef(null);
+// ----- model ----- //
 
-    const Head = (props) => {
-        {/* COU */ }
-        return <Cylinder ref={headRef}
-            diameter={4}
-            length={6}
-            stroke={false}
-            color = {
-                '#804d00'
-            }
-            rotate={{ x: -TAU / 4 }}
-            translate={{ y: 12.5 }}>
-            {/* menton */}
-            <Shape
-                translate={{ y: 0, z: -2 }}
-                stroke={7.5}
-                color = {
-                    '#995c00'
-                }
-                rotate={{ x: TAU / 4 }}>
-                {/* front */}
-                <Ellipse
-                    diameter={2}
-                    translate={{ y: -4 }}
-                    stroke={4}
-                    color = {
-                        '#995c00'
-                    }>
-                        {/* CHEVEUX GROS */}
-                        <Shape
-                            path={[{ y: -1 }, { y: -7 }]}
-                            translate={{ x: -2, y: -3.5, z: -3 }}
-                            rotate={{ x: -TAU / 4 }}
-                            stroke={2.5}
-                            color={'#616161'} />
-                        {/* CHEVEUX MEDIUM */}
-                        <Shape
-                            path={[{ y: 0 }, { y: -6 }]}
-                            translate={{ x: 2, y: -3, z: -2 }}
-                            rotate={{ x: -TAU * 75 / 360 }}
-                            stroke={2}
-                            color={"lightgray"} />
-                        {/* CHEVEUX PETITS */}
-                        <Shape path={[{ y: 0 }, { y: -6 }]}
-                            translate={{ x: -.25, y: -3, z: -1 }}
-                            rotate={{ x: -TAU * 80 / 360 }}
-                            stroke={2.5}
-                            color={"gray"} />
-                        {/* CHEVEUX DERRIERE */}
-                        <Ellipse diameter={3}
-                            translate={{ y: -.3, z: -3 }}
-                            stroke={4}
-                                color={'#4e4e4e'} />
-                    {/* YEUX */}
-                    <Ellipse
-                        quarters={2}
-                        scale={1.5}
-                        translate={{ x: -1.5, y: 0.5, z: 2 }}
-                        rotate={{ z: -TAU / 4 }}
-                        closed={false}
-                        color={'#330000'}
-                        stroke={0.38}
-                        fill={false} />
-                    <Ellipse
-                        quarters={2}
-                        scale={1.5}
-                        translate={{ x: 1.5, y: 0.5, z: 2 }}
-                        rotate={{ z: -TAU / 4 }}
-                        closed={false}
-                        color={'#330000'}
-                        stroke={0.38}
-                        fill={false} />
-                    {/* OREILLES */}
-                    <Ellipse
-                        diameter={1.5}
-                        translate={{ x: 3.5, y: 1, z: -1 }}
-                        rotate={{ y: -TAU / 8 }}
-                        stroke={1}
-                        color = {
-                            '#995c00'
-                        }
-                        fill={true}>
-                        {/* CHEVEUX AUTOUR OREILLE L*/}
-                        <Ellipse quarters={2}
-                            scale={3}
-                            translate={{ x: -.5, y: -.4, z: -2 }}
-                            rotate={{ y: -.8, z: -TAU / 4 }}
-                            closed={false}
-                            color={'#4e4e4e'}
-                            stroke={1.5}
-                            fill={false} />
-                    </Ellipse>
-                    <Ellipse
-                        diameter={1.5}
-                        translate={{ x: -3.5, y: 1, z: -1 }}
-                        rotate={{ y: TAU / 8 }}
-                        stroke={1}
-                        color = {
-                            '#995c00'
-                        }
-                        fill={true}>
-                        {/* CHEVEUX AUTOUR OREILLE R */}
-                        <Ellipse quarters={2}
-                            scale={3}
-                            translate={{ x: .5, y: -.4, z: -2 }}
-                            rotate={{ y: .8, z: -TAU / 4 }}
-                            closed={false}
-                            color={'#4e4e4e'}
-                            stroke={1.5}
-                            fill={false} />
-                    </Ellipse>
-                </Ellipse>
-                {/* SOURIRE */}
-                <Ellipse quarters={2}
-                    translate={{ y: -1, z: 3.5 }}
-                    rotate={{ z: TAU / 4 }}
-                    scale={3}
-                    fill={true}
-                    stroke={0.5}
-                    color={'white'}
-                    closed={true} />
-            </Shape>
-        </Cylinder>
-    };    
-        
-    const Bras = React.forwardRef((props, ref) => {
-        return <Shape ref={ref}
-            path={[{ y: 0 }, { y: 7 }]}
-            translate={props.translate}
-            rotate={props.rotate}
-            color={props.color}
-            stroke={4}>{props.children}</Shape>
-    });
-            
-    const Torso = (props) => {
-        return (
-			<Shape
-				ref={torsoRef}
-				translate={{
-					y: 25.3,
-					z: 0
-				}}
-				rotate={
-					{
-						// z: TAU / 4
-					}
-				}
-				path={[{ y: -torsoX }, { y: torsoX * 3 - 1 }]}
-				color={"black"}
-				stroke={12}
-                onClick={() =>
-                    // console.log("U clicked on the TORSO")
-                }
-			>
-				{/* EPAULES */}
-				<Shape
-					path={[{ x: 0 }, { x: 10 }]}
-					color={"black"}
-					stroke={8}
-					translate={{
-						x: -5,
-						y: -6
-					}}
-				/>
-				{/* LOGO TSHIRT */}
-				<Shape
-					// triangle
-					path={[
-						{ x: 0, y: -1.6 },
-						{ x: 1.6, y: 1.6 },
-						{ x: -1.6, y: 1.6 }
-					]}
-					stroke={0.5}
-					color={"#f38181"}
-					translate={{ y: -4, z: 4 }}
-				/>
-				<Shape
-					path={[
-						{ x: -1.6, y: 2.58 },
-						{ x: 1.6, y: 2.58 }
-					]}
-					// closed by default
-					stroke={0.5}
-					color={"#f4f39a"}
-					translate={{ y: -4, z: 4 }}
-				/>
-				{/* BRAS R */}
-				<Group>
-					<Bras
-						ref={rightArm}
-						color={"black"}
-						translate={{
-							x: -torsoX - 3,
-							y: -7
-							// z: 4
-						}}
-						rotate={{
-							x: 0.5,
-							y: -0.5,
-							z: TAU / 16
-						}}
-					>
-						{/* AVANT BRAS R */}
-						<Bras
-							ref={rightForeArm}
-							color={props.color}
-							translate={{
-								// x: -torsoX - 6,
-								y: 7,
-								z: 0
-							}}
-							rotate={{
-								// mouvement du bras vers le haut avec X entre 0.5 et 1
-								x: 0.5,
-								y: -5,
-								z: -0.5
-							}}
-						>
-							{/* MAIN R */}
-							<Shape
-								stroke={5}
-								color={props.color}
-								translate={{
-									// x: -torsoX - 4,
-									y: 8,
-									z: 0
-								}}
-							/>
-						</Bras>
-					</Bras>
-				</Group>
-				{/* BRAS L */}
-				<Group>
-					<Bras
-						ref={leftArm}
-						color={"black"}
-						translate={{
-							x: torsoX + 3,
-							y: -7,
-							z: 0
-						}}
-						rotate={{
-							// mouvement du bras vers le haut avec X
-							x: 0.7,
-							y: -1,
-							z: -TAU / 16
-						}}
-					>
-						{/* AVANT BRAS L */}
-						<Bras
-							ref={leftForeArm}
-							color={props.color}
-							translate={{
-								x: -torsoX - 4,
-								y: 8,
-								z: 2
-							}}
-							rotate={{
-								x: -2,
-								y: 0,
-								z: 5
-							}}
-						>
-							{/* MAIN L */}
-							<Shape
-								stroke={4.7}
-								color={props.color}
-								translate={{
-									x: -.5,
-									y: -3.5,
-									z: .5
-								}}
-							/>
-						</Bras>
-					</Bras>
-				</Group>
-			</Shape>
-		);
-    };    
+// add shapes to scene
+export const Cou = new Zdog.Cylinder({
+    diameter: 4,
+    length: 6,
+    stroke: false,
+    color: "#995c00",
+    rotate: {
+        x: -TAU / 4
+    },
+    translate: {
+        y: 13.5
+    }
+});
 
-    const Legs = (props) => {
-        // HANCHES
-        return <Cylinder diameter={6} length={torsoX * 3 - 1} translate={{ y: 40 }} rotate={{ x: -TAU, y: -TAU / 4 }} color={'hsl(180, 25%, 20%)'}>
-            {/* JAMBES */}
-            {/* RIGHT THIGH */}
-            <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: -6 }} rotate={{ y: TAU / 4 + 0.4 }} length={12} color={'darkslategray'}>
-                {/* KNEE R */}
-                <Shape stroke={5} color={'hsl(180, 25%, 28%)'} translate={{ z: 8 }}>
-                    {/* TIBIA R */}
-                    <Cylinder diameter={4} translate={{ x: 0, y: 7.5, z: 0 }} rotate={{ x: -TAU / 4, y: 0 }} length={12} color={'hsl(180, 25%, 30%)'}>
-                        {/* CHAUSSURE R */}
-                        <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'#cc7a00'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -3, y: 1, z: .5 }}>
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 2, z: 2 }} rotate={{ x: 3, y: 1, z: -0.1 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 3.25, z: 2 }} rotate={{ x: 3, y: 1, z: -0.1 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 4.5, z: 2 }} rotate={{ x: 3, y: 1, z: -0.1 }} stroke={.5} color={'beige'} />
-                        </Shape>
-                    </Cylinder>
-                </Shape>
-            </Cylinder>
-            {/* LEFT THIGH */}
-            <Cylinder diameter={4} translate={{ x: -8.5, y: 0, z: 6 }} rotate={{ y: TAU / 4 - 0.4 }} length={12} color={'darkslategray'}>
-                {/* KNEE L */}
-                <Shape stroke={5} color={'hsl(180, 25%, 28%)'} translate={{ z: 8 }}>
-                    {/* TIBIA L */}
-                    <Cylinder diameter={4} translate={{ x: 0, y: 7.5, z: 0 }} rotate={{ x: -TAU / 4, y: 0 }} length={12} color={'hsl(180, 25%, 30%)'}>
-                        {/* CHAUSSURE L */}
-                        <Shape path={[{ y: 0 }, { y: 4 }]} stroke={5} color={'#cc7a00'} translate={{ x: 0, y: 0, z: 8 }} rotate={{ x: -3, y: 2, z: .5 }}>
-                            {/* <Ellipse diameter={4} quarters={2} color={'yellow'} translate={{ x: 1.1, y:2, z: 0}} rotate={{ x: TAU/4, y: 0, z: -0.5}}/>
-                                <Ellipse diameter={3} quarters={2} color={'yellow'} translate={{ x: 1.1, y:5, z: 0}} rotate={{ x: TAU/4, y: 0, z: -0.5}}/> */}
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 2, z: -2 }} rotate={{ y: 1.2 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 3.25, z: -2 }} rotate={{ y: 1.2 }} stroke={.5} color={'beige'} />
-                            <Shape path={[{ x: 0 }, { x: 2.5 }]} translate={{ x: 1.3, y: 4.5, z: -2 }} rotate={{ y: 1.2 }} stroke={.5} color={'beige'} />
-                        </Shape>
-                    </Cylinder>
-                </Shape>
-            </Cylinder>
-        </Cylinder>
-    };
-    
-    return (<Group>
-        <Head />
-        <Torso color={"#995c00"} />
-        <Legs />	
-    </Group>            
-	);
-};
+const Menton = new Zdog.Shape({
+    addTo: Cou,
+    translate: {
+        y: 0,
+        z: -2
+    },
+    stroke: 6,
+    color: "#995c00",
+    rotate: {
+        x: TAU / 4
+    }
+});
 
-export default Andry;
+const Front = new Zdog.Ellipse({
+    addTo: Menton,
+    diameter: 2,
+    translate: {
+        y: -4
+    },
+    stroke: 3.2,
+    color: "#995c00"
+});
+
+const Cheveux_gros = new Zdog.Shape({
+    addTo: Front,
+    path: [{
+        y: -1
+    }, {
+        y: -7
+    }],
+    translate: {
+        x: -2,
+        y: -3.5,
+        z: -3
+    },
+    rotate: {
+        x: -TAU / 4
+    },
+    stroke: 2,
+    color: "#616161"
+});
+
+const Cheveux_medium = new Zdog.Shape({
+    addTo: Front,
+    path: [{
+        y: 0
+    }, {
+        y: -6
+    }],
+    translate: {
+        x: 2,
+        y: -3,
+        z: -2
+    },
+    rotate: {
+        x: (-TAU * 75) / 360
+    },
+    stroke: 1.6,
+    color: "lightgray"
+});
+
+const Cheveux_petit = new Zdog.Shape({
+    addTo: Front,
+    path: [{
+        y: 0
+    }, {
+        y: -6
+    }],
+    translate: {
+        x: -0.25,
+        y: -3,
+        z: -1
+    },
+    rotate: {
+        x: (-TAU * 80) / 360
+    },
+    stroke: 2,
+    color: "gray"
+});
+
+const Cheveux_derriere = new Zdog.Ellipse({
+    addTo: Front,
+    diameter: 3,
+    translate: {
+        y: -0.3,
+        z: -3
+    },
+    stroke: 4,
+    color: "#4e4e4e"
+});
+
+const Yeux_L = new Zdog.Ellipse({
+    addTo: Front,
+    quarters: 2,
+    scale: 1.5,
+    translate: {
+        x: -1.5,
+        y: 0.5,
+        z: 2
+    },
+    rotate: {
+        z: -TAU / 4
+    },
+    closed: false,
+    color: "#330000",
+    stroke: 0.38,
+    fill: false
+});
+
+const Yeux_R = Yeux_L.copy({
+    translate: {
+        x: 1.5,
+        y: 0.5,
+        z: 2
+    }
+});
+
+const Oreille_L = new Zdog.Ellipse({
+    addTo: Front,
+    diameter: 1.5,
+    translate: {
+        x: 3.5,
+        y: 1,
+        z: -1
+    },
+    rotate: {
+        y: -TAU / 8
+    },
+    stroke: 1,
+    color: "#995c00",
+    fill: true
+});
+
+const Cheveux_oreille_L = new Zdog.Ellipse({
+    addTo: Oreille_L,
+    quarters: 2,
+    scale: 3,
+    translate: {
+        x: -0.5,
+        y: -0.4,
+        z: -2
+    },
+    rotate: {
+        y: -0.8,
+        z: -TAU / 4
+    },
+    closed: false,
+    color: "#4e4e4e",
+    stroke: 1.5,
+    fill: false
+});
+
+const Oreille_R = Oreille_L.copy({
+    addTo: Front,
+    translate: {
+        x: -3.5,
+        y: 1,
+        z: -1
+    },
+    rotate: {
+        y: TAU / 8
+    }
+});
+
+const Cheveux_oreille_R = Cheveux_oreille_L.copy({
+    addTo: Oreille_R,
+    translate: {
+        x: 0.5,
+        y: -0.4,
+        z: -2
+    },
+    rotate: {
+        y: 0.8,
+        z: -TAU / 4
+    }
+});
+
+const Sourire = new Zdog.Ellipse({
+    addTo: Menton,
+    quarters: 2,
+    translate: {
+        y: -1,
+        z: 3.5
+    },
+    rotate: {
+        z: TAU / 4
+    },
+    scale: 3,
+    fill: true,
+    stroke: 0.5,
+    color: "white",
+    closed: true
+});
+
+export const Torse = new Zdog.Shape({
+    translate: {
+        y: 25.3,
+        z: 0
+    },
+    path: [{
+            y: -torsoX
+        },
+        {
+            y: torsoX * 3 - 1
+        }
+    ],
+    color: "#DED381",
+    stroke: 9.6
+});
+
+const Epaules = new Zdog.Shape({
+    addTo: Torse,
+    path: [{
+            x: 0
+        },
+        {
+            x: 10
+        }
+    ],
+    color: "#FAE491",
+    stroke: 6,
+    translate: {
+        x: -5,
+        y: -6
+    }
+});
+
+const Logo_tshirt1 = new Zdog.Shape({
+    addTo: Torse,
+    path: [{
+            x: 0,
+            y: -1.6
+        },
+        {
+            x: 1.6,
+            y: 1.6
+        },
+        {
+            x: -1.6,
+            y: 1.6
+        }
+    ],
+    stroke: 0.5,
+    color: "hsla(359, 85%, 74%, .5)",
+    translate: {
+        y: -7,
+        z: 4
+    }
+});
+
+const Logo_tshirt2 = new Zdog.Shape({
+    addTo: Torse,
+    path: [{
+            x: -1.6,
+            y: 2.58
+        },
+        {
+            x: 1.6,
+            y: 2.58
+        }
+    ],
+    // closed by default
+    stroke: 0.5,
+    color: "hsla(203, 77%, 83%, 0.5)",
+    translate: {
+        y: -7,
+        z: 4
+    }
+});
+
+const Bras_Groupe_R = new Zdog.Group({
+    addTo: Torse
+});
+
+const Bras_R = new Zdog.Shape({
+    addTo: Bras_Groupe_R,
+    path: [{
+            y: 0
+        },
+        {
+            y: 7
+        }
+    ],
+    translate: {
+        x: -torsoX - 3,
+        y: -7
+    },
+    rotate: {
+        x: 0.5,
+        y: -0.5,
+        z: TAU / 16
+    },
+    color: "#F5F39A",
+    stroke: 3.2
+});
+
+const Avant_Bras_R = Bras_R.copy({
+    addTo: Bras_R,
+    color: "#995c00",
+    translate: {
+        y: 7,
+        z: 0
+    },
+    // mouvement du bras vers le haut avec X entre 0.5 et 1
+    rotate: {
+        x: 0.5,
+        y: -5,
+        z: -0.5
+    }
+});
+
+const Main_R = new Zdog.Shape({
+    addTo: Avant_Bras_R,
+    stroke: 4,
+    color: "#995c00",
+    translate: {
+        y: 8,
+        z: 0
+    }
+});
+
+const Bras_Groupe_L = new Zdog.Group({
+    addTo: Torse
+});
+
+const Bras_L = Bras_R.copy({
+    translate: {
+        x: torsoX + 3,
+        y: -7
+    },
+    rotate: {
+        x: 0.7,
+        y: -1,
+        z: -TAU / 16
+    }
+});
+
+const Avant_Bras_L = Avant_Bras_R.copy({
+    addTo: Bras_L,
+    translate: {
+        x: -torsoX - 4,
+        y: 8,
+        z: 2
+    },
+    rotate: {
+        x: -2,
+        y: 0,
+        z: 5
+    }
+});
+
+const Main_L = Main_R.copy({
+    addTo: Avant_Bras_L,
+    stroke: 3.76,
+    translate: {
+        x: -0.5,
+        y: -3,
+        z: 0.5
+    }
+});
+
+
+
+const Hanches = new Zdog.Cylinder({
+    addTo: Torse,
+    diameter: 6,
+    length: torsoX * 3 - 1,
+    translate: {
+        y: 15
+    },
+    rotate: {
+        x: -TAU,
+        y: -TAU / 4
+    },
+    color: "hsl(180, 25%, 20%)"
+});
+
+// const Hanches = new Zdog.Box({
+//     addTo: Torse,
+//     height: 6,
+//     depth: 9.6,
+//     width: 9.6,
+//     translate: {
+//         y: 15
+//     },
+//     rotate: {
+//         x: -TAU,
+//         y: -TAU / 4
+//     },
+//     color: "hsl(180, 25%, 20%)",
+//     leftFace: "hsl(180, 25%, 20%)",
+//     topFace: "yellow",
+//     stroke: 2
+// });
+
+const Cuisse_R = new Zdog.Cylinder({
+    addTo: Hanches,
+    diameter: 4.8,
+    translate: {
+        x: -8.5,
+        y: 0,
+        z: -6
+    },
+    rotate: {
+        y: TAU / 4 + 0.4
+    },
+    length: 12,
+    color: "darkslategray"
+});
+
+
+
+const Genou_R = new Zdog.Shape({
+    addTo: Cuisse_R,
+    stroke: 5,
+    color: "hsl(180, 25%, 28%)",
+    translate: {
+        z: 8
+    }
+});
+
+const Tibia_R = new Zdog.Cylinder({
+    addTo: Genou_R,
+    diameter: 4.8,
+    translate: {
+        x: 0,
+        y: 7.5,
+        z: 0
+    },
+    rotate: {
+        x: -TAU / 4,
+        y: 0
+    },
+    length: 12,
+    color: "hsl(180, 25%, 30%)"
+});
+const Chaussure_R = new Zdog.Shape({
+    addTo: Tibia_R,
+    path: [{
+        y: 0
+    }, {
+        y: 4.8
+    }],
+    stroke: 4,
+    color: "#cc7a00",
+    translate: {
+        x: 0,
+        y: 0,
+        z: 8
+    },
+    rotate: {
+        x: -3,
+        y: 1,
+        z: 0.5
+    }
+});
+
+const Lacet_CHaussure_R_1 = new Zdog.Shape({
+    addTo: Chaussure_R,
+    path: [{
+        x: 0
+    }, {
+        x: 2.5
+    }],
+    translate: {
+        x: 1.3,
+        y: 2,
+        z: 2
+    },
+    rotate: {
+        x: 3,
+        y: 1,
+        z: -0.1
+    },
+    stroke: 0.5,
+    color: "beige"
+});
+const Lacet_CHaussure_R_2 = Lacet_CHaussure_R_1.copy({
+    translate: {
+        x: 1.3,
+        y: 3.25,
+        z: 2
+    }
+});
+const Lacet_CHaussure_R_3 = Lacet_CHaussure_R_1.copy({
+    translate: {
+        x: 1.3,
+        y: 4.5,
+        z: 2
+    }
+});
+
+const Cuisse_L = Cuisse_R.copy({
+    translate: {
+        x: -8.5,
+        y: 0,
+        z: 6
+    },
+    rotate: {
+        y: TAU / 4 - 0.4
+    }
+});
+const Genou_L = Genou_R.copy({
+    addTo: Cuisse_L
+});
+const Tibia_L = Tibia_R.copy({
+    addTo: Genou_L
+});
+
+const Chaussure_L = new Zdog.Shape({
+    addTo: Tibia_L,
+    path: [{
+        y: 0
+    }, {
+        y: 4.8
+    }],
+    stroke: 4,
+    color: "#cc7a00",
+    translate: {
+        x: 0,
+        y: 0,
+        z: 8
+    },
+    rotate: {
+        x: -3,
+        y: 2,
+        z: 0.5
+    }
+});
+
+const Lacet_CHaussure_L_1 = new Zdog.Shape({
+    addTo: Chaussure_L,
+    path: [{
+        x: 0
+    }, {
+        x: 2.5
+    }],
+    translate: {
+        x: 1.3,
+        y: 2,
+        z: -2
+    },
+    rotate: {
+        y: 1.2
+    },
+    stroke: 0.5,
+    color: "beige"
+});
+
+const Lacet_CHaussure_L_2 = Lacet_CHaussure_L_1.copy({
+    translate: {
+        x: 1.3,
+        y: 3.25,
+        z: -2
+    }
+});
+
+const Lacet_CHaussure_L_3 = Lacet_CHaussure_L_1.copy({
+    translate: {
+        x: 1.3,
+        y: 4.5,
+        z: -2
+    }
+});

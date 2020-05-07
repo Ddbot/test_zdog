@@ -4,84 +4,78 @@ import { Anchor, Cone, Cylinder, Hemisphere, Shape } from 'react-zdog';
 
 
 let { TAU } = Zdog;
-let Pointe = (props) => {
-    return <Cone
-    diameter={.72}
-    length={.72}
-    stroke={false}
-    color={"#f4dc95"}
-    // backface={"#C25"} 
-    backface={false}
-    />
-}
+const Pen = new Zdog.Anchor({
+    scale: 1,
+    translate: {
+        x: 15,
+        y: 25.5,
+        z: 16
+    },
+    rotate: {
+        x: TAU / 4,
+        y: -TAU / 16
+    },
+});
 
-let Mine = (props) => { 
-    return <Cone
-        diameter={.24}
-        length={.24}
-        stroke={false}
-        color={"black"}
-        // backface={"black"}
-        backface={false}
-        translate={{ z: .48}}  
-        />
-}
+let Pointe = new Zdog.Cone({
+    addTo: Pen,
+    diameter: .72,
+    length: .72,
+    stroke: false,
+    color: "#f4dc95",
+    // backface: "#C25"},
+    backface: false,
+})
 
-let Bois = (props) => {
-    return <Cylinder
-    diameter={.7}
-    length={4.5}
-    stroke={false}
-    color={'blue'}
-    // backface={'#E62'}
-    backface={false}
-    translate={{ z: -2.25 }}
-    />
-}
+let Mine = new Zdog.Cone({
+    addTo: Pen,
+    diameter: .2,
+    length: .2,
+    stroke: false,
+    color: "black",
+    backface: false,
+    translate: {
+        z: .48
+    }
+});
 
-let Anneau = (props) => {
-    return <Cylinder
-        diameter={.7}
-        length={.45}
-            stroke={false}        
-        color={'whitesmoke'}
-            // backface={'whitesmoke'}
-            backface={false}
-        translate={{ z: -4.5 }}
-    
-    />
-}
+let Bois = new Zdog.Cylinder({
+    addTo: Pen,
+    diameter: .7,
+    length: 4.5,
+    stroke: false,
+    color: 'blue',
+    backface: false,
+    translate: {
+        z: -2.25
+    }
+});
 
+let Anneau = new Zdog.Cylinder({
+    addTo: Pen,
+    diameter: .7,
+    length: .45,
+    stroke: false,
+    color: 'whitesmoke',
+    // backface: 'whitesmoke',
+    backface: false,
+    translate: {
+        z: -4.5
+    }
+});
 
-
-
-let Gomme = (props) => {
-    return <Hemisphere
-    diameter={.7}
-    stroke={ false}
-    color={ 'black'}
-    // backface={'white'}
-    backface={false}
-    rotate={{
+let Gomme = new Zdog.Hemisphere({
+    addTo: Pen,
+    diameter: .7,
+    stroke: false,
+    color: 'black',
+    backface: false,
+    rotate: {
         x: Math.PI
-    }}
-    translate={{
+    },
+    translate: {
         z: -4.75
-    }}
-
-/>}
-
-const Pen = (props) => {
-    return <Anchor
-        scale={1}
-        translate={{ x: 15, y: 25.5, z: 16 }}
-        rotate={{ x: TAU / 4, y: -TAU/16}}>
-        <Pointe />
-        <Mine />
-        <Bois />
-        <Anneau />
-        <Gomme />
-    </Anchor>
-}
+    }
+});
 
 export default Pen;
