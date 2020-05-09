@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import Zdog from 'zdog';
 import Splitting from "splitting";
 
 import LangContext from '../components/contexts/LangContext';
@@ -9,7 +8,6 @@ import styled from 'styled-components';
 import SEO from "../components/seo";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from '../components/styled/Chevron';
-import RotationSliders from '../components/rotationSliders';
 
 import Container from '../components/styled/Container';
 import { animChevron } from '../utils/timelines';
@@ -28,21 +26,18 @@ const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 `;
 
-const { TAU } = Zdog;
 
 const initial_position = {
-    x: 5.631,
-    y: 6.022,
+	x: 5.631,
+	y: 6.022,
 };
-  
-
 
 const IndexPage = (props) => {
-	let illo = useRef();
-		
+	let illo = useRef(null);
+
 	let chevronBottom = useRef(null);
 	let chevronTop = useRef(null);
-	
+
 	let lang = useContext(LangContext);
 
 	let [index, setIndex] = useState(0);
@@ -51,7 +46,6 @@ const IndexPage = (props) => {
 	let [rotate, setRotate] = useState(initial_position);
 	let [scale, setScale] = useState(.8);
 
-	const defaultLang = localStorage.getItem('lang') || 'fr' || lang;
 
 
 	// LANG		
@@ -60,12 +54,12 @@ const IndexPage = (props) => {
 	});
 
 	// Sync Slide (text content) to index
-	useEffect(() => { 
+	useEffect(() => {
 		setSlide(prev => {
 			let res;
-			 switch (index) {
+			switch (index) {
 				case 0:
-					 res = <Slide0 lang={lang} />
+					res = <Slide0 lang={lang} />
 					break;
 				case 1:
 					res = <Slide1 lang={lang} />
@@ -81,27 +75,31 @@ const IndexPage = (props) => {
 					break;
 				default:
 					break;
-			 }
+			}
 			return res;
 		})
-	}, [index]);
-	
+	}, [index, lang]);
+
 
 	useEffect(() => {
 		// Chevrons animation
-		gsap.set([chevronBottom.current,chevronTop.current], {
+		const up = !!chevronTop.current ? chevronTop.current : 'dummy';
+		const bottom = !!chevronBottom.current ? chevronBottom.current : 'dummy';
+
+
+		gsap.set([bottom, up], {
 			autoAlpha: 0
 		});
-		gsap.to([chevronBottom.current,chevronTop.current], {
+		gsap.to([bottom, up], {
 			duration: 0,
 			autoAlpha: 1,
 			delay: 1.3
 		});
-		animChevron(chevronTop.current, 'x', -15);
-		animChevron(chevronBottom.current, 'x', -15);
-	}, [index]);
+		animChevron(up, 'x', -15);
+		animChevron(bottom, 'x', -15);
+	}, [index, lang]);
 
-	let handleClick = (e) => {		
+	let handleClick = (e) => {
 		switch (e.target) {
 			case chevronTop.current:
 				// 1. faire disparaitre le texte avec splitting
@@ -116,7 +114,7 @@ const IndexPage = (props) => {
 					opacity: 0,
 					backgroundColor: "transparent",
 					x: 1000,
-					stagger: {						
+					stagger: {
 						amount: .195,
 						from: "start"
 					},
@@ -126,7 +124,7 @@ const IndexPage = (props) => {
 							color: "#4a4a4a",
 							x: 1000,
 							duration: .195
-						});						
+						});
 					},
 					onComplete: () => {
 						// 2. setIndex
@@ -137,7 +135,7 @@ const IndexPage = (props) => {
 				});
 
 				break;
-			
+
 			case chevronBottom.current:
 				// 1. faire disparaitre le texte avec splitting
 				const pp = document.querySelector('.textContent>p');
@@ -149,7 +147,7 @@ const IndexPage = (props) => {
 
 				gsap.to(ress[0].words, {
 					opacity: 0,
-					backgroundColor: "transparent",	
+					backgroundColor: "transparent",
 					// duration: .195,
 					// x: 250,
 					x: 1000,
@@ -158,12 +156,12 @@ const IndexPage = (props) => {
 					// 	amount: .195,
 					// 	from: "center"
 					// }),
-					stagger: {						
+					stagger: {
 						from: "start",
 						amount: .195
 					},
 					onStart: () => {
-						gsap.to('.purple', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a" , });
+						gsap.to('.purple', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a", });
 					},
 					onComplete: () => {
 						// 2. setIndex
@@ -178,29 +176,28 @@ const IndexPage = (props) => {
 		}
 	};
 
-	let handleRotation = (e) => {
-		e.persist();
-		setRotate(prev => { 
-			return { ...prev, [e.target.name]: Number(e.target.value) }
-		});
-		// console.log(rotate);
-	}
+	// let handleRotation = (e) => {
+	// 	e.persist();
+	// 	setRotate(prev => {
+	// 		return { ...prev, [e.target.name]: Number(e.target.value) }
+	// 	});
+	// 	// console.log(rotate);
+	// }
 
-	let handleTranslation = (e) => {
-		e.persist();
-		if (e.target.name === "z") {
-			setScale(prev => Number(e.target.value));
-		}
-		setTranslate(prev => {
-			return { ...prev, [e.target.name ]: Number(e.target.value) }
-		});
-		// console.log(translate, scale);
-	}
+	// let handleTranslation = (e) => {
+	// 	e.persist();
+	// 	if (e.target.name === "z") {
+	// 		setScale(prev => Number(e.target.value));
+	// 	}
+	// 	setTranslate(prev => {
+	// 		return { ...prev, [e.target.name]: Number(e.target.value) }
+	// 	});
+	// }
 
 	return (<>
-		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
+		<SEO title={lang === 'fr' ? 'Accueil' : 'Home'} />
 		<Container className="container">
-			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "7%", zIndex: 10, position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
+			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "7%", position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration
 				ref={illo}
 				index={index}

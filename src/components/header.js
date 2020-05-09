@@ -1,6 +1,6 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import LangToggle from './langToggle';
 import LangContext from './contexts/LangContext';
@@ -13,15 +13,15 @@ const Header = (props) => {
   // console.log('Current ctx: ', current);
 
   useEffect(() => {
-      localStorage.setItem('lang', current);
+    localStorage.setItem('lang', current);
   });
-  
+
   return (
     // <header>
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item">
-           <h1> {props.siteTitle}</h1>
+          <h1> {props.siteTitle}</h1>
         </Link>
         {/* GERER LE MENU BURGER POUR LES SMARTPHONES !! */}
         <button className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="burger" onClick={() => {
@@ -32,9 +32,10 @@ const Header = (props) => {
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <LangToggle lang={current} toggleLang={props.toggleLang}/>
+      <LangToggle lang={current} toggleLang={props.toggleLang} />
     </nav>
-  )}
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

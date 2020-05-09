@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const locale = {
     lang: 'fr',
-    setLang: () => {}
+    setLang: () => { }
 }
 
 const LangContext = React.createContext(locale);

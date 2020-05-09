@@ -9,11 +9,11 @@ const Slide_0 = (props) => {
     transformOrigin: "left center",
     transformPerspective: 200
   });
-  useEffect(() => { 
+  useEffect(() => {
     let target = document.querySelector('[data-splitting="words"]');
-    
+
     let res = Splitting({
-      target: target, 
+      target: target,
       by: "lines"
     });
 
@@ -24,8 +24,8 @@ const Slide_0 = (props) => {
       'blue'
     ]);
 
-    let mots = ['[data-word="Andry"]','[data-word="Intégrateur"]','[data-word="Designer"]',['[data-word="sites"]','[data-word="Web"]'],['[data-word="d\'applications"]','[data-word="mobiles"]']]
-    
+    let mots = ['[data-word="Andry"]', '[data-word="Intégrateur"]', '[data-word="Designer"]', ['[data-word="sites"]', '[data-word="Web"]'], ['[data-word="d\'applications"]', '[data-word="mobiles"]']]
+
 
     gsap.from(res[0].words, {
       x: -500,
@@ -38,18 +38,18 @@ const Slide_0 = (props) => {
       },
       delay: 1.5,
       // rotationY: 45,
-      onComplete: () => {
-        mots.forEach((mot, i) => { 
-          if (Array.isArray(mot)) {
-            mot.forEach( m => document.querySelector(m).style.backgroundColor = gsap.utils.wrap(colors, i));
-            console.log('Mot: ', mot);
-          };
-          if (!Array.isArray(mot)) {
-            console.log('Mot not ARRAY: ', mot);
-            document.querySelector(mot).style.backgroundColor = gsap.utils.wrap(colors, i)
-          };
-        });
-      }
+      // onComplete: () => {
+      //   mots.forEach((mot, i) => { 
+      //     if (Array.isArray(mot)) {
+      //       mot.forEach( m => document.querySelector(m).style.backgroundColor = gsap.utils.wrap(colors, i));
+      //       console.log('Mot: ', mot);
+      //     };
+      //     if (!Array.isArray(mot)) {
+      //       console.log('Mot not ARRAY: ', mot);
+      //       document.querySelector(mot).style.backgroundColor = gsap.utils.wrap(colors, i)
+      //     };
+      //   });
+      // }
     });
   });
 
