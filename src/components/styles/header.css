@@ -2,6 +2,7 @@ nav.navbar {
     /* background-color: transparent; */
     min-height: 7.87vh !important;
     max-height: 7.87vh !important;
+    z-index: 1;
 }
 div.navbar-item {
     background-color: transparent;

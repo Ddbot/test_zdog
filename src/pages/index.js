@@ -86,8 +86,17 @@ const IndexPage = (props) => {
 		})
 	}, [index]);
 	
-	// Chevrons animation
+
 	useEffect(() => {
+		// Chevrons animation
+		gsap.set([chevronBottom.current,chevronTop.current], {
+			autoAlpha: 0
+		});
+		gsap.to([chevronBottom.current,chevronTop.current], {
+			duration: 0,
+			autoAlpha: 1,
+			delay: 1.3
+		});
 		animChevron(chevronTop.current, 'x', -15);
 		animChevron(chevronBottom.current, 'x', -15);
 	}, [index]);
@@ -106,7 +115,7 @@ const IndexPage = (props) => {
 				gsap.to(res[0].words, {
 					opacity: 0,
 					backgroundColor: "transparent",
-					y: 100,
+					x: 1000,
 					stagger: {						
 						amount: .195,
 						from: "start"
@@ -115,7 +124,7 @@ const IndexPage = (props) => {
 						gsap.to('.purple', {
 							backgroundColor: "transparent",
 							color: "#4a4a4a",
-							y: 100,
+							x: 1000,
 							duration: .195
 						});						
 					},
@@ -143,7 +152,7 @@ const IndexPage = (props) => {
 					backgroundColor: "transparent",	
 					// duration: .195,
 					// x: 250,
-					y: -100,
+					x: 1000,
 					// scale: gsap.utils.distribute({
 					// 	base: 1,
 					// 	amount: .195,
@@ -154,7 +163,7 @@ const IndexPage = (props) => {
 						amount: .195
 					},
 					onStart: () => {
-						gsap.to('.purple', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a" , y: -100 });
+						gsap.to('.purple', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a" , });
 					},
 					onComplete: () => {
 						// 2. setIndex
@@ -191,7 +200,7 @@ const IndexPage = (props) => {
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home' } />
 		<Container className="container">
-			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "14%", zIndex: 10, position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
+			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "7%", zIndex: 10, position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration
 				ref={illo}
 				index={index}
@@ -200,7 +209,7 @@ const IndexPage = (props) => {
 				rotate={rotate}
 				scale={scale}
 			/>
-			<RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} />
+			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
 			{index !== 4 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
 	</>);

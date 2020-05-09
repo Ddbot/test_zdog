@@ -23,7 +23,7 @@ let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
 // create an scene Anchor to hold all items
 let scene = new Zdog.Anchor();
-scene.scale = .8;
+// scene.scale = .8;
 
 let liste = [Cou, Chair, Table];
 ConePattern.children.map(c => c.visible = false);
@@ -117,15 +117,16 @@ const Me = (props) => {
 
         let slide_0_move_2 = () => {
             // zoom vers l'ecran
-            scene.scale = Zdog.lerp(1, 4, zoomIllo.progress());
-            scene.translate.y -= 1.2;
-            console.log('COmputer ', Computer.addTo);
+            // scene.scale = Zdog.lerp(1, 4, zoomIllo.progress());
+            zoom = Zdog.lerp(6, 34, zoomIllo.progress());
+            scene.translate.y -= .23;
+            scene.children.forEach(c => {if(c.color !== undefined){ c.color = "transparent"}});
         }
 
         // Funcs for the TIMELINE
         let rotateIllo = gsap.to('html', {
             opacity: 1,
-            duration: 1,
+            duration: .8,
             ease: "power2.out",
             onStart: () => {
                 gsap.ticker.add(slide_0_move_1);
@@ -140,6 +141,11 @@ const Me = (props) => {
             duration: .5,
             onStart: () => {
                 gsap.ticker.add(slide_0_move_2);
+
+                // gsap.set(Computer.children, {
+                //     duration: .195,
+                //     color: "transparent"
+                // });                
             },
             onUpdate: () => {
                 if (zoomIllo.progress() >= 0.28) {
@@ -173,13 +179,15 @@ const Me = (props) => {
                         let start = 1,
                             end = 0;
             // zoom vers l'ecran
-            scene.translate.y += 1;
+            scene.translate.y = 3;
             scene.rotate = {
                 x: Zdog.lerp(seq[start][1].x, seq[end][1].x, rotateIllo_reverse.progress()),
-                y: Zdog.lerp(seq[start][1].y, seq[end][1].y, rotateIllo_reverse.progress()),
+                y: Zdog.lerp(seq[start][1].y, seq[end][1].y, rotateIllo_reverse.progress()), 
                 // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo_reverse.progress())
             };
-            scene.scale = Zdog.lerp(4, 0.8, rotateIllo_reverse.progress());
+            // scene.scale = Zdog.lerp(4, 0.8, rotateIllo_reverse.progress());
+            zoom = Zdog.lerp(42, 6, rotateIllo_reverse.progress());
+            // scene.translate.y -= 0.8;
         }
 
 
@@ -187,8 +195,9 @@ const Me = (props) => {
         let rotateIllo_reverse = gsap.to('html', {
             opacity: 1,
             duration: 1.4,
-            ease: "power2.out",
+            ease: "elastic.out(1,0.3)",
             onStart: () => {
+                scene.addChild(Torse);
                 scene.addChild(Computer);
                 scene.addChild(ConePattern);
                 scene.addChild(Chair);
@@ -196,7 +205,6 @@ const Me = (props) => {
                 scene.addChild(Pot);
                 scene.addChild(Pen);
                 scene.addChild(Smartphone);
-                scene.addChild(Torse);
                 scene.addChild(Cou);
                 gsap.ticker.add(slide_0_reverse_move);
             },
@@ -214,7 +222,7 @@ const Me = (props) => {
     // get canvas element and its context
     useEffect(() => {
         canvas = document.querySelector(".zdog-canvas");
-        // console.log(props.animation);
+        // canvas.style.border = "1px solid red";
 
         ctx = canvas.getContext("2d");
         // get canvas size
@@ -247,7 +255,7 @@ const Me = (props) => {
             }
         });
 
-        scene.rotate = seq[0];
+        // scene.rotate = seq[0];
 
         animate();
 

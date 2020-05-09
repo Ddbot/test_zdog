@@ -5,45 +5,55 @@ import gsap from 'gsap';
 // import './styles/slide.css';
 
 const Slide_0 = (props) => {
-  gsap.set('[data-splitting="chars"]', {
+  gsap.set('[data-splitting="words"]', {
     transformOrigin: "left center",
     transformPerspective: 200
   });
   useEffect(() => { 
-    let target = document.querySelector('[data-splitting="chars"]');
+    let target = document.querySelector('[data-splitting="words"]');
     
     let res = Splitting({
       target: target, 
       by: "lines"
     });
 
-    gsap.from(res[0].lines, {
-      x: -100,
+    let colors = gsap.utils.shuffle(['#f4dc95',
+      '#f3af8b',
+      '#f38181',
+      '#6199b8',
+      'blue'
+    ]);
+
+    let mots = ['[data-word="Andry"]','[data-word="Intégrateur"]','[data-word="Designer"]',['[data-word="sites"]','[data-word="Web"]'],['[data-word="d\'applications"]','[data-word="mobiles"]']]
+    
+
+    gsap.from(res[0].words, {
+      x: -500,
+      scale: 0.7,
       autoAlpha: 0,
       // duration: .225,
       stagger: {
-        amount: .225,
+        amount: .195,
         from: 0
       },
-      onStart: () => {
-        gsap.from('.purple', {
-          x: -100,
-          duration: .225,
-          backgroundColor: "transparent"
+      delay: 1.5,
+      // rotationY: 45,
+      onComplete: () => {
+        mots.forEach((mot, i) => { 
+          if (Array.isArray(mot)) {
+            mot.forEach( m => document.querySelector(m).style.backgroundColor = gsap.utils.wrap(colors, i));
+            console.log('Mot: ', mot);
+          };
+          if (!Array.isArray(mot)) {
+            console.log('Mot not ARRAY: ', mot);
+            document.querySelector(mot).style.backgroundColor = gsap.utils.wrap(colors, i)
+          };
         });
       }
-      // rotationY: 45,
     });
   });
 
-  return props.lang === "en" ? <p data-splitting="words">Hello ! <br />
-				I 'm <span className="purple"><b>Andry</b></span>,<br />
-				A <span className="purple"> <b> Web site </b></span> and <span className="purple"> <b> mobile Apps </b></span> Integrator and <span className="purple"> <b>Designer</b></span>
-  </p> : <p data-splitting="words">
-      Bonjour ! <br />
-				Je&nbsp;suis <span className="purple"><b>Andry</b></span>,<br />
-				Intégrateur&nbsp;et&nbsp;<span className="purple"><b>Designer</b></span> de&nbsp;sites<span className="purple"><b>Web</b></span> et&nbsp;d'<span className="purple"><b>applications mobiles</b></span>
-    </p>;
+  return props.lang === "en" ? <p data-splitting="words">Hello ! <br />I 'm Andry,<br />A Web site and mobile Apps Integrator and Designer</p> : <p data-splitting="words">Bonjour ! <br />Je suis Andry,<br />Intégrateur et Designer de sites Web et d'applications mobiles</p>;
 };
 
 export default Slide_0;
