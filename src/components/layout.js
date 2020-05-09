@@ -19,20 +19,22 @@ import { ChevronBottom, ChevronTop } from '../components/chevron';
 import "./styles/layout.css";
 import 'bulma/css/bulma.css';
 
-var lang;
-
-
 const Main = styled.main`
-    display: flex;
+	display: flex;
+	box-sizing: border-box;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-	width: 90 vw;
-	padding: 0 10vw;
+	width: 100%;
+	height: 92vh;
 `;
 
 const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
 localStorage.setItem('lang', defaultLang);
+
+let handleClick = (e) => {
+	console.log('handleClick from LAYOUT: ', e.target);
+}
 
 const Layout = (props) => {
 	let [lang, setLang] = useState(defaultLang);
@@ -51,7 +53,7 @@ const Layout = (props) => {
 		
 		localStorage.setItem('lang', lang);
 		}
-	return (<div>
+	return (<>
 		<LangContext.Provider value={lang} >
 			<Header siteTitle="Andry Online" locale={lang} toggleLang={toggleLang} />
 			<Main>		
@@ -68,7 +70,7 @@ const Layout = (props) => {
 				</symbol>				
 			</defs>
 		</svg>
-	</div>
+	</>
 	);
 }
 

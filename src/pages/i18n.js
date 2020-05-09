@@ -5,8 +5,8 @@ import LangContext from '../components/contexts/LangContext';
 import SEO from "../components/seo";
 import Container from "../components/styled/Container";
 import LogoIllustration from "../components/logoIllustration";
-import { ChevronBottom, ChevronTop } from '../components/chevron';
-import { chevronsBobbing } from '../utils/timelines';
+import Chevron from '../components/styled/Chevron';
+import { animChevron } from '../utils/timelines';
 
 const I18n = ({ location }) => {
 // ______ data pour graphQL ----- //
@@ -30,7 +30,11 @@ const I18n = ({ location }) => {
   let current = useContext(LangContext);
 
   useEffect(() => {
-    localStorage.setItem('lang', current);
+    let design = document.querySelector('a[href="/design"]');
+    let contact = document.querySelector('a[href="/contact"]');
+
+    animChevron(design, 'y', 15);
+    animChevron(contact, 'y', 15);
   });
 
   const defaultLang = localStorage.getItem('lang') || current;
@@ -40,15 +44,14 @@ const I18n = ({ location }) => {
   return (<>
 	<SEO title={"i18n"} />
 	<Container>
-		<Link to='/design' state={{ index: 2 }}>
-			<ChevronTop onClick={location.changeIndex}
-				onMouseEnter={() => chevronsBobbing.pause()}
-				onMouseLeave={() => {
-				chevronsBobbing.play()}} />
+		<Link to='/design' state={{ index: 2 }} style={{ position: "fixed", left: "25%", top: "10%", rotate:"180deg"}}>
+			<Chevron onClick={location.changeIndex} />
 		</Link>
 		<LogoIllustration index={3} />			
 			<div className="textContent" dangerouslySetInnerHTML={{ __html: content }} />     
-	<Link to='/contact' state={{ index: 4 }}><ChevronBottom onMouseEnter={() => chevronsBobbing.pause()} onMouseLeave={() => { chevronsBobbing.play() }} /></Link>
+      <Link to='/contact' state={{ index: 4 }} style={{ position: "fixed", left: "25%", bottom: "4%" }}>
+              <Chevron />
+            </Link>
 	</Container>
   </>)
 };
