@@ -17,14 +17,14 @@ const Slide_0 = (props) => {
       by: "lines"
     });
 
-    let colors = gsap.utils.shuffle(['#f4dc95',
-      '#f3af8b',
-      '#f38181',
-      '#6199b8',
-      'blue'
-    ]);
+    // let colors = gsap.utils.shuffle(['#f4dc95',
+    //   '#f3af8b',
+    //   '#f38181',
+    //   '#6199b8',
+    //   'blue'
+    // ]);
 
-    let mots = ['[data-word="Andry"]', '[data-word="Intégrateur"]', '[data-word="Designer"]', ['[data-word="sites"]', '[data-word="Web"]'], ['[data-word="d\'applications"]', '[data-word="mobiles"]']]
+    // let mots = ['[data-word="Andry"]', '[data-word="Intégrateur"]', '[data-word="Designer"]', ['[data-word="sites"]', '[data-word="Web"]'], ['[data-word="d\'applications"]', '[data-word="mobiles"]']]
 
 
     gsap.from(res[0].words, {

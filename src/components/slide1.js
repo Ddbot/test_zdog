@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Splitting from "splitting";
 import gsap from 'gsap';
 
 
@@ -14,20 +13,11 @@ const Slide_1 = (props) => {
   gsap.from('[data-splitting="words"]', {
     x: -1000,
     autoAlpha: 0,
-    // duration: .225,
     stagger: {
       amount: .5,
       from: 0
     },
-    //   onStart: () => {
-    //     gsap.from('.purple', {
-    //     //   x: -100,
-    //       duration: .225,
-    //       backgroundColor: "transparent"
-    //     });
-    // },
     delay: 1.5
-    // rotationY: 45,
   });
 
   return props.lang === "en" ? <p data-splitting="words">

@@ -83,8 +83,8 @@ const IndexPage = (props) => {
 
 	useEffect(() => {
 		// Chevrons animation
-		const up = !!chevronTop.current ? chevronTop.current : 'dummy';
-		const bottom = !!chevronBottom.current ? chevronBottom.current : 'dummy';
+		const up = !!chevronTop.current ? chevronTop.current : '.dummy';
+		const bottom = !!chevronBottom.current ? chevronBottom.current : '.dummy';
 
 
 		gsap.set([bottom, up], {
@@ -209,6 +209,7 @@ const IndexPage = (props) => {
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
 			{index !== 4 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
+		<div className="dummy" style={{ display: "none" }}></div>
 	</>);
 };
 
