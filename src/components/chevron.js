@@ -6,7 +6,7 @@ import Chevron from './styled/Chevron';
 // import './styles/chevron.css';
 
 let handleKeyPress = () => {
-    console.log('Gérer ca plus tard');
+    // console.log('Gérer ca plus tard');
 }
 
 const ChevronBtn = (props) => {
@@ -17,11 +17,9 @@ const ChevronBtn = (props) => {
     </Chevron>)
 };
 
-export const ChevronBottom = styled(ChevronBtn)`
-  transform: translateY(300px);
-  // margin-bottom: 40vh;
-`;
+export const ChevronBottom = styled(ChevronBtn)``;
 
 export const ChevronTop = styled(ChevronBtn)`  
-  transform: rotate(180deg) translateY(350px);
+position: fixed;
+  transform: rotate(180deg);
 `;

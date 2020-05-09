@@ -1,13 +1,17 @@
 import React from 'react';
 import Zdog from 'zdog';
-import { Illustration, Cone } from 'react-zdog';
 import ConePattern from './zdog/ConePattern';
 
 const { TAU } = Zdog;
 
 const Triangles = (props) => {
-    return <Illustration index={props.index} zoom={4} rotate={{ z: -TAU / 4 }}>
-        <ConePattern {...props}/>
-    </Illustration>}
+    let triangles = new Zdog.Group({
+        index: props.index,
+        zoom: 8,
+        rotate: { z: -TAU / 4 },
+        translate: { x: 4, y: -8 },
+    });
 
+    return Triangles;
+}
 export default Triangles;
