@@ -86,17 +86,26 @@ const IndexPage = (props) => {
 		const up = !!chevronTop.current ? chevronTop.current : '.dummy';
 		const bottom = !!chevronBottom.current ? chevronBottom.current : '.dummy';
 
-
 		gsap.set([bottom, up], {
 			autoAlpha: 0
 		});
-		gsap.to([bottom, up], {
+
+		gsap.to(bottom, {
 			duration: 0,
 			autoAlpha: 1,
-			delay: 1.3
+			delay: 1.3,
+			rotate: "-270deg"
 		});
-		animChevron(up, 'x', -15);
-		animChevron(bottom, 'x', -15);
+
+		gsap.to(up, {
+			duration: 0,
+			autoAlpha: 1,
+			delay: 1.3,
+			rotate: "270deg"
+		});
+
+		animChevron(up, 'y', 15);
+		animChevron(bottom, 'y', -15);
 	}, [index, lang]);
 
 	let handleClick = (e) => {
@@ -118,14 +127,7 @@ const IndexPage = (props) => {
 						amount: .195,
 						from: "start"
 					},
-					onStart: () => {
-						gsap.to('.purple', {
-							backgroundColor: "transparent",
-							color: "#4a4a4a",
-							x: 1000,
-							duration: .195
-						});
-					},
+
 					onComplete: () => {
 						// 2. setIndex
 						setIndex((prev) => {
@@ -197,7 +199,7 @@ const IndexPage = (props) => {
 	return (<>
 		<SEO title={lang === 'fr' ? 'Accueil' : 'Home'} />
 		<Container className="container">
-			{index !== 0 && <Chevron ref={chevronTop} style={{ rotate: "270deg", top: "7%", position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
+			{index !== 0 && <Chevron ref={chevronTop} style={{ top: "7%", position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration
 				ref={illo}
 				index={index}
