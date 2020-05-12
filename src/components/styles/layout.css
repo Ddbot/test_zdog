@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,500i&display=swap');
 
-* ,
-* + * {
+*,
+*+* {
   box-sizing: border-box;
 }
 
@@ -11,9 +11,10 @@ body {
 }
 
 #___gatsby {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
+
 :root {
   --buff: #f4f39a;
   --dark-cream: #f4e898;
@@ -63,14 +64,16 @@ body {
   font-family: "Roboto";
 }
 
-.purple:nth-of-type(2){
-    background-color: #f3af8b;
+.purple:nth-of-type(2) {
+  background-color: #f3af8b;
 }
+
 .purple:nth-of-type(3) {
-    background-color: #f38181;
+  background-color: #f38181;
 }
+
 .purple:nth-of-type(4) {
-    background-color: #6199b8;
+  background-color: #6199b8;
 }
 
 
@@ -79,7 +82,7 @@ body {
 .illustration {
   flex: 1;
   /* width: 50%; */
-transform: scale(0.8, 1);
+  transform: scale(0.8, 1);
 }
 
 .textContent {
@@ -92,7 +95,7 @@ transform: scale(0.8, 1);
 }
 
 .illustration>svg {
-  transform: translate(2vh,-14vh);
+  transform: translate(2vh, -14vh);
   overflow: visible;
   /* scale: 0.7; */
 }
@@ -102,8 +105,11 @@ transform: scale(0.8, 1);
   /* transform: translateY(-1.2rem); */
 
   /* padding: 0 2.5rem 2rem 3.5rem; */
-  line-height: 1.8;
+  /* line-height: 1.8; */
   /* float: left; */
+
+  display: inline-flex;
+  flex-flow: wrap;
 }
 
 .textContent>p>span {
@@ -116,7 +122,6 @@ transform: scale(0.8, 1);
   position: fixed;
   bottom: 5vh;
   right: 0;
-      height: 10px;
-      z-index: 10;
+  height: 10px;
+  z-index: 10;
 }
-
