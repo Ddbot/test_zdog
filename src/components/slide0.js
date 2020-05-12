@@ -12,20 +12,18 @@ const Slide_0 = (props) => {
   useEffect(() => {
     let target = document.querySelector('[data-splitting="lines"]');
 
-    gsap.set('.word', { display: "inline-block" });
 
     let res = Splitting({
       target: target,
       by: "lines"
     });
 
-    let colors = gsap.utils.shuffle(['#f4dc95',
-      '#f3af8b',
-      '#f38181',
-      '#6199b8',
-    ]);
+    //   let colors = gsap.utils.shuffle(['#f4dc95',
+    //     '#f3af8b',
+    //     '#f38181',
+    //     '#6199b8',
+    //   ]);
 
-    // let mots = ['[data-word="Andry"]', '[data-word="Intégrateur"]', '[data-word="Designer"]', ['[data-word="sites"]', '[data-word="Web"]'], ['[data-word="d\'applications"]', '[data-word="mobiles"]']]
 
 
     gsap.from(res[0].lines, {
@@ -39,21 +37,15 @@ const Slide_0 = (props) => {
       },
       delay: 1.5,
       rotationY: 45,
-      onComplete: () => {
-        document.querySelectorAll('.highlight').forEach((word, i) => {
-          word.style.backgroundColor = colors[i];
-          word.style.display = "inline-block";
-        });
-      }
     });
   });
 
   return props.lang === "en" ? <p data-splitting="lines">
-    I 'm <span className="highlight">Andry</span>Andry,<br />
-    A <span className="highlight">Web site</span> and <span className="highlight">mobile Apps></span> Integrator and <span className="highlight">Designer</span>
+    I 'm <span className="highlight"><b>Andry</b></span>,<br />
+    A <span className="highlight"><b>Web site</b></span> and <span className="highlight"><b>mobile Apps</b></span> Integrator and <span className="highlight"><b>Designer</b></span>
   </p> : <p data-splitting="lines">
-      Je suis <span className="highlight">Andry</span>,<br />
-      Intégrateur et <span className="highlight">Designer</span> de <span className="highlight">sites Web</span> et d'<span className="highlight">applications mobiles</span>
+      Je suis <span className="highlight"><b>Andry</b></span>,<br />
+      Intégrateur et <span className="highlight"><b>Designer</b></span> de <span className="highlight"><b>sites Web</b></span> et d'<span className="highlight"><b>applications mobiles</b></span>
     </p>;
 };
 

@@ -80,9 +80,8 @@ const IndexPage = (props) => {
 		})
 	}, [index, lang]);
 
-
+	// Chevrons animation
 	useEffect(() => {
-		// Chevrons animation
 		const up = !!chevronTop.current ? chevronTop.current : '.dummy';
 		const bottom = !!chevronBottom.current ? chevronBottom.current : '.dummy';
 
@@ -108,18 +107,34 @@ const IndexPage = (props) => {
 		animChevron(bottom, 'y', -15);
 	}, [index, lang]);
 
+	// Highlights
+	useEffect(() => {
+		gsap.set('.word', { display: "inline-block" });
+
+		let colors = gsap.utils.shuffle(['#f4dc95',
+			'#f3af8b',
+			'#f38181',
+			'#6199b8',
+		]);
+
+		document.querySelectorAll('.highlight').forEach((word, i) => {
+			word.style.backgroundColor = colors[i];
+			word.style.display = "inline-block";
+		});
+	});
+
+
 	let handleClick = (e) => {
 		switch (e.target) {
 			case chevronTop.current:
 				// 1. faire disparaitre le texte avec splitting
-				const p = document.querySelector('.textContent>p');
 
-				const res = Splitting({
-					target: p,
+				let target = Splitting({
+					target: document.querySelector('.textContent>p'),
 					by: "words"
-				});
+				})[0].words;
 
-				gsap.to(res[0].words, {
+				gsap.to(target, {
 					opacity: 0,
 					backgroundColor: "transparent",
 					x: 1000,
@@ -140,14 +155,14 @@ const IndexPage = (props) => {
 
 			case chevronBottom.current:
 				// 1. faire disparaitre le texte avec splitting
-				const pp = document.querySelector('.textContent>p');
+				// const pp = ;
 
-				const ress = Splitting({
-					target: pp,
+				target = Splitting({
+					target: document.querySelector('.textContent>p'),
 					by: "words"
-				});
+				})[0].words;
 
-				gsap.to(ress[0].words, {
+				gsap.to(target, {
 					opacity: 0,
 					backgroundColor: "transparent",
 					// duration: .195,
@@ -163,7 +178,7 @@ const IndexPage = (props) => {
 						amount: .195
 					},
 					onStart: () => {
-						gsap.to('.purple', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a", });
+						gsap.to('.highlight', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a", });
 					},
 					onComplete: () => {
 						// 2. setIndex
