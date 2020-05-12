@@ -20,14 +20,14 @@ const Slide_1 = (props) => {
     delay: 1.5
   });
 
-  return props.lang === "en" ? <p data-splitting="words">
-    I'm using <span className="purple">React</span> and <br />
-				frameworks such as <span className="purple">Gatsby JS</span> to create
-				<span className="purple">fast, modern</span> and <span className="purple">accessible</span>
-				Web sites and <span className="purple">PWA</span><br />
-  </p> : <p data-splitting="words">
-      J'utilise <span className="purple">React</span> et <br />
-				des frameworks comme <span className="purple">Gatsby&nbsp;JS</span> pour créer des sites et des <span className="purple">PWA&nbsp;modernes</span>, rapides et <span className="purple">accessibles</span>.
+  return props.lang === "en" ? <p data-splitting="lines">
+    I'm using <span className="highlight"><b>React</b></span> and
+				frameworks such as <span className="highlight"><b>Gatsby JS</b></span> to create
+				<span className="highlight"><b>fast, modern</b></span> and <span className="highlight">accessible</span>
+				Web sites and <span className="highlight"><b>PWA</b></span>
+  </p> : <p data-splitting="lines">
+      J'utilise <span className="highlight"><b>React</b></span> et
+				des frameworks comme <span className="highlight"><b>Gatsby</b></span> pour créer des sites et des <span className="highlight"><b>PWA modernes</b></span>, rapides et <span className="highlight"><b>accessibles</b></span>.
 			</p>;
 };
 
