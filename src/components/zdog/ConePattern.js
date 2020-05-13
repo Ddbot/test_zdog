@@ -9,7 +9,7 @@ let ConePattern = new Zdog.Anchor({
 });
 
 const r = {
-    x: TAU/2,
+    x: TAU / 2,
     // y: -Math.PI / 16
     y: 0
 };
@@ -20,7 +20,7 @@ new Zdog.Cone({
     diameter: 4,
     length: 4,
     stroke: false,
-    color: '#f38181',
+    color: 'hsla(0, 83%, 73%,1)',
     backface: false,
     rotate: {
         x: -r.x,
@@ -82,7 +82,7 @@ new Zdog.Cone({
     diameter: 4,
     length: 4,
     stroke: false,
-    color: '#f4c590',
+    color: 'hsla(32, 82%, 76%,1)',
     backface: false,
     rotate: {
         x: -r.x,
@@ -113,7 +113,7 @@ new Zdog.Cone({
     diameter: 4,
     length: 4,
     stroke: false,
-    color: '#f4dc95',
+    color: 'hsla(45, 81%, 77%,1)',
     backface: false,
     rotate: {
         x: -r.x,

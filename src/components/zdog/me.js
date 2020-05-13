@@ -22,7 +22,6 @@ let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
 // create an scene Anchor to hold all items
 let scene = new Zdog.Anchor();
-// scene.scale = .8;
 
 let liste = [Cou, Chair, Table];
 ConePattern.children.map(c => c.visible = false);
@@ -41,7 +40,7 @@ scene.addChild(Cou);
 
 const seq = [
     [{
-        x: 0, y: 0, z: 0
+        x: 0, y: 0, z: 10
     }, {
         x: 5.485, y: 6.138, z: 0
     },
@@ -99,7 +98,7 @@ const Me = (props) => {
         ctx.restore();
     }
 
-    let animateScene = () => {
+    let animateScene0 = () => {
         // Funcs for the TICKER 
         let slide_0_move_1 = () => {
             let start = 0,
@@ -110,19 +109,44 @@ const Me = (props) => {
                 y: Zdog.lerp(seq[start][index].y, seq[end][index].y, rotateIllo.progress()),
                 // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
             };
+
+            // scene.scale = Zdog.lerp(0.8, 10, rotateIllo.progress());
+
+            // scene.scale = Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
+
         }
 
         let slide_0_move_2 = () => {
             // zoom vers l'ecran
             // scene.scale = Zdog.lerp(1, 4, zoomIllo.progress());
-            zoom = Zdog.lerp(6, 34, zoomIllo.progress());
-            scene.translate.y -= .46;
-            // scene.children.forEach(c => { if (c.color !== undefined) { c.color = "transparent" } });
+            // zoom = 
+            // scene.translate.y -= 1;
+            // scene.children.forEach(c => { if (c.color !== undefined) { c.color = "hsla(0, 0%, 100%,1)" } });
+
+            Computer.scale = Zdog.lerp(7, 12, zoomIllo.progress());
+
+            [Chair, Pot, Pen, Smartphone, Torse, Cou, Table].forEach(objet => {
+                let oldColor = gsap.utils.splitColor(objet.color), alpha = oldColor[3];
+                alpha -= alpha / 4.8;
+                // oldColor.pop();
+                // let newColor = oldColor.push(alpha).join(',');
+
+                // objet.color = newColor;
+                if (!objet.color) {
+                    let childs = objet.children.forEach(c => {
+                        if (!c.color) {
+                            console.log('C is ', c);
+                        }
+                        console.log(' Color of c is ', c.color);
+                    });
+                }
+                // console.log('Couleur de lobjet a la racine: ', objet, objet.color);
+            });
         }
 
         // Funcs for the TIMELINE
         let rotateIllo = gsap.to('html', {
-            opacity: 1,
+            autoAlpha: 1,
             duration: .8,
             ease: "power2.out",
             onStart: () => {
@@ -133,24 +157,19 @@ const Me = (props) => {
                 scene.rotate = {
                     x: Zdog.lerp(seq[0][index].x, seq[1][index].x, 1),
                     y: Zdog.lerp(seq[0][index].y, seq[1][index].y, 1),
-                    // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
+                    z: 0
                 };
             }
         });
 
         let zoomIllo = gsap.to('html', {
             autoAlpha: 1,
-            duration: .5,
+            duration: 1.6,
             onStart: () => {
                 gsap.ticker.add(slide_0_move_2);
-
-                // gsap.set(Computer.children, {
-                //     duration: .195,
-                //     color: "transparent"
-                // });                
             },
             onUpdate: () => {
-                if (zoomIllo.progress() >= 0.28) {
+                if (zoomIllo.progress() >= 0.25) {
                     Chair.remove();
                     Pot.remove();
                     Pen.remove();
@@ -164,9 +183,10 @@ const Me = (props) => {
                 }
             },
             onComplete: () => {
-                gsap.ticker.remove(slide_0_move_2);
                 Computer.remove();
+                gsap.ticker.remove(slide_0_move_2);
             },
+            delay: .5
         });
 
         me_tl.add(rotateIllo);
@@ -175,29 +195,38 @@ const Me = (props) => {
         me_tl.play();
     }
 
-    let animateScene_reverse = () => {
+    let animateScene0_reverse = () => {
         // Funcs for the TICKER 
         let slide_0_reverse_move = () => {
             let start = 1,
                 end = 0;
             // zoom vers l'ecran
-            scene.translate.y = 3;
+            scene.translate.y = 10;
             scene.rotate = {
                 x: Zdog.lerp(seq[start][1].x, seq[end][1].x, rotateIllo_reverse.progress()),
                 y: Zdog.lerp(seq[start][1].y, seq[end][1].y, rotateIllo_reverse.progress()),
                 // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo_reverse.progress())
             };
             // scene.scale = Zdog.lerp(4, 0.8, rotateIllo_reverse.progress());
-            zoom = Zdog.lerp(42, 6, rotateIllo_reverse.progress());
+            zoom = Zdog.lerp(42, 7, rotateIllo_reverse.progress());
             // scene.translate.y -= 0.8;
         }
 
+        scene.addChild(Torse);
+        scene.addChild(Computer);
+        scene.addChild(ConePattern);
+        scene.addChild(Chair);
+        scene.addChild(Table);
+        scene.addChild(Pot);
+        scene.addChild(Pen);
+        scene.addChild(Smartphone);
+        scene.addChild(Cou);
 
         // Funcs for the TIMELINE
         let rotateIllo_reverse = gsap.to('html', {
             opacity: 1,
             duration: 1.4,
-            ease: "elastic.out(1,0.3)",
+            // ease: "elastic.out(1,0.3)",
             onStart: () => {
                 scene.addChild(Torse);
                 scene.addChild(Computer);
@@ -212,6 +241,8 @@ const Me = (props) => {
             },
             onComplete: () => {
                 gsap.ticker.remove(slide_0_reverse_move);
+                console.log(scene.translate.y);
+
             }
         });
 
@@ -268,8 +299,6 @@ const Me = (props) => {
         scene.translate = animation[0];
         scene.rotate = animation[1];
         scene.scale = animation[2];
-
-        console.log(props.animation, 'Animation props');
     }, [animation]);
 
     // Start animation depending of change in Index
@@ -277,10 +306,21 @@ const Me = (props) => {
         switch (index) {
             case 0:
                 // NO Animation or transition here
-                prevIndex === 1 && animateScene_reverse();
+                prevIndex === 1 && animateScene0_reverse();
+                console.log('Au debut, scene.translate.y = ', scene.translate.y, ' et zoom = ', zoom)
                 break;
             case 1:
-                prevIndex === 0 && animateScene();
+                if (prevIndex === 0) {
+                    animateScene0();
+                    // gsap.to(scene, {
+                    //     duration: 5,
+                    //     rotate: {
+                    //         x: TAU * 2,
+                    //         y: Math.PI,
+                    //         z: 0
+                    //     },
+                    // });
+                };
                 break;
 
             default:
