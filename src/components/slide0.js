@@ -9,6 +9,7 @@ const Slide_0 = (props) => {
     transformOrigin: "left center",
     transformPerspective: 200
   });
+
   useEffect(() => {
     let target = document.querySelector('[data-splitting="lines"]');
 
@@ -17,14 +18,6 @@ const Slide_0 = (props) => {
       target: target,
       by: "lines"
     });
-
-    //   let colors = gsap.utils.shuffle(['#f4dc95',
-    //     '#f3af8b',
-    //     '#f38181',
-    //     '#6199b8',
-    //   ]);
-
-
 
     gsap.from(res[0].lines, {
       x: -500,
@@ -35,7 +28,7 @@ const Slide_0 = (props) => {
         amount: .195,
         from: 0
       },
-      delay: 1.5,
+      // delay: 1.5,
       rotationY: 45,
     });
   });

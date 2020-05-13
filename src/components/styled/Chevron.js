@@ -16,7 +16,7 @@ const Chevron = styled.button`
 
     clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 
-    rotate: 90deg;
+    // rotate: 90deg;
     
     svg {
         width: 4vw;

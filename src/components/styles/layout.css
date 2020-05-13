@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   width: 100vw;
   height: 100vh;
 }
@@ -13,7 +13,7 @@ body {
 #___gatsby {
   width: 100vw;
   height: 100vh;
-}
+} */
 
 :root {
   --buff: #f4f39a;
@@ -50,73 +50,62 @@ body {
 .container {
   display: flex;
   flex-flow: row nowrap;
-  align-items: flex-start;
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  justify-content: space-evenly;
   /* padding-left: 2rem; */
   width: 100vw;
-  height: 100vh;
-  /* border: 10px solid red; */
+  /* height: 92vh; */
+  /* border: 10px solid black; */
 }
-
-.purple {
-  color: white;
-  padding: 0 3px;
-  background-color: #f4dc95;
-  font-family: "Roboto";
-}
-
-.purple:nth-of-type(2) {
-  background-color: #f3af8b;
-}
-
-.purple:nth-of-type(3) {
-  background-color: #f38181;
-}
-
-.purple:nth-of-type(4) {
-  background-color: #6199b8;
-}
-
-
 
 .zdog-canvas,
-.illustration {
-  flex: 1;
-  /* width: 50%; */
-  transform: scale(0.8, 1);
-}
-
 .textContent {
   flex: 1;
   /* justify-content: flex-start;
   align-content: flex-start;
   align-items: flex-start; */
 
-  height: 100%;
-}
+  display: flex;
+  /* align-items: stretch; */
 
-.illustration>svg {
-  transform: translate(2vh, -14vh);
-  overflow: visible;
-  /* scale: 0.7; */
+  /* border-left: 1px dotted black; */
+  /* border: 10px dotted green; */
+
+
+  /* height: 100%; */
+  min-height: calc(92.13vh*0.75);
+  max-width: calc(92.13vh*0.75);
 }
 
 .textContent>p {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+  font-size: 3rlh;
+  line-height: 3rem;
+  line-height: 3rlh;
   /* transform: translateY(-1.2rem); */
 
-  /* padding: 0 2.5rem 2rem 3.5rem; */
-  /* line-height: 1.8; */
+  line-height: 1.8;
+  margin: auto 0;
   /* float: left; */
 
-  display: inline-flex;
-  flex-flow: wrap;
+  /* display: inline-flex; */
+  /* flex-flow: wrap; */
+
+  /* border: 10px solid green; */
 }
 
-.textContent>p>span {
-  display: inline-block;
-  padding: 0 .2rem;
-}
+.container>svg,
+.container>canvas {
+  /* transform: translate(2vh, -14vh); */
+  overflow: visible;
+  /* scale: 0.7; */
+  /* border: 10px solid red; */
 
+  max-height: calc(92.13vh*0.75);
+  max-width: calc(92.13vh*0.75);
+
+}
 
 .rotationSliders {
   position: fixed;

@@ -1,15 +1,14 @@
-import React, {    useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Zdog from 'zdog';
 
 import Canvas from '../styled/Canvas';
 
-import {    navigate, useStaticQuery} from "gatsby";
+import { navigate, useStaticQuery } from "gatsby";
 
-import gsap, {    splitColor} from 'gsap';
+import gsap, { splitColor } from 'gsap';
 
 import Chair from './Chair';
 import ConePattern from './ConePattern';
-import CodeLines from './CodeLines';
 import Computer from './Computer';
 import { Cou, Torse } from './Andry';
 import Pen from './Pen';
@@ -17,7 +16,7 @@ import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
 
-const { TAU }  = Zdog;
+const { TAU } = Zdog;
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
@@ -45,13 +44,13 @@ const seq = [
         x: 0, y: 0, z: 0
     }, {
         x: 5.485, y: 6.138, z: 0
-        },
+    },
         0.8],
     [{
         x: 0, y: 0, z: 0
-    },{
-    x: TAU, y: TAU/2, z: 0
-    }, 0.8 ]
+    }, {
+        x: TAU, y: TAU / 2, z: 0
+    }, 0.8]
 ];
 
 const Me = (props) => {
@@ -66,7 +65,7 @@ const Me = (props) => {
     }
 
     const prevIndex = usePrevious(index);
-    
+
     let [animation, setAnimation] = useState(props.animation);
     let me_tl = gsap.timeline({
         paused: true,
@@ -106,8 +105,6 @@ const Me = (props) => {
             let start = 0,
                 end = 1;
 
-            const ease = Zdog.easeInOut(rotateIllo.progress() % 2, 3);
-
             scene.rotate = {
                 x: Zdog.lerp(seq[start][index].x, seq[end][index].x, rotateIllo.progress()),
                 y: Zdog.lerp(seq[start][index].y, seq[end][index].y, rotateIllo.progress()),
@@ -119,8 +116,8 @@ const Me = (props) => {
             // zoom vers l'ecran
             // scene.scale = Zdog.lerp(1, 4, zoomIllo.progress());
             zoom = Zdog.lerp(6, 34, zoomIllo.progress());
-            scene.translate.y -= .23;
-            scene.children.forEach(c => {if(c.color !== undefined){ c.color = "transparent"}});
+            scene.translate.y -= .46;
+            // scene.children.forEach(c => { if (c.color !== undefined) { c.color = "transparent" } });
         }
 
         // Funcs for the TIMELINE
@@ -133,10 +130,15 @@ const Me = (props) => {
             },
             onComplete: () => {
                 gsap.ticker.remove(slide_0_move_1);
+                scene.rotate = {
+                    x: Zdog.lerp(seq[0][index].x, seq[1][index].x, 1),
+                    y: Zdog.lerp(seq[0][index].y, seq[1][index].y, 1),
+                    // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
+                };
             }
         });
-        
-        let zoomIllo = gsap.to('html', {    
+
+        let zoomIllo = gsap.to('html', {
             autoAlpha: 1,
             duration: .5,
             onStart: () => {
@@ -162,7 +164,7 @@ const Me = (props) => {
                 }
             },
             onComplete: () => {
-                gsap.ticker.remove(slide_0_move_2);      
+                gsap.ticker.remove(slide_0_move_2);
                 Computer.remove();
             },
         });
@@ -170,19 +172,19 @@ const Me = (props) => {
         me_tl.add(rotateIllo);
         me_tl.add(zoomIllo);
 
-        me_tl.play();            
+        me_tl.play();
     }
 
     let animateScene_reverse = () => {
         // Funcs for the TICKER 
         let slide_0_reverse_move = () => {
-                        let start = 1,
-                            end = 0;
+            let start = 1,
+                end = 0;
             // zoom vers l'ecran
             scene.translate.y = 3;
             scene.rotate = {
                 x: Zdog.lerp(seq[start][1].x, seq[end][1].x, rotateIllo_reverse.progress()),
-                y: Zdog.lerp(seq[start][1].y, seq[end][1].y, rotateIllo_reverse.progress()), 
+                y: Zdog.lerp(seq[start][1].y, seq[end][1].y, rotateIllo_reverse.progress()),
                 // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo_reverse.progress())
             };
             // scene.scale = Zdog.lerp(4, 0.8, rotateIllo_reverse.progress());
@@ -260,9 +262,9 @@ const Me = (props) => {
         animate();
 
     }, [props.rotation]);
- 
+
     // translate, rotate and scale SCENE
-    useEffect(() => { 
+    useEffect(() => {
         scene.translate = animation[0];
         scene.rotate = animation[1];
         scene.scale = animation[2];
@@ -271,16 +273,16 @@ const Me = (props) => {
     }, [animation]);
 
     // Start animation depending of change in Index
-    useEffect(() => { 
+    useEffect(() => {
         switch (index) {
             case 0:
                 // NO Animation or transition here
                 prevIndex === 1 && animateScene_reverse();
                 break;
-        case 1:
-                animateScene();
-            break;
-        
+            case 1:
+                prevIndex === 0 && animateScene();
+                break;
+
             default:
                 break;
         }
