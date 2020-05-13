@@ -119,10 +119,10 @@ const IndexPage = (props) => {
 		// gsap.set('.word', { display: "inline-flex" });
 		gsap.set('.word', { display: "span" });
 
-		let colors = gsap.utils.shuffle(['#f4dc95',
-			'#f3af8b',
-			'#f38181',
-			'#6199b8',
+		let colors = gsap.utils.shuffle(['hsla(45, 81%, 77%,1)',
+			'hsla(21, 81%, 75%,1)',
+			'hsla(0, 83%, 73%,1)',
+			'hsla(201, 38%, 55%,1)',
 		]);
 
 		document.querySelectorAll('.highlight').forEach((word, i) => {
@@ -130,12 +130,6 @@ const IndexPage = (props) => {
 			word.style.display = "span";
 		});
 	});
-
-	// Heights
-	useEffect(() => {
-		console.log(document.querySelector('.textContent').style)
-	});
-
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -154,7 +148,7 @@ const IndexPage = (props) => {
 
 				gsap.to(target, {
 					opacity: 0,
-					backgroundColor: "transparent",
+					backgroundColor: "hsla(0, 0%, 100%,1)",
 					x: 1000,
 					stagger: {
 						amount: .195,
@@ -186,7 +180,7 @@ const IndexPage = (props) => {
 
 				gsap.to(target, {
 					opacity: 0,
-					backgroundColor: "transparent",
+					backgroundColor: "hsla(0, 0%, 100%,1)",
 					// duration: .195,
 					// x: 250,
 					x: 1000,
@@ -200,7 +194,7 @@ const IndexPage = (props) => {
 						amount: .195
 					},
 					onStart: () => {
-						gsap.to('.highlight', { duration: .195, backgroundColor: "transparent", color: "#4a4a4a", });
+						gsap.to('.highlight', { duration: .195, backgroundColor: "hsla(0, 0%, 100%,1)", color: "hsla(0, 0%, 29%,1)", });
 					},
 					onComplete: () => {
 						// 2. setIndex

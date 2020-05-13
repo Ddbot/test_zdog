@@ -6,12 +6,12 @@ const { TAU } = Zdog;
 
 const Orbit = (props) => {
     return (
-        <Ellipse            
+        <Ellipse
             width={70}
             height={120}
             stroke={.8}
-                color={'transparent'}
-                rotate={{ y: -2 }}
+            color={'hsla(0, 0%, 100%,1)'}
+            rotate={{ y: -2 }}
         />
     )
 }

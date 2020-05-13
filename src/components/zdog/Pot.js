@@ -6,7 +6,7 @@ const Pot = new Zdog.Cylinder({
     diameter: 3,
     length: 3,
     stroke: false,
-    color: 'rgba(157, 169, 156, 0.9)',
+    color: 'hsla(115, 7%, 64%, 0.9)',
     // backface={'gray'}
     backface: false,
     translate: {

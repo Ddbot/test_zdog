@@ -22,8 +22,8 @@ let Pointe = new Zdog.Cone({
     diameter: .72,
     length: .72,
     stroke: false,
-    color: "#f4dc95",
-    // backface: "#C25"},
+    color: "hsla(45, 81%, 77%,1)",
+    // backface: "hsla(342, 71%, 47%,1)"},
     backface: false,
 })
 
@@ -32,7 +32,7 @@ let Mine = new Zdog.Cone({
     diameter: .2,
     length: .2,
     stroke: false,
-    color: "black",
+    color: "hsla(0, 0%, 0%,1)",
     backface: false,
     translate: {
         z: .48
