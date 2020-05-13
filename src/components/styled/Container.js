@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: center;
+	// justify-content: center;
 	align-items: flex-start;
 
 
@@ -11,7 +11,7 @@ const Container = styled.div`
 	font-family: "Roboto";
 	z-index: 1;
 
-	margin-top: 40vh;
+	// margin-top: 40vh;
 
 	.illustration {		
 		flex: 1;

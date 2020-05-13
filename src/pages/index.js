@@ -42,7 +42,7 @@ const IndexPage = (props) => {
 
 	let [index, setIndex] = useState(0);
 	let [slide, setSlide] = useState(null);
-	let [translate, setTranslate] = useState({ x: 0, y: 0, z: 0 });
+	let [translate, setTranslate] = useState({ x: 0, y: 10, z: 0 });
 	let [rotate, setRotate] = useState(initial_position);
 	let [scale, setScale] = useState(.8);
 
@@ -55,28 +55,33 @@ const IndexPage = (props) => {
 
 	// Sync Slide (text content) to index
 	useEffect(() => {
-		setSlide(prev => {
-			let res;
-			switch (index) {
-				case 0:
-					res = <Slide0 lang={lang} />
-					break;
-				case 1:
-					res = <Slide1 lang={lang} />
-					break;
-				case 2:
-					res = <Slide2 lang={lang} />
-					break;
-				case 3:
-					res = <Slide3 lang={lang} />
-					break;
-				case 4:
-					res = <Slide4 lang={lang} />
-					break;
-				default:
-					break;
-			}
-			return res;
+		gsap.to('body', {
+			duration: 1.5,
+			autoAlpha: 1,
+			onComplete: () =>
+				setSlide(prev => {
+					let res;
+					switch (index) {
+						case 0:
+							res = <Slide0 lang={lang} />
+							break;
+						case 1:
+							res = <Slide1 lang={lang} />
+							break;
+						case 2:
+							res = <Slide2 lang={lang} />
+							break;
+						case 3:
+							res = <Slide3 lang={lang} />
+							break;
+						case 4:
+							res = <Slide4 lang={lang} />
+							break;
+						default:
+							break;
+					}
+					return res;
+				})
 		})
 	}, [index, lang]);
 
@@ -93,6 +98,7 @@ const IndexPage = (props) => {
 			duration: 0,
 			autoAlpha: 1,
 			delay: 1.3,
+			transform: "rotate(-270deg)",
 			rotate: "-270deg"
 		});
 
@@ -100,7 +106,8 @@ const IndexPage = (props) => {
 			duration: 0,
 			autoAlpha: 1,
 			delay: 1.3,
-			rotate: "270deg"
+			transform: "rotate(270deg)",
+			rotate: "270deg",
 		});
 
 		animChevron(up, 'y', 15);
@@ -109,7 +116,8 @@ const IndexPage = (props) => {
 
 	// Highlights
 	useEffect(() => {
-		gsap.set('.word', { display: "inline-block" });
+		// gsap.set('.word', { display: "inline-flex" });
+		gsap.set('.word', { display: "span" });
 
 		let colors = gsap.utils.shuffle(['#f4dc95',
 			'#f3af8b',
@@ -119,8 +127,13 @@ const IndexPage = (props) => {
 
 		document.querySelectorAll('.highlight').forEach((word, i) => {
 			word.style.backgroundColor = colors[i];
-			word.style.display = "inline-block";
+			word.style.display = "span";
 		});
+	});
+
+	// Heights
+	useEffect(() => {
+		console.log(document.querySelector('.textContent').style)
 	});
 
 
@@ -134,6 +147,11 @@ const IndexPage = (props) => {
 					by: "words"
 				})[0].words;
 
+				console.log('Les éléménts constituant Target sont: ', target);
+
+				gsap.set(target, { display: "inline-flex" })
+				// gsap.set(target, { display: "span" })
+
 				gsap.to(target, {
 					opacity: 0,
 					backgroundColor: "transparent",
@@ -142,12 +160,16 @@ const IndexPage = (props) => {
 						amount: .195,
 						from: "start"
 					},
-
+					onStart: () => {
+						console.log('Les éléménts constituant Target sont: ', target);
+					},
 					onComplete: () => {
 						// 2. setIndex
 						setIndex((prev) => {
 							return prev - 1
 						});
+						console.log('Les éléménts constituant Target à la fin sont: ', target);
+
 					}
 				});
 

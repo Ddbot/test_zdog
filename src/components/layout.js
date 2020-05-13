@@ -24,7 +24,7 @@ const Main = styled.main`
     justify-content: center;
     align-items: center;
 	width: 100%;
-	height: 92vh;
+	height: 92.13vh;
 `;
 
 const defaultLang = Array.from(navigator.language).slice(0, 2).join('') || 'en';
@@ -47,7 +47,7 @@ const Layout = (props) => {
 
 		localStorage.setItem('lang', lang);
 	}
-	return (<>
+	return (<div>
 		<LangContext.Provider value={lang} >
 			<Header siteTitle="Andry Online" locale={lang} toggleLang={toggleLang} />
 			<Main>
@@ -64,7 +64,7 @@ const Layout = (props) => {
 				</symbol>
 			</defs>
 		</svg>
-	</>
+	</div>
 	);
 }
 
