@@ -16,24 +16,24 @@ import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
 
-let logo_aws = require('../../images/logo_aws.svg');
-let logo_css = require('../../images/logo_css.svg');
-let logo_firebase = require('../../images/logo_firebase.svg');
-let logo_gatsby = require('../../images/logo_gatsby.svg');
-let logo_html = require('../../images/logo_html.svg');
-let logo_js = require('../../images/logo_js.svg');
-let logo_react = require('../../images/logo_react.svg');
-let logo_ror = require('../../images/logo_ror.svg');
+import LogoAWS from '../../images/LogoAWS';
+import LogoCSS from '../../images/LogoCSS';
+import LogoFirebase from '../../images/LogoFirebase';
+import LogoGatsby from '../../images/LogoGatsby';
+import LogoHTML from '../../images/LogoHTML';
+import LogoJS from '../../images/LogoJS';
+import LogoReact from '../../images/LogoReact';
+import LogoRoR from '../../images/LogoRoR';
 
 const logos = [
-    logo_aws,
-    logo_css,
-    logo_firebase,
-    logo_gatsby,
-    logo_html,
-    logo_js,
-    logo_react,
-    logo_ror,
+LogoAWS,
+LogoCSS,
+LogoFirebase,
+LogoGatsby,
+LogoHTML,
+LogoJS,
+LogoReact,
+LogoRoR
 ]
 
 
