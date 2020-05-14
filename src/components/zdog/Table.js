@@ -11,10 +11,10 @@ const Table = new Zdog.Box({
     stroke: 2,
     color: 'hsla(0, 0%, 100%,0)',
     // remove left & right faces
-    leftFace: 'hsla(30, 50%, 35%,1)',
-    rightFace: 'hsla(30, 50%, 30%,1)',
+    leftFace: '#002a24',
+    rightFace: '#002a24',
     rearFace: false,
-    topFace: 'hsla(30, 51%, 20%,1)',
+    topFace: '#002a24',
     bottomFace: false,
 });
 

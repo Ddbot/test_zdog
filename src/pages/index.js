@@ -19,8 +19,11 @@ import Slide3 from '../components/slide3';
 import Slide4 from '../components/slide4';
 
 
+import FilterSliders from '../components/FilterSliders';
+
 import "font-awesome/css/font-awesome.min.css";
 import gsap from "gsap";
+import Canvas from "../components/styled/Canvas";
 
 const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
@@ -45,6 +48,12 @@ const IndexPage = (props) => {
 	let [translate, setTranslate] = useState({ x: 0, y: 10, z: 0 });
 	let [rotate, setRotate] = useState(initial_position);
 	let [scale, setScale] = useState(.8);
+
+	// FILTER PARAMS
+	let [hue, setHue] = useState(0);
+	let [grayscale, setGrayscale] = useState(0);
+	let [invert, setInvert] = useState(0);
+	let [contrast, setContrast] = useState(0);
 
 
 
@@ -119,11 +128,16 @@ const IndexPage = (props) => {
 		// gsap.set('.word', { display: "inline-flex" });
 		gsap.set('.word', { display: "span" });
 
-		let colors = gsap.utils.shuffle(['hsla(45, 81%, 77%,1)',
-			'hsla(21, 81%, 75%,1)',
-			'hsla(0, 83%, 73%,1)',
-			'hsla(201, 38%, 55%,1)',
-		]);
+		let colors =
+			// gsap.utils.shuffle(
+			['rgba(209, 75, 21,1)',
+			'rgba(107, 21, 209,1)',
+			'rgba(209, 206, 0,1)',
+			'rgba(107, 54, 107,1)'
+			]
+		// );
+
+		
 
 		document.querySelectorAll('.highlight').forEach((word, i) => {
 			word.style.backgroundColor = colors[i];
@@ -209,6 +223,18 @@ const IndexPage = (props) => {
 		}
 	};
 
+	let handleFilter = (e) => {
+		e.persist();
+
+		if (e.target.name === "hue") { setHue(prev => e.target.value) }
+		if(e.target.name === "grayscale"){ setGrayscale(prev => e.target.value) }
+		if(e.target.name === "invert"){ setInvert(prev => e.target.value) }
+		if(e.target.name === "contrast"){ setContrast(prev => e.target.value) }
+
+		const canvas = document.querySelector('.container>canvas');
+		canvas.style.filter = `hue-rotate(${hue}deg) grayscale(${grayscale}) invert(${invert}) contrast(${contrast})`;
+	}	
+
 	// let handleRotation = (e) => {
 	// 	e.persist();
 	// 	setRotate(prev => {
@@ -240,6 +266,8 @@ const IndexPage = (props) => {
 				scale={scale}
 			/>
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
+			{/* <FilterSliders handleFilter={handleFilter} /> */}
+
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
 			{index !== 4 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
 		<div className="dummy" style={{ display: "none" }}></div>

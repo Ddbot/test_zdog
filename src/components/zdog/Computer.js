@@ -1,4 +1,5 @@
 import Zdog from 'zdog';
+import CodeLines from './CodeLines';
 
 const { TAU } = Zdog;
 
@@ -17,13 +18,13 @@ const Keyboard = new Zdog.Box({
     width: 16,
     height: 32 / 3,
     color: 'hsla(240, 1%, 83%,1)',
-    backface: 'lightgray',
+    backface: 'whitesmoke',
     // backface:false,
-    leftFace: 'lightgray',
-    rightFace: 'lightgray',
-    topFace: 'lightgray',
-    // bottomFace: 'lightgray',
-    bottomFace: false,
+    leftFace: 'whitesmoke',
+    rightFace: 'whitesmoke',
+    topFace: 'whitesmoke',
+    // bottomFace: 'whitesmoke',
+    bottomFace: true,
     translate: {
         y: 32 / 6,
         z: -32 / 6
@@ -39,12 +40,12 @@ const Screen = new Zdog.Box({
     height: 16,
     depth: 1,
     stroke: 1,
-    color: 'lightgray',
+    color: 'whitesmoke',
     backface: 'white',
-    leftFace: 'lightgray',
-    rightFace: 'lightgray',
-    topFace: 'lightgray',
-    bottomFace: 'lightgray'
+    leftFace: 'whitesmoke',
+    rightFace: 'whitesmoke',
+    topFace: 'whitesmoke',
+    bottomFace: 'whitesmoke'
 });
 
 
@@ -53,7 +54,7 @@ let bezel = new Zdog.Rect({
     width: 32 / 3,
     height: 16,
     stroke: 1.5,
-    color: 'lightgray',
+    color: 'whitesmoke',
 });
 
 let t1 = new Zdog.Shape({

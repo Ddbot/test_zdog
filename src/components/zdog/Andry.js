@@ -12,7 +12,7 @@ export const Cou = new Zdog.Cylinder({
     diameter: 4,
     length: 6,
     stroke: false,
-    color: "hsla(36, 100%, 30%,1)",
+    color: "#85530D",
     rotate: {
         x: -TAU / 4
     },
@@ -21,6 +21,9 @@ export const Cou = new Zdog.Cylinder({
     }
 });
 
+// #85530D
+// #85530D
+
 const Menton = new Zdog.Shape({
     addTo: Cou,
     translate: {
@@ -28,7 +31,7 @@ const Menton = new Zdog.Shape({
         z: -2
     },
     stroke: 6,
-    color: "hsla(36, 100%, 30%,1)",
+    color: "#85530D",
     rotate: {
         x: TAU / 4
     }
@@ -41,7 +44,7 @@ const Front = new Zdog.Ellipse({
         y: -4
     },
     stroke: 3.2,
-    color: "hsla(36, 100%, 30%,1)"
+    color: "#85530D"
 });
 
 const Cheveux_gros = new Zdog.Shape({
@@ -150,7 +153,7 @@ const Oreille_L = new Zdog.Ellipse({
         y: -TAU / 8
     },
     stroke: 1,
-    color: "hsla(36, 100%, 30%,1)",
+    color: "#85530D",
     fill: true
 });
 
@@ -227,8 +230,9 @@ export const Torse = new Zdog.Shape({
         y: torsoX * 3 - 1
     }
     ],
-    color: "hsla(53, 58%, 69%,1)",
-    stroke: 9.6
+    color: "#d1ce00",
+    stroke: 9.6,
+    updateSort: true,
 });
 
 const Epaules = new Zdog.Shape({
@@ -240,7 +244,7 @@ const Epaules = new Zdog.Shape({
         x: 10
     }
     ],
-    color: "hsla(47, 91%, 77%,1)",
+    color: "#d1ce00",
     stroke: 6,
     translate: {
         x: -5,
@@ -313,13 +317,13 @@ const Bras_R = new Zdog.Shape({
         y: -0.5,
         z: TAU / 16
     },
-    color: "hsla(59, 82%, 78%,1)",
+    color: "#d1ce00",
     stroke: 3.2
 });
 
 const Avant_Bras_R = Bras_R.copy({
     addTo: Bras_R,
-    color: "hsla(36, 100%, 30%,1)",
+    color: "#85530D",
     translate: {
         y: 7,
         z: 0
@@ -335,7 +339,7 @@ const Avant_Bras_R = Bras_R.copy({
 const Main_R = new Zdog.Shape({
     addTo: Avant_Bras_R,
     stroke: 4,
-    color: "hsla(36, 100%, 30%,1)",
+    color: "#85530D",
     translate: {
         y: 8,
         z: 0
@@ -395,7 +399,7 @@ const Hanches = new Zdog.Cylinder({
         x: -TAU,
         y: -TAU / 4
     },
-    color: "hsla(180, 25%, 20%,1)"
+    color: "#017d6b"
 });
 
 // const Hanches = new Zdog.Box({
@@ -428,7 +432,7 @@ const Cuisse_R = new Zdog.Cylinder({
         y: TAU / 4 + 0.4
     },
     length: 12,
-    color: "darkslategray"
+    color: "#017d6b"
 });
 
 
@@ -436,7 +440,7 @@ const Cuisse_R = new Zdog.Cylinder({
 const Genou_R = new Zdog.Shape({
     addTo: Cuisse_R,
     stroke: 5,
-    color: "hsla(180, 25%, 28%,1)",
+    color: "#017d6b",
     translate: {
         z: 8
     }
@@ -455,7 +459,7 @@ const Tibia_R = new Zdog.Cylinder({
         y: 0
     },
     length: 12,
-    color: "hsla(180, 25%, 30%,1)"
+    color: "#017d6b"
 });
 const Chaussure_R = new Zdog.Shape({
     addTo: Tibia_R,
@@ -465,7 +469,7 @@ const Chaussure_R = new Zdog.Shape({
         y: 4.8
     }],
     stroke: 4,
-    color: "hsla(47, 91%, 77%,1)cc7a00",
+    color: "rgba(209, 75, 21,1)",
     translate: {
         x: 0,
         y: 0,
@@ -538,7 +542,7 @@ const Chaussure_L = new Zdog.Shape({
         y: 4.8
     }],
     stroke: 4,
-    color: "hsla(47, 91%, 77%,1)cc7a00",
+    color: "rgba(209, 75, 21,1)",
     translate: {
         x: 0,
         y: 0,
@@ -567,7 +571,7 @@ const Lacet_CHaussure_L_1 = new Zdog.Shape({
         y: 1.2
     },
     stroke: 0.5,
-    color: "beige"
+    color: "rgba(245, 245, 245,1)"
 });
 
 const Lacet_CHaussure_L_2 = Lacet_CHaussure_L_1.copy({

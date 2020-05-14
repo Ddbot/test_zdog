@@ -45,66 +45,41 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  /* background-color: aquamarine; */
+
+  border: 1.5rem solid var(--bulma-black);
+  border-bottom: 1.5rem solid transparent;
 }
 
-.container {
-  display: flex;
-  flex-flow: row nowrap;
-  /* align-items: center; */
-  /* justify-content: space-around; */
-  justify-content: space-evenly;
-  /* padding-left: 2rem; */
-  width: 100vw;
-  /* height: 92vh; */
-  /* border: 10px solid black; */
+body {
+    /* background: linear-gradient(307deg, #6b366b, #01d1b2); */
+/* background-size: 150% 150%; */
+
+/* background-color: #01d1b2; */
+/* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23017d6b' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E"); */
+
+/* -webkit-animation: testZdog 3s ease infinite;
+-moz-animation: testZdog 3s ease infinite;
+animation: testZdog 3s ease infinite;
+
+@-webkit-keyframes testZdog {
+    0%{background-position:100% 0%}
+    25%{background-position:0% 400%}
+    75%{background-position: 400% 0%}
+    100%{background-position:100% 0%}
 }
-
-.zdog-canvas,
-.textContent {
-  flex: 1;
-  /* justify-content: flex-start;
-  align-content: flex-start;
-  align-items: flex-start; */
-
-  display: flex;
-  /* align-items: stretch; */
-
-  /* border-left: 1px dotted black; */
-  /* border: 10px dotted green; */
-
-
-  /* height: 100%; */
-  min-height: calc(92.13vh*0.75);
-  max-width: calc(92.13vh*0.75);
+@-moz-keyframes testZdog {
+    0%{background-position:100% 0%}
+    50%{background-position:0% 400%}
+    100%{background-position:100% 0%}
 }
-
-.textContent>p {
-  font-size: 2.2rem;
-  font-size: 3rlh;
-  line-height: 3rem;
-  line-height: 3rlh;
-  /* transform: translateY(-1.2rem); */
-
-  line-height: 1.8;
-  margin: auto 0;
-  /* float: left; */
-
-  /* display: inline-flex; */
-  /* flex-flow: wrap; */
-
-  /* border: 10px solid green; */
-}
-
-.container>svg,
-.container>canvas {
-  /* transform: translate(2vh, -14vh); */
-  overflow: visible;
-  /* scale: 0.7; */
-  /* border: 10px solid red; */
-
-  max-height: calc(92.13vh*0.75);
-  max-width: calc(92.13vh*0.75);
-
+@keyframes testZdog {
+    0%{background-position:100% 0%}
+    25%{background-position:0% 400%}
+    75%{background-position: 400% 0%}
+    100%{background-position:100% 0%}
+} */
 }
 
 .rotationSliders {

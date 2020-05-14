@@ -16,6 +16,27 @@ import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
 
+let logo_aws = require('../../images/logo_aws.svg');
+let logo_css = require('../../images/logo_css.svg');
+let logo_firebase = require('../../images/logo_firebase.svg');
+let logo_gatsby = require('../../images/logo_gatsby.svg');
+let logo_html = require('../../images/logo_html.svg');
+let logo_js = require('../../images/logo_js.svg');
+let logo_react = require('../../images/logo_react.svg');
+let logo_ror = require('../../images/logo_ror.svg');
+
+const logos = [
+    logo_aws,
+    logo_css,
+    logo_firebase,
+    logo_gatsby,
+    logo_html,
+    logo_js,
+    logo_react,
+    logo_ror,
+]
+
+
 const { TAU } = Zdog;
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
@@ -117,29 +138,25 @@ const Me = (props) => {
         }
 
         let slide_0_move_2 = () => {
-            // zoom vers l'ecran
-            // scene.scale = Zdog.lerp(1, 4, zoomIllo.progress());
-            // zoom = 
+            // zoom vers l'ecran et compenser en tirant vers le haut
             scene.translate.y -= .6;
-            // scene.children.forEach(c => { if (c.color !== undefined) { c.color = "hsla(0, 0%, 100%,1)" } });
+            zoom += 0.5;
+        }
 
-            // Computer.scale = Zdog.lerp(7, 12, zoomIllo.progress());
-
-            // [Chair, Pot, Pen, Smartphone, Torse, Cou, Table].forEach(objet => {       
-            //     let childs = objet.children.forEach(c => {
-            //         let oldColor = gsap.utils.splitColor(c.color);
-            //         oldColor[3] -= 0.01;
-
-            //         let newColor = `rgba(${oldColor[0]},${oldColor[1]},${oldColor[2]},${oldColor[3]})`;
-
-            //         c.color = newColor;
-            //         console.log(c.color);
-
-            //     });
-            //     // }
-            // });
-
-            zoom += 0.50;
+        let slide_0_move_3 = () => {
+            console.log('Where is the Screen ? ', scene.children);
+            scene.children.forEach((child) => {
+                console.log('Child: ', child);
+                !!child.children && child.children.forEach((c) => {
+                    console.log('C: ', c);                        
+                    !!c.children && c.children.forEach((d) => {
+                                            console.log('D: ', d);
+                            d.visible = false;
+                        });
+                        c.visible = false;
+                    });
+                child.visible = false;
+            });
         }
 
         // Funcs for the TIMELINE
@@ -184,14 +201,34 @@ const Me = (props) => {
                 }
             },
             onComplete: () => {
+                gsap.ticker.remove(slide_0_move_2);     
                 // Computer.remove();
-                gsap.ticker.remove(slide_0_move_2);
             },
             delay: .5
         });
 
+        let widenScreen = gsap.to('html', {
+            duration: .225,
+            autoAlpha: 1,
+            onStart: () => {
+                gsap.ticker.add(slide_0_move_3);
+            },
+            onUpdate: () => { },
+            onComplete: () => {
+                gsap.ticker.remove(slide_0_move_3);
+            }
+        });
+
+        // let displayLogos = gsap.from(logos, {
+        //     duration: .45,
+        //     autoAlpha: 0,
+        //     scale: 0,
+        // });
+
         me_tl.add(rotateIllo);
         me_tl.add(zoomIllo);
+        me_tl.add(widenScreen);
+        // me_tl.add(displayLogos);
 
         me_tl.play();
     }
@@ -210,6 +247,7 @@ const Me = (props) => {
             };
             // scene.scale = Zdog.lerp(4, 0.8, rotateIllo_reverse.progress());
             zoom = Zdog.lerp(42, 7, rotateIllo_reverse.progress());
+            // zoom -= 0.5
             // scene.translate.y -= 0.8;
         }
 

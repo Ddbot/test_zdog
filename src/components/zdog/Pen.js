@@ -44,7 +44,7 @@ let Bois = new Zdog.Cylinder({
     diameter: .7,
     length: 4.5,
     stroke: false,
-    color: 'hsla(240, 100%, 50%,1)',
+    color: '#d1ce00',
     backface: false,
     translate: {
         z: -2.25
