@@ -120,28 +120,26 @@ const Me = (props) => {
             // zoom vers l'ecran
             // scene.scale = Zdog.lerp(1, 4, zoomIllo.progress());
             // zoom = 
-            // scene.translate.y -= 1;
+            scene.translate.y -= .6;
             // scene.children.forEach(c => { if (c.color !== undefined) { c.color = "hsla(0, 0%, 100%,1)" } });
 
-            Computer.scale = Zdog.lerp(7, 12, zoomIllo.progress());
+            // Computer.scale = Zdog.lerp(7, 12, zoomIllo.progress());
 
-            [Chair, Pot, Pen, Smartphone, Torse, Cou, Table].forEach(objet => {
-                let oldColor = gsap.utils.splitColor(objet.color), alpha = oldColor[3];
-                alpha -= alpha / 4.8;
-                // oldColor.pop();
-                // let newColor = oldColor.push(alpha).join(',');
+            // [Chair, Pot, Pen, Smartphone, Torse, Cou, Table].forEach(objet => {       
+            //     let childs = objet.children.forEach(c => {
+            //         let oldColor = gsap.utils.splitColor(c.color);
+            //         oldColor[3] -= 0.01;
 
-                // objet.color = newColor;
-                if (!objet.color) {
-                    let childs = objet.children.forEach(c => {
-                        if (!c.color) {
-                            console.log('C is ', c);
-                        }
-                        console.log(' Color of c is ', c.color);
-                    });
-                }
-                // console.log('Couleur de lobjet a la racine: ', objet, objet.color);
-            });
+            //         let newColor = `rgba(${oldColor[0]},${oldColor[1]},${oldColor[2]},${oldColor[3]})`;
+
+            //         c.color = newColor;
+            //         console.log(c.color);
+
+            //     });
+            //     // }
+            // });
+
+            zoom += 0.50;
         }
 
         // Funcs for the TIMELINE
@@ -159,14 +157,17 @@ const Me = (props) => {
                     y: Zdog.lerp(seq[0][index].y, seq[1][index].y, 1),
                     z: 0
                 };
+                [Chair, Torse, Cou].forEach(el => el.remove());
             }
         });
 
         let zoomIllo = gsap.to('html', {
             autoAlpha: 1,
-            duration: 1.6,
+            duration: .6,
             onStart: () => {
                 gsap.ticker.add(slide_0_move_2);
+                     Torse.remove();
+                     Cou.remove();
             },
             onUpdate: () => {
                 if (zoomIllo.progress() >= 0.25) {
@@ -177,13 +178,13 @@ const Me = (props) => {
                 }
 
                 if (zoomIllo.progress() >= 0.5) {
-                    Torse.remove();
-                    Cou.remove();
+                    // Torse.remove();
+                    // Cou.remove();
                     Table.remove();
                 }
             },
             onComplete: () => {
-                Computer.remove();
+                // Computer.remove();
                 gsap.ticker.remove(slide_0_move_2);
             },
             delay: .5
