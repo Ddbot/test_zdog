@@ -486,7 +486,7 @@ let Mine = new Zdog.Cone({
     diameter: .2,
     length: .2,
     stroke: false,
-    color: "black",
+    color: "hsla(0, 0%, 0%,1)",
     backface: false,
     translate: {
         z: .48
@@ -498,7 +498,7 @@ let Bois = new Zdog.Cylinder({
     diameter: .7,
     length: 4.5,
     stroke: false,
-    color: 'blue',
+    color: 'hsla(240, 100%, 50%,1)',
     backface: false,
     translate: {
         z: -2.25
@@ -510,8 +510,8 @@ let Anneau = new Zdog.Cylinder({
     diameter: .7,
     length: .45,
     stroke: false,
-    color: 'whitesmoke',
-    // backface: 'whitesmoke',
+    color: 'hsla(0, 0%, 96%,1)',
+    // backface: 'hsla(0, 0%, 96%,1)',
     backface: false,
     translate: {
         z: -4.5
@@ -522,7 +522,7 @@ let Gomme = new Zdog.Hemisphere({
     addTo: Pen,
     diameter: .7,
     stroke: false,
-    color: 'black',
+    color: 'hsla(0, 0%, 0%,1)',
     backface: false,
     rotate: {
         x: Math.PI
@@ -570,13 +570,13 @@ export const SmartphoneScreen = new Zdog.Box({
     width: 3,
     height: 5.5,
     depth: .125,
-    color: 'black',
-    // backface: 'hsl(201, 38%, 25%)',
+    color: 'hsla(0, 0%, 0%,1)',
+    // backface: 'hsla(201, 38%, 25%,1)',
     backface: false,
-    leftFace: 'hsl(201, 38%, 25%)',
-    rightFace: 'hsl(201, 38%, 25%)',
-    topFace: 'hsl(201, 38%, 25%)',
-    // bottomFace: 'hsl(201, 38%, 25%)',
+    leftFace: 'hsla(201, 38%, 25%,1)',
+    rightFace: 'hsla(201, 38%, 25%,1)',
+    topFace: 'hsla(201, 38%, 25%,1)',
+    // bottomFace: 'hsla(201, 38%, 25%,1)',
     bottomFace: false,
     translate: {
         y: 32 / 6,
@@ -674,7 +674,7 @@ export const Hanches = new Zdog.Cylinder({
         x: -TAU,
         y: -TAU / 4
     },
-    color: "hsl(180, 25%, 20%)"
+    color: "hsla(180, 25%, 20%,1)"
 });
 
 export const Cuisse_R = new Zdog.Cylinder({
@@ -695,7 +695,7 @@ export const Cuisse_R = new Zdog.Cylinder({
 export const Genou_R = new Zdog.Shape({
     addTo: Cuisse_R,
     stroke: 5,
-    color: "hsl(180, 25%, 28%)",
+    color: "hsla(180, 25%, 28%,1)",
     translate: {
         z: 8
     }
@@ -714,7 +714,7 @@ export const Tibia_R = new Zdog.Cylinder({
         y: 0
     },
     length: 12,
-    color: "hsl(180, 25%, 30%)"
+    color: "hsla(180, 25%, 30%,1)"
 });
 export const Chaussure_R = new Zdog.Shape({
     addTo: Tibia_R,

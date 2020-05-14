@@ -16,7 +16,9 @@ const Smartphone = (props) => {
 
   return (<svg id="smartphone" ref={el => el = smartphoneRef} viewBox="0 0 215 444" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeMiterlimit="10">
 
-    <path d="M197.84 443.86H16.5A16.5 16.5 0 010 427.36V16.5A16.5 16.5 0 0116.5 0h181.34a16.5 16.5 0 0116.5 16.5v410.86a16.5 16.5 0 01-16.5 16.5" fill="rgb(33, 128, 160)" fillRule="nonzero" />
+    < path d = "M197.84 443.86H16.5A16.5 16.5 0 010 427.36V16.5A16.5 16.5 0 0116.5 0h181.34a16.5 16.5 0 0116.5 16.5v410.86a16.5 16.5 0 01-16.5 16.5"
+    fill = "hsla(195, 66%, 38%,1)"
+    fillRule = "nonzero" / >
 
     <path d="M189.55 425.64H24.78a12.18 12.18 0 01-12.18-12.18V30.4c0-6.73 5.45-12.18 12.18-12.18h164.77c6.73 0 12.18 5.45 12.18 12.18v383.06c0 6.72-5.45 12.18-12.18 12.18" fill="hsla(188, 15%, 59%,1)" fillRule="nonzero" />
 

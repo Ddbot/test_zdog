@@ -16,7 +16,7 @@ const Keyboard = new Zdog.Box({
     addTo: Computer,
     width: 16,
     height: 32 / 3,
-    color: 'rgb(211, 211, 212)',
+    color: 'hsla(240, 1%, 83%,1)',
     backface: 'lightgray',
     // backface:false,
     leftFace: 'lightgray',

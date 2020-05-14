@@ -33,10 +33,10 @@
   --gray-blue: hsla(201, 38%, 55%, 1);
   --dusty-blue: #5295bf;
   --bulma-green: #9DF5DF;
-  --bulma-blue: hsl(204, 86%, 53%);
-  --bulma-blue2: rgb(33, 128, 160);
-  --bulma-orange: hsl(48, 100%, 67%);
-  --bulma-red: hsl(348, 100%, 61%);
+  --bulma-blue: hsla(204, 86%, 53%,1);
+  --bulma-blue2: hsla(195, 66%, 38%,1);
+  --bulma-orange: hsla(48, 100%, 67%,1);
+  --bulma-red: hsla(348, 100%, 61%,1);
   --bulma-yellow: #D1CE0A;
   --bulma-black: #002620;
   font-family: "Roboto";

@@ -395,7 +395,7 @@ const Hanches = new Zdog.Cylinder({
         x: -TAU,
         y: -TAU / 4
     },
-    color: "hsl(180, 25%, 20%)"
+    color: "hsla(180, 25%, 20%,1)"
 });
 
 // const Hanches = new Zdog.Box({
@@ -410,8 +410,8 @@ const Hanches = new Zdog.Cylinder({
 //         x: -TAU,
 //         y: -TAU / 4
 //     },
-//     color: "hsl(180, 25%, 20%)",
-//     leftFace: "hsl(180, 25%, 20%)",
+//     color: "hsla(180, 25%, 20%,1)",
+//     leftFace: "hsla(180, 25%, 20%,1)",
 //     topFace: "yellow",
 //     stroke: 2
 // });
@@ -436,7 +436,7 @@ const Cuisse_R = new Zdog.Cylinder({
 const Genou_R = new Zdog.Shape({
     addTo: Cuisse_R,
     stroke: 5,
-    color: "hsl(180, 25%, 28%)",
+    color: "hsla(180, 25%, 28%,1)",
     translate: {
         z: 8
     }
@@ -455,7 +455,7 @@ const Tibia_R = new Zdog.Cylinder({
         y: 0
     },
     length: 12,
-    color: "hsl(180, 25%, 30%)"
+    color: "hsla(180, 25%, 30%,1)"
 });
 const Chaussure_R = new Zdog.Shape({
     addTo: Tibia_R,

@@ -38,12 +38,12 @@ button.navbar-item svg {
 }
 
 button.navbar-link:not(.is-arrowless):hover {
-    color: hsl(171, 100%, 41%);
+    color: hsla(171, 100%, 41%,1);
 }
 
 button.navbar-link:not(.is-arrowless)::after {
     content: '';
-    border-color: hsl(171, 100%, 41%);
+    border-color: hsla(171, 100%, 41%,1);
 }
 
 button.navbar-item,
