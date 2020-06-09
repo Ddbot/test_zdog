@@ -130,14 +130,14 @@ const IndexPage = (props) => {
 
 		let colors =
 			// gsap.utils.shuffle(
-			['rgba(209, 75, 21,1)',
-			'rgba(107, 21, 209,1)',
-			'rgba(209, 206, 0,1)',
-			'rgba(107, 54, 107,1)'
+			['rgba(209, 75, 21,.5)',
+			'rgba(107, 21, 209,.5)',
+			'rgba(209, 206, 0,.5)',
+			'rgba(107, 54, 107,.5)'
 			]
 		// );
 
-		
+
 
 		document.querySelectorAll('.highlight').forEach((word, i) => {
 			word.style.backgroundColor = colors[i];
@@ -185,7 +185,6 @@ const IndexPage = (props) => {
 
 			case chevronBottom.current:
 				// 1. faire disparaitre le texte avec splitting
-				// const pp = ;
 
 				target = Splitting({
 					target: document.querySelector('.textContent>p'),
@@ -195,14 +194,7 @@ const IndexPage = (props) => {
 				gsap.to(target, {
 					opacity: 0,
 					backgroundColor: "hsla(0, 0%, 100%,1)",
-					// duration: .195,
-					// x: 250,
 					x: 1000,
-					// scale: gsap.utils.distribute({
-					// 	base: 1,
-					// 	amount: .195,
-					// 	from: "center"
-					// }),
 					stagger: {
 						from: "start",
 						amount: .195
@@ -230,6 +222,11 @@ const IndexPage = (props) => {
 		if(e.target.name === "grayscale"){ setGrayscale(prev => e.target.value) }
 		if(e.target.name === "invert"){ setInvert(prev => e.target.value) }
 		if(e.target.name === "contrast"){ setContrast(prev => e.target.value) }
+
+		// const canvas = document.querySelectorAll('.highlight');
+		// canvas.forEach((c) => {
+		// 	c.style.filter = `hue-rotate(${hue}deg) grayscale(${grayscale}) invert(${invert}) contrast(${contrast})`;
+		// });
 
 		const canvas = document.querySelector('.container>canvas');
 		canvas.style.filter = `hue-rotate(${hue}deg) grayscale(${grayscale}) invert(${invert}) contrast(${contrast})`;
@@ -267,10 +264,10 @@ const IndexPage = (props) => {
 			/>
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
-
+			<div className="separator" />
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
 			{index !== 4 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
-		<div className="dummy" style={{ display: "none" }}></div>
+		{/* <div className="dummy" style={{ display: "none" }}></div> */}
 	</>);
 };
 

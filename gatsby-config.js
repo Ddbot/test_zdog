@@ -61,7 +61,12 @@ module.exports = {
           icon: `src/images/logo.png`, // This path is relative to the root of the site.
         },
       },
-      `gatsby-plugin-sass`,
+      {
+        resolve: `gatsby-plugin-sass`,
+        options: {
+          includePaths: [`${__dirname}/src/styles`]
+        }
+      },
       // this (optional) plugin enables Progressive Web App + Offline functionality
       // To learn more, visit: https://gatsby.dev/offline
       // `gatsby-plugin-offline`,

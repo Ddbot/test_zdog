@@ -122,12 +122,11 @@ const Me = (props) => {
     let animateScene0 = () => {
         // Funcs for the TICKER 
         let slide_0_move_1 = () => {
-            let start = 0,
-                end = 1;
+            let end = 1;
 
             scene.rotate = {
-                x: Zdog.lerp(seq[start][index].x, seq[end][index].x, rotateIllo.progress()),
-                y: Zdog.lerp(seq[start][index].y, seq[end][index].y, rotateIllo.progress()),
+                x: Zdog.lerp(animation[1].x, seq[end][index].x, rotateIllo.progress()),
+                y: Zdog.lerp(animation[1].y, seq[end][index].y, rotateIllo.progress()),
                 // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
             };
 
@@ -161,7 +160,7 @@ const Me = (props) => {
 
         // Funcs for the TIMELINE
         let rotateIllo = gsap.to('html', {
-            autoAlpha: 1,
+            // autoAlpha: 1,
             duration: .8,
             ease: "power2.out",
             onStart: () => {
@@ -179,7 +178,7 @@ const Me = (props) => {
         });
 
         let zoomIllo = gsap.to('html', {
-            autoAlpha: 1,
+            // autoAlpha: 1,
             duration: .6,
             onStart: () => {
                 gsap.ticker.add(slide_0_move_2);
@@ -241,8 +240,8 @@ const Me = (props) => {
             // zoom vers l'ecran
             scene.translate.y = 10;
             scene.rotate = {
-                x: Zdog.lerp(seq[start][1].x, seq[end][1].x, rotateIllo_reverse.progress()),
-                y: Zdog.lerp(seq[start][1].y, seq[end][1].y, rotateIllo_reverse.progress()),
+                x: Zdog.lerp(animation[1].x, seq[end][1].x, rotateIllo_reverse.progress()),
+                y: Zdog.lerp(animation[1].y, seq[end][1].y, rotateIllo_reverse.progress()),
                 // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo_reverse.progress())
             };
             // scene.scale = Zdog.lerp(4, 0.8, rotateIllo_reverse.progress());
@@ -263,7 +262,7 @@ const Me = (props) => {
 
         // Funcs for the TIMELINE
         let rotateIllo_reverse = gsap.to('html', {
-            opacity: 1,
+            // opacity: 1,
             duration: 1.4,
             // ease: "elastic.out(1,0.3)",
             onStart: () => {
@@ -320,10 +319,20 @@ const Me = (props) => {
             onDragMove: function (pointer, moveX, moveY) {
                 // scene.rotate.x = gsap.utils.clamp(5.62, 6.33, dragStartRX - (moveY / minSize) * TAU);
                 // scene.rotate.y = gsap.utils.clamp(5.96, 6.64, dragStartRY - (moveX / minSize) * TAU);
-                scene.rotate.x = dragStartRX - (moveY / minSize) * TAU;
-                scene.rotate.y = dragStartRY - (moveX / minSize) * TAU;
 
-                console.log('onDragMove: { x: ', scene.rotate.x, '; y: ', scene.rotate.y, ' }');
+                setAnimation((prevAnimation) => {
+                    return [
+                        animation[0], {
+                        x: dragStartRX - (moveY / minSize) * TAU,
+                        y: dragStartRY - (moveX / minSize) * TAU
+                        },
+                        animation[2]
+                    ]
+                });
+                // scene.rotate.x = dragStartRX - (moveY / minSize) * TAU;
+                // scene.rotate.y = dragStartRY - (moveX / minSize) * TAU;
+
+                // console.log('onDragMove: { x: ', scene.rotate.x, '; y: ', scene.rotate.y, ' }');
             }
         });
 

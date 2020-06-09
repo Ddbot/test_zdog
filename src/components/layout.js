@@ -18,6 +18,8 @@ import "./styles/layout.css";
 import 'bulma/css/bulma.css';
 
 const Main = styled.main`
+grid-row: 2 / span 1;
+grid-column: 1 / span 2;
 	display: flex;
 	box-sizing: border-box;
     flex-flow: row nowrap;
@@ -47,7 +49,7 @@ const Layout = (props) => {
 
 		localStorage.setItem('lang', lang);
 	}
-	return (<div>
+	return (<div className="layout">
 		<LangContext.Provider value={lang} >
 			<Header siteTitle="Andry Online" locale={lang} toggleLang={toggleLang} />
 			<Main>
