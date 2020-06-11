@@ -145,6 +145,32 @@ const IndexPage = (props) => {
 		});
 	});
 
+	// Logos
+	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
+		x: -100,
+	scale: 0.5
+	}, {
+		x: 0,
+			scale: 1.5,
+			autoAlpha: 1,
+			stagger: { amount: 0.7 },
+			onComplete: () => {
+				gsap.to('.logos', {
+					duration: 1,
+					filter: "grayscale(0%)",
+					stagger: {
+						amount: 1
+					},
+					onComplete: () => {
+						gsap.to('#logoGrid', {
+							duration: .4,
+							padding: "1rem",
+						});
+					}
+				});
+			}
+	});
+
 	let handleClick = (e) => {
 		switch (e.target) {
 			case chevronTop.current:
@@ -154,8 +180,6 @@ const IndexPage = (props) => {
 					target: document.querySelector('.textContent>p'),
 					by: "words"
 				})[0].words;
-
-				console.log('Les éléménts constituant Target sont: ', target);
 
 				gsap.set(target, { display: "inline-flex" })
 				// gsap.set(target, { display: "span" })
@@ -202,13 +226,17 @@ const IndexPage = (props) => {
 					onStart: () => {
 						gsap.to('.highlight', { duration: .195, backgroundColor: "hsla(0, 0%, 100%,1)", color: "hsla(0, 0%, 29%,1)", });
 					},
-					onComplete: () => {
+					// onComplete: () => {
+					// 	// 2. setIndex
+					// 	setIndex((prev) => {
+					// 		return prev + 1
+					// 	});
+					// }
+				});
 						// 2. setIndex
 						setIndex((prev) => {
 							return prev + 1
 						});
-					}
-				});
 				break;
 			default:
 				break;

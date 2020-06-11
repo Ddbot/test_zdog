@@ -143,17 +143,12 @@ const Me = (props) => {
         }
 
         let slide_0_move_3 = () => {
-            console.log('Where is the Screen ? ', scene.children);
             scene.children.forEach((child) => {
-                console.log('Child: ', child);
                 !!child.children && child.children.forEach((c) => {
-                    console.log('C: ', c);                        
-                    !!c.children && c.children.forEach((d) => {
-                                            console.log('D: ', d);
-                            d.visible = false;
-                        });
-                        c.visible = false;
-                    });
+                    !!c.children && c.children.forEach((d) => { d.visible = false });
+                    c.visible = false;
+                });
+                
                 child.visible = false;
             });
         }
@@ -307,7 +302,7 @@ const Me = (props) => {
         let dragStartRX, dragStartRY;
         let minSize = Math.min(canvasWidth, canvasHeight);
 
-        // add drag-rotatation with Dragger
+        // add drag-rotation with Dragger
         new Zdog.Dragger({
             startElement: canvas,
             onDragStart: function () {
@@ -349,7 +344,7 @@ const Me = (props) => {
         scene.scale = animation[2];
     }, [animation]);
 
-    // Start animation depending of change in Index
+    // Start animation depending on Index
     useEffect(() => {
         switch (index) {
             case 0:
@@ -360,6 +355,8 @@ const Me = (props) => {
             case 1:
                 if (prevIndex === 0) {
                     animateScene0();
+                    console.log('Il faut afficher les logos des logiciels cites', ctx, canvas, 'Index is ', index);
+                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
                     // gsap.to(scene, {
                     //     duration: 5,
                     //     rotate: {

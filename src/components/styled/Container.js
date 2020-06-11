@@ -53,6 +53,11 @@ const Container = styled.div`
 			margin: auto 0;
 		}
 	}
+
+	&>#logoGrid {
+		height: calc(92.13vh*0.75);
+		width: calc(92.13vh*0.75);
+	}
 `;
 
 export default Container;

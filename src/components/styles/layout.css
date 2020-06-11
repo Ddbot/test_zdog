@@ -5,16 +5,6 @@
   box-sizing: border-box;
 }
 
-/* body {
-  width: 100vw;
-  height: 100vh;
-}
-
-#___gatsby {
-  width: 100vw;
-  height: 100vh;
-} */
-
 :root {
   --buff: #f4f39a;
   --dark-cream: #f4e898;
@@ -52,33 +42,6 @@
 body {
 border: .5rem solid var(--bulma-black);
 border-bottom: .5rem solid transparent;
-    /* background: linear-gradient(307deg, #6b366b, #01d1b2); */
-/* background-size: 150% 150%; */
-
-/* background-color: #01d1b2; */
-/* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23017d6b' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E"); */
-
-/* -webkit-animation: testZdog 3s ease infinite;
--moz-animation: testZdog 3s ease infinite;
-animation: testZdog 3s ease infinite;
-
-@-webkit-keyframes testZdog {
-    0%{background-position:100% 0%}
-    25%{background-position:0% 400%}
-    75%{background-position: 400% 0%}
-    100%{background-position:100% 0%}
-}
-@-moz-keyframes testZdog {
-    0%{background-position:100% 0%}
-    50%{background-position:0% 400%}
-    100%{background-position:100% 0%}
-}
-@keyframes testZdog {
-    0%{background-position:100% 0%}
-    25%{background-position:0% 400%}
-    75%{background-position: 400% 0%}
-    100%{background-position:100% 0%}
-} */
 
 background-color: rgba(127, 255, 212,.5);
 
@@ -88,8 +51,6 @@ width: 100vw;
 
 .layout {
   display: grid;
-  /* grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 8fr 1fr; */
   gap: 1px 1px;
   grid-template-areas: ". ."". ."". .";
 
@@ -103,4 +64,83 @@ width: 100vw;
   right: 0;
   height: 10px;
   z-index: 10;
+}
+
+#logoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+
+
+  justify-items: center;
+  align-content: stretch;
+
+  align-items: stretch;
+
+  overflow: visible;
+}
+
+.logos {
+  max-width: 33%;
+  max-height: 33%;
+
+  padding: 0 auto;
+
+  align-self: center;
+
+  filter: grayscale(100%);
+  scale:1;
+
+    opacity: 0;
+}
+
+.logos::before {
+  display: none;
+  top: 1.5em;
+  font-size: 0.9em;
+}
+
+.logos:hover::before {
+  display: visible;
+  content: attr(data-presentation);
+  position: absolute;
+  color: blue;
+   top: 1.5em;
+   font-size: 0.9em;
+   scale: 4;
+   width: 100%;
+   height: 100%;
+   border: 10px solid green;
+}
+
+.logos:nth-of-type(4) {
+  scale: 1.5;
+}
+
+.logos:nth-of-type(4),
+.logos:nth-of-type(5) {
+  translate: 150%;
+}
+
+
+/* Ruby on Rails */
+#ror {
+  /* display: flex;
+  justify-content: center; */
+  padding: auto;
+  /* transform: scale(2); */
+  overflow: visible;
+}
+
+#ror > g {
+    transform: scale(2.5) translate(-50%, -59%);
+}
+
+.logos#react {
+  /* min-width: 2rem; */
+  min-height: 2rem;
+}
+
+.container>svg:first-of-type {
+  /* align-self: center; */
 }
