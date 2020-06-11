@@ -5,7 +5,7 @@ import LangContext from '../components/contexts/LangContext';
 
 import styled from 'styled-components';
 
-import SEO from "../components/seo";
+// import SEO from "../components/seo";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from '../components/styled/Chevron';
 
@@ -275,7 +275,7 @@ const IndexPage = (props) => {
 	// }
 
 	return (<>
-		<SEO title={lang === 'fr' ? 'Accueil' : 'Home'} />
+		{/* <SEO title={lang === 'fr' ? 'Accueil' : 'Home'} /> */}
 		<Container className="container">
 			{index !== 0 && <Chevron ref={chevronTop} style={{ top: "7%", position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration

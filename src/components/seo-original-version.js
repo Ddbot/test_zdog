@@ -18,14 +18,19 @@ function SEO({ description, lang, meta, title }) {
           siteMetadata {
             title
             author
+            en {
               description
+            }
+            fr {
+              description
+            }
           }
         }
       }
     `
   )
 
-  const metaDescription = description;
+  const metaDescription = description || site.siteMetadata.description
 
   return (
     <Helmet

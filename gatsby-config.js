@@ -4,22 +4,22 @@ module.exports = {
     author: `@dandibot`,
     description: '<span>This page is hosting my CV and my blog</span>',
     plugins: [
+            {
+              resolve: `gatsby-source-wordpress`,
+              options: {
+                baseUrl: `travailleurduweb.wordpress.com`,
+                protocol: `https`,
+                hostingWPCOM: true,
+                useACF: false,
+              },
+            },
       `gatsby-plugin-react-helmet`,
-      // {
-      //   resolve: `gatsby-source-filesystem`,
-      //   options: {
-      //     name: `images`,
-      //     path: `${__dirname}/src/images`,
-      //   },
-      // },
       {
-        resolve: `gatsby-source-wordpress`,
+        resolve: `gatsby-source-filesystem`,
         options: {
-          baseUrl: `travailleurduweb.wordpress.com/`,
-          protocol: `https`,
-          hostingWPCOM: true,
-          useACF: false,
-        }
+          name: `images`,
+          path: `${__dirname}/src/images`,
+        },
       },
       {
         resolve: `gatsby-plugin-manifest`,
