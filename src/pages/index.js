@@ -15,8 +15,8 @@ import { animChevron } from '../utils/timelines';
 import Slide0 from '../components/slide0';
 import Slide1 from '../components/slide1';
 import Slide2 from '../components/slide2';
-import Slide3 from '../components/slide3';
-import Slide4 from '../components/slide4';
+import Slide3 from '../components/slide2';
+import Slide4 from '../components/slide3';
 
 
 import FilterSliders from '../components/FilterSliders';
@@ -82,9 +82,6 @@ const IndexPage = (props) => {
 							break;
 						case 3:
 							res = <Slide3 lang={lang} />
-							break;
-						case 4:
-							res = <Slide4 lang={lang} />
 							break;
 						default:
 							break;
