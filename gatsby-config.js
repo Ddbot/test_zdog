@@ -15,12 +15,8 @@ module.exports = {
 				<span class="purple"><b>fast, modern</b></span> and <span class="purple"><b>accessible</b></span>                
 				Web sites and <span class="purple"><b>PWA</b></span><br />
 			</p>`,
-      slide_2: `<p style='margin-left:10%;'>
-                I'm also using <span class="purple"><b>React Native</b></span> and <br />
-                <span class="purple"><b>Ruby on Rails</b></span>. I am a music and technology fan, who <span class="purple"><b>always strives to learn more</b></span>
-            </p>`,
-      slide_3: `<p style='margin-left: 10%;'>I am also a <span class="purple"><b>writer / translator</b></span>. I create catchy and <span class="purple"><b>a11y compliant content</b></span> and can even shoulder the <span class="purple"><b>i18n</b></span> of your sites and applications</p>`,
-      slide_4: `<p style='margin-right:10%;'>I'm currently available for work. <span class="purple"><b>Contact me !</b></span></p>`,
+      slide_2: `<p style='margin-left: 10%;'>I am also a <span class="purple"><b>writer / translator</b></span>. I create catchy and <span class="purple"><b>a11y compliant content</b></span> and can even shoulder the <span class="purple"><b>i18n</b></span> of your sites and applications</p>`,
+      slide_3: `<p style='margin-right:10%;'>I'm currently available for work. <span class="purple"><b>Contact me !</b></span></p>`,
     },
     fr: {
       description: `<span>Vous trouverez ici mon CV ainsi que mon blog</span>`,
@@ -33,12 +29,8 @@ module.exports = {
 				J'utilise <span class="purple"><b>React</b></span> et <br />
 				des frameworks tels que <span class="purple"><b>Gatsby&nbsp;JS</b></span> pour créer des sites et des <span class="purple"><b>PWA&nbsp;modernes<b></span>, rapides</b></span> et <span class="purple"><b>accessibles</b></span>.
 			</p>`,
-      slide_2: `<p style={{marginLeft:'10%'}}>
-                J'utilise également <span class="purple"><b>React Native</b></span> et <span class="purple"><b>Ruby on Rails</b></span>. En véritable <span class="purple"><b>passionné</b></span>, j'
-                assure une <span class="purple"><b>veille technologique</b></span> permanente.
-            </p>`,
-      slide_3: `<p style={{ marginLeft: '10%' }}>Je suis également <span class="purple"><b>rédacteur et traducteur</b></span>. Je créé du <span class="purple"><b>contenu SEO accrocheur</b></span> et assure une <span class="purple"><b>i18n de qualité</b></span></p>`,
-      slide_4: `<p>Je suis à votre disposition pour plus de renseignements. <span class="purple"><b>Contactez-moi !</b></span></p>`,
+      slide_2: `<p style={{ marginLeft: '10%' }}>Je suis également <span class="purple"><b>rédacteur et traducteur</b></span>. Je créé du <span class="purple"><b>contenu SEO accrocheur</b></span> et assure une <span class="purple"><b>i18n de qualité</b></span></p>`,
+      slide_3: `<p>Je suis à votre disposition pour plus de renseignements. <span class="purple"><b>Contactez-moi !</b></span></p>`,
     },
     plugins: [
       `gatsby-plugin-react-helmet`,

@@ -15,8 +15,7 @@ import { animChevron } from '../utils/timelines';
 import Slide0 from '../components/slide0';
 import Slide1 from '../components/slide1';
 import Slide2 from '../components/slide2';
-import Slide3 from '../components/slide2';
-import Slide4 from '../components/slide3';
+import Slide3 from '../components/slide3';
 
 
 import FilterSliders from '../components/FilterSliders';
@@ -223,17 +222,17 @@ const IndexPage = (props) => {
 					onStart: () => {
 						gsap.to('.highlight', { duration: .195, backgroundColor: "hsla(0, 0%, 100%,1)", color: "hsla(0, 0%, 29%,1)", });
 					},
-					// onComplete: () => {
-					// 	// 2. setIndex
-					// 	setIndex((prev) => {
-					// 		return prev + 1
-					// 	});
-					// }
-				});
+					onComplete: () => {
 						// 2. setIndex
 						setIndex((prev) => {
 							return prev + 1
 						});
+					}
+				});
+						// 2. setIndex
+						// setIndex((prev) => {
+						// 	return prev + 1
+						// });
 				break;
 			default:
 				break;
@@ -291,7 +290,7 @@ const IndexPage = (props) => {
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
 			<div className="separator" />
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
-			{index !== 4 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
+			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
 		{/* <div className="dummy" style={{ display: "none" }}></div> */}
 	</>);
 };
