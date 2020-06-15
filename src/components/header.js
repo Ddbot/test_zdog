@@ -32,6 +32,7 @@ const Header = (props) => {
           <span aria-hidden="true"></span>
         </button>
       </div>
+      <Link to="/blog" className="navbar-item"><h1>Blog</h1></Link>      
       <LangToggle lang={current} toggleLang={props.toggleLang} />
     </nav>
   )

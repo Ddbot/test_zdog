@@ -144,25 +144,18 @@ const IndexPage = (props) => {
 	// Logos
 	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
 		x: -100,
-	scale: 0.5
+	scale: 0
 	}, {
 		x: 0,
 			scale: 1.5,
 			autoAlpha: 1,
-			stagger: { amount: 0.7 },
+			stagger: { amount: 0.295 },
+			ease: 'expo.out',
 			onComplete: () => {
-				gsap.to('.logos', {
-					duration: 1,
-					filter: "grayscale(0%)",
-					stagger: {
-						amount: 1
-					},
-					onComplete: () => {
-						gsap.to('#logoGrid', {
-							duration: .4,
-							padding: "1rem",
-						});
-					}
+				gsap.to('#logoGrid', {
+					duration: .4,
+					ease: "elastic.in(1, 0.75)",
+					padding: "1rem",
 				});
 			}
 	});
@@ -171,15 +164,12 @@ const IndexPage = (props) => {
 		switch (e.target) {
 			case chevronTop.current:
 				// 1. faire disparaitre le texte avec splitting
-
 				let target = Splitting({
 					target: document.querySelector('.textContent>p'),
 					by: "words"
 				})[0].words;
 
-				gsap.set(target, { display: "inline-flex" })
-				// gsap.set(target, { display: "span" })
-
+				gsap.set(target, { display: "inline-flex" });
 				gsap.to(target, {
 					opacity: 0,
 					backgroundColor: "hsla(0, 0%, 100%,1)",
@@ -205,7 +195,6 @@ const IndexPage = (props) => {
 
 			case chevronBottom.current:
 				// 1. faire disparaitre le texte avec splitting
-
 				target = Splitting({
 					target: document.querySelector('.textContent>p'),
 					by: "words"
@@ -229,10 +218,6 @@ const IndexPage = (props) => {
 						});
 					}
 				});
-						// 2. setIndex
-						// setIndex((prev) => {
-						// 	return prev + 1
-						// });
 				break;
 			default:
 				break;

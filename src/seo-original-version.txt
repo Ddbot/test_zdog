@@ -90,4 +90,4 @@ SEO.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-export default SEOORIGINALVERSION
+// export default SEOORIGINALVERSION

@@ -6,7 +6,7 @@ import UKFlag from './ukFlag';
 const LangToggle = (props) => {
 
     return (
-        <div id="navbarBasicExample" className="navbar-menu">
+        <div className="navbar-menu">
             <div className="navbar-end">
                 <div className="navbar-item has-dropdown is-hoverable">
                     <button className="navbar-link">

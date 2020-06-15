@@ -45,7 +45,11 @@ const Layout = (props) => {
 			lang = e.target.parentElement.parentElement.parentElement.parentElement.dataset;
 		}
 
-		setLang(() => { return lang });
+		setLang((prev) => { 
+			return (prev === 'fr' || undefined) ? 'en' : 'fr';
+		});
+		
+		console.log('CLICKED ON toggleLang, current lang is ', lang, defaultLang);
 
 		localStorage.setItem('lang', lang);
 	}

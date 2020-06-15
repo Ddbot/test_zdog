@@ -1,8 +1,21 @@
 import React, { useEffect } from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import gsap from 'gsap';
 import Splitting from "splitting";
 
 const Slide_1 = (props) => {
+  const data = useStaticQuery(
+    graphql `
+      query {        
+          wordpressPage(id: {
+            eq: "f8980629-597c-5c0c-b7e0-e1675bcb9f97"
+          }){
+            content
+          }
+        }
+    `
+  );
+
   gsap.set('[data-splitting="words"]', {
     transformOrigin: "left center",
     transformPerspective: 200
@@ -41,14 +54,20 @@ const Slide_1 = (props) => {
     });
   });
 
+  let renderData = () => {
+    return {
+      __html: data.wordpressPage.content
+    }
+  }
+
   return props.lang === "en" ? <p data-splitting="lines">
     I'm using <span className="highlight"><b>React</b></span> and
 				frameworks such as <span className="highlight"><b>Gatsby JS</b></span> to create
 				<span className="highlight"><b>fast, modern</b></span> and <span className="highlight">accessible</span>
 				Web sites and <span className="highlight"><b>PWA</b></span>
   </p> : <p data-splitting="lines">
-      J'utilise <span className="highlight"><b>React</b></span> et des frameworks comme <span className="highlight"><b>Gatsby</b></span>&nbsp;pour créer des sites et des <span className="highlight"><b>PWA modernes</b></span>, rapides et <span className="highlight"><b>accessibles</b></span>.
-			</p>;
+      <div dangerouslySetInnerHTML={renderData()} />
+    </p>;
 };
 
 export default Slide_1;

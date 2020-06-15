@@ -1,10 +1,24 @@
 import React, { useEffect } from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import Splitting from "splitting";
 import gsap from 'gsap';
 
 // import './styles/slide.css';
 
 const Slide_0 = (props) => {
+
+  const data = useStaticQuery(
+    graphql`
+      query {        
+          wordpressPage(id: {
+            eq: "95543ea1-bf21-5e54-a003-a75c0499c6f5"
+          }){
+            content
+          }
+        }
+    `
+  );
+
   gsap.set('[data-splitting="words"]', {
     transformOrigin: "left center",
     transformPerspective: 200
@@ -31,14 +45,21 @@ const Slide_0 = (props) => {
       // delay: 1.5,
       rotationY: 45,
     });
+
+    console.log('Data = ', data.wordpressPage.content);
   });
+
+  let renderData = () => {
+    return {
+      __html: data.wordpressPage.content
+    }
+  }
 
   return props.lang === "en" ? <p data-splitting="lines">
     I 'm <span className="highlight"><b>Andry</b></span>,<br />
     A <span className="highlight"><b>Web site</b></span> and <span className="highlight"><b>mobile Apps</b></span> Integrator and <span className="highlight"><b>Designer</b></span>
   </p> : <p data-splitting="lines">
-      Je suis <span className="highlight"><b>Andry</b></span>,<br />
-      Intégrateur et <span className="highlight"><b>Designer</b></span> de <span className="highlight"><b>sites Web</b></span> et d'<span className="highlight"><b>applications mobiles</b></span>
+      <div dangerouslySetInnerHTML={renderData()} />
     </p>;
 };
 
