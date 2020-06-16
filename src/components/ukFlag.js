@@ -2,8 +2,8 @@ import React from 'react'
 
 const UKFlag = () => {
   return (
-    <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
-      <g transform="scale(.05 .06667)">
+    <svg id="uk" viewBox="10 0 40 40" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
+      <g transform="scale(.05, .06667)">
         <clipPath id="a">
           <path d="M0 0h1200v600H0z" />
         </clipPath>

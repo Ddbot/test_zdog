@@ -12,18 +12,29 @@ const ContactForm = (props) => {
     });
 
 
+    // Email validation
     useEffect(() => { 
-        console.log('Received LANG is ', props);
-    });
+        if (form['email'].length > 0 && !validateEmail(form['email'])) {
+            document.querySelector('.has-icons-left>input').classList.add('is-danger');
+            document.querySelector('span.icon:nth-child(3)').style.visibility = "visible";
+            document.querySelector('.help').style.visibility = "visible";
+        } else {
+            document.querySelector('.has-icons-left>input').classList.remove('is-danger');
+            document.querySelector('.help').style.visibility = "hidden";
+            document.querySelector('span.icon:nth-child(3)').style.visibility = "hidden";
+        }
+    }, [form['email']]);
 
     let handleChange = (e) => {
         const { target } = e;
+
+
 
         setForm(prev => {
             return { ...prev, [target.dataset.name]: target.value }
         });
 
-        console.log('State de ', target.dataset.name, ' change en ', form[target.dataset.name], form);     
+        console.log(document.activeElement);     
     }
 
     let handleSubmit = (e) => {
@@ -33,6 +44,8 @@ const ContactForm = (props) => {
 
     let validateEmail = (email) => {
         const re = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
+
+
         return re.test(String(email).toLowerCase());
     }
 
@@ -50,7 +63,7 @@ const ContactForm = (props) => {
                 <span className="icon is-small is-left">
                 <i className="fa fa-envelope"></i>
                 </span>
-                <span className="icon is-small is-right">
+                <span className="icon is-small is-right" style={{ color: "red" }}>
                 <i className="fa fa-exclamation-triangle"></i>
                 </span>
             </div>
@@ -110,7 +123,7 @@ const ContactForm = (props) => {
                 <span className="icon is-small is-left">
                 <i className="fa fa-envelope"></i>
                 </span>
-                <span className="icon is-small is-right">
+                <span className="icon is-small is-right" style={{ color: "red" }}>
                 <i className="fa fa-exclamation-triangle"></i>
                 </span>
             </div>
@@ -121,8 +134,8 @@ const ContactForm = (props) => {
             <div className="control">
                 <div className="select">
                 <select data-name="objet" onChange={handleChange}>
-                    <option>C'est juste tester la fonctionnalité</option>
                     <option>Je veux vous contacter pour du travail</option>
+                    <option>C'est juste pour tester la fonctionnalité</option>
                 </select>
                 </div>
             </div>
@@ -143,7 +156,8 @@ const ContactForm = (props) => {
                                 acceptance: !prev['acceptance']
                             }
                         });
-                    }} />
+                        }} />
+                    &nbsp;J'ai lu et j'accepte les <a href="#">conditions d'utilisation</a>                        
                 </label>
             </div>
         </div>

@@ -55,22 +55,27 @@ div.navbar-item:hover>.navbar-dropdown {
 
 div.navbar-item>.navbar-dropdown>button.navbar-item {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 0;
+    flex-flow: column wrap;
+    justify-content: center;
     height: 100%; 
-    width: 100%;
-
+    font-size: .7rem;
 }
 
-button.navbar-item > svg {
-    min-height: 1.5rem;
-    max-height: 1.5rem;
-    min-width: 1.5rem;
-    max-width: 1.5rem;
-    border-radius: 100%;
+button.navbar-item > svg#uk {
+    border-radius: 50%;
+    scale: 0.67;
+    translate: 30% 0;
+}
 
+button.navbar-item>svg#france {
+    scale: 0.67;
+    border-radius: 1.5rem;
+}
+
+
+button.navbar-item>svg > g {
+    height: 1.5rem;
+    width: 1.5rem; 
 }
 
 button.navbar-link:not(.is-arrowless):hover {
@@ -81,7 +86,8 @@ button.navbar-link:not(.is-arrowless):hover {
 
 button.navbar-link:not(.is-arrowless)::after {
     content: '';
-    border-color: hsla(171, 100%, 41%,1);
+    /* border-color: hsla(171, 100%, 41%,1); */
+    border-color: var(--bulma-black);
 }
 
 button.navbar-item,
