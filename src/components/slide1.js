@@ -7,9 +7,15 @@ const Slide_1 = (props) => {
   const data = useStaticQuery(
     graphql `
       query {        
-          wordpressPage(id: {
+          fr: wordpressPage(id: {
             eq: "f8980629-597c-5c0c-b7e0-e1675bcb9f97"
           }){
+            content
+          }
+
+          en: wordpressPage(id: {
+            eq: "2f58ac34-d2b2-5e62-a306-cf9f2ebb7cea"
+          }) {
             content
           }
         }
@@ -56,18 +62,11 @@ const Slide_1 = (props) => {
 
   let renderData = () => {
     return {
-      __html: data.wordpressPage.content
+      __html: data[props.lang].content
     }
   }
 
-  return props.lang === "en" ? <p data-splitting="lines">
-    I'm using <span className="highlight"><b>React</b></span> and
-				frameworks such as <span className="highlight"><b>Gatsby JS</b></span> to create
-				<span className="highlight"><b>fast, modern</b></span> and <span className="highlight">accessible</span>
-				Web sites and <span className="highlight"><b>PWA</b></span>
-  </p> : <p data-splitting="lines">
-      <div dangerouslySetInnerHTML={renderData()} />
-    </p>;
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />
 };
 
 export default Slide_1;

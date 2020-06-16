@@ -5,8 +5,14 @@ const Slide_2 = (props) => {
   const data = useStaticQuery(
     graphql `
       query {        
-          wordpressPage(id: {
+          fr: wordpressPage(id: {
             eq: "5f2d282b-69fc-5898-95c0-7bbdc90aead5"
+          }){
+            content
+          }
+
+          en: wordpressPage(id: {
+            eq: "a40fed8c-9709-5117-92c9-e41dc599778a"
           }){
             content
           }
@@ -16,14 +22,11 @@ const Slide_2 = (props) => {
 
   let renderData = () => {
     return {
-      __html: data.wordpressPage.content
+      __html: data[props.lang].content
     }
   }
 
-  return props.lang === "en" ? <p data-splitting="lines">I am also a <span className="highlight"><b>writer / translator</b></span>. I create catchy and <span className="highlight"><b>a11y compliant content</b></span> and can even shoulder the <span className="highlight"><b>i18n</b></span> of your sites and applications</p> :
-    <p data-splitting="lines">
-            <div dangerouslySetInnerHTML={renderData()} />
-    </p>
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />
 };
 
 export default Slide_2;

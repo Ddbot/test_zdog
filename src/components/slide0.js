@@ -9,13 +9,16 @@ const Slide_0 = (props) => {
 
   const data = useStaticQuery(
     graphql`
-      query {        
-          wordpressPage(id: {
-            eq: "95543ea1-bf21-5e54-a003-a75c0499c6f5"
-          }){
-            content
-          }
+      query {
+        en: wordpressPage(id: {eq: "0fb96152-7c50-5292-9a04-95c88709ee36"}){
+          title
+          content
         }
+        fr: wordpressPage(id: {eq: "95543ea1-bf21-5e54-a003-a75c0499c6f5"}){
+          title
+          content
+        }
+      }
     `
   );
 
@@ -46,21 +49,16 @@ const Slide_0 = (props) => {
       rotationY: 45,
     });
 
-    console.log('Data = ', data.wordpressPage.content);
+    console.log('Data = ', data[props.lang], props.lang);
   });
 
   let renderData = () => {
     return {
-      __html: data.wordpressPage.content
+      __html: data[props.lang].content
     }
   }
 
-  return props.lang === "en" ? <p data-splitting="lines">
-    I 'm <span className="highlight"><b>Andry</b></span>,<br />
-    A <span className="highlight"><b>Web site</b></span> and <span className="highlight"><b>mobile Apps</b></span> Integrator and <span className="highlight"><b>Designer</b></span>
-  </p> : <p data-splitting="lines">
-      <div dangerouslySetInnerHTML={renderData()} />
-    </p>;
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />;
 };
 
 export default Slide_0;
