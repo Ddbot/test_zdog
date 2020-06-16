@@ -35,8 +35,6 @@
   width: 100vw;
   max-height: 100vh;
   overflow: hidden;
-
-  /* background-color: aquamarine; */
 }
 
 body {
@@ -124,10 +122,7 @@ width: 100vw;
 
 /* Ruby on Rails */
 #ror {
-  /* display: flex;
-  justify-content: center; */
   padding: auto;
-  /* transform: scale(2); */
   overflow: visible;
 }
 
@@ -136,10 +131,5 @@ width: 100vw;
 }
 
 .logos#react {
-  /* min-width: 2rem; */
   min-height: 2rem;
-}
-
-.container>svg:first-of-type {
-  /* align-self: center; */
 }
