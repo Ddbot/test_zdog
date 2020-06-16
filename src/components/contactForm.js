@@ -1,26 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 
 const ContactForm = (props) => {
+
+    let [form, setForm] = useState({
+        name: '',
+        email: '',
+        objet: '',
+        message: '',
+        acceptance: false
+    });
+
+
     useEffect(() => { 
         console.log('Received LANG is ', props);
     });
+
+    let handleChange = (e) => {
+        const { target } = e;
+
+        setForm(prev => {
+            return { ...prev, [target.dataset.name]: target.value }
+        });
+
+        console.log('State de ', target.dataset.name, ' change en ', form[target.dataset.name], form);     
+    }
+
+    let handleSubmit = (e) => {
+        e.preventDefault();
+        (!!form['name'] && validateEmail(form['email']) && !!form['objet'] && !!form['message'] && !!form['acceptance']) ? console.log('Sending the form to the backend', form) : console.log('There is missing info');
+    }
+
+    let validateEmail = (email) => {
+        const re = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
+        return re.test(String(email).toLowerCase());
+    }
+
     return props.lang === "en" ? <div className="contact">
         <div className="field">
             <label className="label">Name</label>
             <div className="control">
-                <input className="input" type="text" placeholder="Text input" />
+                <input className="input" type="text" placeholder="Text input" data-name="name" onChange={handleChange}/>
             </div>
         </div>
         <div className="field">
             <label className="label">Email</label>
             <div className="control has-icons-left has-icons-right">
-                <input className="input is-danger" type="email" placeholder="Email input" value="hello@" />
+                <input className="input is-danger" type="email" placeholder="Email input" data-name="email" required onChange={handleChange}/>
                 <span className="icon is-small is-left">
-                <i className="fas fa-envelope"></i>
+                <i className="fa fa-envelope"></i>
                 </span>
                 <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
+                <i className="fa fa-exclamation-triangle"></i>
                 </span>
             </div>
             <p className="help is-danger">This email is invalid</p>
@@ -29,9 +60,9 @@ const ContactForm = (props) => {
             <label className="label">Subject</label>
             <div className="control">
                 <div className="select">
-                <select>
-                    <option>Select dropdown</option>
-                    <option>With options</option>
+                <select data-name="objet" onChange={handleChange}>
+                    <option>We want to offer you a position !</option>
+                    <option>I just want to test this functionality</option>
                 </select>
                 </div>
             </div>
@@ -39,20 +70,27 @@ const ContactForm = (props) => {
         <div className="field">
             <label className="label">Message</label>
             <div className="control">
-                <textarea className="textarea" placeholder="Textarea"></textarea>
+                <textarea className="textarea" placeholder="Textarea" data-name="message" onChange={handleChange}></textarea>
             </div>
         </div>
         <div className="field">
             <div className="control">
                 <label className="checkbox">
-                <input type="checkbox" />
+                    <input type="checkbox" data-name="acceptance" onClick={() => {
+                        setForm((prev) => {
+                            return {
+                                ...prev,
+                                acceptance: !prev['acceptance']
+                            }
+                        });
+                    }} />
                 I agree to the <a href="#">terms and conditions</a>
                 </label>
             </div>
         </div>
         <div className="field is-grouped">
             <div className="control">
-                <button className="button is-link" onClick={() => { console.log('YOU SUBMIT THE FORM');}}>Submit</button>
+                <button className="button is-link" onClick={handleSubmit}>Submit</button>
             </div>
             <div className="control">
                 <button className="button is-link is-light"><Link to="/">Cancel</Link></button>
@@ -61,19 +99,19 @@ const ContactForm = (props) => {
     </div> : <div className="contact">
         <div className="field">
             <label className="label">Votre nom</label>
-            <div className="control">
-                <input className="input" type="text" placeholder="Text input" />
+            <div className="control" name="name">
+                <input className="input" type="text" placeholder="Insérez votre nom" onChange={handleChange} data-name="name" />
             </div>
         </div>
         <div className="field">
             <label className="label">Email</label>
             <div className="control has-icons-left has-icons-right">
-                <input className="input is-danger" type="email" placeholder="Email input" value="hello@" />
+                <input className="input is-danger" type="email" placeholder="votre adresse email" onChange={handleChange} data-name="email"/>
                 <span className="icon is-small is-left">
-                <i className="fas fa-envelope"></i>
+                <i className="fa fa-envelope"></i>
                 </span>
                 <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
+                <i className="fa fa-exclamation-triangle"></i>
                 </span>
             </div>
             <p className="help is-danger">Le format de cet email est incorrect</p>
@@ -82,8 +120,8 @@ const ContactForm = (props) => {
             <label className="label">Objet</label>
             <div className="control">
                 <div className="select">
-                <select>
-                    <option>Je veux juste tester la fonctionnalité</option>
+                <select data-name="objet" onChange={handleChange}>
+                    <option>C'est juste tester la fonctionnalité</option>
                     <option>Je veux vous contacter pour du travail</option>
                 </select>
                 </div>
@@ -92,20 +130,26 @@ const ContactForm = (props) => {
         <div className="field">
             <label className="label">Message</label>
             <div className="control">
-                <textarea className="textarea" placeholder="Textarea"></textarea>
+                <textarea className="textarea" placeholder="Votre message" data-name="message" onChange={handleChange}></textarea>
             </div>
         </div>
         <div className="field">
             <div className="control">
                 <label className="checkbox">
-                <input type="checkbox" />
-                J'ai lu et accepte les <a href="#">Conditions générales d'utilisation</a>
+                    <input type="checkbox" data-name="acceptance" onClick={() => {
+                        setForm((prev) => {
+                            return {
+                                ...prev,
+                                acceptance: !prev['acceptance']
+                            }
+                        });
+                    }} />
                 </label>
             </div>
         </div>
         <div className="field is-grouped">
             <div className="control">
-                <button className="button is-link" onClick={() => { console.log('YOU SUBMIT THE FORM');}}>Envoyer</button>
+                <button className="button is-link" onClick={handleSubmit}>Envoyer</button>
             </div>
             <div className="control">
                 <button className="button is-link is-light"><Link to="/">Annuler</Link></button>
