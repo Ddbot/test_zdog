@@ -7,11 +7,32 @@ nav.navbar {
     z-index: 1;
     color: #002620;
     background-color: transparent;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
 
-div.navbar-item {
-    flex-grow: 1;
-    background-color: hsla(0, 0%, 100%, 1);
+@media screen and (min-width: 1024px) {
+    .navbar-menu {
+        flex-grow: 0 !important;
+        flex-shrink: 0;
+    }
+}
+
+nav.navbar > *:not(.navbar-menu) {
+    min-width: 25vh;
+    max-width: 25vh;
+}
+
+div.navbar-item,
+a.navbar-item {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    /* flex-grow: 1; */
+    /* flex-shrink: 0; */
+    /* background-color: hsla(0, 0%, 100%, 1); */
+    text-align: center;
 }
 
 div.navbar-item:not(:hover)>.navbar-dropdown {
@@ -19,9 +40,7 @@ div.navbar-item:not(:hover)>.navbar-dropdown {
     padding: 0 auto;
     opacity: 0;
     /* transition: all 1s linear !important; */
-    background-color: hsla(0, 0%, 100%, 1);
-        background-color: red;
-
+    /* background-color: hsla(0, 0%, 100%, 1); */
 }
 
 div.navbar-item:hover>.navbar-dropdown {
@@ -55,7 +74,7 @@ button.navbar-item > svg {
 }
 
 button.navbar-link:not(.is-arrowless):hover {
-    color: hsla(171, 100%, 41%,1);
+    /* color: hsla(171, 100%, 41%,1); */
         background-color: transparent;
 
 }
@@ -69,7 +88,7 @@ button.navbar-item,
 button.navbar-link,
 button.navbar-burger.burger[aria-expanded=false] {
     border: none;
-    background: white;
+    /* background: white; */
         background-color: transparent;
 
 }
@@ -118,4 +137,13 @@ button.navbar-burger:active {
 
 .navbar-item:hover>.navbar-link:hover>.navbar-dropdown:hover {
     cursor: pointer;
+}
+
+#gatsby-focus-wrapper>div>nav>a>h1 {
+    font-family: "Vibur";
+    font-size: 1.5rem;
+}
+
+#gatsby-focus-wrapper>div>nav>div.navbar-menu>div>div>button {
+    font-size: 1rem;
 }

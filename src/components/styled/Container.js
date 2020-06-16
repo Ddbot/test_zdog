@@ -55,8 +55,9 @@ const Container = styled.div`
 	}
 
 	&>#logoGrid {
-		height: calc(92.13vh*0.75);
-		width: calc(92.13vh*0.75);
+		align-self: center;
+		height: calc(92.13vh*0.57);
+		width: calc(92.13vh*0.57);
 	}
 `;
 

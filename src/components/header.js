@@ -33,6 +33,7 @@ const Header = (props) => {
         </button>
       </div>
       <Link to="/blog" className="navbar-item"><h1>Blog</h1></Link>      
+      <Link to="/contact" className="navbar-item">Contact</Link>      
       <LangToggle lang={current} toggleLang={props.toggleLang} />
     </nav>
   )
