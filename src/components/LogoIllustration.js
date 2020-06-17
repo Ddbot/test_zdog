@@ -28,26 +28,8 @@ const LogoIllustration = React.forwardRef((props, ref) => {
         // console.log(currentTarget.classList, currentTarget.dataset.presentation, e);
         console.log('LEFT the element');
     }    
-
-    switch (index) {
-        case 1:   
-            return <div id="logoGrid">
-                <LogoHTML />                
-                <LogoCSS />
-                <LogoJS />                
-                <LogoReact />
-                <LogoGatsby />
-                {/* <LogoRoR onHover={onHover}/> */}
-                <div></div>
-                <LogoFirebase />
-                                <div></div>
-                <LogoAWS />
-            </div>   
-            break;
-        default:
             return <Me ref={ref} index={index} animation={[props.translate, props.rotate, props.scale]} />
-            break;
-    }
+
 })
 
 export default LogoIllustration;

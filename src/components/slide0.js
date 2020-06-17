@@ -22,34 +22,25 @@ const Slide_0 = (props) => {
     `
   );
 
-  gsap.set('[data-splitting="words"]', {
-    transformOrigin: "left center",
-    transformPerspective: 200
-  });
+  // gsap.set('[data-splitting="words"]', {
+  //   transformOrigin: "left center",
+  //   transformPerspective: 200
+  // });
 
   useEffect(() => {
     let target = document.querySelector('[data-splitting="lines"]');
-
-
     let res = Splitting({
       target: target,
       by: "lines"
     });
-
     gsap.from(res[0].lines, {
       x: -500,
       scale: 0.7,
       autoAlpha: 0,
-      duration: .225,
       stagger: {
-        amount: .195,
-        from: 0
+        amount: 1.95,
       },
-      // delay: 1.5,
-      rotationY: 45,
     });
-
-    console.log('Data = ', data[props.lang], props.lang);
   });
 
   let renderData = () => {

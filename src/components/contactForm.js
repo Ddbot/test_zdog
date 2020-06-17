@@ -28,17 +28,14 @@ const ContactForm = (props) => {
     let handleChange = (e) => {
         const { target } = e;
 
-
-
         setForm(prev => {
-            return { ...prev, [target.dataset.name]: target.value }
+            return target.dataset.name === "objet" ? { ...prev, [target.dataset.name]: target.value.trim() } : { ...prev, [target.dataset.name]: target.value };
         });
-
-        console.log(document.activeElement);     
     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
+        
         (!!form['name'] && validateEmail(form['email']) && !!form['objet'] && !!form['message'] && !!form['acceptance']) ? console.log('Sending the form to the backend', form) : console.log('There is missing info');
     }
 
@@ -53,7 +50,8 @@ const ContactForm = (props) => {
         <div className="field">
             <label className="label">Name</label>
             <div className="control">
-                <input className="input" type="text" placeholder="Text input" data-name="name" onChange={handleChange}/>
+                <input className="input" type="text" placeholder="Text input" data-name="name" onChange={handleChange} />
+                <p className="help is-danger" style={{ visibility: "hidden" }}>Please provide a name</p>
             </div>
         </div>
         <div className="field">
@@ -67,17 +65,13 @@ const ContactForm = (props) => {
                 <i className="fa fa-exclamation-triangle"></i>
                 </span>
             </div>
-            <p className="help is-danger">This email is invalid</p>
+            <p className="help is-danger" style={{ visibility: "hidden" }}>This email is invalid</p>
+            {/* { form['email'].length>0 && !validateEmail(form['email']) && <p className="help is-danger">This email is invalid</p>} */}
         </div>
         <div className="field">
             <label className="label">Subject</label>
             <div className="control">
-                <div className="select">
-                <select data-name="objet" onChange={handleChange}>
-                    <option>We want to offer you a position !</option>
-                    <option>I just want to test this functionality</option>
-                </select>
-                </div>
+                <input className="input" type="text" placeholder="Subject input" data-name="objet" onChange={handleChange}/>  
             </div>
         </div>
         <div className="field">
@@ -96,7 +90,7 @@ const ContactForm = (props) => {
                                 acceptance: !prev['acceptance']
                             }
                         });
-                    }} />
+                    }} />&nbsp;
                 I agree to the <a href="#">terms and conditions</a>
                 </label>
             </div>
@@ -114,6 +108,7 @@ const ContactForm = (props) => {
             <label className="label">Votre nom</label>
             <div className="control" name="name">
                 <input className="input" type="text" placeholder="Insérez votre nom" onChange={handleChange} data-name="name" />
+                <p className="help is-danger">Nous avons besoin de votre nom !</p>                    
             </div>
         </div>
         <div className="field">
@@ -127,17 +122,12 @@ const ContactForm = (props) => {
                 <i className="fa fa-exclamation-triangle"></i>
                 </span>
             </div>
-            <p className="help is-danger">Le format de cet email est incorrect</p>
+            { form['email'].length>0 && !validateEmail(form['email']) && <p className="help is-danger">Le format de cet email est invalide</p>}
         </div>
         <div className="field">
             <label className="label">Objet</label>
             <div className="control">
-                <div className="select">
-                <select data-name="objet" onChange={handleChange}>
-                    <option>Je veux vous contacter pour du travail</option>
-                    <option>C'est juste pour tester la fonctionnalité</option>
-                </select>
-                </div>
+                <input className="input" type="text" placeholder="Subject input" data-name="objet" onChange={handleChange}/>  
             </div>
         </div>
         <div className="field">

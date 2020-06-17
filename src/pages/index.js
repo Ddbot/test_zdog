@@ -5,7 +5,7 @@ import LangContext from '../components/contexts/LangContext';
 
 import styled from 'styled-components';
 
-// import SEO from "../components/seo";
+import SEO from "../components/seo";
 import LogoIllustration from "../components/logoIllustration";
 import Chevron from '../components/styled/Chevron';
 
@@ -213,10 +213,13 @@ const IndexPage = (props) => {
 					},
 					onComplete: () => {
 						// 2. setIndex
-						setIndex((prev) => {
-							return prev + 1
-						});
+						// setIndex((prev) => {
+						// 	return prev + 1
+						// });
 					}
+				});
+				setIndex((prev) => {
+					return prev + 1
 				});
 				break;
 			default:
@@ -241,26 +244,45 @@ const IndexPage = (props) => {
 		canvas.style.filter = `hue-rotate(${hue}deg) grayscale(${grayscale}) invert(${invert}) contrast(${contrast})`;
 	}	
 
-	// let handleRotation = (e) => {
-	// 	e.persist();
-	// 	setRotate(prev => {
-	// 		return { ...prev, [e.target.name]: Number(e.target.value) }
-	// 	});
-	// 	// console.log(rotate);
-	// }
+	let handleRotation = (e) => {
+		e.persist();
+		setRotate(prev => {
+			return { ...prev, [e.target.name]: Number(e.target.value) }
+		});
+		// console.log(rotate);
+	}
 
-	// let handleTranslation = (e) => {
-	// 	e.persist();
-	// 	if (e.target.name === "z") {
-	// 		setScale(prev => Number(e.target.value));
-	// 	}
-	// 	setTranslate(prev => {
-	// 		return { ...prev, [e.target.name]: Number(e.target.value) }
-	// 	});
-	// }
+	let handleTranslation = (e) => {
+		e.persist();
+		if (e.target.name === "z") {
+			setScale(prev => Number(e.target.value));
+		}
+		setTranslate(prev => {
+			return { ...prev, [e.target.name]: Number(e.target.value) }
+		});
+	}
+
+	let seoContent = (index, lang) => {
+		switch (index) {
+			case 0:
+				return lang === "fr" ? "Accueil" : "Home";
+				break;
+			case 1:
+				return lang === "fr" ? "Programmation" : "Programming";
+				break;
+			case 2:
+				return lang === "fr" ? "Écrire et Traduire" : "Writer & Translator";
+				break;
+			case 3:
+				return "Contact"
+				break;
+			default:
+				break;
+		}
+	}
 
 	return (<>
-		{/* <SEO title={lang === 'fr' ? 'Accueil' : 'Home'} /> */}
+		<SEO title={seoContent(index,lang)} />
 		<Container className="container">
 			{index !== 0 && <Chevron ref={chevronTop} style={{ top: "7%", position: "fixed", left: "25%", zIndex: 10 }} onClick={handleClick} />}
 			<LogoIllustration

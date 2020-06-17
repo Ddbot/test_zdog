@@ -22,6 +22,7 @@ const Slide_3 = (props) => {
         }
     `
   );
+  
 
   let renderData = () => {
     return {

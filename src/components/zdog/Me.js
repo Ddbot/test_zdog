@@ -16,25 +16,20 @@ import Pot from './Pot';
 import Smartphone from './Smartphone';
 import Table from './Table';
 
-import LogoAWS from '../../images/LogoAWS';
-import LogoCSS from '../../images/LogoCSS';
-import LogoFirebase from '../../images/LogoFirebase';
-import LogoGatsby from '../../images/LogoGatsby';
-import LogoHTML from '../../images/LogoHTML';
-import LogoJS from '../../images/LogoJS';
-import LogoReact from '../../images/LogoReact';
-import LogoRoR from '../../images/LogoRoR';
+import LogoGrid from '../LogoGrid';
 
-const logos = [
-LogoAWS,
-LogoCSS,
-LogoFirebase,
-LogoGatsby,
-LogoHTML,
-LogoJS,
-LogoReact,
-LogoRoR
-]
+
+
+// const logos = [
+// LogoAWS,
+// LogoCSS,
+// LogoFirebase,
+// LogoGatsby,
+// LogoHTML,
+// LogoJS,
+// LogoReact,
+// LogoRoR
+// ]
 
 
 const { TAU } = Zdog;
@@ -46,8 +41,6 @@ let scene = new Zdog.Anchor();
 
 let liste = [Cou, Chair, Table];
 ConePattern.children.map(c => c.visible = false);
-
-console.log('Cones: ', ConePattern);
 
 scene.addChild(Computer);
 scene.addChild(ConePattern);
@@ -350,13 +343,14 @@ const Me = (props) => {
             case 0:
                 // NO Animation or transition here
                 prevIndex === 1 && animateScene0_reverse();
-                console.log('Au debut, scene.translate.y = ', scene.translate.y, ' et zoom = ', zoom)
                 break;
             case 1:
+
                 if (prevIndex === 0) {
                     animateScene0();
-                    console.log('Il faut afficher les logos des logiciels cites', ctx, canvas, 'Index is ', index);
-                    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                }
+                    // console.log('Il faut afficher les logos des logiciels cites', ctx, canvas, 'Index is ', index);
+                    // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
                     // gsap.to(scene, {
                     //     duration: 5,
                     //     rotate: {
@@ -364,8 +358,11 @@ const Me = (props) => {
                     //         y: Math.PI,
                     //         z: 0
                     //     },
-                    // });
-                };
+                    // });}            
+                break;
+            
+            case 2:
+                
                 break;
 
             default:
@@ -373,7 +370,9 @@ const Me = (props) => {
         }
     });
 
-    return <Canvas className="zdog-canvas" width={480} height={480}></Canvas>;
-}
+    return <><Canvas className="zdog-canvas" width={480} height={480}></Canvas>
+                <LogoGrid />
+            </>;
+        }
 
-export default Me;
+        export default Me;

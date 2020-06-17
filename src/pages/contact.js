@@ -8,13 +8,10 @@ import {
 import ContactForm from "../components/ContactForm"
 import SEO from "../components/seo"
 
-const ContactPage = ({ location }) => {
-    useEffect(() => { 
-        console.log('LANG IS ', location.state.lang);
-    });
+const ContactPage = () => {
     return <>
     <SEO title="Contact Form" />
-    <ContactForm lang={location.state.lang} />
+    <ContactForm lang={localStorage.getItem('lang')} />
 </>
 };
 
