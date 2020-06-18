@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogoHTML = (props) => <svg viewBox="0 0 512 512" className="logos" data-presentation="I am proficient in HTML" onMouseEnter={props.onMouseEnter}>
+const LogoHTML = (props) => <svg viewBox="0 0 512 512" className="logos" data-presentation="I am proficient in HTML" onMouseEnter={props.onMouseEnter} style={{ scale: "1.5" }}>
   <path d="M108.4 0h23v22.8h21.2V0h23v69h-23V46h-21v23h-23.2M206 23h-20.3V0h63.7v23H229v46h-23m53.5-69h24.1l14.8 24.3L313.2 0h24.1v69h-23V34.8l-16.1 24.8-16.1-24.8V69h-22.6m89.2-69h23v46.2h32.6V69h-55.6"/>
   <path fill="#e44d26" d="M107.6 471l-33-370.4h362.8l-33 370.2L255.7 512"/>
   <path fill="#f16529" d="M256 480.5V131h148.3L376 447"/>

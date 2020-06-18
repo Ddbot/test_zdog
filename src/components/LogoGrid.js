@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import gsap from 'gsap';
 
 import LogoAWS from '../images/LogoAWS';
 import LogoCSS from '../images/LogoCSS';
@@ -16,11 +17,15 @@ const LogoGrid = (props) => {
                 <LogoJS />                
                 <LogoReact />
                 <LogoGatsby />
-                <div></div>
+                <div style={{ color: "transparent" }}>_</div>
                 <LogoFirebase />
-                <div></div>
+                <div style={{ color: "transparent" }}>_</div>
                 <LogoAWS /> 
-            </div>
+    </div>
+    
+    // . . .
+    // . . x
+    // . x .
 }
 
 export default LogoGrid;

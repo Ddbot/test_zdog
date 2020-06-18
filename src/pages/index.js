@@ -19,6 +19,7 @@ import Slide3 from '../components/slide3';
 
 
 import FilterSliders from '../components/FilterSliders';
+import RotationSliders from '../components/RotationSliders';
 
 import "font-awesome/css/font-awesome.min.css";
 import gsap from "gsap";
@@ -49,7 +50,7 @@ const IndexPage = (props) => {
 	let [scale, setScale] = useState(.8);
 
 	// FILTER PARAMS
-	let [hue, setHue] = useState(0);
+	let [hue, setHue] = useState('90');
 	let [grayscale, setGrayscale] = useState(0);
 	let [invert, setInvert] = useState(0);
 	let [contrast, setContrast] = useState(0);
@@ -126,10 +127,11 @@ const IndexPage = (props) => {
 
 		let colors =
 			// gsap.utils.shuffle(
-			['rgba(209, 75, 21,.5)',
-			'rgba(107, 21, 209,.5)',
-			'rgba(209, 206, 0,.5)',
-			'rgba(107, 54, 107,.5)'
+			['rgba(209, 75, 21,1)',
+			'rgba(107, 21, 209,1)',
+			'rgba(209, 206, 0,1)',
+			'rgba(107, 54, 107,1)'
+			// '#6B366B'
 			]
 		// );
 
@@ -137,20 +139,29 @@ const IndexPage = (props) => {
 
 		document.querySelectorAll('.highlight').forEach((word, i) => {
 			word.style.backgroundColor = colors[i];
+			word.style.outline = `0.5rem solid ${colors[i]}`;
 			word.style.display = "span";
 		});
 	});
 
 	// Logos
 	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
-		x: -100,
-	scale: 0
-	}, {
-		x: 0,
-			scale: 1.5,
+			// x: -50,
+			y: 40,
+			scale: 0,
+			autoAlpha: 0
+		}, {
+			// x: 0,
+			y: 0,
+			scale: gsap.utils.distribute({
+				base: 0.5,
+				amount: 1.5,
+				from: 4,
+				grid: [3,3],
+				ease: 'expo.out',
+			}),
 			autoAlpha: 1,
-			stagger: { amount: 0.295 },
-			ease: 'expo.out',
+			stagger: { amount: 0.225 },
 			onComplete: () => {
 				gsap.to('#logoGrid', {
 					duration: .4,
@@ -159,6 +170,8 @@ const IndexPage = (props) => {
 				});
 			}
 	});
+
+
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -183,6 +196,7 @@ const IndexPage = (props) => {
 					},
 					onComplete: () => {
 						// 2. setIndex
+						
 						setIndex((prev) => {
 							return prev - 1
 						});
@@ -209,18 +223,18 @@ const IndexPage = (props) => {
 						amount: .195
 					},
 					onStart: () => {
-						gsap.to('.highlight', { duration: .195, backgroundColor: "hsla(0, 0%, 100%,1)", color: "hsla(0, 0%, 29%,1)", });
+						gsap.to('.highlight', { duration: .195, backgroundColor: "hsla(0, 0%, 100%,1)", color: "hsla(0, 0%, 29%,1)", outlineColor: "hsla(0, 0%, 100%,1)"});
 					},
 					onComplete: () => {
 						// 2. setIndex
-						// setIndex((prev) => {
-						// 	return prev + 1
-						// });
+						setIndex((prev) => {
+							return prev + 1
+						});
 					}
 				});
-				setIndex((prev) => {
-					return prev + 1
-				});
+				// setIndex((prev) => {
+				// 	return prev + 1
+				// });
 				break;
 			default:
 				break;
@@ -297,8 +311,8 @@ const IndexPage = (props) => {
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
 			<div className="separator" />
 			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
-			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />} </Container>
-		{/* <div className="dummy" style={{ display: "none" }}></div> */}
+			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />}
+		</Container>
 	</>);
 };
 

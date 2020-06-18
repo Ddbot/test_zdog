@@ -18,20 +18,6 @@ import Table from './Table';
 
 import LogoGrid from '../LogoGrid';
 
-
-
-// const logos = [
-// LogoAWS,
-// LogoCSS,
-// LogoFirebase,
-// LogoGatsby,
-// LogoHTML,
-// LogoJS,
-// LogoReact,
-// LogoRoR
-// ]
-
-
 const { TAU } = Zdog;
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
@@ -82,10 +68,23 @@ const Me = (props) => {
     let [animation, setAnimation] = useState(props.animation);
     let me_tl = gsap.timeline({
         paused: true,
+        onComplete: () => {
+            gsap.set('.zdog-canvas', {
+                display: "none"
+            });
+            gsap.set('#logoGrid', {
+                display: "grid"
+            });
+        }
     });
 
     let me_reverse_tl = gsap.timeline({
         paused: true,
+        onStart: () => {
+            gsap.set('#logoGrid', { display: "none" });
+            gsap.set('.zdog-canvas', { display: "block" });
+            animateScene0_reverse();
+        }
     });
 
     // ----- animate ----- //
@@ -281,7 +280,6 @@ const Me = (props) => {
     // get canvas element and its context
     useEffect(() => {
         canvas = document.querySelector(".zdog-canvas");
-        // canvas.style.border = "1px solid red";
 
         ctx = canvas.getContext("2d");
         // get canvas size
@@ -342,12 +340,16 @@ const Me = (props) => {
         switch (index) {
             case 0:
                 // NO Animation or transition here
+                gsap.set('#logoGrid', { display: "none" });
                 prevIndex === 1 && animateScene0_reverse();
                 break;
             case 1:
 
                 if (prevIndex === 0) {
                     animateScene0();
+                } else { 
+                    gsap.set('#logoGrid', { display: "grid" });
+                    gsap.set('.zdog-canvas', { display: "none" });                    
                 }
                     // console.log('Il faut afficher les logos des logiciels cites', ctx, canvas, 'Index is ', index);
                     // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -362,16 +364,18 @@ const Me = (props) => {
                 break;
             
             case 2:
-                
-                break;
-
+                gsap.set('#logoGrid', { display: "none" });
+                gsap.set('.zdog-canvas', { display: "flex" });
+                break;            
             default:
+                // LAST SLIDE
+
                 break;
         }
     });
 
     return <><Canvas className="zdog-canvas" width={480} height={480}></Canvas>
-                <LogoGrid />
+        <LogoGrid prevIndex={prevIndex}/>
             </>;
         }
 

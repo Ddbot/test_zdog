@@ -2,14 +2,6 @@
 import React from 'react';
 
 import Me from "./zdog/Me";
-import LogoAWS from "../images/LogoAWS";
-import LogoCSS from "../images/LogoCSS";
-import LogoFirebase from "../images/LogoFirebase";
-import LogoGatsby from "../images/LogoGatsby";
-import LogoHTML from "../images/LogoHTML";
-import LogoJS from "../images/LogoJS";
-import LogoReact from "../images/LogoReact";
-import LogoRoR from "../images/LogoRoR";
 
 const LogoIllustration = React.forwardRef((props, ref) => {
     let { index } = props;
