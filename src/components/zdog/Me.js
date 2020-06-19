@@ -17,6 +17,7 @@ import Smartphone from './Smartphone';
 import Table from './Table';
 
 import LogoGrid from '../LogoGrid';
+import Blog_animated from '../Blog_animated';
 
 const { TAU } = Zdog;
 
@@ -281,7 +282,7 @@ const Me = (props) => {
     useEffect(() => {
         canvas = document.querySelector(".zdog-canvas");
 
-        ctx = canvas.getContext("2d");
+ctx = canvas.getContext("2d");
         // get canvas size
         canvasWidth = canvas.width;
         canvasHeight = canvas.height;
@@ -322,7 +323,7 @@ const Me = (props) => {
             }
         });
 
-        // scene.rotate = seq[0];
+        scene.rotate = seq[0];
 
         animate();
 
@@ -340,7 +341,6 @@ const Me = (props) => {
         switch (index) {
             case 0:
                 // NO Animation or transition here
-                gsap.set('#logoGrid', { display: "none" });
                 prevIndex === 1 && animateScene0_reverse();
                 break;
             case 1:
@@ -349,7 +349,6 @@ const Me = (props) => {
                     animateScene0();
                 } else { 
                     gsap.set('#logoGrid', { display: "grid" });
-                    gsap.set('.zdog-canvas', { display: "none" });                    
                 }
                     // console.log('Il faut afficher les logos des logiciels cites', ctx, canvas, 'Index is ', index);
                     // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -365,8 +364,13 @@ const Me = (props) => {
             
             case 2:
                 gsap.set('#logoGrid', { display: "none" });
-                gsap.set('.zdog-canvas', { display: "flex" });
-                break;            
+                gsap.set('.zdog-canvas', { display: "none" });
+                gsap.set('#blog', { display: "flex" });
+
+                break;  
+            
+            case 3: 
+                
             default:
                 // LAST SLIDE
 
@@ -374,8 +378,10 @@ const Me = (props) => {
         }
     });
 
-    return <><Canvas className="zdog-canvas" width={480} height={480}></Canvas>
-        <LogoGrid prevIndex={prevIndex}/>
+    return <>
+        <Canvas className="zdog-canvas" width={480} height={480}></Canvas>
+        {index === 1 && <LogoGrid prevIndex={prevIndex} />}
+        {index === 2 && <Blog_animated />}
             </>;
         }
 

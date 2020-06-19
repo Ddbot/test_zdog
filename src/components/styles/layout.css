@@ -6,35 +6,16 @@
 }
 
 :root {
-  --buff: #f4f39a;
-  --dark-cream: #f4e898;
-  --light-tan: hsla(45, 81%, 77%, 1);
-  --pale-peach: #f4d193;
-  --very-light-brown: hsla(32, 82%, 76%, 1);
-  --peach: #f4ba8e;
-  --pale-salmon: #f3af8b;
-  --light-salmon: #f3a389;
-  --blush: #f39886;
-  --peachy-pink: #f38c84;
-  --blush-pink: hsla(0, 83%, 73%, 1);
-  --cement: #9da99c;
-  --cool-gray: #87a3a7;
-  --bluey-gray: #709db1;
-  --gray-blue: hsla(201, 38%, 55%, 1);
-  --dusty-blue: #5295bf;
-  --bulma-green: #9DF5DF;
-  --bulma-blue: hsla(204, 86%, 53%,1);
-  --bulma-blue2: hsla(195, 66%, 38%,1);
-  --bulma-orange: hsla(48, 100%, 67%,1);
-  --bulma-red: hsla(348, 100%, 61%,1);
-  --bulma-yellow: #D1CE0A;
+  --duration: 650ms;
   --bulma-black: rgba(0, 38, 32,.7);
-  font-family: "Roboto";
+
+  font-family: Arial, "Roboto";
   font-size: 20px;
 
   width: 100vw;
   max-height: 100vh;
   overflow: hidden;
+
 }
 
 body {
@@ -119,7 +100,6 @@ width: 100vw;
   translate: 150%;
 }
 
-
 /* Ruby on Rails */
 #ror {
   padding: auto;
@@ -132,4 +112,117 @@ width: 100vw;
 
 .logos#react {
   min-height: 2rem;
+}
+
+/* DANS LOGO ILLUSTRATION, ANIMATION DU LETTERING DE BLOG */
+
+svg#blog {
+  /* width: 200px;
+  height: 200px; */
+}
+
+.blog_B {
+  stroke-dasharray: 425 427;
+  stroke-dashoffset: 426;
+  animation: blog_B_draw var(--duration) linear 0ms forwards;
+}
+
+@keyframes blog_B_draw {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes blog_B_fade {
+  0% {
+    stroke-opacity: 1;
+  }
+
+  94.44444444444444% {
+    stroke-opacity: 1;
+  }
+
+  100% {
+    stroke-opacity: 0;
+  }
+}
+
+.blog_l {
+  stroke-dasharray: 258 260;
+  stroke-dashoffset: 259;
+  animation: blog_l_draw var(--duration) linear 0ms forwards;
+}
+
+@keyframes blog_l_draw {
+  100% {
+    stroke-dashoffset: 0;
+  }
+
+}
+
+@keyframes blog_l_fade {
+  0% {
+    stroke-opacity: 1;
+  }
+
+  94.44444444444444% {
+    stroke-opacity: 1;
+  }
+
+  100% {
+    stroke-opacity: 0;
+  }
+}
+
+.blog_o {
+  stroke-dasharray: 206 208;
+  stroke-dashoffset: 207;
+  animation: blog_o_draw var(--duration) linear 0ms forwards;
+}
+
+@keyframes blog_o_draw {
+  100% {
+    stroke-dashoffset: 0;
+  }
+
+}
+
+@keyframes blog_o_fade {
+  0% {
+    stroke-opacity: 1;
+  }
+
+  94.44444444444444% {
+    stroke-opacity: 1;
+  }
+
+  100% {
+    stroke-opacity: 0;
+  }
+}
+
+.blog_g {
+  stroke-dasharray: 364 366;
+  stroke-dashoffset: 365;
+  animation: blog_g_draw var(--duration) linear 0ms forwards;
+}
+
+@keyframes blog_g_draw {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes blog_g_fade {
+  0% {
+    stroke-opacity: 1;
+  }
+
+  94.44444444444444% {
+    stroke-opacity: 1;
+  }
+
+  100% {
+    stroke-opacity: 0;
+  }
 }

@@ -122,52 +122,35 @@ const IndexPage = (props) => {
 
 	// Highlights
 	useEffect(() => {
-		// gsap.set('.word', { display: "inline-flex" });
 		gsap.set('.word', { display: "span" });
 
 		let colors =
-			// gsap.utils.shuffle(
-			['rgba(209, 75, 21,1)',
-			'rgba(107, 21, 209,1)',
-			'rgba(209, 206, 0,1)',
-			'rgba(107, 54, 107,1)'
-			// '#6B366B'
-			]
-		// );
-
-
+			[
+				'rgba(209, 75, 21,1)',
+				'rgba(107, 21, 209,1)',
+				'rgba(209, 206, 0,1)',
+				'rgba(107, 54, 107,1)'
+			];
 
 		document.querySelectorAll('.highlight').forEach((word, i) => {
 			word.style.backgroundColor = colors[i];
-			word.style.outline = `0.5rem solid ${colors[i]}`;
+			word.style.outline = `0.25rem solid ${colors[i]}`;
 			word.style.display = "span";
 		});
 	});
 
 	// Logos
 	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
-			// x: -50,
 			y: 40,
 			scale: 0,
 			autoAlpha: 0
 		}, {
-			// x: 0,
 			y: 0,
-			scale: gsap.utils.distribute({
-				base: 0.5,
+			scale: 1.5,
+			autoAlpha: 1,
+			stagger: {
 				amount: 1.5,
 				from: 4,
-				grid: [3,3],
-				ease: 'expo.out',
-			}),
-			autoAlpha: 1,
-			stagger: { amount: 0.225 },
-			onComplete: () => {
-				gsap.to('#logoGrid', {
-					duration: .4,
-					ease: "elastic.in(1, 0.75)",
-					padding: "1rem",
-				});
 			}
 	});
 

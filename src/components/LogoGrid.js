@@ -17,9 +17,9 @@ const LogoGrid = (props) => {
                 <LogoJS />                
                 <LogoReact />
                 <LogoGatsby />
-                <div style={{ color: "transparent" }}>_</div>
+                <div className="logos" style={{ color: "transparent" }}>_</div>
                 <LogoFirebase />
-                <div style={{ color: "transparent" }}>_</div>
+                <div className="logos" style={{ color: "transparent" }}>_</div>
                 <LogoAWS /> 
     </div>
     
