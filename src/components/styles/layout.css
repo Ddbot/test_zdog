@@ -116,11 +116,7 @@ width: 100vw;
 
 /* DANS LOGO ILLUSTRATION, ANIMATION DU LETTERING DE BLOG */
 
-svg#blog {
-  /* width: 200px;
-  height: 200px; */
-}
-
+/* 
 .blog_B {
   stroke-dasharray: 425 427;
   stroke-dashoffset: 426;
@@ -225,4 +221,4 @@ svg#blog {
   100% {
     stroke-opacity: 0;
   }
-}
+} */
