@@ -178,13 +178,10 @@ const IndexPage = (props) => {
 						console.log('Les éléménts constituant Target sont: ', target);
 					},
 					onComplete: () => {
-						// 2. setIndex
-						
+						// 2. setIndex						
 						setIndex((prev) => {
 							return prev - 1
 						});
-						console.log('Les éléménts constituant Target à la fin sont: ', target);
-
 					}
 				});
 

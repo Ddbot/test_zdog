@@ -10,12 +10,14 @@ const Slide_1 = (props) => {
           fr: wordpressPage(id: {
             eq: "f8980629-597c-5c0c-b7e0-e1675bcb9f97"
           }){
+            title
             content
           }
 
           en: wordpressPage(id: {
             eq: "2f58ac34-d2b2-5e62-a306-cf9f2ebb7cea"
           }) {
+            title
             content
           }
         }
@@ -39,6 +41,7 @@ const Slide_1 = (props) => {
   });
 
   let renderData = () => {
+    document.title = data[props.lang].title;
     return {
       __html: data[props.lang].content
     }

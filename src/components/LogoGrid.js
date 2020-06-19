@@ -10,8 +10,8 @@ import LogoJS from '../images/LogoJS';
 import LogoReact from '../images/LogoReact';
 import LogoRoR from '../images/LogoRoR';
 
-const LogoGrid = (props) => {
-    return <div id="logoGrid">
+const LogoGrid = React.forwardRef((props,ref) => {
+    return <div id="logoGrid" ref={ref}>
                  <LogoHTML />                
                 <LogoCSS />
                 <LogoJS />                
@@ -26,6 +26,6 @@ const LogoGrid = (props) => {
     // . . .
     // . . x
     // . x .
-}
+})
 
 export default LogoGrid;

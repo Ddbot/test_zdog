@@ -26,11 +26,7 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description;
-
-  useEffect(() => { 
-  console.log('Site ', site);
-  }, []);
-
+  
   return (
     <Helmet
       htmlAttributes={{

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, createRef } from 'react';
 import Zdog from 'zdog';
 
 import Canvas from '../styled/Canvas';
@@ -8,7 +8,6 @@ import { navigate, useStaticQuery } from "gatsby";
 import gsap, { splitColor } from 'gsap';
 
 import Chair from './Chair';
-import ConePattern from './ConePattern';
 import Computer from './Computer';
 import { Cou, Torse } from './Andry';
 import Pen from './Pen';
@@ -27,10 +26,8 @@ let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 let scene = new Zdog.Anchor();
 
 let liste = [Cou, Chair, Table];
-ConePattern.children.map(c => c.visible = false);
 
 scene.addChild(Computer);
-scene.addChild(ConePattern);
 scene.addChild(Chair);
 scene.addChild(Table);
 scene.addChild(Pot);
@@ -55,6 +52,10 @@ const seq = [
 
 const Me = (props) => {
     const { index } = props;
+    let zdogRef = useRef(),
+        logosRef = createRef(),
+        blogRef = useRef();
+    
 
     function usePrevious(value) {
         const ref = useRef();
@@ -91,7 +92,9 @@ const Me = (props) => {
     // ----- animate ----- //
     let animate = () => {
         // make changes to model, like rotating scene
-        // scene.rotate.y += isSpinning ? 0.03 : 0;
+        scene.rotate.y += isSpinning ? 0.003 : 0;
+        // scene.rotate.y += 0.003;
+
         scene.updateGraph();
         render();
         requestAnimationFrame(animate);
@@ -240,7 +243,6 @@ const Me = (props) => {
 
         scene.addChild(Torse);
         scene.addChild(Computer);
-        scene.addChild(ConePattern);
         scene.addChild(Chair);
         scene.addChild(Table);
         scene.addChild(Pot);
@@ -256,7 +258,6 @@ const Me = (props) => {
             onStart: () => {
                 scene.addChild(Torse);
                 scene.addChild(Computer);
-                scene.addChild(ConePattern);
                 scene.addChild(Chair);
                 scene.addChild(Table);
                 scene.addChild(Pot);
@@ -340,6 +341,10 @@ ctx = canvas.getContext("2d");
     useEffect(() => {
         switch (index) {
             case 0:
+                // Hide other REFS
+                console.log('REFS ', logosRef.current, zdogRef.current);
+                // gsap.set("#logoGrid", { display: "none" });
+                // gsap.set("#blog", { display: "none" });
                 // NO Animation or transition here
                 prevIndex === 1 && animateScene0_reverse();
                 break;
@@ -347,6 +352,8 @@ ctx = canvas.getContext("2d");
 
                 if (prevIndex === 0) {
                     animateScene0();
+                    // gsap.set('.zdog-canvas', { display: "none"});
+                    // gsap.set('#logoGrid', { display: "grid" });
                 } else { 
                     gsap.set('#logoGrid', { display: "grid" });
                 }
@@ -364,24 +371,34 @@ ctx = canvas.getContext("2d");
             
             case 2:
                 gsap.set('#logoGrid', { display: "none" });
-                gsap.set('.zdog-canvas', { display: "none" });
-                gsap.set('#blog', { display: "flex" });
+
+                // We placed both Illus ON TOP OF EACH OTHER THX TO GSAP
+                gsap.set('.zdog-canvas', { display: "flex", x: "50%", border: "1px solid red", zIndex: "10" });
+                gsap.set('#blog', { x: "-50%", y: "7.5%", border: "1px solid red", zIndex: "9" });  
+                
+                // Let's look at all th children of the Canvas scne
+                let children = scene.children;
+                children.forEach(child => { 
+                    scene.removeChild(child);
+                });
+
+                scene.addChild(Pen);
 
                 break;  
             
             case 3: 
-                
+                gsap.set('#logoGrid', { display: "grid" });
             default:
                 // LAST SLIDE
 
                 break;
         }
-    });
+    }, [index]);
 
     return <>
-        <Canvas className="zdog-canvas" width={480} height={480}></Canvas>
-        {index === 1 && <LogoGrid prevIndex={prevIndex} />}
-        {index === 2 && <Blog_animated />}
+        <Canvas ref={zdogRef} className="zdog-canvas" width={480} height={480}></Canvas>
+        <LogoGrid ref={logosRef} prevIndex={prevIndex} />
+        <Blog_animated ref={blogRef} />
             </>;
         }
 

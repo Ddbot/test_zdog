@@ -22,11 +22,6 @@ const Slide_0 = (props) => {
     `
   );
 
-  // gsap.set('[data-splitting="words"]', {
-  //   transformOrigin: "left center",
-  //   transformPerspective: 200
-  // });
-
   useEffect(() => {
     let target = document.querySelector('[data-splitting="lines"]');
     let res = Splitting({
@@ -41,9 +36,10 @@ const Slide_0 = (props) => {
         amount: 1.95,
       },
     });
-  });
+  },[]);
 
   let renderData = () => {
+    document.title = data[props.lang].title;
     return {
       __html: data[props.lang].content
     }
