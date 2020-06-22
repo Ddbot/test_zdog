@@ -56,11 +56,10 @@ const IndexPage = (props) => {
 	let [contrast, setContrast] = useState(0);
 
 
-
 	// LANG		
 	useEffect(() => {
 		localStorage.setItem('lang', lang);
-	});
+	},[lang]);
 
 	// Sync Slide (text content) to index
 	useEffect(() => {
@@ -243,7 +242,6 @@ const IndexPage = (props) => {
 		setRotate(prev => {
 			return { ...prev, [e.target.name]: Number(e.target.value) }
 		});
-		// console.log(rotate);
 	}
 
 	let handleTranslation = (e) => {
@@ -254,6 +252,7 @@ const IndexPage = (props) => {
 		setTranslate(prev => {
 			return { ...prev, [e.target.name]: Number(e.target.value) }
 		});
+		console.log(translate, scale);
 	}
 
 	let seoContent = (index, lang) => {
@@ -282,7 +281,7 @@ const IndexPage = (props) => {
 			<LogoIllustration
 				ref={illo}
 				index={index}
-				style={{ zIndex: 2, flex: 1 }}
+				style={{ zIndex: 2, flex: 1, position: "fixed"}}
 				translate={translate}
 				rotate={rotate}
 				scale={scale}

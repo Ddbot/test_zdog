@@ -3,7 +3,7 @@ import Zdog from 'zdog';
 
 import Canvas from '../styled/Canvas';
 
-import { navigate, useStaticQuery } from "gatsby";
+import Vivus from 'vivus';
 
 import gsap, { splitColor } from 'gsap';
 
@@ -22,7 +22,7 @@ const { TAU } = Zdog;
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
-// create an scene Anchor to hold all items
+// create a scene Anchor to hold all items
 let scene = new Zdog.Anchor();
 
 let liste = [Cou, Chair, Table];
@@ -54,8 +54,10 @@ const Me = (props) => {
     const { index } = props;
     let zdogRef = useRef(),
         logosRef = createRef(),
-        blogRef = useRef();
+        blogRef = createRef();
     
+    
+    gsap.set(blogRef.current, { position: "fixed" });
 
     function usePrevious(value) {
         const ref = useRef();
@@ -92,7 +94,7 @@ const Me = (props) => {
     // ----- animate ----- //
     let animate = () => {
         // make changes to model, like rotating scene
-        scene.rotate.y += isSpinning ? 0.003 : 0;
+        // scene.rotate.y += isSpinning ? 0.003 : 0;
         // scene.rotate.y += 0.003;
 
         scene.updateGraph();
@@ -123,13 +125,7 @@ const Me = (props) => {
             scene.rotate = {
                 x: Zdog.lerp(animation[1].x, seq[end][index].x, rotateIllo.progress()),
                 y: Zdog.lerp(animation[1].y, seq[end][index].y, rotateIllo.progress()),
-                // z: Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
             };
-
-            // scene.scale = Zdog.lerp(0.8, 10, rotateIllo.progress());
-
-            // scene.scale = Zdog.lerp(seq[start][1].z, seq[end][1].z, rotateIllo.progress())
-
         }
 
         let slide_0_move_2 = () => {
@@ -209,12 +205,6 @@ const Me = (props) => {
             }
         });
 
-        // let displayLogos = gsap.from(logos, {
-        //     duration: .45,
-        //     autoAlpha: 0,
-        //     scale: 0,
-        // });
-
         me_tl.add(rotateIllo);
         me_tl.add(zoomIllo);
         me_tl.add(widenScreen);
@@ -283,7 +273,7 @@ const Me = (props) => {
     useEffect(() => {
         canvas = document.querySelector(".zdog-canvas");
 
-ctx = canvas.getContext("2d");
+        ctx = canvas.getContext("2d");
         // get canvas size
         canvasWidth = canvas.width;
         canvasHeight = canvas.height;
@@ -332,9 +322,15 @@ ctx = canvas.getContext("2d");
 
     // translate, rotate and scale SCENE
     useEffect(() => {
+        console.log(animation);
+        
         scene.translate = animation[0];
         scene.rotate = animation[1];
         scene.scale = animation[2];
+
+            //   zdogRef.current.translate = animation[0];
+            //   zdogRef.current.rotate = animation[1];
+            //   zdogRef.current.scale = animation[2];
     }, [animation]);
 
     // Start animation depending on Index
@@ -342,9 +338,9 @@ ctx = canvas.getContext("2d");
         switch (index) {
             case 0:
                 // Hide other REFS
-                console.log('REFS ', logosRef.current, zdogRef.current);
-                // gsap.set("#logoGrid", { display: "none" });
-                // gsap.set("#blog", { display: "none" });
+                gsap.set([logosRef.current, blogRef.current], {
+                    display: "none"
+                });
                 // NO Animation or transition here
                 prevIndex === 1 && animateScene0_reverse();
                 break;
@@ -352,29 +348,33 @@ ctx = canvas.getContext("2d");
 
                 if (prevIndex === 0) {
                     animateScene0();
-                    // gsap.set('.zdog-canvas', { display: "none"});
+                    gsap.set(zdogRef.current, { autoAlpha: 0});
                     // gsap.set('#logoGrid', { display: "grid" });
                 } else { 
-                    gsap.set('#logoGrid', { display: "grid" });
-                }
-                    // console.log('Il faut afficher les logos des logiciels cites', ctx, canvas, 'Index is ', index);
-                    // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-                    // gsap.to(scene, {
-                    //     duration: 5,
-                    //     rotate: {
-                    //         x: TAU * 2,
-                    //         y: Math.PI,
-                    //         z: 0
-                    //     },
-                    // });}            
+                    gsap.set([zdogRef.current,blogRef.current], { display: "none" });
+                    gsap.set(logosRef.current, { display: "grid" });
+                }         
                 break;
             
             case 2:
-                gsap.set('#logoGrid', { display: "none" });
+                //  We just keep the PEN and delete all other children from the CANVAS scene
+                [Chair, Table, Smartphone, Torse, Pot, Cou, Computer].forEach(
+                    (child) => scene.removeChild(child));
+                
+                gsap.set(logosRef.current, { display: "none" });
+                gsap.set([zdogRef.current, blogRef.current], { display: "block" });
+                gsap.set(zdogRef.current, { x: "7.5%" });
+                gsap.set(blogRef.current, { x: "-107.5%", position: "fixed" });
+
+                console.log(getComputedStyle(zdogRef.current).height, getComputedStyle(blogRef.current).height);
+
+                new Vivus(blogRef.current, {
+                    duration: 161,
+                    type: 'oneByOne'
+                }, null);
 
                 // We placed both Illus ON TOP OF EACH OTHER THX TO GSAP
-                gsap.set('.zdog-canvas', { display: "flex", x: "50%", border: "1px solid red", zIndex: "10" });
-                gsap.set('#blog', { x: "-50%", y: "7.5%", border: "1px solid red", zIndex: "9" });  
+                gsap.set('.zdog-canvas', { display: "flex", zIndex: "10" });                
                 
                 // Let's look at all th children of the Canvas scne
                 let children = scene.children;
@@ -387,7 +387,7 @@ ctx = canvas.getContext("2d");
                 break;  
             
             case 3: 
-                gsap.set('#logoGrid', { display: "grid" });
+                gsap.set([logosRef.current, blogRef.current], { display: "none" });
             default:
                 // LAST SLIDE
 
