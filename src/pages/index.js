@@ -25,6 +25,16 @@ import "font-awesome/css/font-awesome.min.css";
 import gsap from "gsap";
 import Canvas from "../components/styled/Canvas";
 
+// const firebase = require("firebase");
+// Required for side-effects
+// require("firebase/firestore");
+
+import firebase from '../firebase.js';
+
+const db = firebase.firestore();
+
+console.log('Firebase = ', firebase, ' Firestore = ', db);
+
 const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 `;
@@ -218,6 +228,18 @@ const IndexPage = (props) => {
 			default:
 				break;
 		}
+
+		db.collection("users").add({
+				first: "Ada",
+				last: "Lovelace",
+				born: 1815
+			})
+			.then(function (docRef) {
+				console.log("Document written with ID: ", docRef.id);
+			})
+			.catch(function (error) {
+				console.error("Error adding document: ", error);
+			});
 	};
 
 	let handleFilter = (e) => {
