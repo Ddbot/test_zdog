@@ -230,9 +230,9 @@ const IndexPage = (props) => {
 		}
 
 		db.collection("users").add({
-				first: "Ada",
-				last: "Lovelace",
-				born: 1815
+				first: "Joris",
+				last: "Walmart",
+				born: 1986
 			})
 			.then(function (docRef) {
 				console.log("Document written with ID: ", docRef.id);

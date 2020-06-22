@@ -20,6 +20,7 @@
     "gatsby-source-filesystem": "^2.1.56",
     "gatsby-source-wordpress": "^3.3.11",
     "gsap": "^3.2.5",
+    "lottery-wheel": "^2.4.1",
     "node-sass": "^4.13.1",
     "pattern.css": "^1.0.0",
     "prop-types": "^15.7.2",
