@@ -78,9 +78,17 @@ const WheelOF = (props) => {
     
     if (!!el) {
         let wheel = new Wheel({
-            radius: 200,
             el: el,
             data: cadeaux,
+            radius: 200,
+            buttonText: 'Tournez !',
+            buttonWidth: 80, //px
+            buttonFontSize: 60, // automatic
+            limit: 1,
+            duration: 10000, // in ms
+            turn: 1, // minimum amount of turns of the wheel
+            draw: true, // if false you have to call draw to draw the wheel
+            clockwise: false, // by default clockwise
             theme: 'default',
             color: {
                 button: '#4864AB',
@@ -90,27 +98,44 @@ const WheelOF = (props) => {
                 prizeFont: '#4864AB',
                 prize: '#A8DE52',
             },
-            limit: 1,
+            turn: 10,
             onSuccess(data) {
                 setText((prev) => {               
                     return data.text
                 });
                 // Acceder a db aavec le fruit dont le nom === data.text
-                db.collection('cadeaux').where('name', '==', data.text).get()
-                    .then((querySnapShot) => { 
-                        let target = cadeaux.find(el => el.text === data.text);
-                        querySnapShot.docs.forEach(doc => {
-                            db.collection('cadeaux').doc(doc.id).update({
-                                quantite: target.chance - 1
-                            });
-                        });                          
-                    });
+                db.collection("cadeaux")
+					.where("name", "==", data.text)
+					.get()
+					.then(querySnapShot => {
+						let target = cadeaux.find(el => el.text === data.text);
+						querySnapShot.docs.forEach(doc => {
+							db.collection("cadeaux")
+								.doc(doc.id)
+								.update({
+									quantite: target.chance - 1
+								});
+						});
+					})
+					.catch(function(error) {
+						// The document probably doesn't exist.
+						console.error("Error updating document: ", error);
+					});
             },
             onFail(data) {
                 console.log('SORRY YOU CANT PLAY ANYMORE, REDIRECT TO ANOTHER PAGE', data);
                 navigate('/');
+            },
+            onButtonHover(anime, button) {
+                anime({
+                    targets: button.node,
+                    scale: 1.2,
+                    duration: 500
+                });
+                console.log(anime, button);
             }
-        });}
+        })
+    }
 
     const dato = useStaticQuery(
         graphql`
