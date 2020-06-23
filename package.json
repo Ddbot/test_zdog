@@ -9,6 +9,7 @@
     "dotenv": "^8.2.0",
     "firebase": "^7.15.3",
     "firebase-admin": "^8.12.1",
+    "firebase-tools": "^8.4.3",
     "font-awesome": "^4.7.0",
     "gatsby": "^2.19.45",
     "gatsby-cli": "^2.12.17",
