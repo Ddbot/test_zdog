@@ -46,7 +46,8 @@ const ContactForm = (props) => {
         return re.test(String(email).toLowerCase());
     }
 
-    return props.lang === "en" ? <div className="contact">
+    return props.lang === "en" ?
+    <form name="contactForm" className="contact">
         <div className="field">
             <label className="label">Name</label>
             <div className="control">
@@ -103,7 +104,8 @@ const ContactForm = (props) => {
                 <button className="button is-link is-light"><Link to="/">Cancel</Link></button>
             </div>
         </div>
-    </div> : <div className="contact">
+        </form> :
+    <form className="contact">
         <div className="field">
             <label className="label">Votre nom</label>
             <div className="control" name="name">
@@ -159,7 +161,7 @@ const ContactForm = (props) => {
                 <button className="button is-link is-light"><Link to="/">Annuler</Link></button>
             </div>
         </div>
-    </div>
+    </form>
 }
 
 export default ContactForm;

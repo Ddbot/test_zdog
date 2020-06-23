@@ -30,12 +30,9 @@ import Canvas from "../components/styled/Canvas";
 // require("firebase/firestore");
 
 import firebase from '../firebase.js';
-// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
-const functions = require('firebase-functions');
 
-// The Firebase Admin SDK to access Cloud Firestore.
-const admin = require('firebase-admin');
-admin.initializeApp();
+// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+// const functions = require('firebase-functions');
 
 const db = firebase.firestore();
 

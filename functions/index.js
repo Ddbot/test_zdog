@@ -12,7 +12,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
 
-export const onCadeauUpdate =
+const onCadeauUpdate =
     functions.firestore.document('cadeaux/{cadeauId}').onUpdate(change => { 
         const before = change.before.data();
         const after = change.after.data();

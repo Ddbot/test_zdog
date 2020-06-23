@@ -113,7 +113,7 @@ const WheelOF = (props) => {
 							db.collection("cadeaux")
 								.doc(doc.id)
 								.update({
-									quantite: target.chance - 1
+									quantite: firebase.firestore.FieldValue.increment(-1)
 								});
 						});
 					})
