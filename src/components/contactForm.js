@@ -4,12 +4,13 @@ import { Link } from 'gatsby';
 const ContactForm = (props) => {
 
     let [form, setForm] = useState({
-        name: '',
+        name: document.,
         email: '',
         objet: '',
         message: '',
         acceptance: false
-    });
+    }),
+        [error, set]
 
 
     // Email validation
@@ -51,7 +52,7 @@ const ContactForm = (props) => {
         <div className="field">
             <label className="label">Name</label>
             <div className="control">
-                <input className="input" type="text" placeholder="Text input" data-name="name" onChange={handleChange} />
+                <input className="input" type="text" placeholder="Text input" data-name="name" name="userName" onChange={handleChange} />
                 <p className="help is-danger" style={{ visibility: "hidden" }}>Please provide a name</p>
             </div>
         </div>
@@ -109,7 +110,7 @@ const ContactForm = (props) => {
         <div className="field">
             <label className="label">Votre nom</label>
             <div className="control" name="name">
-                <input className="input" type="text" placeholder="Insérez votre nom" onChange={handleChange} data-name="name" />
+                <input className="input" type="text" placeholder="Insérez votre nom" onChange={handleChange} data-name="name" name="userName" />
                 <p className="help is-danger">Nous avons besoin de votre nom !</p>                    
             </div>
         </div>
