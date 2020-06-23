@@ -30,6 +30,12 @@ import Canvas from "../components/styled/Canvas";
 // require("firebase/firestore");
 
 import firebase from '../firebase.js';
+// The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
+const functions = require('firebase-functions');
+
+// The Firebase Admin SDK to access Cloud Firestore.
+const admin = require('firebase-admin');
+admin.initializeApp();
 
 const db = firebase.firestore();
 
@@ -161,8 +167,6 @@ const IndexPage = (props) => {
 			}
 	});
 
-
-
 	let handleClick = (e) => {
 		switch (e.target) {
 			case chevronTop.current:
@@ -226,43 +230,6 @@ const IndexPage = (props) => {
 			default:
 				break;
 		}
-
-		// let fruits = [{ name: "pomme", quantite: 2 }, { name: "banane", quantite: 2 }, { name: "kiwi", quantite: 2 }, { name: "poire", quantite: 2 }];
-
-		// let fruits = [];
-
-		// db.collection('cadeaux').get().then((querySnapShot => {
-		// 	querySnapShot.forEach((doc) => {
-		// 		console.log('Doc: ', doc.data());
-		// 		fruits.push(doc.data());
-	
-		// 	});
-		// })).then(() => {
-		// 	fruits = fruits.filter(fruit => fruit.quantite !== 0).map(fruit => { 
-		// 		return { text: fruit.name, quantite: fruit.quantite }
-		// 	});
-		// }).then(() => {
-		// 	console.log('Maintenant les fruits sont ', fruits);
-
-		// });
-
-
-		// On ajoute les fruits dans la db
-
-		// fruits.forEach((fruit) => {
-		// 	db.collection("cadeaux").add({
-		// 		name: fruit.name,
-		// 		quantite: fruit.quantite,
-		// 	})
-		// 	.then(function (docRef) {
-		// 		console.log("On ajoute le fruit avec l'ID: ", docRef.id);
-		// 	})
-		// 	.catch(function (error) {
-		// 		console.error("Error adding document: ", error);
-		// 	});
-		// });
-
-
 	};
 
 	let handleFilter = (e) => {
