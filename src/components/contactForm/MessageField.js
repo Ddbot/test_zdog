@@ -3,14 +3,12 @@ import ErrorMessage from '../ErrorMessage';
 
 const MessageField = (props) => {
         const { lang } = props;
-    let [error, setError] = useState(null);
-    return <div className="field">
-            <label className="label">Message</label>
-            <div className="control">
-            <textarea className="textarea" placeholder="Textarea" data-name="message" onChange={props.handleChange}></textarea>
-            {!!error && <ErrorMessage />}
-            </div>
-        </div>
+        return <div className="field">
+                        <label className="label">Message</label>
+                        <div className="control">
+                                <textarea className="textarea" placeholder={lang === 'en' ? 'Tell me everything' : 'Dites-moi tout...' } data-name="message" onChange={props.handleChange}></textarea>
+                        </div>
+                </div>
 }
 export default MessageField;
 
