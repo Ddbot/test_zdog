@@ -4,13 +4,12 @@ import { Link } from 'gatsby';
 const ContactForm = (props) => {
 
     let [form, setForm] = useState({
-        name: document.,
+        // name: '',
         email: '',
         objet: '',
         message: '',
         acceptance: false
-    }),
-        [error, set]
+    }), [error, setError] = useState(null);
 
 
     // Email validation
@@ -36,6 +35,12 @@ const ContactForm = (props) => {
 
     let handleSubmit = (e) => {
         e.preventDefault();
+
+    const userName = document.contactForm.userName.value;
+    if (!userName) {
+        setError('user-name-required');
+        return;
+    }
         
         (!!form['name'] && validateEmail(form['email']) && !!form['objet'] && !!form['message'] && !!form['acceptance']) ? console.log('Sending the form to the backend', form) : console.log('There is missing info');
     }
@@ -106,7 +111,7 @@ const ContactForm = (props) => {
             </div>
         </div>
         </form> :
-    <form className="contact">
+    <form className="contact" name="contactForm">
         <div className="field">
             <label className="label">Votre nom</label>
             <div className="control" name="name">
