@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby';
+import NameField from './NameField';
+import EmailField from './EmailField';
+import SubjectField from './SubjectField';
+import MessageField from './MessageField';
+import AcceptanceField from './AcceptanceField';
+import SubmitBtn from './SubmitBtn';
+import ErrorMessage from '../ErrorMessage';
 
 const ContactForm = (props) => {
 
@@ -20,7 +27,7 @@ const ContactForm = (props) => {
             document.querySelector('.help').style.visibility = "visible";
         } else {
             document.querySelector('.has-icons-left>input').classList.remove('is-danger');
-            document.querySelector('.help').style.visibility = "hidden";
+            // document.querySelector('.help').style.visibility = "hidden";
             document.querySelector('span.icon:nth-child(3)').style.visibility = "hidden";
         }
     }, [form['email']]);
@@ -52,122 +59,14 @@ const ContactForm = (props) => {
         return re.test(String(email).toLowerCase());
     }
 
-    return props.lang === "en" ?
-    <form name="contactForm" className="contact">
-        <div className="field">
-            <label className="label">Name</label>
-            <div className="control">
-                <input className="input" type="text" placeholder="Text input" data-name="name" name="userName" onChange={handleChange} />
-                <p className="help is-danger" style={{ visibility: "hidden" }}>Please provide a name</p>
-            </div>
-        </div>
-        <div className="field">
-            <label className="label">Email</label>
-            <div className="control has-icons-left has-icons-right">
-                <input className="input is-danger" type="email" placeholder="Email input" data-name="email" required onChange={handleChange}/>
-                <span className="icon is-small is-left">
-                <i className="fa fa-envelope"></i>
-                </span>
-                <span className="icon is-small is-right" style={{ color: "red" }}>
-                <i className="fa fa-exclamation-triangle"></i>
-                </span>
-            </div>
-            <p className="help is-danger" style={{ visibility: "hidden" }}>This email is invalid</p>
-            {/* { form['email'].length>0 && !validateEmail(form['email']) && <p className="help is-danger">This email is invalid</p>} */}
-        </div>
-        <div className="field">
-            <label className="label">Subject</label>
-            <div className="control">
-                <input className="input" type="text" placeholder="Subject input" data-name="objet" onChange={handleChange}/>  
-            </div>
-        </div>
-        <div className="field">
-            <label className="label">Message</label>
-            <div className="control">
-                <textarea className="textarea" placeholder="Textarea" data-name="message" onChange={handleChange}></textarea>
-            </div>
-        </div>
-        <div className="field">
-            <div className="control">
-                <label className="checkbox">
-                    <input type="checkbox" data-name="acceptance" onClick={() => {
-                        setForm((prev) => {
-                            return {
-                                ...prev,
-                                acceptance: !prev['acceptance']
-                            }
-                        });
-                    }} />&nbsp;
-                I agree to the <a href="#">terms and conditions</a>
-                </label>
-            </div>
-        </div>
-        <div className="field is-grouped">
-            <div className="control">
-                <button className="button is-link" onClick={handleSubmit}>Submit</button>
-            </div>
-            <div className="control">
-                <button className="button is-link is-light"><Link to="/">Cancel</Link></button>
-            </div>
-        </div>
-        </form> :
-    <form className="contact" name="contactForm">
-        <div className="field">
-            <label className="label">Votre nom</label>
-            <div className="control" name="name">
-                <input className="input" type="text" placeholder="Insérez votre nom" onChange={handleChange} data-name="name" name="userName" />
-                <p className="help is-danger">Nous avons besoin de votre nom !</p>                    
-            </div>
-        </div>
-        <div className="field">
-            <label className="label">Email</label>
-            <div className="control has-icons-left has-icons-right">
-                <input className="input is-danger" type="email" placeholder="votre adresse email" onChange={handleChange} data-name="email"/>
-                <span className="icon is-small is-left">
-                <i className="fa fa-envelope"></i>
-                </span>
-                <span className="icon is-small is-right" style={{ color: "red" }}>
-                <i className="fa fa-exclamation-triangle"></i>
-                </span>
-            </div>
-            { form['email'].length>0 && !validateEmail(form['email']) && <p className="help is-danger">Le format de cet email est invalide</p>}
-        </div>
-        <div className="field">
-            <label className="label">Objet</label>
-            <div className="control">
-                <input className="input" type="text" placeholder="Subject input" data-name="objet" onChange={handleChange}/>  
-            </div>
-        </div>
-        <div className="field">
-            <label className="label">Message</label>
-            <div className="control">
-                <textarea className="textarea" placeholder="Votre message" data-name="message" onChange={handleChange}></textarea>
-            </div>
-        </div>
-        <div className="field">
-            <div className="control">
-                <label className="checkbox">
-                    <input type="checkbox" data-name="acceptance" onClick={() => {
-                        setForm((prev) => {
-                            return {
-                                ...prev,
-                                acceptance: !prev['acceptance']
-                            }
-                        });
-                        }} />
-                    &nbsp;J'ai lu et j'accepte les <a href="#">conditions d'utilisation</a>                        
-                </label>
-            </div>
-        </div>
-        <div className="field is-grouped">
-            <div className="control">
-                <button className="button is-link" onClick={handleSubmit}>Envoyer</button>
-            </div>
-            <div className="control">
-                <button className="button is-link is-light"><Link to="/">Annuler</Link></button>
-            </div>
-        </div>
-    </form>
-}
+    return <form name="contactForm" className="contact">
+            <NameField onChange={handleChange} lang={props.lang} />
+            <EmailField onChange={handleChange}  lang={props.lang} />
+            <SubjectField onChange={handleChange}  lang={props.lang} />
+            <MessageField onChange={handleChange}  lang={props.lang} />
+            <AcceptanceField onClick={() => setForm((prev) => {return {...prev, acceptance: !prev.acceptance }})} lang={props.lang} />
+            <SubmitBtn handleSubmit={handleSubmit}  lang={props.lang} />
+        </form>
+    }
 
 export default ContactForm;

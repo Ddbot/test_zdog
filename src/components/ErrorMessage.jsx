@@ -33,7 +33,7 @@ function ErrorMessage(props) {
 		}
 	}
 
-	return errorCode ? <ErrorShell className="error">{getErrorMessage()}</ErrorShell> : null;
+	return errorCode ? <ErrorShell className="help is-danger">{getErrorMessage()}</ErrorShell> : null;
 }
 
 export default ErrorMessage;
