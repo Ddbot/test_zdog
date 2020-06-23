@@ -21,10 +21,6 @@ const LogoGrid = React.forwardRef((props,ref) => {
                 <div className="logos" style={{ color: "transparent" }}>_</div>
                 <LogoAWS /> 
     </div>
-    
-    // . . .
-    // . . x
-    // . x .
 })
 
 export default LogoGrid;

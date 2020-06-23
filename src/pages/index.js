@@ -33,8 +33,6 @@ import firebase from '../firebase.js';
 
 const db = firebase.firestore();
 
-console.log('Firebase = ', firebase, ' Firestore = ', db);
-
 const TextContainer = styled.div`
 // clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 `;
@@ -229,17 +227,42 @@ const IndexPage = (props) => {
 				break;
 		}
 
-		db.collection("users").add({
-				first: "Joris",
-				last: "Walmart",
-				born: 1986
-			})
-			.then(function (docRef) {
-				console.log("Document written with ID: ", docRef.id);
-			})
-			.catch(function (error) {
-				console.error("Error adding document: ", error);
-			});
+		// let fruits = [{ name: "pomme", quantite: 2 }, { name: "banane", quantite: 2 }, { name: "kiwi", quantite: 2 }, { name: "poire", quantite: 2 }];
+
+		// let fruits = [];
+
+		// db.collection('cadeaux').get().then((querySnapShot => {
+		// 	querySnapShot.forEach((doc) => {
+		// 		console.log('Doc: ', doc.data());
+		// 		fruits.push(doc.data());
+	
+		// 	});
+		// })).then(() => {
+		// 	fruits = fruits.filter(fruit => fruit.quantite !== 0).map(fruit => { 
+		// 		return { text: fruit.name, quantite: fruit.quantite }
+		// 	});
+		// }).then(() => {
+		// 	console.log('Maintenant les fruits sont ', fruits);
+
+		// });
+
+
+		// On ajoute les fruits dans la db
+
+		// fruits.forEach((fruit) => {
+		// 	db.collection("cadeaux").add({
+		// 		name: fruit.name,
+		// 		quantite: fruit.quantite,
+		// 	})
+		// 	.then(function (docRef) {
+		// 		console.log("On ajoute le fruit avec l'ID: ", docRef.id);
+		// 	})
+		// 	.catch(function (error) {
+		// 		console.error("Error adding document: ", error);
+		// 	});
+		// });
+
+
 	};
 
 	let handleFilter = (e) => {
