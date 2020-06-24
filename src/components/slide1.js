@@ -1,34 +1,53 @@
 import React, { useEffect } from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import gsap from 'gsap';
-
-
-// import './styles/slide.css';
+import Splitting from "splitting";
 
 const Slide_1 = (props) => {
-  gsap.set('[data-splitting="words"]', {
-    transformOrigin: "left center",
-    transformPerspective: 200
+  const data = useStaticQuery(
+    graphql `
+      query {        
+          fr: wordpressPage(id: {
+            eq: "f8980629-597c-5c0c-b7e0-e1675bcb9f97"
+          }){
+            title
+            content
+          }
+
+          en: wordpressPage(id: {
+            eq: "2f58ac34-d2b2-5e62-a306-cf9f2ebb7cea"
+          }) {
+            title
+            content
+          }
+        }
+    `
+  );
+
+  useEffect(() => {
+    let target = document.querySelector('[data-splitting="lines"]');
+    let res = Splitting({
+      target: target,
+      by: "lines"
+    });
+    gsap.from(res[0].lines, {
+      y: -500,
+      scale: 0.7,
+      autoAlpha: 0,
+      stagger: {
+        amount: 1,
+      },
+    });
   });
 
-  gsap.from('[data-splitting="words"]', {
-    x: -1000,
-    autoAlpha: 0,
-    stagger: {
-      amount: .5,
-      from: 0
-    },
-    delay: 1.5
-  });
+  let renderData = () => {
+    document.title = data[props.lang].title;
+    return {
+      __html: data[props.lang].content
+    }
+  }
 
-  return props.lang === "en" ? <p data-splitting="words">
-    I'm using <span className="purple">React</span> and <br />
-				frameworks such as <span className="purple">Gatsby JS</span> to create
-				<span className="purple">fast, modern</span> and <span className="purple">accessible</span>
-				Web sites and <span className="purple">PWA</span><br />
-  </p> : <p data-splitting="words">
-      J'utilise <span className="purple">React</span> et <br />
-				des frameworks comme <span className="purple">Gatsby&nbsp;JS</span> pour créer des sites et des <span className="purple">PWA&nbsp;modernes</span>, rapides et <span className="purple">accessibles</span>.
-			</p>;
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />
 };
 
 export default Slide_1;

@@ -1,8 +1,8 @@
 const Pen = new Zdog.Anchor({
     addTo: scene,
-        scale: 1,
-        translate: { x: 15, y: 25.5, z: 16 },
-        rotate: { x: TAU / 4, y: -TAU/16},
+    scale: 1,
+    translate: { x: 15, y: 25.5, z: 16 },
+    rotate: { x: TAU / 4, y: -TAU / 16 },
 });
 
 const Pot = new Zdog.Cylinder({
@@ -10,7 +10,7 @@ const Pot = new Zdog.Cylinder({
     diameter: 3,
     length: 3,
     stroke: false,
-    color: 'rgba(157, 169, 156, 0.9)',
+    color: 'hsla(115, 7%, 64%, 0.9)',
     // backface={'gray'}
     backface: false,
     translate: {
@@ -26,7 +26,7 @@ let Pointe = new Zdog.Cone({
     diameter: .72,
     length: .72,
     stroke: false,
-    color: "#f4dc95",
+    color: "hsla(45, 81%, 77%,1)",
     // backface: "#C25"},
     backface: false,
 })
@@ -36,7 +36,7 @@ let Mine = new Zdog.Cone({
     diameter: .2,
     length: .2,
     stroke: false,
-    color: "black",
+    color: "hsla(0, 0%, 0%,1)",
     backface: false,
     translate: { z: .48 }
 });
@@ -47,27 +47,27 @@ let Bois = new Zdog.Cylinder({
     diameter: .7,
     length: 4.5,
     stroke: false,
-    color: 'blue',
+    color: 'hsla(240, 100%, 50%,1)',
     backface: false,
     translate: { z: -2.25 }
 });
 
 let Anneau = new Zdog.Cylinder({
     addTo: Pen,
-        diameter: .7,
-        length: .45,
-            stroke: false,
-        color: 'whitesmoke',
-            // backface: 'whitesmoke',
-            backface: false,
+    diameter: .7,
+    length: .45,
+    stroke: false,
+    color: 'hsla(0, 0%, 96%,1)',
+    // backface: 'hsla(0, 0%, 96%,1)',
+    backface: false,
     translate: { z: -4.5 }
-    });
+});
 
 let Gomme = new Zdog.Hemisphere({
     addTo: Pen,
     diameter: .7,
     stroke: false,
-    color: 'black',
+    color: 'hsla(0, 0%, 0%,1)',
     backface: false,
     rotate: { x: Math.PI },
     translate: { z: -4.75 }

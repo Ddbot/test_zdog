@@ -9,13 +9,13 @@ const Table = new Zdog.Box({
     height: 27,
     depth: 15,
     stroke: 2,
-    color: 'transparent',
+    color: 'hsla(0, 0%, 100%,0)',
     // remove left & right faces
-    leftFace: '#86592d',
-    rightFace: '#734d26',
+    leftFace: '#002a24',
+    rightFace: '#002a24',
     rearFace: false,
-    topFace: '#4d3319',
+    topFace: '#002a24',
     bottomFace: false,
 });
-    
+
 export default Table;

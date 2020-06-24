@@ -1,59 +1,51 @@
 import React, { useEffect } from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import Splitting from "splitting";
 import gsap from 'gsap';
 
 // import './styles/slide.css';
 
 const Slide_0 = (props) => {
-  gsap.set('[data-splitting="words"]', {
-    transformOrigin: "left center",
-    transformPerspective: 200
-  });
-  useEffect(() => {
-    let target = document.querySelector('[data-splitting="words"]');
 
+  const data = useStaticQuery(
+    graphql`
+      query {
+        en: wordpressPage(id: {eq: "0fb96152-7c50-5292-9a04-95c88709ee36"}){
+          title
+          content
+        }
+        fr: wordpressPage(id: {eq: "95543ea1-bf21-5e54-a003-a75c0499c6f5"}){
+          title
+          content
+        }
+      }
+    `
+  );
+
+  useEffect(() => {
+    let target = document.querySelector('[data-splitting="lines"]');
     let res = Splitting({
       target: target,
       by: "lines"
     });
-
-    // let colors = gsap.utils.shuffle(['#f4dc95',
-    //   '#f3af8b',
-    //   '#f38181',
-    //   '#6199b8',
-    //   'blue'
-    // ]);
-
-    // let mots = ['[data-word="Andry"]', '[data-word="Intégrateur"]', '[data-word="Designer"]', ['[data-word="sites"]', '[data-word="Web"]'], ['[data-word="d\'applications"]', '[data-word="mobiles"]']]
-
-
-    gsap.from(res[0].words, {
+    gsap.from(res[0].lines, {
       x: -500,
       scale: 0.7,
       autoAlpha: 0,
-      // duration: .225,
       stagger: {
-        amount: .195,
-        from: 0
+        amount: 1.95,
       },
-      delay: 1.5,
-      // rotationY: 45,
-      // onComplete: () => {
-      //   mots.forEach((mot, i) => { 
-      //     if (Array.isArray(mot)) {
-      //       mot.forEach( m => document.querySelector(m).style.backgroundColor = gsap.utils.wrap(colors, i));
-      //       console.log('Mot: ', mot);
-      //     };
-      //     if (!Array.isArray(mot)) {
-      //       console.log('Mot not ARRAY: ', mot);
-      //       document.querySelector(mot).style.backgroundColor = gsap.utils.wrap(colors, i)
-      //     };
-      //   });
-      // }
     });
-  });
+  },[]);
 
-  return props.lang === "en" ? <p data-splitting="words">Hello ! <br />I 'm Andry,<br />A Web site and mobile Apps Integrator and Designer</p> : <p data-splitting="words">Bonjour ! <br />Je suis Andry,<br />Intégrateur et Designer de sites Web et d'applications mobiles</p>;
+  let renderData = () => {
+    document.title = data[props.lang].title;
+    return {
+      __html: data[props.lang].content
+    }
+  }
+
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />;
 };
 
 export default Slide_0;

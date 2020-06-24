@@ -7,16 +7,16 @@ const Chevron = styled.button`
     justify-content: center;
     cursor: pointer;
 
-    border: .5vw solid transparent;
+    border: .5vw solid hsla(0, 0%, 100%,0);
     border-radius: 50% ;
-    background-color: #6199b8;
+    background-color: hsla(201, 38%, 55%,1);
     outline-style: none;
 
     z-index: 10;
 
     clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
 
-    rotate: 90deg;
+    // rotate: 90deg;
     
     svg {
         width: 4vw;

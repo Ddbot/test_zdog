@@ -1,4 +1,5 @@
 import Zdog from 'zdog';
+import CodeLines from './CodeLines';
 
 const { TAU } = Zdog;
 
@@ -16,14 +17,14 @@ const Keyboard = new Zdog.Box({
     addTo: Computer,
     width: 16,
     height: 32 / 3,
-    color: 'rgb(211, 211, 212)',
-    backface: 'lightgray',
+    color: 'hsla(240, 1%, 83%,1)',
+    backface: 'whitesmoke',
     // backface:false,
-    leftFace: 'lightgray',
-    rightFace: 'lightgray',
-    topFace: 'lightgray',
-    // bottomFace: 'lightgray',
-    bottomFace: false,
+    leftFace: 'whitesmoke',
+    rightFace: 'whitesmoke',
+    topFace: 'whitesmoke',
+    // bottomFace: 'whitesmoke',
+    bottomFace: true,
     translate: {
         y: 32 / 6,
         z: -32 / 6
@@ -39,12 +40,12 @@ const Screen = new Zdog.Box({
     height: 16,
     depth: 1,
     stroke: 1,
-    color: 'lightgray',
+    color: 'whitesmoke',
     backface: 'white',
-    leftFace: 'lightgray',
-    rightFace: 'lightgray',
-    topFace: 'lightgray',
-    bottomFace: 'lightgray'
+    leftFace: 'whitesmoke',
+    rightFace: 'whitesmoke',
+    topFace: 'whitesmoke',
+    bottomFace: 'whitesmoke'
 });
 
 
@@ -53,7 +54,7 @@ let bezel = new Zdog.Rect({
     width: 32 / 3,
     height: 16,
     stroke: 1.5,
-    color: 'lightgray',
+    color: 'whitesmoke',
 });
 
 let t1 = new Zdog.Shape({
@@ -78,7 +79,7 @@ let t1 = new Zdog.Shape({
     backface: false,
     // closed by default
     stroke: .1,
-    color: '#f4f39a',
+    color: 'hsla(59, 80%, 78%,1)',
     fill: true
 });
 
@@ -106,7 +107,7 @@ let t3 = t1.copy({
         x: 2,
         y: -1
     }],
-    color: '#f4d193'
+    color: 'hsla(38, 82%, 77%,1)'
 });
 let t4 = t1.copy({
     path: [{
@@ -119,7 +120,7 @@ let t4 = t1.copy({
         x: 1,
         y: -3
     }],
-    color: '#f38181'
+    color: 'hsla(0, 83%, 73%,1)'
 });
 
 let t5 = t1.copy({
@@ -133,7 +134,7 @@ let t5 = t1.copy({
         x: 3,
         y: 1
     }],
-    color: '#f4c590'
+    color: 'hsla(32, 82%, 76%,1)'
 });
 
 let t6 = t5.copy({
@@ -160,7 +161,7 @@ let t7 = t1.copy({
         x: 3,
         y: -3
     }],
-    color: '#f3a389'
+    color: 'hsla(15, 82%, 75%,1)'
 });
 
 let t8 = t7.copy({

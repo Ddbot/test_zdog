@@ -2,14 +2,16 @@ import Zdog from 'zdog';
 
 const { TAU } = Zdog;
 
-const Chair = new Zdog.Group({});
+const Chair = new Zdog.Group({
+    updateSort: true
+});
 
 const DossierTop = new Zdog.Ellipse({
     addTo: Chair,
     diameter: 20,
     quarters: 2,
     stroke: 3,
-    color: '#332424',
+    color: '#486B36',
     rotate: {
         x: 3 / TAU / 4,
         z: -TAU / 4,
@@ -26,7 +28,7 @@ const DossierMiddle = new Zdog.Rect({
     width: 20,
     height: 18,
     stroke: 3,
-    color: '#332424',
+    color: '#486B36',
     translate: {
         y: 39,
         z: -10
@@ -39,7 +41,7 @@ const Pouf = new Zdog.Ellipse({
     width: 10,
     height: 20,
     stroke: 8,
-    color: '#332424',
+    color: '#486B36',
     rotate: {
         x: TAU / 4,
         z: -TAU / 4,
@@ -65,7 +67,7 @@ const Stand1 = new Zdog.Ellipse({
         z: TAU / 4
     },
     closed: false,
-    color: '#b3cccc',
+    color: 'hsla(180, 20%, 75%,1)',
     stroke: 2,
     // fill: false
 });
@@ -86,7 +88,7 @@ const Stand2 = new Zdog.Ellipse({
         // z: TAU/2
     },
     closed: false,
-    color: '#b3cccc',
+    color: 'hsla(180, 20%, 75%,1)',
     stroke: 2,
     // fill: false
 });

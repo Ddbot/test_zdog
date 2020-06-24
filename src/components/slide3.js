@@ -1,8 +1,39 @@
 import React from "react";
+import {
+  useStaticQuery,
+  graphql
+} from "gatsby";
+
 
 const Slide_3 = (props) => {
-  return props.lang === "en" ? <p>I am also a <span className="purple"><b>writer / translator</b></span>. I create catchy and <span className="purple"><b>a11y compliant content</b></span> and can even shoulder the <span className="purple"><b>i18n</b></span> of your sites and applications</p> :
-    <p>Je suis également <span className="purple"><b>rédacteur et traducteur</b></span>. Je créé du <span className="purple"><b>contenu SEO accrocheur</b></span> et assure une <span className="purple"><b>i18n de qualité</b></span></p>
+  const data = useStaticQuery(
+    graphql `
+      query {        
+          fr: wordpressPage(id: {
+            eq: "95990e43-39a2-5cc5-9898-23ee9bca21b1"
+          }){
+            title
+            content
+          }
+          en: wordpressPage(id: {
+            eq: "71f4de97-7a6c-5370-9b34-dc6a34e8d04f"
+          }) {
+            title
+            content
+          }
+        }
+    `
+  );
+  
+
+  let renderData = () => {
+    document.title = data[props.lang].title;
+    return {
+      __html: data[props.lang].content
+    }
+  }
+
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />
 };
 
 export default Slide_3;

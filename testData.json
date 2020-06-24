@@ -1,0 +1,16 @@
+{ 
+    "cadeaux": {
+        "000001": {
+            "name":"pomme",
+            "quantite":"10"
+        },
+        "000002": {
+            "name": "poire",
+            "quantite": "20"
+        },
+        "003248": {
+            "name": "kiwi",
+            "quantite": "45"
+        }
+    }
+}

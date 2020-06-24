@@ -1,23 +1,35 @@
-import React, { useEffect } from "react";
-import gsap from "gsap";
-
-// import './styles/slide.css';
+import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 
 const Slide_2 = (props) => {
-    gsap.set('.purple', { transformOrigin: "center center" });
-    useEffect(() => { 
-        gsap.from('p', {
-            autoAlpha: .5,
-            scale: .7
-        })
-    });
-  return props.lang === "en" ? <p style={{marginLeft:'10%'}}>
-                I'm also using <span className="purple"><b>React Native</b></span> and <br />
-                <span className="purple"><b>Ruby on Rails</b></span>. I am a music and technology fan, who <span className="purple"><b>always strives to learn more</b></span>
-            </p> : <p style={{marginLeft:'10%'}}>
-                J'utilise également <span className="purple"><b>React Native</b></span> et <span className="purple"><b>Ruby on Rails</b></span>. En véritable <span className="purple"><b>passionné</b></span>, j'
-                assure une <span className="purple"><b>veille technologique</b></span> permanente.
-            </p>;
+  const data = useStaticQuery(
+    graphql `
+      query {        
+          fr: wordpressPage(id: {
+            eq: "5f2d282b-69fc-5898-95c0-7bbdc90aead5"
+          }){
+            title
+            content
+          }
+
+          en: wordpressPage(id: {
+            eq: "a40fed8c-9709-5117-92c9-e41dc599778a"
+          }){
+            title
+            content
+          }
+        }
+    `
+  );
+
+  let renderData = () => {
+    document.title = data[props.lang].title;
+    return {
+      __html: data[props.lang].content
+    }
+  }
+
+  return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />
 };
 
 export default Slide_2;

@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useEffect }from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
@@ -18,20 +18,15 @@ function SEO({ description, lang, meta, title }) {
           siteMetadata {
             title
             author
-            en {
               description
-            }
-            fr {
-              description
-            }
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-
+  const metaDescription = description;
+  
   return (
     <Helmet
       htmlAttributes={{

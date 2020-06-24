@@ -22,8 +22,8 @@ let Pointe = new Zdog.Cone({
     diameter: .72,
     length: .72,
     stroke: false,
-    color: "#f4dc95",
-    // backface: "#C25"},
+    color: "hsla(45, 81%, 77%,1)",
+    // backface: "hsla(342, 71%, 47%,1)"},
     backface: false,
 })
 
@@ -32,7 +32,7 @@ let Mine = new Zdog.Cone({
     diameter: .2,
     length: .2,
     stroke: false,
-    color: "black",
+    color: "hsla(0, 0%, 0%,1)",
     backface: false,
     translate: {
         z: .48
@@ -44,7 +44,7 @@ let Bois = new Zdog.Cylinder({
     diameter: .7,
     length: 4.5,
     stroke: false,
-    color: 'blue',
+    color: '#d1ce00',
     backface: false,
     translate: {
         z: -2.25
@@ -56,8 +56,8 @@ let Anneau = new Zdog.Cylinder({
     diameter: .7,
     length: .45,
     stroke: false,
-    color: 'whitesmoke',
-    // backface: 'whitesmoke',
+    color: 'hsla(0, 0%, 96%,1)',
+    // backface: 'hsla(0, 0%, 96%,1)',
     backface: false,
     translate: {
         z: -4.5
@@ -68,7 +68,7 @@ let Gomme = new Zdog.Hemisphere({
     addTo: Pen,
     diameter: .7,
     stroke: false,
-    color: 'black',
+    color: 'hsla(0, 0%, 0%,1)',
     backface: false,
     rotate: {
         x: Math.PI

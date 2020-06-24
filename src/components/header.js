@@ -20,7 +20,7 @@ const Header = (props) => {
     // <header>
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <Link to="/" className="navbar-item">
+        <Link to="/" state={{ lang: current, index: 0 }} className="navbar-item">
           <h1> {props.siteTitle}</h1>
         </Link>
         {/* GERER LE MENU BURGER POUR LES SMARTPHONES !! */}
@@ -32,6 +32,9 @@ const Header = (props) => {
           <span aria-hidden="true"></span>
         </button>
       </div>
+      <Link to="/blog" className="navbar-item"><h1>Blog</h1></Link>      
+      <Link to="/contact" state={{ lang: current }} className="navbar-item">Contact</Link>     
+      <Link to="/WheelOF" state={{ lang: current }} className="navbar-item">Wheel</Link>
       <LangToggle lang={current} toggleLang={props.toggleLang} />
     </nav>
   )

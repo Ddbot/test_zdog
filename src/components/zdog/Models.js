@@ -13,7 +13,7 @@ var hipX = 8 / quarterTurn / 2;
 
 // ----- model ----- //
 
-    // create an scene Anchor to hold all items
+// create an scene Anchor to hold all items
 export let scene = new Zdog.Anchor();
 
 // add shapes to scene
@@ -22,7 +22,7 @@ export const Cou = new Zdog.Cylinder({
     diameter: 4,
     length: 6,
     stroke: false,
-    color: "#995c00",
+    color: "hsla(36, 100%, 30%,1)",
     rotate: {
         x: -TAU / 4
     },
@@ -38,7 +38,7 @@ export const Menton = new Zdog.Shape({
         z: -2
     },
     stroke: 7.5,
-    color: "#995c00",
+    color: "hsla(36, 100%, 30%,1)",
     rotate: {
         x: TAU / 4
     }
@@ -51,7 +51,7 @@ export const Front = new Zdog.Ellipse({
         y: -4
     },
     stroke: 4,
-    color: "#995c00"
+    color: "hsla(36, 100%, 30%,1)"
 });
 
 export const Cheveux_gros = new Zdog.Shape({
@@ -70,7 +70,7 @@ export const Cheveux_gros = new Zdog.Shape({
         x: -TAU / 4
     },
     stroke: 2.5,
-    color: "#616161"
+    color: "hsla(0, 0%, 38%,1)"
 });
 
 export const Cheveux_medium = new Zdog.Shape({
@@ -119,7 +119,7 @@ export const Cheveux_derriere = new Zdog.Ellipse({
         z: -3
     },
     stroke: 4,
-    color: "#4e4e4e"
+    color: "hsla(0, 0%, 31%,1)"
 });
 
 export const Yeux_L = new Zdog.Ellipse({
@@ -135,7 +135,7 @@ export const Yeux_L = new Zdog.Ellipse({
         z: -TAU / 4
     },
     closed: false,
-    color: "#330000",
+    color: "hsla(0, 100%, 10%,1)",
     stroke: 0.38,
     fill: false
 });
@@ -160,7 +160,7 @@ export const Oreille_L = new Zdog.Ellipse({
         y: -TAU / 8
     },
     stroke: 1,
-    color: "#995c00",
+    color: "hsla(36, 100%, 30%,1)",
     fill: true
 });
 
@@ -178,7 +178,7 @@ export const Cheveux_oreille_L = new Zdog.Ellipse({
         z: -TAU / 4
     },
     closed: false,
-    color: "#4e4e4e",
+    color: "hsla(0, 0%, 31%,1)",
     stroke: 1.5,
     fill: false
 });
@@ -232,26 +232,26 @@ export const Torse = new Zdog.Shape({
         z: 0
     },
     path: [{
-            y: -torsoX
-        },
-        {
-            y: torsoX * 3 - 1
-        }
+        y: -torsoX
+    },
+    {
+        y: torsoX * 3 - 1
+    }
     ],
-    color: "#DED381",
+    color: "hsla(53, 58%, 69%,1)",
     stroke: 12
 });
 
 export const Epaules = new Zdog.Shape({
     addTo: Torse,
     path: [{
-            x: 0
-        },
-        {
-            x: 10
-        }
+        x: 0
+    },
+    {
+        x: 10
+    }
     ],
-    color: "#FAE491",
+    color: "hsla(47, 91%, 77%,1)",
     stroke: 8,
     translate: {
         x: -5,
@@ -262,17 +262,17 @@ export const Epaules = new Zdog.Shape({
 export const Logo_tshirt1 = new Zdog.Shape({
     addTo: Torse,
     path: [{
-            x: 0,
-            y: -1.6
-        },
-        {
-            x: 1.6,
-            y: 1.6
-        },
-        {
-            x: -1.6,
-            y: 1.6
-        }
+        x: 0,
+        y: -1.6
+    },
+    {
+        x: 1.6,
+        y: 1.6
+    },
+    {
+        x: -1.6,
+        y: 1.6
+    }
     ],
     stroke: 0.5,
     color: "hsla(359, 85%, 74%, .5)",
@@ -285,13 +285,13 @@ export const Logo_tshirt1 = new Zdog.Shape({
 export const Logo_tshirt2 = new Zdog.Shape({
     addTo: Torse,
     path: [{
-            x: -1.6,
-            y: 2.58
-        },
-        {
-            x: 1.6,
-            y: 2.58
-        }
+        x: -1.6,
+        y: 2.58
+    },
+    {
+        x: 1.6,
+        y: 2.58
+    }
     ],
     // closed by default
     stroke: 0.5,
@@ -309,11 +309,11 @@ export const Bras_Groupe_R = new Zdog.Group({
 export const Bras_R = new Zdog.Shape({
     addTo: Bras_Groupe_R,
     path: [{
-            y: 0
-        },
-        {
-            y: 7
-        }
+        y: 0
+    },
+    {
+        y: 7
+    }
     ],
     translate: {
         x: -torsoX - 3,
@@ -324,13 +324,13 @@ export const Bras_R = new Zdog.Shape({
         y: -0.5,
         z: TAU / 16
     },
-    color: "#F5F39A",
+    color: "hsla(59, 82%, 78%,1)",
     stroke: 4
 });
 
 export const Avant_Bras_R = Bras_R.copy({
     addTo: Bras_R,
-    color: "#995c00",
+    color: "hsla(36, 100%, 30%,1)",
     translate: {
         y: 7,
         z: 0
@@ -346,7 +346,7 @@ export const Avant_Bras_R = Bras_R.copy({
 export const Main_R = new Zdog.Shape({
     addTo: Avant_Bras_R,
     stroke: 5,
-    color: "#995c00",
+    color: "hsla(36, 100%, 30%,1)",
     translate: {
         y: 8,
         z: 0
@@ -410,7 +410,7 @@ export const Screen = new Zdog.Box({
     height: 32 / 3,
     depth: 1,
     stroke: 1,
-    color: 'rgba(1,1,1,.8)',
+    color: 'hsla(0, 0%, 0%, 0.8)',
     backface: 'lightgray',
     leftFace: 'lightgray',
     rightFace: 'lightgray',
@@ -422,7 +422,7 @@ export const Keyboard = new Zdog.Box({
     addTo: Computer,
     width: 16,
     height: 32 / 3,
-    color: 'rgb(211, 211, 212)',
+    color: 'hsla(240, 1%, 83%,1)',
     backface: 'lightgray',
     // backface:false,
     leftFace: 'lightgray',
@@ -458,7 +458,7 @@ export const Pot = new Zdog.Cylinder({
     diameter: 3,
     length: 3,
     stroke: false,
-    color: 'rgba(157, 169, 156, 0.9)',
+    color: 'hsla(115, 7%, 64%, 0.9)',
     // backface={'gray'}
     backface: false,
     translate: {
@@ -476,8 +476,8 @@ let Pointe = new Zdog.Cone({
     diameter: .72,
     length: .72,
     stroke: false,
-    color: "#f4dc95",
-    // backface: "#C25"},
+    color: "hsla(45, 81%, 77%,1)",
+    // backface: "hsla(342, 71%, 47%,1)"},
     backface: false,
 })
 
@@ -486,7 +486,7 @@ let Mine = new Zdog.Cone({
     diameter: .2,
     length: .2,
     stroke: false,
-    color: "black",
+    color: "hsla(0, 0%, 0%,1)",
     backface: false,
     translate: {
         z: .48
@@ -498,7 +498,7 @@ let Bois = new Zdog.Cylinder({
     diameter: .7,
     length: 4.5,
     stroke: false,
-    color: 'blue',
+    color: 'hsla(240, 100%, 50%,1)',
     backface: false,
     translate: {
         z: -2.25
@@ -510,8 +510,8 @@ let Anneau = new Zdog.Cylinder({
     diameter: .7,
     length: .45,
     stroke: false,
-    color: 'whitesmoke',
-    // backface: 'whitesmoke',
+    color: 'hsla(0, 0%, 96%,1)',
+    // backface: 'hsla(0, 0%, 96%,1)',
     backface: false,
     translate: {
         z: -4.5
@@ -522,7 +522,7 @@ let Gomme = new Zdog.Hemisphere({
     addTo: Pen,
     diameter: .7,
     stroke: false,
-    color: 'black',
+    color: 'hsla(0, 0%, 0%,1)',
     backface: false,
     rotate: {
         x: Math.PI
@@ -542,12 +542,12 @@ export const Table = new Zdog.Box({
     height: 27,
     depth: 15,
     stroke: 2,
-    color: 'transparent',
+    color: 'hsla(0, 0%, 100%,1)',
     // remove left & right faces
-    leftFace: '#86592d',
-    rightFace: '#734d26',
+    leftFace: 'hsla(30, 50%, 35%,1)',
+    rightFace: 'hsla(30, 50%, 30%,1)',
     rearFace: false,
-    topFace: '#4d3319',
+    topFace: 'hsla(30, 51%, 20%,1)',
     bottomFace: false,
 });
 
@@ -570,13 +570,13 @@ export const SmartphoneScreen = new Zdog.Box({
     width: 3,
     height: 5.5,
     depth: .125,
-    color: 'black',
-    // backface: 'hsl(201, 38%, 25%)',
+    color: 'hsla(0, 0%, 0%,1)',
+    // backface: 'hsla(201, 38%, 25%,1)',
     backface: false,
-    leftFace: 'hsl(201, 38%, 25%)',
-    rightFace: 'hsl(201, 38%, 25%)',
-    topFace: 'hsl(201, 38%, 25%)',
-    // bottomFace: 'hsl(201, 38%, 25%)',
+    leftFace: 'hsla(201, 38%, 25%,1)',
+    rightFace: 'hsla(201, 38%, 25%,1)',
+    topFace: 'hsla(201, 38%, 25%,1)',
+    // bottomFace: 'hsla(201, 38%, 25%,1)',
     bottomFace: false,
     translate: {
         y: 32 / 6,
@@ -597,7 +597,7 @@ export const Avatar = new Zdog.Ellipse({
         y: -2
     },
     fill: true,
-    color: '#9da99c'
+    color: 'hsla(115, 7%, 64%,1)'
 });
 
 export const Line = new Zdog.Shape({
@@ -607,7 +607,7 @@ export const Line = new Zdog.Shape({
     }, {
         x: 1
     }],
-    color: '#87a3a7',
+    color: 'hsla(188, 15%, 59%,1)',
     stroke: .2,
     translate: {
         x: -1,
@@ -638,7 +638,7 @@ export const Box = new Zdog.Rect({
     addTo: SmartphoneScreen,
     width: 2,
     height: 1.8,
-    color: '#87a3a7',
+    color: 'hsla(188, 15%, 59%,1)',
     fill: true,
     stroke: .2,
     translate: {
@@ -660,7 +660,7 @@ export const Triangle = new Zdog.Shape({
     }],
     fill: true,
     stroke: .2,
-    color: '#636'
+    color: 'hsla(300, 33%, 30%,1)'
 });
 
 export const Hanches = new Zdog.Cylinder({
@@ -674,7 +674,7 @@ export const Hanches = new Zdog.Cylinder({
         x: -TAU,
         y: -TAU / 4
     },
-    color: "hsl(180, 25%, 20%)"
+    color: "hsla(180, 25%, 20%,1)"
 });
 
 export const Cuisse_R = new Zdog.Cylinder({
@@ -695,7 +695,7 @@ export const Cuisse_R = new Zdog.Cylinder({
 export const Genou_R = new Zdog.Shape({
     addTo: Cuisse_R,
     stroke: 5,
-    color: "hsl(180, 25%, 28%)",
+    color: "hsla(180, 25%, 28%,1)",
     translate: {
         z: 8
     }
@@ -714,7 +714,7 @@ export const Tibia_R = new Zdog.Cylinder({
         y: 0
     },
     length: 12,
-    color: "hsl(180, 25%, 30%)"
+    color: "hsla(180, 25%, 30%,1)"
 });
 export const Chaussure_R = new Zdog.Shape({
     addTo: Tibia_R,
@@ -724,7 +724,7 @@ export const Chaussure_R = new Zdog.Shape({
         y: 4
     }],
     stroke: 5,
-    color: "#cc7a00",
+    color: "hsla(36, 100%, 40%,1)",
     translate: {
         x: 0,
         y: 0,
@@ -797,7 +797,7 @@ export const Chaussure_L = new Zdog.Shape({
         y: 4
     }],
     stroke: 5,
-    color: "#cc7a00",
+    color: "hsla(36, 100%, 40%,1)",
     translate: {
         x: 0,
         y: 0,
@@ -854,7 +854,7 @@ export const DossierTop = new Zdog.Ellipse({
     diameter: 20,
     quarters: 2,
     stroke: 3,
-    color: '#332424',
+    color: 'hsla(0, 17%, 17%,1)',
     rotate: {
         x: 3 / TAU / 4,
         z: -TAU / 4,
@@ -871,7 +871,7 @@ export const DossierMiddle = new Zdog.Rect({
     width: 20,
     height: 18,
     stroke: 3,
-    color: '#332424',
+    color: 'hsla(0, 17%, 17%,1)',
     translate: {
         y: 39,
         z: -10
@@ -884,7 +884,7 @@ export const Pouf = new Zdog.Ellipse({
     width: 10,
     height: 20,
     stroke: 8,
-    color: '#332424',
+    color: 'hsla(0, 17%, 17%,1)',
     rotate: {
         x: TAU / 4,
         z: -TAU / 4,
@@ -898,7 +898,7 @@ export const StoolStand = new Zdog.Hemisphere({
     addTo: Chair,
     diameter: 20,
     stroke: false,
-    color: '#b3cccc',
+    color: 'hsla(180, 20%, 75%,1)',
     backface: false,
     translate: {
         y: 59
