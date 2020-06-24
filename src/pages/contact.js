@@ -6,7 +6,7 @@ import {
 } from "gatsby";
 
 import ContactForm from "../components/contactForm/ContactForm"
-import SEO from "../components/seo"
+import SEO from "../components/Seo"
 
 const ContactPage = () => {
     return <>
