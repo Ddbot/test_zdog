@@ -14,6 +14,7 @@ const ContactForm = (props) => {
     let [error, setError] = useState({
         name: false,
         email: false,
+        objet: false,
         message: false,
         acceptance: false
     });
@@ -23,97 +24,122 @@ const ContactForm = (props) => {
         email: '',
         objet: '',
         message: '',
-        acceptance: false
+        // acceptance: false
     });
 
+    let [checked, setChecked] = useState(false);
 
+    let handleClick = (e) => {
+        let { target } = e;
+        e.preventDefault();
 
+        setChecked(prev => !prev);
+        // setForm((prev) => {
+        //     return {
+        //         ...prev,
+        //         acceptance: !prev.acceptance
+        //     }
+        // });
 
-    // Email validation
-    // useEffect(() => { 
-    //     if (form['email'].length > 0 && !validateEmail(form['email'])) {
-    //         document.querySelector('.has-icons-left>input').classList.add('is-danger');
-    //         document.querySelector('span.icon:nth-child(3)').style.visibility = "visible";
-    //         document.querySelector('.help').style.visibility = "visible";
-    //     } else {
-    //         document.querySelector('.has-icons-left>input').classList.remove('is-danger');
-    //         document.querySelector('.help').style.visibility = "hidden";
-    //         document.querySelector('span.icon:nth-child(3)').style.visibility = "hidden";
-    //     }
-    // }, [form['email']]);
+        // setError((prevError) => {
+        //     return {
+        //         ...prevError,
+        //         acceptance: !prevError.acceptance
+        //     }
+        // })
+    }
 
     let handleChange = (e) => {
         const { target } = e;
 
-        if (target.name === "email" && validateEmail(target.value)) {
-            toggleAlertClass('email');
+        if (validateField(target.name) === false) {
+            document.querySelector(`[name="${target.name}"]`).classList.add('is-danger');
             setError((prevError) => {
-            return {
-                ...prevError,
-                email: false
-            }
-        })};
-
-        if (target.name === "name" && target.value.length > 0) {
-            toggleAlertClass('name');
+                return {
+                    ...prevError,
+                    [target.name]: true
+                }
+            })
+        } else {
+            document.querySelector(`[name="${target.name}"]`).classList.remove('is-danger');
             setError((prevError) => {
-            return {
-                ...prevError,
-                name: false
-            }
-        })};
-
-        if (target.name === "acceptance" && target.value === true) {
-            toggleAlertClass('acceptance');
-            setError((prevError) => {
-            return {
-                ...prevError,
-                acceptance: false
-            }
-        })};
+                return {
+                    ...prevError,
+                    [target.name]: false
+                }
+            })
+        }
 
         setForm(prev => {
-            return { ...prev, [target.name]: target.value.trim() };
+            return {
+                ...prev,
+                [target.name]: target.value.trim()
+            };
         });
+
+        // target.name === "email" && validateField(target.name);
 
         console.log(target, form[target.name], target.name);
     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
-        let { target } = e;
-        
-        if (!form.name) {
-            toggleAlertClass('name');
-            setError((prevError) => {
-                return { ...prevError, name: true }
+        let res = [];
+
+        // si il y a le moindre attribut dans error, ne pas submit
+
+        let processError = (key) => {
+            document.querySelector(`[name="${key}"]`).classList.add('is-danger');
+            setError((prevError) => { 
+                return {
+                    ...prevError,
+                    [key]: true
+                }
             });
-            if (!validateEmail(form.email)) {
-            toggleAlertClass('email');
-            setError((prevError) => {
-                return { ...prevError, email: true }
-            });            
-            }
         }
 
-        if (form.acceptance === false) {
-           setError((prevError) => {
-                return { ...prevError, acceptance: true }
-           });
-        }
 
-        console.log('Form values ', form);
+        Array.from(Object.keys(form)).forEach((key) => {
+            if (!validateField(key)) { processError(key) } else {
+                document.querySelector(`[name="${key}"]`).classList.remove('is-danger');
+
+                // key === 'acceptance' ? document.querySelector(`[name="${key}"]`).classList.remove('is-danger');
+            };
+            res.push(!validateField(key));
+        });
+
+        
+        // let ar = Array.from(Object.values(error)
+        //     .map(v => !!v));
+
+        const isTrue = (v) => v === true
+        // ar.some(isFalse);
+        console.log(res.some(isTrue) ? 'Donnez ls renseignements demandés svp': "Youpo ! pas derreur on passe a la suite");
+
+        // console.log('Errors ', error, ' State: ', form);
         
         // (!!form['name'] && validateEmail(form['email']) && !!form['objet'] && !!form['message'] && !!form['acceptance']) ? console.log('Sending the form to the backend', form) : console.log('There is missing info');
     }
 
-    let validateEmail = (email) => {
-        const re = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
-        return re.test(String(email).toLowerCase());
-    }
+    // let validateEmail = (email) => {
+    //     const re = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
+    //     return re.test(String(email).toLowerCase());
+    // }
 
-    let toggleAlertClass = (klass) => {
-    document.querySelector(`input[name=${klass}]`).classList.toggle('is-danger');
+    let validateField = (fieldName) => {
+        switch (fieldName) {
+            // case 'name':
+            //     return form[fieldName].length > 0 ? true : false;
+            case 'email':
+                const re = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
+                return re.test(String(form.email).toLowerCase());
+            // case 'acceptance':
+            //     return form[fieldName] ? true : false;
+            // case 'message':
+            //     return form[fieldName].length > 0 ? true : false;
+            default:
+                return !!form[fieldName] ? true : false;
+        }          
     }
 
     return <form name="contactForm" className="contact">
@@ -121,7 +147,7 @@ const ContactForm = (props) => {
             <EmailField onChange={handleChange}  error={error.email} lang={props.lang} />
             <SubjectField onChange={handleChange} lang={props.lang} />
             <MessageField onChange={handleChange} lang={props.lang} />
-            <AcceptanceField onClick={() => setForm((prev) => {return {...prev, acceptance: !prev.acceptance }})} error={error.acceptance} lang={props.lang} />
+            <AcceptanceField onClick={handleClick} error={error.acceptance} lang={props.lang} checked={checked}/>
             <SubmitBtn handleSubmit={handleSubmit}  error={error} lang={props.lang} />
         </form>
     }

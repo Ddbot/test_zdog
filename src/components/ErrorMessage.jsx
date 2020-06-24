@@ -11,10 +11,7 @@ function ErrorMessage(props) {
 			case "missing-email":
 				return props.lang === "en" ? "Malformed or missing email" : "Email manquant ou mal écrit";
 			case "missing-acceptance":
-				return props.lang === "en" ? "Please check to accept T&Cs" : <>
-					<span className="icon is-small is-right" style={{ color: "red" }}>
-						<i className="fa fa-exclamation-triangle"></i>
-					</span>Veuillez accepter les termes d'utilisation</>;					
+				return props.lang === "en" ? "Please check to accept T&Cs": "Veuillez accepter les termes d'utilisation";					
 			case "user-name-required":
 				return props.lang === "en" ? "Please provide your name" : "Veuillez donner un nom";
 			default:
