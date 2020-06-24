@@ -7,8 +7,7 @@ const AcceptanceField = (props) => {
             <div className="control">
                 <label className="checkbox">
                     <input type="checkbox" data-name="acceptance" onClick={props.onClick} />&nbsp;
-                    {
-                        lang === 'en' ? <span>I agree to the <a href="#">terms and conditions</a></span> : <span>J'accepte les <a href="#">conditions d'utilisation</a></span>}                
+                    { lang === 'en' ? <span>I agree to the <a href="#">terms and conditions</a></span> : <span>J'accepte les <a href="#">conditions d'utilisation</a></span>}                
                 </label>
         </div>
         {!!error && <ErrorMessage errorCode={"missing-acceptance"} lang={lang}/>}

@@ -14,7 +14,7 @@ const SubjectField = (props) => {
     return <div className="field">
         <label className="label">{lang === "en" ? 'Subject' : 'Objet'}</label>
                 <div className="control">
-                    <input className="input" type="text" placeholder={locale === "en" ? "Subject input" : "Objet du message"} data-name="objet" onChange={props.handleChange}/>  
+                    <input className="input" type="text" placeholder={locale === "en" ? "Subject input" : "Objet du message"} data-name="objet" name="objet"onChange={props.onChange}/>  
                 </div>
             </div>
 }

@@ -107,3 +107,7 @@ width: 100vw;
 .logos#react {
   min-height: 2rem;
 }
+
+.is-danger {
+  transition-duration: 3s;
+}
