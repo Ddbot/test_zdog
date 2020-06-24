@@ -10,11 +10,11 @@ import PropTypes from "prop-types";
 
 import styled from 'styled-components';
 
-import Header from "./Header";
+import Header from "./NavBar/Header";
 
 import LangContext from '../contexts/LangContext';
 
-import "./styles/layout.css";
+import "../styles/layout.css";
 import 'bulma/css/bulma.css';
 
 const Main = styled.main`

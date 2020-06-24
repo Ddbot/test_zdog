@@ -1,7 +1,7 @@
 import React from 'react';
 
-import FranceFlag from './franceFlag';
-import UKFlag from './ukFlag';
+import FranceFlag from '../../../images/franceFlag';
+import UKFlag from '../../../images/ukFlag';
 
 const LangToggle = (props) => {
 

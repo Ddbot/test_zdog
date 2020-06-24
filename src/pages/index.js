@@ -5,8 +5,8 @@ import LangContext from '../components/contexts/LangContext';
 
 import styled from 'styled-components';
 
-import SEO from "../components/seo";
-import LogoIllustration from "../components/logoIllustration";
+import SEO from "../components/layout/NavBar/Seo";
+import LogoIllustration from "../components/layout/illustration/LogoIllustration";
 
 import { animChevron } from '../utils/timelines';
 
