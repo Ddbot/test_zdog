@@ -6,3 +6,4 @@ const LogoGatsby = (props) => <svg viewBox="0 0 28 28" className="logos" data-pr
 </svg>
 
 export default LogoGatsby;
+
