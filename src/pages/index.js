@@ -86,8 +86,8 @@ const Container = styled.div `
 `;
 
 const Chevron = styled.button `    
-    width: 4vw;
-    height: 4vw;
+    width: 2.8vw;
+    height: 2.8vw;
 
     justify-content: center;
     cursor: pointer;
@@ -126,7 +126,7 @@ const initial_position = {
 };
 
 const IndexPage = (props) => {
-	let illo = useRef(null);
+	let illo = useRef();
 
 	let chevronBottom = useRef(null);
 	let chevronTop = useRef(null);
@@ -229,7 +229,8 @@ const IndexPage = (props) => {
 	});
 
 	// Logos
-	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
+	useEffect(() => {
+		!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
 			y: 40,
 			scale: 0,
 			autoAlpha: 0
@@ -241,7 +242,8 @@ const IndexPage = (props) => {
 				amount: 1.5,
 				from: 4,
 			}
-	});
+		})
+	}, []);
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -327,20 +329,23 @@ const IndexPage = (props) => {
 
 	let handleRotation = (e) => {
 		e.persist();
+		// console.log([e.target], [e.target.name], e.target.name)
 		setRotate(prev => {
 			return { ...prev, [e.target.name]: Number(e.target.value) }
 		});
+
+		console.log('ILlo: ', illo.current);
 	}
 
 	let handleTranslation = (e) => {
 		e.persist();
-		if (e.target.name === "z") {
+		if (e.target.name !== "scale") {
+			setTranslate(prev => {
+				return { ...prev, [e.target.name]: Number(e.target.value) }
+			})
+		} else {
 			setScale(prev => Number(e.target.value));
 		}
-		setTranslate(prev => {
-			return { ...prev, [e.target.name]: Number(e.target.value) }
-		});
-		console.log(translate, scale);
 	}
 
 	let seoContent = (index, lang) => {

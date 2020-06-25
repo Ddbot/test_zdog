@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Me from "./zdog/Me";
 import gsap from 'gsap/gsap-core';
 
 const LogoIllustration = React.forwardRef((props, ref) => {
     let { index, translate, rotate, scale } = props;
+
+    useEffect(() => { 
+        console.log('Index in LogoIllustration: ', index, ' Trans: ', translate, ' Rot: ', rotate, ' Scale: ',scale);
+    });
 
     // let mouseEnter = (e) => {
     //     let { currentTarget } = e;
@@ -20,7 +24,7 @@ const LogoIllustration = React.forwardRef((props, ref) => {
     //     // console.log(currentTarget.classList, currentTarget.dataset.presentation, e);
     //     console.log('LEFT the element');
     // }    
-    return <Me ref={ref} index={index} animation={[translate, rotate, scale]} />
+    return <Me index={index} animation={[translate, rotate, scale]} />
 
 })
 
