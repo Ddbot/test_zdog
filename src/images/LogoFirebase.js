@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LogoFirebase = (props) => <svg viewBox="0 0 96 132" className="logos" data-presentation="I make use of Firebase for its numerous functionalities. Did I tell you I like serverless ?" onMouseEnter={props.onMouseEnter}>
+const LogoFirebase = (props) => <svg viewBox="0 0 96 132" className="logos" data-presentation="I make use of Firebase for its numerous functionalities. Did I tell you I like serverless ?" onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} data-name="Firebase">
   <g>
     <path d="M0 105.75L16.13 2.52a2.98 2.98 0 015.57-.94L38.4 32.69l6.65-12.66a2.98 2.98 0 015.27 0l45.02 85.72H0z" fill="#ffa000" fillRule="nonzero"/>
   </g>

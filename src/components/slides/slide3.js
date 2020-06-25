@@ -16,7 +16,7 @@ const Slide_3 = (props) => {
             content
           }
           en: wordpressPage(id: {
-            eq: "71f4de97-7a6c-5370-9b34-dc6a34e8d04f"
+            eq: "3aa777a4-1913-5146-80f8-c08a094fbb86"
           }) {
             title
             content

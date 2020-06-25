@@ -261,23 +261,24 @@ const Me = (props) => {
                                     //  Faire de logosParams un objet avec tous les reglages pour chaq logo (ex: initial x & y position);
                                     
                                     gsap.to(allLogos, {
-                                        x: 0,
-                                        y: 0,
-                                        stagger: {
-                                            amount: .47
-                                        },
-                                        scale: 1,
-                                        autoAlpha: 1          ,                          
-                                        ease: "power4.out",
-                                        onComplete: () => {
-                                            gsap.to(allLogos, {
-                                                duration: 20,
-                                                scale: "-=0.25",
-                                                ease: "elastic.in(1,0.75)",
-                                                // stagger: 0.225
-                                            })
-                                        }
-                                    }).delay(.8);
+										x: 0,
+										y: 0,
+										stagger: {
+											amount: 0.47
+										},
+										scale: 1,
+										autoAlpha: 1,
+										ease: "power4.out",
+										onComplete: () => {
+											gsap.to(allLogos, {
+												duration: 10,
+												scale: "-=0.25",
+												ease: "elastic.in(1,0.75)",
+												repeat: 2,
+												yoyo: true
+											});
+										},								
+									}).delay(0.8);
                                 }
                             });
                         }
@@ -287,8 +288,7 @@ const Me = (props) => {
             case 2:
                 //  We just keep the PEN and delete all other children from the CANVAS scene
                 [Chair, Table, Smartphone, Torse, Pot, Cou, Computer].forEach(
-                    (child) => scene.removeChild(child)
-                    // (child) => child.remove()
+                    (child) => scene.removeChild(child)                    
                 );
                 
                 gsap.set(logosRef.current, { display: "none" });
@@ -337,8 +337,9 @@ const Me = (props) => {
 
     return <>
         <Canvas ref={zdogRef} className="zdog-canvas" width={480} height={480}></Canvas>
-        <LogoGrid ref={logosRef} prevIndex={prevIndex} />
+        <LogoGrid ref={logosRef} prevIndex={prevIndex} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
         <Blog_Animation ref={blogRef} />
+        <span id="content"></span>
             </>;
 }
 

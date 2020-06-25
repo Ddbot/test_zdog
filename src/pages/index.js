@@ -138,6 +138,7 @@ const IndexPage = (props) => {
 	let [translate, setTranslate] = useState({ x: 0, y: 10, z: 0 });
 	let [rotate, setRotate] = useState(initial_position);
 	let [scale, setScale] = useState(.8);
+	let [presentation, setPresentation] = useState(<></>);
 
 	// FILTER PARAMS
 	let [hue, setHue] = useState('90');
@@ -367,6 +368,26 @@ const IndexPage = (props) => {
 		}
 	}
 
+    let onMouseEnter = (e) => {
+    	e.preventDefault();
+    	e.persist();
+    	let {
+    		currentTarget,
+    		target
+    	} = e;
+		setPresentation((prevPrez) => { return currentTarget.dataset.presentation });
+    }
+
+    let onMouseLeave = (e) => {
+    	e.preventDefault();
+    	e.persist();
+    	let {
+    		currentTarget,
+    		target
+    	} = e;
+    	setPresentation((prevPrez) => { return '' });
+    }
+
 	return (<>
 		<SEO title={seoContent(index,lang)} />
 		<Container className="container">
@@ -374,15 +395,17 @@ const IndexPage = (props) => {
 			<LogoIllustration
 				ref={illo}
 				index={index}
-				style={{ zIndex: 2, flex: 1, position: "fixed"}}
+				style={{ zIndex: 2, flex: 1, position: "fixed" }}
 				translate={translate}
 				rotate={rotate}
 				scale={scale}
+				onMouseEnter={onMouseEnter}
+				onMouseLeave={onMouseLeave}
 			/>
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
 			<div className="separator" />
-			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
+			<TextContainer className="textContent" style={{ flex: 1 }}>{presentation === "" ? slide : <h2>{presentation}</h2>}</TextContainer>
 			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />}
 		</Container>
 	</>);

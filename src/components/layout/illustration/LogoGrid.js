@@ -9,17 +9,17 @@ import LogoHTML from '../../../images/LogoHTML';
 import LogoJS from '../../../images/LogoJS';
 import LogoReact from '../../../images/LogoReact';
 
-const LogoGrid = React.forwardRef((props,ref) => {
+const LogoGrid = React.forwardRef((props, ref) => {
     return <div id="logoGrid" ref={ref}>
-                 <LogoHTML />                
-                <LogoCSS />
-                <LogoJS />                
-                <LogoReact />
-                <LogoGatsby />
+                 <LogoHTML onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />                
+                <LogoCSS onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
+                <LogoJS onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />                
+                <LogoGatsby onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
+                <LogoReact onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
                 <div className="logos" style={{ color: "transparent" }}>_</div>
-                <LogoFirebase />
+                <LogoFirebase onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
                 <div className="logos" style={{ color: "transparent" }}>_</div>
-                <LogoAWS /> 
+                <LogoAWS onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} /> 
     </div>
 })
 

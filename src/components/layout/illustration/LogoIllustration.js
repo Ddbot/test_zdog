@@ -9,23 +9,8 @@ const LogoIllustration = React.forwardRef((props, ref) => {
     useEffect(() => { 
         console.log('Index in LogoIllustration: ', index, ' Trans: ', translate, ' Rot: ', rotate, ' Scale: ',scale);
     });
-
-    // let mouseEnter = (e) => {
-    //     let { currentTarget } = e;
-    //     currentTarget.classList.add('active');
-    //     console.log(currentTarget.classList, currentTarget.dataset.presentation);
-    // }
-
-    // let mouseExit = (e) => {
-    //     // e.eventPersist();
-    //     let { currentTarget } = e;
-    //     e.preventDefault();
-    //     // currentTarget.classList.remove('active');
-    //     // console.log(currentTarget.classList, currentTarget.dataset.presentation, e);
-    //     console.log('LEFT the element');
-    // }    
-    return <Me index={index} animation={[translate, rotate, scale]} />
-
+  
+    return <Me index={index} animation={[translate, rotate, scale]} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}/>
 })
 
 export default LogoIllustration;
