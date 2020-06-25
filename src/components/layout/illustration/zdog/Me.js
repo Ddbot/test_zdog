@@ -277,7 +277,7 @@ const Me = (props) => {
                                                 // stagger: 0.225
                                             })
                                         }
-                                    }).delay(.4);
+                                    }).delay(.8);
                                 }
                             });
                         }
