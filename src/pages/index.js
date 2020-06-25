@@ -14,6 +14,13 @@ import Slide0 from '../components/slides/slide0';
 import Slide1 from '../components/slides/slide1';
 import Slide2 from '../components/slides/slide2';
 import Slide3 from '../components/slides/slide3';
+import Slide_AWS from '../components/slides/slide_AWS';
+import Slide_CSS from '../components/slides/slide_CSS';
+import Slide_Firebase from '../components/slides/slide_Firebase';
+import Slide_Gatsby from '../components/slides/slide_Gatsby';
+import Slide_HTML from '../components/slides/slide_HTML';
+import Slide_JS from '../components/slides/slide_JS';
+import Slide_React from '../components/slides/slide_React';
 
 
 import FilterSliders from '../components/AnimationTools/FilterSliders';
@@ -138,7 +145,7 @@ const IndexPage = (props) => {
 	let [translate, setTranslate] = useState({ x: 0, y: 10, z: 0 });
 	let [rotate, setRotate] = useState(initial_position);
 	let [scale, setScale] = useState(.8);
-	let [presentation, setPresentation] = useState(<></>);
+	let [presentation, setPresentation] = useState('');
 
 	// FILTER PARAMS
 	let [hue, setHue] = useState('90');
@@ -371,11 +378,32 @@ const IndexPage = (props) => {
     let onMouseEnter = (e) => {
     	e.preventDefault();
     	e.persist();
-    	let {
-    		currentTarget,
-    		target
-    	} = e;
-		setPresentation((prevPrez) => { return currentTarget.dataset.presentation });
+		let {
+			currentTarget,
+			target
+		} = e,
+			{ name } = currentTarget.dataset;
+		
+		setPresentation((prevPres) => {
+			switch (name) {
+				case 'AWS':
+					return <Slide_AWS lang={lang} />
+				case 'CSS':
+					return <Slide_CSS lang={lang} />
+				case 'Firebase':
+					return <Slide_Firebase lang={lang} />
+				case 'Gatsby':
+					return <Slide_Gatsby lang={lang} />
+				case 'HTML':
+					return <Slide_HTML lang={lang} />
+				case 'JS':
+					return <Slide_JS lang={lang} />
+				case 'React':
+					return <Slide_React lang={lang} />
+				default:
+					return slide;
+			}
+		})
     }
 
     let onMouseLeave = (e) => {
