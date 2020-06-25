@@ -5,32 +5,111 @@ import LangContext from '../components/contexts/LangContext';
 
 import styled from 'styled-components';
 
-import SEO from "../components/seo";
-import LogoIllustration from "../components/logoIllustration";
-import Chevron from '../components/styled/Chevron';
+import SEO from "../components/layout/NavBar/Seo";
+import LogoIllustration from "../components/layout/illustration/LogoIllustration";
 
-import Container from '../components/styled/Container';
 import { animChevron } from '../utils/timelines';
 
-import Slide0 from '../components/slide0';
-import Slide1 from '../components/slide1';
-import Slide2 from '../components/slide2';
-import Slide3 from '../components/slide3';
+import Slide0 from '../components/slides/slide0';
+import Slide1 from '../components/slides/slide1';
+import Slide2 from '../components/slides/slide2';
+import Slide3 from '../components/slides/slide3';
 
 
-import FilterSliders from '../components/FilterSliders';
-import RotationSliders from '../components/RotationSliders';
+import FilterSliders from '../components/AnimationTools/FilterSliders';
+import RotationSliders from '../components/AnimationTools/rotationSliders';
 
 import "font-awesome/css/font-awesome.min.css";
 import gsap from "gsap";
-import Canvas from "../components/styled/Canvas";
-
-// const firebase = require("firebase");
-// Required for side-effects
-// require("firebase/firestore");
 
 import firebase from '../firebase.js';
 
+const Container = styled.div `
+	display: flex;
+	flex-flow: row nowrap;
+
+	justify-content: space-evenly;
+	align-items: flex-start;
+
+
+  	width: 100vw;
+
+	font-size: 2rem;
+	font-family: "Roboto";
+	color: #002620;
+
+	z-index: 1;
+
+
+	align-self: center;
+
+	&>canvas {
+		overflow: visible;
+
+		height: calc(92.13vh * 0.75);
+		width: calc(92.13vh * 0.75);
+	}
+
+	&>.separator {
+				height: calc(92.13vh * 0.75);
+				border: 1px solid rgba(0, 38, 32, .7);
+	}
+
+	&>.textContent {
+		display: flex;
+		flex: 1;
+
+		height: calc(92.13vh*0.75);
+		max-width: calc(92.13vh*0.75);
+
+		padding: 2rem;
+
+		.highlight {
+			color: rgba(245, 245, 245, 1);
+			margin: .1rem;
+		}
+
+		&>p {
+			font-size: 2rem;
+			line-height: 2rem;
+
+			line-height: 1.8;
+			margin: auto 0;
+		}
+	}
+
+	&>#logoGrid {
+		align-self: center;
+		height: calc(92.13vh*0.57);
+		width: calc(92.13vh*0.57);
+	}
+`;
+
+const Chevron = styled.button `    
+    width: 2.8vw;
+    height: 2.8vw;
+
+    justify-content: center;
+    cursor: pointer;
+
+    border: .5vw solid hsla(0, 0%, 100%,0);
+    border-radius: 50% ;
+    background-color: hsla(201, 38%, 55%,1);
+    outline-style: none;
+
+    z-index: 10;
+
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+
+    // rotate: 90deg;
+    
+    svg {
+        width: 4vw;
+        height: 4vw;
+        display: none;
+        margin: 1vw;
+    }
+`;
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 // const functions = require('firebase-functions');
 
@@ -47,7 +126,7 @@ const initial_position = {
 };
 
 const IndexPage = (props) => {
-	let illo = useRef(null);
+	let illo = useRef();
 
 	let chevronBottom = useRef(null);
 	let chevronTop = useRef(null);
@@ -150,7 +229,8 @@ const IndexPage = (props) => {
 	});
 
 	// Logos
-	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
+	useEffect(() => {
+		!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
 			y: 40,
 			scale: 0,
 			autoAlpha: 0
@@ -162,7 +242,8 @@ const IndexPage = (props) => {
 				amount: 1.5,
 				from: 4,
 			}
-	});
+		})
+	}, []);
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -248,20 +329,23 @@ const IndexPage = (props) => {
 
 	let handleRotation = (e) => {
 		e.persist();
+		// console.log([e.target], [e.target.name], e.target.name)
 		setRotate(prev => {
 			return { ...prev, [e.target.name]: Number(e.target.value) }
 		});
+
+		console.log('ILlo: ', illo.current);
 	}
 
 	let handleTranslation = (e) => {
 		e.persist();
-		if (e.target.name === "z") {
+		if (e.target.name !== "scale") {
+			setTranslate(prev => {
+				return { ...prev, [e.target.name]: Number(e.target.value) }
+			})
+		} else {
 			setScale(prev => Number(e.target.value));
 		}
-		setTranslate(prev => {
-			return { ...prev, [e.target.name]: Number(e.target.value) }
-		});
-		console.log(translate, scale);
 	}
 
 	let seoContent = (index, lang) => {

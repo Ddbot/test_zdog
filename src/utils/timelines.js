@@ -114,3 +114,28 @@ import gsap from 'gsap';
         }).delay(transitionDelay);
     };
 
+    // export let me_tl = gsap.timeline({
+    //     paused: true,
+    //     onComplete: () => {
+    //         gsap.set('.zdog-canvas', {
+    //             display: "none"
+    //         });
+    //         gsap.set('#logoGrid', {
+    //             display: "grid"
+    //         });
+    //     }
+    // });
+
+    // export let me_reverse_tl = gsap.timeline({
+    //     paused: true,
+    //     onStart: () => {
+    //         gsap.set('#logoGrid', {
+    //             display: "none"
+    //         });
+    //         gsap.set('.zdog-canvas', {
+    //             display: "block"
+    //         });
+    //         // animateScene0_reverse();
+    //     }
+    // });
+

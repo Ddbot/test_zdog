@@ -5,8 +5,8 @@ import {
     Link
 } from "gatsby";
 
-import ContactForm from "../components/contactForm/ContactForm"
-import SEO from "../components/seo"
+import ContactForm from "../components/layout/NavBar/contactForm/ContactForm"
+import SEO from "../components/layout/NavBar/Seo"
 
 const ContactPage = () => {
     return <>

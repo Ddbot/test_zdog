@@ -22,8 +22,6 @@ body {
 border: .5rem solid transparent;
 border-bottom: .5rem solid transparent;
 
-/* background-color: rgba(127, 255, 212,.5); */
-
 max-height: 100vh;
 width: 100vw;
 }
