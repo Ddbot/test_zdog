@@ -237,21 +237,21 @@ const IndexPage = (props) => {
 	});
 
 	// Logos
-	useEffect(() => {
-		!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
-			y: 40,
-			scale: 0,
-			autoAlpha: 0
-		}, {
-			y: 0,
-			scale: 1.5,
-			autoAlpha: 1,
-			stagger: {
-				amount: 1.5,
-				from: 4,
-			}
-		})
-	}, []);
+	// useEffect(() => {
+	// 	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
+	// 		y: 40,
+	// 		scale: 0,
+	// 		autoAlpha: 0
+	// 	}, {
+	// 		y: 0,
+	// 		scale: 1.5,
+	// 		autoAlpha: 1,
+	// 		stagger: {
+	// 			amount: 1.5,
+	// 			from: 4,
+	// 		}
+	// 	})
+	// }, []);
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -383,6 +383,17 @@ const IndexPage = (props) => {
 			target
 		} = e,
 			{ name } = currentTarget.dataset;
+		
+		console.log('onMouseEnter target is ', currentTarget);
+
+		let scale = Number(currentTarget.style.scale) * 1.618;
+
+		// gsap.to(currentTarget, {			
+		// 	duration: 0.225,
+		// 	scale,
+		// 	transformOrigin: "center center",
+		// 	ease: "expo.out",
+		// });
 		
 		setPresentation((prevPres) => {
 			switch (name) {
