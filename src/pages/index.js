@@ -14,7 +14,7 @@ import Slide0 from '../components/slides/slide0';
 import Slide1 from '../components/slides/slide1';
 import Slide2 from '../components/slides/slide2';
 import Slide3 from '../components/slides/slide3';
-import Slide_AWS from '../components/slides/slide_AWS';
+import Slide_WP from '../components/slides/slide_WP';
 import Slide_CSS from '../components/slides/slide_CSS';
 import Slide_Firebase from '../components/slides/slide_Firebase';
 import Slide_Gatsby from '../components/slides/slide_Gatsby';
@@ -73,7 +73,7 @@ const Container = styled.div `
 
 		.highlight {
 			color: rgba(245, 245, 245, 1);
-			margin: .1rem;
+			margin: .1rem;		
 		}
 
 		&>p {
@@ -386,8 +386,8 @@ const IndexPage = (props) => {
 		
 		setPresentation((prevPres) => {
 			switch (name) {
-				case 'AWS':
-					return <Slide_AWS lang={lang} />
+				case 'WP':
+					return <Slide_WP lang={lang} />
 				case 'CSS':
 					return <Slide_CSS lang={lang} />
 				case 'Firebase':
@@ -409,12 +409,26 @@ const IndexPage = (props) => {
     let onMouseLeave = (e) => {
     	e.preventDefault();
     	e.persist();
-    	let {
-    		currentTarget,
-    		target
-    	} = e;
-    	setPresentation((prevPrez) => { return '' });
-    }
+		let {
+			currentTarget,
+			target
+		} = e, slideId;		
+		if (currentTarget.dataset.name === "HTML") {
+			setTimeout(() => {
+				setPresentation(prev => '');
+			}, 1000);
+		}
+	}
+	
+	// si presentation contient le texte de HTML, faire un setTimeout pour ne l'afficher que pendant 1s
+	useEffect(() => { 
+		if (presentation === <Slide_HTML lang={lang} />) {
+			const timer = setTimeout(() => {
+				setPresentation(prev => '');
+			}, 1000);
+			clearTimeout(timer);
+		}
+	}, [presentation]);
 
 	return (<>
 		<SEO title={seoContent(index,lang)} />
@@ -433,7 +447,7 @@ const IndexPage = (props) => {
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
 			<div className="separator" />
-			<TextContainer className="textContent" style={{ flex: 1 }}>{presentation === "" ? slide : <h2>{presentation}</h2>}</TextContainer>
+			<TextContainer className="textContent" style={{ flex: 1 }}>{presentation === "" ? slide : presentation}</TextContainer>
 			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />}
 		</Container>
 	</>);

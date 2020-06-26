@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 // import gsap from 'gsap';
 
-import LogoAWS from '../../../images/LogoAWS';
+import LogoWP from '../../../images/LogoWP';
 import LogoCSS from '../../../images/LogoCSS';
 import LogoFirebase from '../../../images/LogoFirebase';
 import LogoGatsby from '../../../images/LogoGatsby';
@@ -19,7 +19,7 @@ const LogoGrid = React.forwardRef((props, ref) => {
                 <div className="logos" style={{ color: "transparent" }}>_</div>
                 <LogoFirebase onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
                 <div className="logos" style={{ color: "transparent" }}>_</div>
-                <LogoAWS onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} /> 
+                <LogoWP onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} /> 
     </div>
 })
 

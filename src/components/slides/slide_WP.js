@@ -10,19 +10,19 @@ import gsap from 'gsap';
 
 // import './styles/slide.css';
 
-const Slide_AWS = (props) => {
+const Slide_WP = (props) => {
 
     const data = useStaticQuery(
         graphql `
       query {
         en: wordpressPage(id: {
-                eq: "f55ff220-cd5f-51fa-8743-5afa754b9be2"
+                eq: "4d78f372-43e2-5f9e-b863-4d6a0c4b1816"
             }) {
           title
           content
         }
         fr: wordpressPage(id: {
-                eq: "52dcb6e6-9c47-56dc-ba0a-fd3d5c5f7c76"
+                eq: "eb697dab-5df4-56af-998f-fcb98cdd38fe"
             }) {
           title
           content
@@ -57,4 +57,4 @@ const Slide_AWS = (props) => {
     return <p data-splitting="lines" dangerouslySetInnerHTML={renderData()} />;
 };
 
-export default Slide_AWS;
+export default Slide_WP;
