@@ -48,7 +48,7 @@ const Slide_WP = (props) => {
     }, []);
 
     let renderData = () => {
-        // document.title = data[props.lang].title;
+        document.title = data[props.lang].title + ' | Andry Online'
         return {
             __html: data[props.lang].content
         }

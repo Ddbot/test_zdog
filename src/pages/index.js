@@ -22,7 +22,6 @@ import Slide_HTML from '../components/slides/slide_HTML';
 import Slide_JS from '../components/slides/slide_JS';
 import Slide_React from '../components/slides/slide_React';
 
-
 import FilterSliders from '../components/AnimationTools/FilterSliders';
 import RotationSliders from '../components/AnimationTools/rotationSliders';
 
@@ -236,22 +235,6 @@ const IndexPage = (props) => {
 		});
 	});
 
-	// Logos
-	// useEffect(() => {
-	// 	!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
-	// 		y: 40,
-	// 		scale: 0,
-	// 		autoAlpha: 0
-	// 	}, {
-	// 		y: 0,
-	// 		scale: 1.5,
-	// 		autoAlpha: 1,
-	// 		stagger: {
-	// 			amount: 1.5,
-	// 			from: 4,
-	// 		}
-	// 	})
-	// }, []);
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -384,16 +367,7 @@ const IndexPage = (props) => {
 		} = e,
 			{ name } = currentTarget.dataset;
 		
-		console.log('onMouseEnter target is ', currentTarget);
-
 		let scale = Number(currentTarget.style.scale) * 1.618;
-
-		// gsap.to(currentTarget, {			
-		// 	duration: 0.225,
-		// 	scale,
-		// 	transformOrigin: "center center",
-		// 	ease: "expo.out",
-		// });
 		
 		setPresentation((prevPres) => {
 			switch (name) {

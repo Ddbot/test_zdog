@@ -20,6 +20,9 @@ import Blog_Animation from '../Blog_animation';
 
 import usePrevious from '../../../../utils/usePrevious';
 
+import { wiggle, wiggleProp } from '../../../../utils/utils.js';
+
+
 const { TAU } = Zdog;
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
@@ -201,6 +204,9 @@ const Me = (props) => {
                                             console.log('Le canvas à lécran est ', zdogRef.current, scene);
                                     }
                                     });
+
+                                    let grid = document.getElementById('logoGrid');
+                                    let { x, y } = grid.getBoundingClientRect();
                                     
                                     gsap.set('.logos', {
                                         autoAlpha: 0,
@@ -208,77 +214,93 @@ const Me = (props) => {
                                         });
                                     gsap.set("#logoGrid", {
                                         display: "grid",  
-                                        // scale: 0.8
+                                        scale: 0.8
                                     });    
 
                                     const logosParams = [{
-                                        transformOrigin: "bottom right",
+                                        transformOrigin: "bottom right",                                        
                                         x: 100,
-                                        y: 100
+                                        y: 100,
+                                        ease: "power3.out",
                                     }, {
-                                        transformOrigin: "bottom center",
+                                        transformOrigin: "bottom center",                                        
                                         x: 0,
-                                        y:100
+                                        y:100,
+                                        ease: "elastic.out(1,0.3)",
                                     }, {
-                                        transformOrigin: "bottom left",
+                                        transformOrigin: "bottom left",                                        
                                         x: -100,
                                             y: 100,
+                                            ease: "bounce.out",
                                             backgroundColor: "#F8E017",
                                             borderRadius: "100%",
                                             border: "1px solid lightgray"
                                     }, {
-                                        transformOrigin: "center right",
+                                        transformOrigin: "center right",                                        
                                         x: 50,
                                             y: 0,
+                                            ease: "slow(0.7,0.7, false)",
                                         width: "2rem"
                                     }, {
-                                        transformOrigin: "top left",
+                                        transformOrigin: "top left",                                        
                                         x: -50,
                                             y: 10,
+                                            ease: "circ.out",
                                     }, {
-                                        transformOrigin: "center",
+                                        transformOrigin: "center",                                        
                                         x: 0,
-                                        y:0
+                                        y:0,
+                                        ease: "back.out(1.7)",
                                     }, {
-                                        transformOrigin: "top right",
+                                        transformOrigin: "top right",                                        
                                         x: 100,
-                                        y:-100
+                                        y:-100,
+                                        ease: "expo.out",
                                     }, {
-                                        transformOrigin: "center",
+                                        transformOrigin: "center",                                        
                                         x: 0,
-                                        y:0
-                                    }, {
-                                        x: -200,
-                                        y: -200
+                                        y:0,
+                                        ease: "expo.out",
+                                        }, {                                        
+                                        x: -100,
+                                        y: -100,
+                                        ease: "sine.out",
                                     }
                                     ];
                                     
                                     let allLogos = Array.from(document.getElementsByClassName('logos'));
                                     allLogos.forEach((logo,i) => {
-                                        gsap.set(logo, logosParams[i]);
+                                        gsap.to(logo, logosParams[i]);
+                                        gsap.set(logo, {
+                                            filter: "drop-shadow(0 0 0.75rem lightgray)"
+                                        });
                                     });
 
                                     //  Faire de logosParams un objet avec tous les reglages pour chaq logo (ex: initial x & y position);
                                     
-                                    gsap.to(allLogos, {
-										x: 0,
-										y: 0,
-										stagger: {
-											amount: 0.47
-										},
-										scale: 1,
-										autoAlpha: 1,
-										ease: "power4.out",
-										onComplete: () => {
-											gsap.to(allLogos, {
-												duration: 10,
-												scale: "-=0.25",
-												ease: "elastic.in(1,0.75)",
-												repeat: 2,
-												yoyo: true
-											});
-										},								
-									}).delay(0.8);
+                                    // gsap.to(allLogos, {
+									// 	x: 0,
+									// 	y: 0,
+									// 	stagger: {
+                                    //         grid: [3, 3],
+                                    //         from: "random",
+                                    //         ease: "elastic.inOut(1,0.3)",
+                                    //         amount: 2
+									// 	},
+									// 	scale: 1,
+									// 	autoAlpha: 1,
+										// ease: "power4.out",
+										// onComplete: () => {
+                                            allLogos.forEach((el,i) => {
+                                                // this.wiggleProp(el, 'scale', 0.93, 1);
+                                                gsap.to(el, { x: 0, y: 0, scale: 1, autoAlpha: 1 }).delay(0.5+i*0.2);
+                                                wiggleProp(el, 'rotation', -2.5, 2.5);
+                                                wiggleProp(el, 'x', -3, 3);
+                                                wiggleProp(el, 'y', -3, 3);
+                                                wiggleProp(el, 'scale', .7, 1);
+                                            })
+										// },								
+									// });
                                 }
                             });
                         }
