@@ -17,13 +17,36 @@ import Table from './Table';
 
 import LogoGrid from '../LogoGrid';
 import Blog_Animation from '../Blog_animation';
+import Signature from '../../../Signature';
+import Trace from '../../../Trace';
 
 import usePrevious from '../../../../utils/usePrevious';
-
 import { wiggle, wiggleProp } from '../../../../utils/utils.js';
 
 
 const { TAU } = Zdog;
+const seq = [
+    [{
+        x: 0,
+        y: 0,
+        z: 10
+    }, {
+        x: 5.485,
+        y: 6.138,
+        z: 0
+    },
+        0.8
+    ],
+    [{
+        x: 0,
+        y: 0,
+        z: 0
+    }, {
+        x: TAU,
+        y: TAU / 2,
+        z: 0
+    }, 0.8]
+];
 
 let canvas, ctx, canvasWidth, canvasHeight, zoom, isSpinning;
 
@@ -35,20 +58,6 @@ let liste = [Computer, Cou, Torse, Chair, Table, Pen, Pot, Smartphone];
 liste.forEach(element => {
     scene.addChild(element)
 });
-
-const seq = [
-    [{
-        x: 0, y: 0, z: 10
-    }, {
-        x: 5.485, y: 6.138, z: 0
-    },
-        0.8],
-    [{
-        x: 0, y: 0, z: 0
-    }, {
-        x: TAU, y: TAU / 2, z: 0
-    }, 0.8]
-];
 
 const Canvas = styled.canvas `    
     overflow: visible;
@@ -62,10 +71,12 @@ const Me = (props) => {
     const { index } = props;
     let zdogRef = useRef(),
         logosRef = useRef(),
-        blogRef = useRef();
+        // blogRef = useRef(),
+        signatureRef = useRef();
+        // traceRef = useRef();
     
     
-    gsap.set(blogRef.current, { position: "absolute" });
+    // gsap.set(blogRef.current, { position: "absolute" });
 
     const prevIndex = usePrevious(index);
 
@@ -103,50 +114,48 @@ const Me = (props) => {
     useEffect(() => {
         canvas = document.querySelector(".zdog-canvas");
 
-        ctx = canvas.getContext("2d");
-        // get canvas size
-        canvasWidth = canvas.width;
-        canvasHeight = canvas.height;
-        // illustration variables
-        zoom = 7;
-        isSpinning = false;
+        if (!!canvas) {
+            ctx = canvas.getContext("2d");
+            // get canvas size
+            canvasWidth = canvas.width;
+            canvasHeight = canvas.height;
+            // illustration variables
+            zoom = 7;
+            isSpinning = false;
 
-        // ----- drag ----- //
-        let dragStartRX, dragStartRY;
-        let minSize = Math.min(canvasWidth, canvasHeight);
+            // ----- drag ----- //
+            let dragStartRX, dragStartRY;
+            let minSize = Math.min(canvasWidth, canvasHeight);
 
-        // add drag-rotation with Dragger
-        new Zdog.Dragger({
-            startElement: canvas,
-            onDragStart: function () {
-                isSpinning = false;
-                dragStartRX = scene.rotate.x;
-                dragStartRY = scene.rotate.y;
-            },
-            // CLAMP pour limiter le mouvement
-            onDragMove: function (pointer, moveX, moveY) {
-                scene.rotate.x = gsap.utils.clamp(5.62, 6.33, dragStartRX - (moveY / minSize) * TAU);
-                scene.rotate.y = gsap.utils.clamp(5.96, 6.64, dragStartRY - (moveX / minSize) * TAU);
+            // add drag-rotation with Dragger
+            new Zdog.Dragger({
+                startElement: canvas,
+                onDragStart: function () {
+                    isSpinning = false;
+                    dragStartRX = scene.rotate.x;
+                    dragStartRY = scene.rotate.y;
+                },
+                // CLAMP pour limiter le mouvement
+                onDragMove: function (pointer, moveX, moveY) {
+                    scene.rotate.x = gsap.utils.clamp(5.62, 6.33, dragStartRX - (moveY / minSize) * TAU);
+                    scene.rotate.y = gsap.utils.clamp(5.96, 6.64, dragStartRY - (moveX / minSize) * TAU);
 
-                setAnimation((prevAnimation) => {
-                    return [
-                        animation[0], {
-                        x: dragStartRX - (moveY / minSize) * TAU,
-                        y: dragStartRY - (moveX / minSize) * TAU
-                        },
-                        animation[2]
-                    ]
-                });
-                // scene.rotate.x = dragStartRX - (moveY / minSize) * TAU;
-                // scene.rotate.y = dragStartRY - (moveX / minSize) * TAU;
+                    setAnimation((prevAnimation) => {
+                        return [
+                            animation[0], {
+                                x: dragStartRX - (moveY / minSize) * TAU,
+                                y: dragStartRY - (moveX / minSize) * TAU
+                            },
+                            animation[2]
+                        ]
+                    });
+                }
+            });
 
-                // console.log('onDragMove: { x: ', scene.rotate.x, '; y: ', scene.rotate.y, ' }');
-            }
-        });
+            scene.rotate = seq[0];
 
-        scene.rotate = seq[0];
-
-        animate();
+            animate();
+        }
 
     }, [props.rotation]);
 
@@ -162,7 +171,7 @@ const Me = (props) => {
         switch (index) {
             case 0:
                 // Hide other REFS
-                gsap.set([logosRef.current, blogRef.current], {
+                gsap.set([logosRef.current, signatureRef.current], {
                     display: "none"
                 });                
                 break;
@@ -178,13 +187,12 @@ const Me = (props) => {
                                 y: Zdog.lerp(animation[1].y, seq[1][index].y, p),
                             }
                         },
-                        onStart: () => { },
                         onComplete: () => {
-                            // anim2: intervient une fois la rotATION  terminee et commence par effacer le personnage Zdog pour ne plus laisser que l'ordi et la table
+                            // anim2: intervient une fois la rotATION terminee et commence par effacer le personnage Zdog pour ne plus laisser que l'ordi et la table
                             let anim2 = gsap.to(scene, {
                                 duration: 1,
                                 onStart: () => {
-                                    [Cou, Torse, Chair].forEach(z => scene.removeChild(z));
+                                    [Cou, Torse, Chair].forEach(element => scene.removeChild(element));
                                 },
                                 onUpdate: () => {
                                     // Fait changer la scale de Zdog
@@ -200,107 +208,27 @@ const Me = (props) => {
                                     
                                     gsap.to(zdogRef.current, {
                                         duration: 0.1, scale: 100, autoAlpha: 0,
-                                        onStart: () => {
-                                            console.log('Le canvas à lécran est ', zdogRef.current, scene);
-                                    }
                                     });
 
-                                    let grid = document.getElementById('logoGrid');
-                                    let { x, y } = grid.getBoundingClientRect();
-                                    
+                                    // 1. on fait disparaitre les logos
                                     gsap.set('.logos', {
                                         autoAlpha: 0,
                                         scale: 0,
                                         });
-                                    gsap.set("#logoGrid", {
+                                    gsap.set(logosRef.current, {
                                         display: "grid",  
                                         scale: 0.8
-                                    });    
-
-                                    const logosParams = [{
-                                        transformOrigin: "bottom right",                                        
-                                        x: 100,
-                                        y: 100,
-                                        ease: "power3.out",
-                                    }, {
-                                        transformOrigin: "bottom center",                                        
-                                        x: 0,
-                                        y:100,
-                                        ease: "elastic.out(1,0.3)",
-                                    }, {
-                                        transformOrigin: "bottom left",                                        
-                                        x: -100,
-                                            y: 100,
-                                            ease: "bounce.out",
-                                            backgroundColor: "#F8E017",
-                                            borderRadius: "100%",
-                                            border: "1px solid lightgray"
-                                    }, {
-                                        transformOrigin: "center right",                                        
-                                        x: 50,
-                                            y: 0,
-                                            ease: "slow(0.7,0.7, false)",
-                                        width: "2rem"
-                                    }, {
-                                        transformOrigin: "top left",                                        
-                                        x: -50,
-                                            y: 10,
-                                            ease: "circ.out",
-                                    }, {
-                                        transformOrigin: "center",                                        
-                                        x: 0,
-                                        y:0,
-                                        ease: "back.out(1.7)",
-                                    }, {
-                                        transformOrigin: "top right",                                        
-                                        x: 100,
-                                        y:-100,
-                                        ease: "expo.out",
-                                    }, {
-                                        transformOrigin: "center",                                        
-                                        x: 0,
-                                        y:0,
-                                        ease: "expo.out",
-                                        }, {                                        
-                                        x: -100,
-                                        y: -100,
-                                        ease: "sine.out",
-                                    }
-                                    ];
+                                    });                            
                                     
                                     let allLogos = Array.from(document.getElementsByClassName('logos'));
-                                    allLogos.forEach((logo,i) => {
-                                        gsap.to(logo, logosParams[i]);
-                                        gsap.set(logo, {
-                                            filter: "drop-shadow(0 0 0.75rem lightgray)"
-                                        });
-                                    });
-
-                                    //  Faire de logosParams un objet avec tous les reglages pour chaq logo (ex: initial x & y position);
-                                    
-                                    // gsap.to(allLogos, {
-									// 	x: 0,
-									// 	y: 0,
-									// 	stagger: {
-                                    //         grid: [3, 3],
-                                    //         from: "random",
-                                    //         ease: "elastic.inOut(1,0.3)",
-                                    //         amount: 2
-									// 	},
-									// 	scale: 1,
-									// 	autoAlpha: 1,
-										// ease: "power4.out",
-										// onComplete: () => {
-                                            allLogos.forEach((el,i) => {
-                                                // this.wiggleProp(el, 'scale', 0.93, 1);
-                                                gsap.to(el, { x: 0, y: 0, scale: 1, autoAlpha: 1 }).delay(0.5+i*0.2);
-                                                wiggleProp(el, 'rotation', -2.5, 2.5);
-                                                wiggleProp(el, 'x', -3, 3);
-                                                wiggleProp(el, 'y', -3, 3);
-                                                wiggleProp(el, 'scale', .7, 1);
-                                            })
-										// },								
-									// });
+                                    allLogos.forEach((el,i) => {
+                                        // 2. on fait reapparaitre les logos
+                                        gsap.to(el, { x: 0, y: 0, scale: 1, autoAlpha: 1 }).delay(0.618+i*0.2);
+                                        wiggleProp(el, 'rotation', -2.5, 2.5);
+                                        wiggleProp(el, 'x', -3, 3);
+                                        wiggleProp(el, 'y', -3, 3);
+                                        wiggleProp(el, 'scale', .7, 1);
+                                    })
                                 }
                             });
                         }
@@ -308,48 +236,146 @@ const Me = (props) => {
                 break;
             
             case 2:
-                //  We just keep the PEN and delete all other children from the CANVAS scene
-                [Chair, Table, Smartphone, Torse, Pot, Cou, Computer].forEach(
-                    (child) => scene.removeChild(child)                    
-                );
-                
                 gsap.set(logosRef.current, { display: "none" });
-                gsap.set([zdogRef.current, blogRef.current], {
-                    position: "relative",
-                    scale: 1,
-                    display: "flex",
-                    autoAlpha: 1,
-                    x: "7.5%",
-                });
-                // gsap.set(zdogRef.current, { x: "7.5%" });
-                gsap.set(blogRef.current, {
-                    x: -320,
-                    position: "absolute",
-                });
-
-                console.log('This is ZDOG: ', zdogRef.current, scene);
-
-                // on lance l'animation de Blog
-                new Vivus(blogRef.current, {
-                    duration: 161,
-                    type: 'oneByOne'
-                }, null);
-
-                // We placed both Illus ON TOP OF EACH OTHER THX TO GSAP
-                gsap.set(zdogRef.current, { display: "flex", zIndex: "10" });                
+                gsap.set([zdogRef.current, signatureRef.current], { display: "flex", scale: 1, width: 480, height: 480, autoAlpha: 1 });
+                gsap.set(zdogRef.current, { zIndex: 10 });
                 
-                // Let's look at all th children of the Canvas scne
-                let children = scene.children;
-                children.forEach(child => { 
-                    scene.removeChild(child);
+                // gsap.set(signatureRef.current, { x: "50%" });
+                // gsap.set(traceRef.current, { x: "-50%" });
+
+                // gsap.set(document.querySelector("svg:nth-of-type(2)"), {
+                //     x: "-50%",
+                //     border: '1px solid red'
+                // });
+
+// REGLER STROKE DASHOFFSET DE SIGNATUREREF ???
+
+
+                // create timeline
+                let tl = gsap.timeline({
+                    paused: true,
+                        // onStart: () => {
+                        // new Vivus(signatureRef.current, {
+                        //     duration: dur * 4,
+                        //     type: 'oneByOne'
+                        // }, null);
+                        // }
+                        });
+
+                // create illo
+                let illo = new Zdog.Illustration({
+                    // set canvas with selector
+                    //   element: ".zdog-canvas",
+                    element: zdogRef.current,
+                    zoom: 0.3,
+                    rotate: {
+                        y: Math.PI / 2
+                    },
+                    translate: {
+                        x: -250
+                    },
+                    scale: 2.5
+                });
+                
+                let pointe = new Zdog.Cone({
+                    addTo: illo,
+                    diameter: 72,
+                    length: 72,
+                    stroke: false,
+                    color: "beige",
+                    backface: "#C25",
+                    // rotate: {
+                    //   x: Math.PI / 2,
+                    //   y: -Math.PI / 16,
+                    // },
+                    translate: {
+                        // y: 40
+                    }
+                });
+                let mine = pointe.copy({
+                    scale: 0.33,
+                    color: "black",
+                    translate: {
+                        z: 64
+                    }
+                });
+                let cylinder = new Zdog.Cylinder({
+                    addTo: illo,
+                    diameter: 70,
+                    length: 450,
+                    stroke: false,
+                    color: "#C25",
+                    backface: "#E62",
+                    translate: {
+                        z: -225
+                    }
+                });
+                let gumRing = cylinder.copy({
+                    addTo: cylinder,
+                    color: "orange",
+                    length: 45
                 });
 
-                scene.addChild(Pen);
+                let gum = new Zdog.Hemisphere({
+                    addTo: gumRing,
+                    diameter: 70,
+                    // fill enabled by default
+                    // disable stroke for crisp edge
+                    stroke: false,
+                    color: "white",
+                    backface: "orange",
+                    rotate: {
+                        x: Math.PI
+                    },
+                    translate: {
+                        z: -25
+                    }
+                });
 
-                break;  
-            
+                const animateIllo = () => {
+                    // rotate illo each frame
+                    // illo.rotate.y += 0.01;
+                    illo.updateRenderGraph();
+                    // animate next frame
+                    requestAnimationFrame(animateIllo);
+                }
+                // start animation
+                animateIllo();
+
+
+                illo.zoom = 0.1;
+                illo.rotate.y = Math.PI / 1.5;
+                let dur = 0.805;
+
+                signatureRef.current.style.height = getComputedStyle(zdogRef.current).height;
+                                               
+                // Animate PEN along BLOG letters path
+
+                let pathes = Array.from(document.querySelectorAll('#blog > path'));
+
+                let eases = ["power1.out", "power2.out", "power3.out", "power4.inOut"];
+                let durs = [1.084,.659,.526,.929];
+
+                pathes.forEach((path, index) => {
+                    tl.add(gsap.to(zdogRef.current, {
+                        duration: durs[index],
+                        // x: "100",
+                        ease: "power1.out",
+                        // repeat: -1,
+                        motionPath: {
+                            path: path,
+                            align: path,
+                            autoRotate: false,
+                            alignOrigin: [0.41, 0.5]
+                        },
+                    }));
+                    // .delay(index * dur);
+                    tl.play();
+    });
+    
+    break;
             case 3: 
-                gsap.set([logosRef.current, blogRef.current], { display: "none" });
+                gsap.set([logosRef.current, signatureRef.current], { display: "none" });
             default:
                 // LAST SLIDE
 
@@ -360,7 +386,10 @@ const Me = (props) => {
     return <>
         <Canvas ref={zdogRef} className="zdog-canvas" width={480} height={480}></Canvas>
         <LogoGrid ref={logosRef} prevIndex={prevIndex} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
-        <Blog_Animation ref={blogRef} />
+        {/* <Blog_Animation ref={blogRef} /> */}
+        {index === 2 && <Signature ref={signatureRef} />}
+        {/* {index === 2 && <Trace ref={traceRef} />} */}
+        
         <span id="content"></span>
             </>;
 }

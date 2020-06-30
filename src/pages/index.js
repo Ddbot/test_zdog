@@ -21,7 +21,7 @@ import Slide_Gatsby from '../components/slides/slide_Gatsby';
 import Slide_HTML from '../components/slides/slide_HTML';
 import Slide_JS from '../components/slides/slide_JS';
 import Slide_React from '../components/slides/slide_React';
-
+import Slide_Selector from '../components/slides/Slide_Selector';
 import FilterSliders from '../components/AnimationTools/FilterSliders';
 import RotationSliders from '../components/AnimationTools/rotationSliders';
 
@@ -432,7 +432,9 @@ const IndexPage = (props) => {
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
 			<div className="separator" />
-			<TextContainer className="textContent" style={{ flex: 1 }}>{presentation === "" ? slide : presentation}</TextContainer>
+			<TextContainer className="textContent" style={{ flex: 1 }}>
+				{presentation === "" ? slide : presentation}
+			</TextContainer>
 			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />}
 		</Container>
 	</>);

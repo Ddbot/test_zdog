@@ -1,5 +1,7 @@
 import gsap from 'gsap'
 
+let TAU = Math.PI * 2;
+
 // Returns a function, that, as long as it continues to be invoked, will not
 // be triggered. The function will be called after it stops being called for
 // N milliseconds. If `immediate` is passed, trigger the function on the
@@ -103,4 +105,4 @@ export function wiggle(element) {
         wiggleProp(el, 'x', -3, 3);
         wiggleProp(el, 'y', -3, 3);
     })
-}
+};
