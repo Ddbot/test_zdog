@@ -17,7 +17,7 @@ const StyledSVG = styled.svg`
 `;
 
 const Signature = React.forwardRef((props, ref) => {
-  
+  console.log('Props From Signature ', props);
 // return <div class="container">
   {/* <canvas class="zdog-canvas"></canvas> */}
   return <StyledSVG xmlns="http://www.w3.org/2000/svg" ref={ref} stroke="#002A24"  fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" clipRule="evenodd" height={480} width={480} viewBox="0 0 1024 1024">

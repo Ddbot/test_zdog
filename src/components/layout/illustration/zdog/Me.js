@@ -3,8 +3,6 @@ import Zdog from 'zdog';
 
 import styled from 'styled-components';
 
-import Vivus from 'vivus';
-
 import gsap, { splitColor } from 'gsap';
 
 import Chair from './Chair';
@@ -16,9 +14,7 @@ import Smartphone from './Smartphone';
 import Table from './Table';
 
 import LogoGrid from '../LogoGrid';
-import Blog_Animation from '../Blog_animation';
 import Signature from '../../../Signature';
-import Trace from '../../../Trace';
 
 import usePrevious from '../../../../utils/usePrevious';
 import { wiggle, wiggleProp } from '../../../../utils/utils.js';
@@ -350,17 +346,24 @@ const Me = (props) => {
                 signatureRef.current.style.height = getComputedStyle(zdogRef.current).height;
                                                
                 // Animate PEN along BLOG letters path
-
                 let pathes = Array.from(document.querySelectorAll('#blog > path'));
 
-                let eases = ["power1.out", "power2.out", "power3.out", "power4.inOut"];
-                let durs = [1.084,.659,.526,.929];
+                let durs = [1.084, .659, .526, .929];
 
+                gsap.set(Pen, {
+                    rotate: {
+                        x: 1.5
+                    },
+             
+                });
+                
+
+                // We add each path (B - l - o - g) to the timeline and animate it (because it is paused initially)
                 pathes.forEach((path, index) => {
                     tl.add(gsap.to(zdogRef.current, {
                         duration: durs[index],
                         // x: "100",
-                        ease: "power1.out",
+                        // ease: eases[index],
                         // repeat: -1,
                         motionPath: {
                             path: path,
@@ -386,9 +389,7 @@ const Me = (props) => {
     return <>
         <Canvas ref={zdogRef} className="zdog-canvas" width={480} height={480}></Canvas>
         <LogoGrid ref={logosRef} prevIndex={prevIndex} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} />
-        {/* <Blog_Animation ref={blogRef} /> */}
         {index === 2 && <Signature ref={signatureRef} />}
-        {/* {index === 2 && <Trace ref={traceRef} />} */}
         
         <span id="content"></span>
             </>;
