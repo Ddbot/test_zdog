@@ -217,7 +217,8 @@ const Me = (props) => {
                                     });                            
                                     
                                     let allLogos = Array.from(document.getElementsByClassName('logos'));
-                                    allLogos.forEach((el,i) => {
+                                    allLogos.forEach((el, i) => {                                      
+                                        // let gs = Array.from(el.children).filter(element => element.nodeName.classList.contains() === "g");
                                         // 2. on fait reapparaitre les logos
                                         gsap.to(el, { x: 0, y: 0, scale: 1, autoAlpha: 1 }).delay(0.618+i*0.2);
                                         wiggleProp(el, 'rotation', -2.5, 2.5);
