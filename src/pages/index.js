@@ -14,8 +14,14 @@ import Slide0 from '../components/slides/slide0';
 import Slide1 from '../components/slides/slide1';
 import Slide2 from '../components/slides/slide2';
 import Slide3 from '../components/slides/slide3';
-
-
+import Slide_WP from '../components/slides/slide_WP';
+import Slide_CSS from '../components/slides/slide_CSS';
+import Slide_Firebase from '../components/slides/slide_Firebase';
+import Slide_Gatsby from '../components/slides/slide_Gatsby';
+import Slide_HTML from '../components/slides/slide_HTML';
+import Slide_JS from '../components/slides/slide_JS';
+import Slide_React from '../components/slides/slide_React';
+import Slide_Selector from '../components/slides/Slide_Selector';
 import FilterSliders from '../components/AnimationTools/FilterSliders';
 import RotationSliders from '../components/AnimationTools/rotationSliders';
 
@@ -35,7 +41,7 @@ const Container = styled.div `
   	width: 100vw;
 
 	font-size: 2rem;
-	font-family: "Roboto";
+	// font-family: "Roboto";
 	color: #002620;
 
 	z-index: 1;
@@ -66,7 +72,7 @@ const Container = styled.div `
 
 		.highlight {
 			color: rgba(245, 245, 245, 1);
-			margin: .1rem;
+			margin: .1rem;		
 		}
 
 		&>p {
@@ -138,6 +144,7 @@ const IndexPage = (props) => {
 	let [translate, setTranslate] = useState({ x: 0, y: 10, z: 0 });
 	let [rotate, setRotate] = useState(initial_position);
 	let [scale, setScale] = useState(.8);
+	let [presentation, setPresentation] = useState('');
 
 	// FILTER PARAMS
 	let [hue, setHue] = useState('90');
@@ -228,22 +235,6 @@ const IndexPage = (props) => {
 		});
 	});
 
-	// Logos
-	useEffect(() => {
-		!!document.querySelectorAll(".logos") && gsap.fromTo('.logos', {
-			y: 40,
-			scale: 0,
-			autoAlpha: 0
-		}, {
-			y: 0,
-			scale: 1.5,
-			autoAlpha: 1,
-			stagger: {
-				amount: 1.5,
-				from: 4,
-			}
-		})
-	}, []);
 
 	let handleClick = (e) => {
 		switch (e.target) {
@@ -367,6 +358,63 @@ const IndexPage = (props) => {
 		}
 	}
 
+    let onMouseEnter = (e) => {
+    	e.preventDefault();
+    	e.persist();
+		let {
+			currentTarget,
+			target
+		} = e,
+			{ name } = currentTarget.dataset;
+		
+		let scale = Number(currentTarget.style.scale) * 1.618;
+		
+		setPresentation((prevPres) => {
+			switch (name) {
+				case 'WP':
+					return <Slide_WP lang={lang} />
+				case 'CSS':
+					return <Slide_CSS lang={lang} />
+				case 'Firebase':
+					return <Slide_Firebase lang={lang} />
+				case 'Gatsby':
+					return <Slide_Gatsby lang={lang} />
+				case 'HTML':
+					return <Slide_HTML lang={lang} />
+				case 'JS':
+					return <Slide_JS lang={lang} />
+				case 'React':
+					return <Slide_React lang={lang} />
+				default:
+					return slide;
+			}
+		})
+    }
+
+    let onMouseLeave = (e) => {
+    	e.preventDefault();
+    	e.persist();
+		let {
+			currentTarget,
+			target
+		} = e, slideId;		
+		if (currentTarget.dataset.name === "HTML") {
+			setTimeout(() => {
+				setPresentation(prev => '');
+			}, 1000);
+		}
+	}
+	
+	// si presentation contient le texte de HTML, faire un setTimeout pour ne l'afficher que pendant 1s
+	useEffect(() => { 
+		if (presentation === <Slide_HTML lang={lang} />) {
+			const timer = setTimeout(() => {
+				setPresentation(prev => '');
+			}, 1000);
+			clearTimeout(timer);
+		}
+	}, [presentation]);
+
 	return (<>
 		<SEO title={seoContent(index,lang)} />
 		<Container className="container">
@@ -374,15 +422,19 @@ const IndexPage = (props) => {
 			<LogoIllustration
 				ref={illo}
 				index={index}
-				style={{ zIndex: 2, flex: 1, position: "fixed"}}
+				style={{ zIndex: 2, flex: 1, position: "fixed" }}
 				translate={translate}
 				rotate={rotate}
 				scale={scale}
+				onMouseEnter={onMouseEnter}
+				onMouseLeave={onMouseLeave}
 			/>
 			{/* <RotationSliders handleRotation={handleRotation} handleTranslation={handleTranslation} /> */}
 			{/* <FilterSliders handleFilter={handleFilter} /> */}
 			<div className="separator" />
-			<TextContainer className="textContent" style={{ flex: 1 }}>{slide}</TextContainer>
+			<TextContainer className="textContent" style={{ flex: 1 }}>
+				{presentation === "" ? slide : presentation}
+			</TextContainer>
 			{index !== 3 && <Chevron ref={chevronBottom} style={{ position: "fixed", left: "25%", bottom: "4%" }} onClick={handleClick} />}
 		</Container>
 	</>);

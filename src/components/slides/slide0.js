@@ -33,13 +33,13 @@ const Slide_0 = (props) => {
       scale: 0.7,
       autoAlpha: 0,
       stagger: {
-        amount: 1.95,
+        amount: 1.65,
       },
     });
   },[]);
 
   let renderData = () => {
-    // document.title = data[props.lang].title;
+    document.title = data[props.lang].title + ' | Andry Online';
     return {
       __html: data[props.lang].content
     }

@@ -34,7 +34,7 @@ const Header = (props) => {
       </div>
       <Link to="/blog" className="navbar-item"><h1>Blog</h1></Link>      
       <Link to="/contact" state={{ lang: current }} className="navbar-item">Contact</Link>     
-      <Link to="/WheelOF" state={{ lang: current }} className="navbar-item">Wheel</Link>
+      {/* <Link to="/WheelOF" state={{ lang: current }} className="navbar-item">Wheel</Link> */}
       <LangToggle lang={current} toggleLang={props.toggleLang} />
     </nav>
   )

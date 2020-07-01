@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const LogoCSS = (props) => <svg viewBox="0 0 362.73 512" className="logos" data-presentation="I'm proficient in CSS and all kinds of CSS preprocessors" onMouseEnter={props.onMouseEnter} style={{ translate: "0 100%"}}>
+const LogoCSS = (props) => <svg viewBox="0 0 362.73 512" className="logos" data-presentation="I'm proficient in CSS and all kinds of CSS preprocessors" onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave} data-name="CSS" style={{ translate: "0 100%"}}>
   {/* <metadata id="metadata3481"/> */}
   <g transform="translate(-193.63 -276.36)">
     <g transform="translate(119 276.36)">
