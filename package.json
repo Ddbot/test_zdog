@@ -24,7 +24,7 @@
     "gatsby-source-wordpress": "^3.3.11",
     "gsap": "^3.2.5",
     "lottery-wheel": "^2.4.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "pattern.css": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
